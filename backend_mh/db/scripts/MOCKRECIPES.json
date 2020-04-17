@@ -8,7 +8,7 @@
     "CARBS": "160",
     "FAT": "15",
     "COOKING_DIFFICULTY": "1",
-    "COOKING_TIME_MINS": "25",
+    "COOKING_TIME_MINS": "25"
   },
   {
     "NAME": "Really Delicious Test Recipe",
@@ -19,7 +19,7 @@
     "CARBS": "160",
     "FAT": "15",
     "COOKING_DIFFICULTY": "1",
-    "COOKING_TIME_MINS": "25",
+    "COOKING_TIME_MINS": "25"
   },
   {
     "NAME": "Really Delicious Test Recipe",
@@ -30,6 +30,6 @@
     "CARBS": "160",
     "FAT": "15",
     "COOKING_DIFFICULTY": "1",
-    "COOKING_TIME_MINS": "25",
+    "COOKING_TIME_MINS": "25"
   }
-];
+]
