@@ -1,14 +1,18 @@
 const { query } = require("../index");
 
+const fs = require("fs");
+const { promisify } = require("util");
+const path = require("path");
+const readFile = promisify(fs.readFile);
+
 async function populateRecipes() {
-  const json = await readFile(
-    path.join(__dirname, ".", "./populateRecipes.js")
-  );
+  const json = await readFile(path.join(__dirname, ".", "./MOCKRECIPES.json"));
   const data = JSON.parse(json);
   const res = await Promise.all(
     data.map(
       async ({
         recipe_id,
+        name,
         ingredients,
         calories,
         protein,
@@ -20,6 +24,7 @@ async function populateRecipes() {
         const res = await query(
           `INSERT INTO recipes (
               recipe_id,
+              name,
               ingredients,
               calories,
               protein,
@@ -35,10 +40,12 @@ async function populateRecipes() {
                        $5,
                        $6,
                        $7,
-                       $8
+                       $8,
+                       $9
                      ) RETURNING *`,
           [
             recipe_id,
+            name,
             ingredients,
             calories,
             protein,
