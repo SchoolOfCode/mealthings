@@ -1,150 +1,112 @@
-import React, { useState } from "react";
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Flatlist,
-  Switch,
-} from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import * as WebBrowser from "expo-web-browser";
+import * as React from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLS } from "./COLS";
-import { MonoText } from "../components/StyledText";
 
-export default function HomeScreen() {
-  const [celery, setCelery] = useState(false);
-
-  function celeryHandler() {
-    if (celery === false) {
-      setCelery(true);
-      console.log("hello");
-    } else if (celery === true) {
-      setCelery(false);
-      console.log("Goodbye");
-    }
-  }
+export default function HomeScreen({ navigation }) {
   return (
-    <View style={styles.container} style="Text">
-      <Text> Celery</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={celery ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={celery}
-      />
-      <Text> Gluten</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Gluten ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Gluten}
-      />
-      <Text> Crustaceans</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Crustaceans ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Crustaceans}
-      />
-      <Text> Eggs </Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Eggs ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Eggs}
-      />
-      <Text> Fish</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Fish ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Fish}
-      />
-      <Text> Lupin</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Lupin ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Lupin}
-      />
-      <Text> Milk</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Milk ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Milk}
-      />
-      <Text> Molluscs</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Molluscs ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={celery}
-      />
-      <Text> Mustard</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Mustard ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Mustard}
-      />
-      <Text> Tree nuts</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Treenuts ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Treenuts}
-      />
-      <Text> Peanuts</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Peanuts ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Peanuts}
-      />
-      <Text> Seasame Seeds</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Seasame_Seeds ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Seasame_Seeds}
-      />
-      <Text> Soybeans</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={Soybeans ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={Soybeans}
-      />
-      <Text> Suphur Dioxide</Text>
-      <Switch
-        trackColor={{ false: "#767577", true: "#81b0ff" }}
-        thumbColor={celery ? "#f5dd4b" : "#f4f3f4"}
-        ios_backgroundColor="#3e3e3e"
-        onValueChange={celeryHandler}
-        value={celery}
-      />
+    <View style={styles.container}>
+      <View style={styles.welcomeContainer}>
+        <View style={styles.logoCircle}>
+          <Image source={require("../assets/images/Mealthings.png")} />
+        </View>
+        <Text style={styles.tagLine}>Eat Well. Feel Amazing.</Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.buttonBackground}>
+          <Text style={styles.buttonText}>Try out now!</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonBackground}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonBackground}
+          onPress={() => navigation.navigate("YourStats")}
+        >
+          <Text style={styles.buttonText}>Test Page</Text>
+        </TouchableOpacity>
+      </View>
     </View>
+  );
+}
+
+HomeScreen.navigationOptions = {
+  header: null,
+};
+
+function DevelopmentModeNotice() {
+  if (__DEV__) {
+    const learnMoreButton = (
+      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
+        Learn more
+      </Text>
+    );
+
+    return (
+      <Text style={styles.developmentModeText}>
+        Development mode is enabled: your app will be slower but you can use
+        useful development tools. {learnMoreButton}
+      </Text>
+    );
+  } else {
+    return (
+      <Text style={styles.developmentModeText}>
+        You are not in development mode: your app will run at full speed.
+      </Text>
+    );
+  }
+}
+
+function handleLearnMorePress() {
+  WebBrowser.openBrowserAsync(
+    "https://docs.expo.io/versions/latest/workflow/development-mode/"
+  );
+}
+
+function handleHelpPress() {
+  WebBrowser.openBrowserAsync(
+    "https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change"
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
+    flex: 1,
+    backgroundColor: COLS.C_BG,
+    justifyContent: "center",
+  },
+  mealThingsLogo: {
+    alignItems: "center",
+    margin: "auto",
+    justifyContent: "center",
+  },
+  logoCircle: {
+    width: 200,
+    height: 200,
+    borderRadius: 200,
+    backgroundColor: COLS.C_LOGO_BG,
+  },
+  tagLine: {
+    color: COLS.C5_LIGHT_TEXT,
+  },
+  buttonContainer: {
+    marginTop: "20%",
+  },
+  buttonBackground: {
+    backgroundColor: COLS.C5_LIGHT_TEXT,
+    width: 200,
+    alignSelf: "center",
+    margin: 5,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: COLS.C4_DARK_TEXT,
+    textAlign: "center",
+    padding: 5,
+  },
+  welcomeContainer: {
+    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 20,
   },
 });
