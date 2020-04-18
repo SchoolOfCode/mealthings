@@ -13,7 +13,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { MonoText } from "../components/StyledText";
 
-export default function App() {
+export default function Goals() {
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
   const [fatLoss, setFatLoss] = useState(false);
