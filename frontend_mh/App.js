@@ -10,6 +10,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import useLinking from "./navigation/useLinking";
 import HomeScreen from "./screens/HomeScreen";
 
+import Goals from "./screens/Goals";
+import TodaysRecipe from "./screens/TodaysRecipe";
 import YourStats from "./screens/YourStats";
 import SplashScreenDrink from "./screens/SplashScreenDrink";
 import SplashScreenExerciseSlow from "./screens/SplashScreenExerciseSlow";
@@ -62,6 +64,8 @@ export default function App(props) {
           <Stack.Navigator initialRouteName="Home">
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="YourStats" component={YourStats} />
+            <Stack.Screen name="Goals" component={Goals} />
+            <Stack.Screen name="TodaysRecipe" component={TodaysRecipe} />
             <Stack.Screen
               name="SplashScreenDrink"
               component={SplashScreenDrink}

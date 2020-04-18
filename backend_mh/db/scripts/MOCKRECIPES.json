@@ -13,13 +13,37 @@
   {
     "recipe_id": "2",
     "name": "Really Delicious BLT",
-    "ingredients": "BLT",
+    "ingredients": [
+      "Free range streaky bacon",
+      "Lettuce",
+      "Beef tomato",
+      "Wholemeal bread",
+      "Freshly churned butter",
+      "Mayonaise"
+    ],
+    "ingredientsQuantities": [
+      "2 rashers",
+      "Several leaves",
+      "1",
+      "2 slices",
+      "",
+      ""
+    ],
     "calories": "286",
     "protein": "20",
     "carbohydrates": "160",
     "fat": "15",
     "cooking_difficulty": "1",
-    "cooking_time_mins": "25"
+    "cooking_time_mins": "25",
+    "method": {
+      "1": "Slice the bread thickly",
+      "2": "Spread the freshly churned butter on one slice of bread.",
+      "3": "Spread mayonaise on the second slice of bread",
+      "4": "Slice the tomato thinly",
+      "5": "Fry the bacon until crispy",
+      "6": "Tear the lettuce roughly by hand",
+      "7": "layer the tomato slices, lettuce and bacon on the bread and serve as a sandwhich."
+    }
   },
   {
     "recipe_id": "3",
