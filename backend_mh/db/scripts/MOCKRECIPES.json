@@ -2,13 +2,22 @@
   {
     "recipe_id": "1",
     "name": "Really Delicious Cabbage",
-    "ingredients": "Cabbage",
+    "ingredients": ["Cabbage", "Butter", "Caraway seeds"],
+    "ingredientsQuantities": ["1 head", "100 g", "1 tsp"],
     "calories": "286",
     "protein": "20",
     "carbohydrates": "160",
     "fat": "15",
     "cooking_difficulty": "1",
-    "cooking_time_mins": "25"
+    "cooking_time_mins": "25",
+    "method": [
+      "Roughly chop the cabbage",
+      "Add to steamer and add half a tsp of caraway seeds",
+      "Steam for approx. 5 min (depending on cabbage type) until cooked but still crunchy",
+      "Remove from heat and drain. ",
+      "Add the butter and gently stir cabbage until butter melts",
+      "Serve immediatly with remaining caraway seeds and several grinds of black pepper"
+    ]
   },
   {
     "recipe_id": "2",
@@ -35,25 +44,31 @@
     "fat": "15",
     "cooking_difficulty": "1",
     "cooking_time_mins": "25",
-    "method": {
-      "1": "Slice the bread thickly",
-      "2": "Spread the freshly churned butter on one slice of bread.",
-      "3": "Spread mayonaise on the second slice of bread",
-      "4": "Slice the tomato thinly",
-      "5": "Fry the bacon until crispy",
-      "6": "Tear the lettuce roughly by hand",
-      "7": "layer the tomato slices, lettuce and bacon on the bread and serve as a sandwhich."
-    }
+    "method": [
+      "Slice the bread thickly",
+      "Spread the freshly churned butter on one slice of bread.",
+      "Spread mayonaise on the second slice of bread",
+      "Slice the tomato thinly",
+      "Fry the bacon until crispy",
+      "Tear the lettuce roughly by hand",
+      "layer the tomato slices, lettuce and bacon on the bread and serve as a sandwhich."
+    ]
   },
   {
     "recipe_id": "3",
     "name": "Really Delicious Porrige",
-    "ingredients": "Porrige",
+    "ingredients": ["Porrige", "Blueberries", "Banana", "Oat milk"],
+    "ingredientsQuantities": ["100 g", "1 handful", "1 sliced", "200 ml"],
     "calories": "286",
     "protein": "20",
     "carbohydrates": "160",
     "fat": "15",
     "cooking_difficulty": "1",
-    "cooking_time_mins": "25"
+    "cooking_time_mins": "25",
+    "method": [
+      "Mix ingredients in a saucepan",
+      "Heat ingredients over a low heat, stirring gently until milk is fully absorbed",
+      "Serve while hot"
+    ]
   }
 ]
