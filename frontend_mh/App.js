@@ -12,6 +12,7 @@ import HomeScreen from "./screens/HomeScreen";
 
 import Goals from "./screens/Goals";
 
+import ShoppingList from "./screens/ShoppingList";
 import NewRecipe from "./screens/NewRecipe";
 import TodaysRecipe from "./screens/TodaysRecipe";
 import YourStats from "./screens/YourStats";
@@ -78,6 +79,11 @@ export default function App(props) {
               name="Goals"
               component={Goals}
               options={{ title: "Goals" }}
+            />
+            <Stack.Screen
+              name="ShoppingList"
+              component={ShoppingList}
+              options={{ title: "Shopping List" }}
             />
             <Stack.Screen
               name="NewRecipe"
