@@ -21,7 +21,7 @@ export default function HomeScreen({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.buttonBackground}
-          onPress={() => navigation.navigate("TodaysRecipe")}
+          onPress={() => navigation.navigate("NewRecipe")}
         >
           <Text style={styles.buttonText}>Test Page</Text>
         </TouchableOpacity>

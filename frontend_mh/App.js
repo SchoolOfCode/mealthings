@@ -11,6 +11,8 @@ import useLinking from "./navigation/useLinking";
 import HomeScreen from "./screens/HomeScreen";
 
 import Goals from "./screens/Goals";
+
+import NewRecipe from "./screens/NewRecipe";
 import TodaysRecipe from "./screens/TodaysRecipe";
 import YourStats from "./screens/YourStats";
 import SplashScreenDrink from "./screens/SplashScreenDrink";
@@ -62,21 +64,45 @@ export default function App(props) {
           initialState={initialNavigationState}
         >
           <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={HomeScreen} />
-            <Stack.Screen name="YourStats" component={YourStats} />
-            <Stack.Screen name="Goals" component={Goals} />
-            <Stack.Screen name="TodaysRecipe" component={TodaysRecipe} />
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{ title: "Home" }}
+            />
+            <Stack.Screen
+              name="YourStats"
+              component={YourStats}
+              options={{ title: "Your stats" }}
+            />
+            <Stack.Screen
+              name="Goals"
+              component={Goals}
+              options={{ title: "Goals" }}
+            />
+            <Stack.Screen
+              name="NewRecipe"
+              component={NewRecipe}
+              options={{ title: "Add a new recipe" }}
+            />
+            <Stack.Screen
+              name="TodaysRecipe"
+              component={TodaysRecipe}
+              options={{ title: "Today's recipe" }}
+            />
             <Stack.Screen
               name="SplashScreenDrink"
               component={SplashScreenDrink}
+              options={{ title: "Alert" }}
             />
             <Stack.Screen
               name="SplashScreenExerciseSlow"
               component={SplashScreenExerciseSlow}
+              options={{ title: "Alert" }}
             />
             <Stack.Screen
               name="SplashScreenExerciseQuick"
               component={SplashScreenExerciseQuick}
+              options={{ title: "Alert" }}
             />
           </Stack.Navigator>
         </NavigationContainer>
