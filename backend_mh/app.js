@@ -2,6 +2,7 @@ const express = require("express");
 const PORT = 5000;
 const usersRouter = require("./routes/users.js");
 const recipesRouter = require("./routes/recipes.js");
+const foodIntakeRouter = require("./routes/foodIntake.js");
 
 // Start an express server
 const app = express();
@@ -10,6 +11,7 @@ app.use(express.json());
 
 app.use("/users", usersRouter);
 app.use("/recipes", recipesRouter);
+app.use("/foodIntake", foodIntakeRouter);
 
 app.get("/", (req, res) =>
   res.send(
