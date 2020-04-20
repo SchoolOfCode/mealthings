@@ -15,7 +15,7 @@
     "db:populateUsers": "node -r dotenv/config ./db/scripts/populateUsers.js",
     "db:populateRecipes": "node -r dotenv/config ./db/scripts/populateRecipes.js",
     "db:populateFoodIntake": "node -r dotenv/config ./db/scripts/populateFoodIntake.js",
-    "db:reset": "npm run db:dropFoodIntake && npm run db:dropRecipes && npm run db:dropUsers && npm run db:createUsers && npm run db:db:createRecipes && npm run db:createFoodIntake && npm run db:populateUsers && npm run db:populateRecipes && npm run db:populateFoodIntake",
+    "db:reset": "npm run db:dropFoodIntake && npm run db:dropRecipes && npm run db:dropUsers && npm run db:createUsers && npm run db:createRecipes && npm run db:createFoodIntake && npm run db:populateUsers && npm run db:populateRecipes && npm run db:populateFoodIntake",
     "dev": "nodemon -r dotenv/config ./bin/www"
   },
   "author": "",
