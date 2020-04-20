@@ -1,7 +1,18 @@
-import * as WebBrowser from "expo-web-browser";
 import * as React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import * as WebBrowser from "expo-web-browser";
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Flatlist,
+} from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
+
 import { COLS } from "./COLS";
+
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -19,6 +30,7 @@ export default function HomeScreen({ navigation }) {
         <TouchableOpacity style={styles.buttonBackground}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+
         <TouchableOpacity
           style={styles.buttonBackground}
           onPress={() => navigation.navigate("ShoppingList")}

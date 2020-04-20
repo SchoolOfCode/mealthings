@@ -47,7 +47,7 @@ export default function App() {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <View>
         <Text style={styles.headerC}>
           <Image source={require("../assets/images/arrow.png")} />
@@ -79,6 +79,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: COLS.C_BG,
+    height: 1000,
+  },
   inputField: {
     position: "relative",
     top: 80,
