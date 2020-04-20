@@ -8,14 +8,15 @@ import {
   View,
   TextInput,
   Flatlist,
+  Button,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { MonoText } from "../components/StyledText";
 
 export default function App() {
-  const [weight, setWeight] = useState();
-  const [height, setHeight] = useState();
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
   const [fatLoss, setFatLoss] = useState(false);
   const [muscle, setMuscle] = useState(false);
   const [diet, setDiet] = useState(false);
@@ -23,173 +24,186 @@ export default function App() {
   const [cook, setCook] = useState(false);
   const [display, setDisplay] = useState();
 
-  function Track(e) {
-    setWeight(e.target.value);
+  function Track(enteredText) {
+    setWeight(enteredText);
   }
-  function Tracked(e) {
-    setHeight(e.target.value);
+  function Tracked(enteredText) {
+    setHeight(enteredText);
   }
 
   function HandleSubmit() {
     setDisplay("success");
-    console.log(weight, height, fatLoss, muscle, diet, time, cook);
-    // const data = { weight, height, fatLoss, muscle, diet, time, cook };
-    // const options = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-    //   body: JSON.stringify(data),
-    // };
-    // fetch("", options)
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("this is", data);
-    //   });
+    console.log({ weight, height, fatLoss, muscle, diet, time, cook });
   }
 
-  function highLightedF() {
-    console.log("called");
-    if (fatLoss === false) {
+  function fatHandler() {
+    if (diet === true) {
+      setTime(false);
+    } else if (fatLoss === false) {
       setFatLoss(true);
-      console.log("Goodbye");
     } else if (fatLoss === true) {
       setFatLoss(false);
-      console.log("hello");
     }
   }
-  function highLightedM() {
-    if (muscle === false) {
+  function muscleHandler() {
+    if (diet === true) {
+      setMuscle(false);
+    } else if (muscle === false) {
       setMuscle(true);
-    } else if (fatLoss === true) {
+    } else if (muscle === true) {
       setMuscle(false);
     }
   }
-  function highLightedD() {
-    if (diet === false) {
+  function dietHandler() {
+    if (diet === true) {
       setDiet(true);
     } else if (diet === true) {
       setDiet(false);
     }
   }
-  function highLightedT() {
-    if (time === false) {
+  function timeHandler() {
+    if (diet === true) {
+      setTime(false);
+    } else if (time === false) {
       setTime(true);
     } else if (time === true) {
-      setDiet(false);
+      setTime(false);
     }
   }
-  function highLightedC() {
-    if (cook === false) {
+  function cookHandler() {
+    if (diet === true) {
+      setCook(false);
+    } else if (cook === false) {
       setCook(true);
-    } else if (fatLoss === true) {
+    } else if (cook === true) {
       setCook(false);
     }
   }
 
   return (
-    <View style={styles.header}>
-      <Text>{display}</Text>
-      <View>
-        <Text>Is updating or something</Text>
-        <TextInput
-          style={styles.Inputs}
-          placeholder="Weight"
-          placeholderTextColor="white"
-          onChangeText={Track}
-        ></TextInput>
-        <TextInput
-          style={styles.Inputs}
-          placeholder="Height"
-          placeholderTextColor="white"
-          onChangeText={Tracked}
-        ></TextInput>
-      </View>
-      <View style={styles.ImgFlex}>
-        <TouchableOpacity onPress={highLightedF}>
-          <Image
-            onPress={highLightedF}
-            style={styles.Imagetag}
-            source={require("../assets/images/arrow.png")}
-          />
-          <Text onPress={highLightedF}> Fat Loss</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={highLightedM}>
-          <Image
-            style={styles.Imagetag}
-            source={require("../assets/images/arrow.png")}
-          />
-          <Text> Gaining Muscle</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={highLightedD}>
-          <Image
-            style={styles.Imagetag}
-            source={require("../assets/images/arrow.png")}
-          />
-          <Text> No Diet</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.ImgFlex2}>
-        <TouchableOpacity onPress={highLightedT}>
-          <Image
-            style={styles.Imagetag}
-            source={require("../assets/images/arrow.png")}
-          />
-          <Text> Saving Time</Text>
-        </TouchableOpacity>
+    <ScrollView>
+      <View style={styles.header}>
         <TouchableOpacity>
           <Image
-            style={styles.Imagetag}
-            onPress={highLightedC}
+            style={styles.arrow}
             source={require("../assets/images/arrow.png")}
-          />
-          <Text> Learning to Cook</Text>
+          ></Image>
+        </TouchableOpacity>
+        <Text style={styles.Goals}>Goals</Text>
+        <View style={styles.margin}>
+          <TextInput
+            type="number"
+            style={styles.inputField}
+            placeholder="Weight"
+            placeholderTextColor="white"
+            onChangeText={Track}
+          ></TextInput>
+          <TextInput
+            style={styles.inputField}
+            placeholder="Height"
+            placeholderTextColor="white"
+            type="number"
+            onChangeText={Tracked}
+          ></TextInput>
+        </View>
+        <View style={styles.flex}>
+          <View>
+            <TouchableOpacity onPress={fatHandler}>
+              <Image
+                style={styles.img}
+                source={require("../assets/images/calories.png")}
+              />
+
+              <Text style={styles.text}>Fatloss</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <TouchableOpacity onPress={muscleHandler}>
+              <Image
+                style={styles.img}
+                source={require("../assets/images/woman.png")}
+              />
+              <Text style={styles.text}>Gaining Muscle</Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity onPress={dietHandler}>
+              <Image
+                style={styles.img}
+                source={require("../assets/images/eat.png")}
+              />
+              <Text style={styles.text}>No Diet</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.flex2}>
+          <View>
+            <TouchableOpacity onPress={timeHandler}>
+              <Image
+                style={styles.img2}
+                source={require("../assets/images/time.png")}
+              />
+              <Text style={styles.text2}>Saving Time</Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity onPress={cookHandler}>
+              <Image
+                style={styles.img2}
+                source={require("../assets/images/Cooking.png")}
+              />
+              <Text style={styles.text2}>Learning to Cook</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.button} onPress={HandleSubmit}>
+          <Text style={{ color: "white" }}>Next</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.Direction} onPress={HandleSubmit}>
-        <Text>Next</Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
-  header: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    height: 60,
-  },
-  Inputs: {
+  Goals: {
     alignSelf: "center",
-    position: "relative",
-    alignItems: "center",
-
-    top: 100,
-    width: 200,
+  },
+  arrow: {
+    height: 40,
+    width: 40,
+    left: 30,
+    top: 20,
+  },
+  margin: {
+    marginVertical: 50,
+  },
+  inputField: {
+    marginVertical: 5,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    margin: 10,
-    justifyContent: "space-evenly",
+    width: 200,
+    alignSelf: "center",
+    height: 50,
+    borderRadius: 5,
   },
-  ImgFlex: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  ImgFlex2: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  Imagetag: {
-    position: "relative",
-    top: 150,
+  flex: { flexDirection: "row", marginVertical: 20 },
+  flex2: { flexDirection: "row", right: 20 },
+  img: {
     width: 100,
     height: 100,
-    margin: 10,
+    alignSelf: "center",
+    left: 50 / 2,
+    marginHorizontal: 10,
   },
-  Direction: {
-    position: "relative",
-    top: 200,
+  img2: {
+    width: 100,
+    height: 100,
+    alignSelf: "center",
+    left: 190 / 2,
+    marginHorizontal: 10,
+  },
+  text: { alignSelf: "center", left: 50 / 2, marginVertical: 10 },
+  text2: { alignSelf: "center", left: 190 / 2 },
+  button: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     color: COLS.C_BG,
     textAlign: "center",
@@ -197,6 +211,6 @@ const styles = StyleSheet.create({
     width: 70,
     alignSelf: "center",
     borderRadius: 5,
-    marginVertical: 3,
+    marginVertical: 50,
   },
 });
