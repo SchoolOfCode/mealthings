@@ -1,26 +1,25 @@
 const { query } = require("../index");
 
-async function createUsers() {
-  const res = await query(
-    `CREATE TABLE IF NOT EXISTS users(
-        user_id SERIAL PRIMARY KEY,
-        name TEXT,
-        birthday DATE,
-        height INT,
-        email_address TEXT,
-        username TEXT,
-        weight NUMBER,
-        password TEXT,
-        new_mum BOOLEAN,
-        food_prefs_inc TEXT,
-        food_prefs_exc TEXT,
-        goals TEXT
-            )`
-  );
+async function createRecipes() {
+  const res = await query(`CREATE TABLE IF NOT EXISTS recipes (
+      recipe_id SERIAL PRIMARY KEY,
+      name TEXT,
+      ingredients TEXT,
+      calories TEXT,
+      protein TEXT, 
+      carbohydrates TEXT,
+      fat TEXT,
+      saturates TEXT,
+      sugars TEXT,
+      salt TEXT,
+      fibre TEXT,
+      cooking_difficulty TEXT,
+      cooking_time_mins INT
+  )`);
   console.log(res);
 }
 
-// async function populateUsers() {
+//async function populateUsers() {
 //   const json = await readFile(path.join(__dirname, "..", "populateRecipes.js"));
 //   const data = JSON.parse(json);
 //   const res = await Promise.all(
@@ -83,5 +82,4 @@ async function createUsers() {
 //   console.log(res);
 // }
 
-createUsers();
-// populateUsers();
+module.exports = { createRecipes };
