@@ -13,7 +13,6 @@ async function populateFoodIntake() {
   const res = await Promise.all(
     data.map(
       async ({
-        meal_id,
         meal_date_time,
         user_id,
         recipe_id,
@@ -22,7 +21,6 @@ async function populateFoodIntake() {
       }) => {
         const res = await query(
           `INSERT INTO food_intake (
-        meal_id,
         user_id,
         recipe_id,
         meal_date_time, 
@@ -33,11 +31,9 @@ async function populateFoodIntake() {
                        $2,
                        $3,
                        $4,
-                       $5,
-                       $6
+                       $5
                      ) RETURNING *`,
           [
-            meal_id,
             user_id,
             recipe_id,
             meal_date_time,

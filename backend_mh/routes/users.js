@@ -1,37 +1,76 @@
 const express = require("express");
-
-const { getUser, getUserById, getUserByName } = require("../models/users");
-const { patchUser } = require("../models/patchUsers");
+const {
+  getUsers,
+  getUserById,
+  addUser,
+  patchUser,
+} = require("../models/users");
 const router = express.Router();
 
-// router.get("/user", async (req, res) => {
-//     const {}
-// });
-
-// To Test
-// Need to do req.params, and /user:id ?
-router.get("/userId", async (req, res) => {
-  const { body } = req;
-  const data = await getUserById(body);
-  console.log(data);
-  res.json({ message: "Received User Using ID" });
+router.get("/", async (req, res) => {
+  console.log("Received GET request for all users");
+  const data = await getUsers();
+  console.log("data", data);
+  if (data[0]) {
+    return res.status(200).json({
+      message: "All users enclosed",
+      success: true,
+      payload: data,
+    });
+  }
+  return res
+    .status(400)
+    .json({ message: "Failed to access database", success: false });
 });
 
-// To Test
-// Need to do as a query string ?
-router.get("/userName", async (req, res) => {
-  const { body } = req;
-  const data = await getUserByName(body);
-  console.log(data);
-  res.json({ message: "Received User Using Name" });
+router.get("/:userId", async (req, res) => {
+  const { userId } = req.params;
+  console.log("Recieved GET request for userId: ", userId);
+  const data = await getUserById(userId);
+  if (data.rows) {
+    return res.status(200).json({
+      message: "Received User Using ID",
+      success: true,
+      payload: data,
+    });
+  }
+  console.warn("Failed getting user id:", userId, "from database.");
+  return res.status(400).json({
+    message: "Failed to fetch from database!",
+    success: false,
+    payload: data,
+  });
 });
 
 // Post request to add/insert new user
-
-// To Test
-router.patch("/updateUser", async (req, res) => {
+router.post("/", async (req, res) => {
   const { body } = req;
-  const data = await patchUser(body);
-  console.log(data);
-  res.json({ message: "User Updated" });
+  console.log("Recieved a POST request to users", body);
+  const data = await addUser(body);
+  if (data.rows) {
+    return res
+      .status(201)
+      .json({ message: "Inserted new user", success: true });
+  }
+  return res
+    .status(400)
+    .json({ message: "Failed to insert user", success: false });
 });
+
+// Patch request to update a user
+router.patch("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  const data = await patchUser(body, id);
+  console.log(data);
+  if (data) {
+    return res
+      .status(200)
+      .json({ message: "User Updated", success: true, payload: data });
+  }
+  return res
+    .status(400)
+    .json({ message: "User Update failed", success: false });
+});
+
+module.exports = router;
