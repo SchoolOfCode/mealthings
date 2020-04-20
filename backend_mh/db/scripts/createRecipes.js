@@ -9,6 +9,10 @@ async function createRecipes() {
       protein TEXT, 
       carbohydrates TEXT,
       fat TEXT,
+      saturates TEXT,
+      sugars TEXT,
+      salt TEXT,
+      fibre TEXT,
       cooking_difficulty TEXT,
       cooking_time_mins INT
   )`);
