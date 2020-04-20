@@ -18,8 +18,12 @@ async function populateRecipes() {
         protein,
         carbohydrates,
         fat,
+        saturates,
+        sugars,
+        salt,
+        fibre,
         cooking_difficulty,
-        cooking_time_mins
+        cooking_time_mins,
       }) => {
         const res = await query(
           `INSERT INTO recipes (
@@ -30,6 +34,10 @@ async function populateRecipes() {
               protein,
               carbohydrates,
               fat,
+              saturates,
+              sugars,
+              salt,
+              fibre,
               cooking_difficulty,
               cooking_time_mins
                      ) VALUES (
@@ -41,7 +49,11 @@ async function populateRecipes() {
                        $6,
                        $7,
                        $8,
-                       $9
+                       $9,
+                       $10,
+                       $11,
+                       $12,
+                       $13
                      ) RETURNING *`,
           [
             recipe_id,
@@ -51,8 +63,12 @@ async function populateRecipes() {
             protein,
             carbohydrates,
             fat,
+            saturates,
+            sugars,
+            salt,
+            fibre,
             cooking_difficulty,
-            cooking_time_mins
+            cooking_time_mins,
           ]
         );
         return res.rows[0];
