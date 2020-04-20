@@ -15,12 +15,16 @@ async function populateFoodIntake() {
       async ({
         meal_id,
         meal_date_time,
+        user_id,
+        recipe_id,
         confirmed_eaten,
-        additional_preferences
+        additional_preferences,
       }) => {
         const res = await query(
           `INSERT INTO food_intake (
         meal_id,
+        user_id,
+        recipe_id,
         meal_date_time, 
         confirmed_eaten,
         additional_preferences
@@ -29,8 +33,17 @@ async function populateFoodIntake() {
                        $2,
                        $3,
                        $4
+                       $5
+                       $6
                      ) RETURNING *`,
-          [meal_id, meal_date_time, confirmed_eaten, additional_preferences]
+          [
+            meal_id,
+            user_id,
+            recipe_id,
+            meal_date_time,
+            confirmed_eaten,
+            additional_preferences,
+          ]
         );
         return res.rows[0];
       }

@@ -1,0 +1,21 @@
+# ToDo list
+
+- Recreate tables and populate data to check nothing broken
+- HTTP requests
+  - Users
+    - Get user
+    - Get user by id
+    - Get user by name
+    - Post (add) new user
+    - patch / change user
+  - Recipes
+    - Get recipe
+    - Get recipe by id
+    - Post (add) new recipe
+    - patch / change recipe
+  - userFoodIntake
+    - Get userMeal
+    - Get user by id
+    - Get user by name
+    - Post (add) new user
+    - patch / change user
