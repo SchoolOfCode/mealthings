@@ -1,13 +1,20 @@
+// Need pool query thing - might work or might not! Is in index.js, so possibly will find automatically...
 const { query } = require("../db");
 
+// To Test
+// res.rows[0] ?
 async function getUser() {
   const res = await query(`SELECT * FROM users`);
   return res.rows;
 }
+
+// To Test
 async function getUserById(user_id) {
   const res = await query(`SELECT * FROM users WHERE id = $1`, [user_id]);
   return res.rows[0];
 }
+
+// To Test
 async function getUserByName(name) {
   const res = await query(
     `SELECT * FROM users WHERE name ILIKE '%' || $1 || '%'`,
@@ -15,6 +22,10 @@ async function getUserByName(name) {
   );
   return res.rows[0];
 }
+
+// TODO
+// POST to add a user (below)
+// PATCH to change a user
 
 // async function addUser(user) {
 //   const {

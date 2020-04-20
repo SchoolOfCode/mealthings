@@ -1,5 +1,6 @@
-const { query } = require("../index");
+const { query } = require("../db/index");
 
+// To Test
 async function patchUser(body, id) {
   const {
     name,
@@ -12,7 +13,7 @@ async function patchUser(body, id) {
     new_mum,
     food_prefs_inc,
     food_prefs_exc,
-    goals
+    goals,
   } = body;
   const res = await query(
     `UPDATE users SET name= COALESCE($1, name),
@@ -38,12 +39,12 @@ async function patchUser(body, id) {
       new_mum,
       food_prefs_inc,
       food_prefs_exc,
-      goals
+      goals,
     ]
   );
   return res.rows[0];
 }
 
 module.exports = {
-  patchUser
+  patchUser,
 };
