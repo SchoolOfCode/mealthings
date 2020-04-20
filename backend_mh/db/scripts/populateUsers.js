@@ -11,7 +11,6 @@ async function populateUsers() {
   const res = await Promise.all(
     data.map(
       async ({
-        user_id,
         name,
         birthday,
         height,
@@ -22,11 +21,10 @@ async function populateUsers() {
         new_mum,
         food_prefs_inc,
         food_prefs_exc,
-        goals
+        goals,
       }) => {
         const res = await query(
           `INSERT INTO users (
-            user_id,
             name,
             birthday,
             height,
@@ -49,11 +47,9 @@ async function populateUsers() {
                        $8,
                        $9,
                        $10,
-                       $11,
-                       $12
+                       $11
                      ) RETURNING *`,
           [
-            user_id,
             name,
             birthday,
             height,
@@ -64,7 +60,7 @@ async function populateUsers() {
             new_mum,
             food_prefs_inc,
             food_prefs_exc,
-            goals
+            goals,
           ]
         );
         return res.rows[0];

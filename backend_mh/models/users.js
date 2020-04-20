@@ -1,109 +1,136 @@
-// Need pool query thing - might work or might not! Is in index.js, so possibly will find automatically...
 const { query } = require("../db");
 
-// To Test
-// res.rows[0] ?
-async function getUser() {
+// Get all users
+async function getUsers() {
   const res = await query(`SELECT * FROM users`);
   return res.rows;
 }
 
-// To Test
+// Get one user by id
 async function getUserById(user_id) {
-  const res = await query(`SELECT * FROM users WHERE id = $1`, [user_id]);
-  return res.rows[0];
+  const res = await query(`SELECT * FROM users WHERE user_id = $1`, [user_id]);
+  return res.rows;
 }
 
-// To Test
-async function getUserByName(name) {
-  const res = await query(
-    `SELECT * FROM users WHERE name ILIKE '%' || $1 || '%'`,
-    [name]
+// Add a new user
+async function addUser(body) {
+  const {
+    name,
+    birthday,
+    height,
+    email_address,
+    username,
+    weight,
+    password,
+    new_mum,
+    food_prefs_inc,
+    food_prefs_exc,
+    goals,
+  } = body;
+  console.log(
+    name,
+    birthday,
+    height,
+    email_address,
+    username,
+    weight,
+    password,
+    new_mum,
+    food_prefs_inc,
+    food_prefs_exc,
+    goals
   );
+  const res = await query(
+    `INSERT INTO users(
+        name,
+        birthday,
+        height,
+        email_address,
+        username,
+        weight,
+        password,
+        new_mum,
+        food_prefs_inc,
+        food_prefs_exc,
+        goals
+        )
+        VALUES (
+            $1,
+            $2,
+            $3,
+            $4,
+            $5,
+            $6,
+            $7,
+            $8,
+            $9,
+            $10,
+            $11
+        ) RETURNING *`,
+    [
+      name,
+      birthday,
+      height,
+      email_address,
+      username,
+      weight,
+      password,
+      new_mum,
+      food_prefs_inc,
+      food_prefs_exc,
+      goals,
+    ]
+  );
+  return res;
+}
+
+// PATCH to change a user
+async function patchUser(body, id) {
+  const {
+    name,
+    birthday,
+    height,
+    email_address,
+    username,
+    weight,
+    password,
+    new_mum,
+    food_prefs_inc,
+    food_prefs_exc,
+    goals,
+  } = body;
+  const res = await query(
+    `UPDATE users SET name= COALESCE($1, name),
+         birthday= COALESCE($2, birthday),
+         height= COALESCE($3, height),
+         email_address= COALESCE($4, email_address),
+         username= COALESCE($5, username),
+         weight= COALESCE($6, weight),
+         password= COALESCE($7, password),
+         new_mum= COALESCE($8, new_mum),
+         food_prefs_inc= COALESCE($9, food_prefs_inc),
+         food_prefs_exc= COALESCE($10, food_prefs_exc),
+         goals= COALESCE($11, goals)
+         WHERE user_id = $12
+         RETURNING *
+         `,
+    [
+      name,
+      birthday,
+      height,
+      email_address,
+      username,
+      weight,
+      password,
+      new_mum,
+      food_prefs_inc,
+      food_prefs_exc,
+      goals,
+      id,
+    ]
+  );
+  console.log(res);
   return res.rows[0];
 }
 
-// TODO
-// POST to add a user (below)
-// PATCH to change a user
-
-// async function addUser(user) {
-//   const {
-//     user_id,
-//     name,
-//     birthday,
-//     height,
-//     email_address,
-//     username,
-//     weight,
-//     password,
-//     new_mum,
-//     food_prefs_inc,
-//     food_prefs_exc,
-//     goals
-//   } = user;
-//   const res = await query(
-//     `INSERT INTO users(
-//             user_id,
-//         name,
-//         birthday,
-//         height,
-//         email_address,
-//         username,
-//         weight,
-//         password,
-//         new_mum,
-//         food_prefs_inc,
-//         food_prefs_exc,
-//         goals
-//         )
-//         VALUES (
-//             $1,
-//             $2,
-//             $3,
-//             $4,
-//             $5,
-//             $6,
-//             $7,
-//             $8,
-//             $9,
-//             $10,
-//             $11,
-//             $12
-//         )`,
-//     [
-//       user_id,
-//       name,
-//       birthday,
-//       height,
-//       email_address,
-//       username,
-//       weight,
-//       password,
-//       new_mum,
-//       food_prefs_inc,
-//       food_prefs_exc,
-//       goals
-//     ]
-//   );
-//   return res.rows[0];
-// }
-
-module.exports = { getUser, getUserById, getUserByName };
-
-// return [
-//         {
-//           name: "James",
-//           birthday: "2020-04-19",
-//           height: "180",
-//           email_address: "samblahblah@gmail.com",
-//           username: "samwwww",
-//           weight: "84",
-//           password: "password",
-//           new_mum: "false",
-//           food_prefs_inc: "pork",
-//           food_prefs_exc: "peanuts",
-//           goals: "weight loss",
-//         },
-//       ];
-//     }
+module.exports = { getUsers, getUserById, addUser, patchUser };
