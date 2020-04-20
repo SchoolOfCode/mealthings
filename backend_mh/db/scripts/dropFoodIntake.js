@@ -1,6 +1,6 @@
 const { query } = require("../index.js");
 
-async function dropFoodIntake() {
+async function dropTableFoodIntake() {
   try {
     const res = await query(`
     DROP TABLE food_intake
