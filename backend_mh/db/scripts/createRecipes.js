@@ -19,6 +19,7 @@ async function createRecipes() {
   )`);
   console.log(res);
 }
+createRecipes();
 
 //async function populateUsers() {
 //   const json = await readFile(path.join(__dirname, "..", "populateRecipes.js"));
@@ -82,5 +83,3 @@ async function createRecipes() {
 //   );
 //   console.log(res);
 // }
-
-module.exports = { createRecipes };

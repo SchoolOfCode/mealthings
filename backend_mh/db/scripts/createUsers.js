@@ -19,5 +19,4 @@ async function createUsers() {
   );
   console.log(res);
 }
-
-module.exports = { createUsers };
+createUsers();

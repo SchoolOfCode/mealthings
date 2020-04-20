@@ -32,8 +32,8 @@ async function populateFoodIntake() {
                        $1,
                        $2,
                        $3,
-                       $4
-                       $5
+                       $4,
+                       $5,
                        $6
                      ) RETURNING *`,
           [
@@ -51,5 +51,4 @@ async function populateFoodIntake() {
   );
   console.log(res);
 }
-
 populateFoodIntake();
