@@ -6,12 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
+    "db:dropFoodIntake": "node -r dotenv/config ./db/scripts/dropFoodIntake.js",
+    "db:dropUsers": "node -r dotenv/config ./db/scripts/dropUsers.js",
+    "db:dropRecipes": "node -r dotenv/config ./db/scripts/dropRecipes.js",
     "db:createFoodIntake": "node -r dotenv/config ./db/scripts/createFoodIntake.js",
     "db:createRecipes": "node -r dotenv/config ./db/scripts/createRecipes.js",
     "db:createUsers": "node -r dotenv/config ./db/scripts/createUsers.js",
     "db:populateUsers": "node -r dotenv/config ./db/scripts/populateUsers.js",
     "db:populateRecipes": "node -r dotenv/config ./db/scripts/populateRecipes.js",
     "db:populateFoodIntake": "node -r dotenv/config ./db/scripts/populateFoodIntake.js",
+    "db:reset": "npm run db:dropFoodIntake && npm run db:dropRecipes && npm run db:dropUsers && npm run db:createUsers && npm run db:db:createRecipes && npm run db:createFoodIntake && npm run db:populateUsers && npm run db:populateRecipes && npm run db:populateFoodIntake",
     "dev": "nodemon -r dotenv/config ./bin/www"
   },
   "author": "",
