@@ -9,9 +9,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 // import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import useLinking from "./navigation/useLinking";
 import HomeScreen from "./screens/HomeScreen";
-
 import Goals from "./screens/Goals";
-
 import ShoppingList from "./screens/ShoppingList";
 import NewRecipe from "./screens/NewRecipe";
 import TodaysRecipe from "./screens/TodaysRecipe";

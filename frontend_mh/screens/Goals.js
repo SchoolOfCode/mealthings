@@ -144,7 +144,7 @@ export default function Goals({ navigation }) {
           </View>
         </View>
         <View style={styles.flex2}>
-          <View>
+          <View style={styles.positioning}>
             <TouchableOpacity onPress={timeHandler}>
               <Image
                 style={styles.img2}
@@ -153,7 +153,7 @@ export default function Goals({ navigation }) {
               <Text style={styles.text2}>Saving Time</Text>
             </TouchableOpacity>
           </View>
-          <View>
+          <View style={styles.positioning}>
             <TouchableOpacity onPress={cookHandler}>
               <Image
                 style={styles.img2}
@@ -174,6 +174,9 @@ const styles = StyleSheet.create({
   Goals: {
     alignSelf: "center",
   },
+  positioning: {
+    left: 180 / 2,
+  },
   arrow: {
     height: 20,
     width: 20,
@@ -192,7 +195,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   flex: { flexDirection: "row", marginVertical: 20 },
-  flex2: { flexDirection: "row", right: 20 },
+  flex2: { flexDirection: "row" },
   img: {
     width: 100,
     height: 100,
@@ -204,11 +207,11 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     alignSelf: "center",
-    left: 190 / 2,
+
     marginHorizontal: 10,
   },
   text: { alignSelf: "center", left: 50 / 2, marginVertical: 10 },
-  text2: { alignSelf: "center", left: 190 / 2 },
+  text2: { alignSelf: "center" },
   button: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     color: COLS.C_BG,
