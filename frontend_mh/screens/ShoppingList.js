@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, ScrollView, Text, StyleSheet } from "react-native";
+import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 
@@ -92,7 +92,7 @@ function IngredientItem({ item }) {
   );
 }
 
-export default function ShoppingList() {
+export default function ShoppingList({ navigation }) {
   const listOfIngredients = [];
   multipleRecipes.forEach((recipe) => {
     recipe.ingredients.forEach((item) => {
@@ -101,11 +101,31 @@ export default function ShoppingList() {
   });
   return (
     <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.position}
+        onPress={() => {
+          navigation.navigate("LandingPage");
+        }}
+      >
+        <Image
+          style={styles.arrow}
+          source={require("../assets/images/goback.png")}
+        />
+      </TouchableOpacity>
       <ScrollView>
         {listOfIngredients.map((item) => (
           <IngredientItem item={item} />
         ))}
       </ScrollView>
+
+      <View>
+        <TouchableOpacity
+          style={styles.formatting}
+          onPress={() => navigation.navigate("TodaysRecipe")}
+        >
+          <Text> Start Cooking </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -115,6 +135,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLS.C_BG,
     padding: 5,
+  },
+
+  arrow: {
+    height: 30,
+    width: 30,
+    left: 10,
+    top: 20,
+    marginBottom: 40,
+  },
+  formatting: {
+    backgroundColor: COLS.C5_LIGHT_TEXT,
+    marginBottom: 20,
+    padding: 20,
+    alignItems: "center",
   },
   ingredientItemContainer: {
     flexDirection: "row",

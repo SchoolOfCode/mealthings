@@ -14,7 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { MonoText } from "../components/StyledText";
 
-export default function Goals() {
+export default function Goals({ navigation }) {
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
   const [fatLoss, setFatLoss] = useState(false);
@@ -34,6 +34,7 @@ export default function Goals() {
   function HandleSubmit() {
     setDisplay("success");
     console.log({ weight, height, fatLoss, muscle, diet, time, cook });
+    navigation.navigate("SplashSuccess");
   }
 
   function fatHandler() {
@@ -86,7 +87,7 @@ export default function Goals() {
         <TouchableOpacity>
           <Image
             style={styles.arrow}
-            source={require("../assets/images/arrow.png")}
+            source={require("../assets/images/goback.png")}
           ></Image>
         </TouchableOpacity>
         <Text style={styles.Goals}>Goals</Text>
@@ -108,7 +109,12 @@ export default function Goals() {
         </View>
         <View style={styles.flex}>
           <View>
-            <TouchableOpacity onPress={fatHandler}>
+            <TouchableOpacity
+              onPress={fatHandler}
+              onPress={() => {
+                backgroundColor: COLS.C_YELLOW;
+              }}
+            >
               <Image
                 style={styles.img}
                 source={require("../assets/images/calories.png")}
@@ -169,8 +175,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   arrow: {
-    height: 40,
-    width: 40,
+    height: 20,
+    width: 20,
     left: 30,
     top: 20,
   },

@@ -13,7 +13,6 @@ import { ScrollView } from "react-native-gesture-handler";
 
 import { COLS } from "./COLS";
 
-
 export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
@@ -24,18 +23,19 @@ export default function HomeScreen({ navigation }) {
         <Text style={styles.tagLine}>Eat Well. Feel Amazing.</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonBackground}>
+        <TouchableOpacity
+          style={styles.buttonBackground}
+          onPress={() => navigation.navigate("Goals")}
+        >
           <Text style={styles.buttonText}>Try out now!</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonBackground}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.buttonBackground}
-          onPress={() => navigation.navigate("ShoppingList")}
-        >
-          <Text style={styles.buttonText}>Test Page</Text>
+          <Text
+            onPress={() => navigation.navigate("LandingPage")}
+            style={styles.buttonText}
+          >
+            Login
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
