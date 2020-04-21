@@ -55,7 +55,7 @@ export default function App() {
   }
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.container}>
       <View>
         <View>
           <Text style={styles.headerC}>
@@ -87,19 +87,23 @@ export default function App() {
               placeholderTextColor="black"
             />
           </View>
-
-          <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
-          <Text style={styles.formatting}>{display}</Text>
-
-          <View style={styles.buttonFormat}>
-            <TouchableOpacity style={styles.Direction}>
-              <Text>Back</Text>
+          <View>
+            <TouchableOpacity onPress={SubmitHandler} style={styles.submit}>
+              <Text style={styles.buttonText}>Submit</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.Direction}>
-              <Text>Next</Text>
-            </TouchableOpacity>
+          </View>
+
+          <View style={styles.buttonflex}>
+            <View>
+              <TouchableOpacity style={styles.Direction}>
+                <Text>Back</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.buttonText}>
+              <TouchableOpacity style={styles.Direction}>
+                <Text>Next</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
@@ -108,6 +112,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: COLS.C_BG,
+  },
   inputField: {
     marginVertical: 5,
     backgroundColor: COLS.C5_LIGHT_TEXT,
@@ -119,28 +126,31 @@ const styles = StyleSheet.create({
   headerC: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     height: 60,
+    marginBottom: 50,
   },
-  formatting: {
-    alignSelf: "center",
-  },
-  buttonText: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    color: COLS.C_BG,
-    textAlign: "center",
-    padding: 5,
-    width: 70,
-    alignSelf: "center",
-    borderRadius: 5,
-    marginVertical: 3,
-  },
-  buttonFormat: {
+  buttonflex: {
     flexDirection: "row",
+    marginVertical: 10,
+    padding: 10,
+  },
+  submit: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    justifyContent: "space-between",
-    margin: 30,
+    width: 80,
     alignSelf: "center",
+    marginVertical: 40,
     borderRadius: 5,
-    justifyContent: "space-between",
+    padding: 10,
+    alignItems: "center",
+  },
+  Direction: {
+    backgroundColor: COLS.C5_LIGHT_TEXT,
+    width: 80,
+    alignSelf: "center",
+    marginVertical: 40,
+    borderRadius: 5,
+    padding: 10,
+    margin: 20,
+    alignItems: "center",
+    left: 70,
   },
 });

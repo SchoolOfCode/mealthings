@@ -97,8 +97,25 @@ const multipleRecipes = [
     protein: "20",
     carbohydrates: "160",
     fat: "15",
-    cooking_difficulty: "1",
-    cooking_time_mins: "25",
+    cooking_difficulty: "4",
+    cooking_time_mins: "35",
+    method: [
+      "Mix ingredients in a saucepan",
+      "Heat ingredients over a very low heat, stirring gently until milk is fully absorbed",
+      "Serve while hot",
+    ],
+  },
+  {
+    recipe_id: "3",
+    name: "Really Delicious Porrige",
+    ingredients: ["Porrige", "Blueberries", "Banana", "Oat milk"],
+    ingredientsQuantities: ["100 g", "1 handful", "1 sliced", "200 ml"],
+    calories: "286",
+    protein: "20",
+    carbohydrates: "160",
+    fat: "15",
+    cooking_difficulty: "4",
+    cooking_time_mins: "35",
     method: [
       "Mix ingredients in a saucepan",
       "Heat ingredients over a low heat, stirring gently until milk is fully absorbed",
@@ -110,30 +127,27 @@ const multipleRecipes = [
 function recipeCard(recipeObject) {
   return (
     <View key={recipeObject.name} style={styles.recipeCardContainer}>
-      <Image
-        source={require("../assets/images/posh-blt.jpg")}
-        style={styles.recipeCardImage}
-      />
-      <View style={styles.recipeCardTextContainer}>
-        <Text style={styles.recipeCardTitle}>{recipeObject.name}</Text>
-        <Text style={styles.recipeCardCookingTime}>
-          {recipeObject.cooking_time_mins} mins
-        </Text>
-        <Text style={styles.recipeCardDifficulty}>
-          {recipeObject.cooking_difficulty < 2
-            ? "Easy"
-            : recipeObject.cooking_difficulty < 4
-            ? "Medium"
-            : "Hard"}
-        </Text>
-      </View>
       <TouchableOpacity>
-        <SimpleLineIcons
-          name="magnifier-add"
-          size={20}
-          color={"black"}
-          backgroundColor={COLS.C5_LIGHT_TEXT}
+        <Image
+          source={require("../assets/images/posh-blt.jpg")}
+          style={styles.recipeCardImage}
         />
+
+        <View style={styles.recipeCardTextContainer}>
+          <Text style={styles.recipeCardTitle}>{recipeObject.name}</Text>
+          <Text style={styles.recipeCardCookingTime}>
+            {recipeObject.cooking_time_mins} mins
+          </Text>
+          <Text style={styles.recipeCardDifficulty}>
+            {recipeObject.cooking_difficulty < 2
+              ? "Easy"
+              : recipeObject.cooking_difficulty < 4
+              ? "Medium"
+              : "Hard"}
+          </Text>
+        </View>
+
+        <SimpleLineIcons style={styles.icons} name="magnifier-add" size={20} />
       </TouchableOpacity>
     </View>
   );
@@ -141,9 +155,17 @@ function recipeCard(recipeObject) {
 
 const screenWidth = Dimensions.get("window").width;
 
-export default function NewRecipe() {
+export default function NewRecipe({ navigation }) {
   return (
     <View style={styles.container}>
+      <View style={styles.positioning}>
+        <TouchableOpacity onPress={() => navigation.navigate("LandingPage")}>
+          <Image
+            style={styles.arrow}
+            source={require("../assets/images/goback.png")}
+          />
+        </TouchableOpacity>
+      </View>
       <Text style={styles.mainTitle}>{data.name}</Text>
       <Image
         source={require("../assets/images/posh-blt.jpg")}
@@ -182,12 +204,24 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     alignItems: "center",
   },
+  positioning: {
+    right: 170,
+    top: 20,
+  },
+  arrow: {
+    height: 20,
+    width: 20,
+  },
+
   mainTitle: {
+    left: 12,
     fontSize: 24,
     fontWeight: "bold",
-    margin: 10,
+    bottom: 8,
+    marginBottom: 10,
   },
   mainImage: {
+    marginTop: 10,
     width: screenWidth * 0.8,
     height: screenWidth * 0.4,
   },
@@ -220,10 +254,16 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   recipeCardContainer: {
-    width: 120,
+    width: 150,
     height: 200,
-    backgroundColor: COLS.C_LOGO_BG,
-    marginTop: 5,
+    backgroundColor: COLS.C6_WHITE_TEXT,
+    marginTop: 20,
+    marginBottom: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 200, height: 20 },
+    shadowOpacity: 2,
+    shadowRadius: 40,
+    elevation: 7,
   },
   recipeCardImage: {
     width: "100%",
@@ -231,17 +271,33 @@ const styles = StyleSheet.create({
   },
   recipeCardTextContainer: {
     width: "100%",
+    marginTop: 5,
     padding: 5,
   },
   recipeCardTitle: {
     fontSize: 12,
     textAlign: "center",
+    alignSelf: "center",
     fontWeight: "bold",
   },
   recipeCardCookingTime: {
     fontSize: 12,
+    alignItems: "center",
+    alignSelf: "center",
   },
   recipeCardDifficulty: {
     fontSize: 12,
+    alignItems: "center",
+    marginTop: 5,
+    alignSelf: "center",
+  },
+  icons: {
+    alignSelf: "flex-end",
+    right: 10,
+    bottom: 30,
+    backgroundColor: COLS.C_RED,
+    borderRadius: 100,
+    borderWidth: 10,
+    borderColor: COLS.C_RED,
   },
 });

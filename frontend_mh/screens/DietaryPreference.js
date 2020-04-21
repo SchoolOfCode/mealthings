@@ -15,7 +15,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { MonoText } from "../components/StyledText";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [noRequirement, setNoRequirement] = useState(false);
   const [vegetarian, setVegetarian] = useState(false);
   const [ovovegetarian, setOvovegetarian] = useState(false);
@@ -125,6 +125,7 @@ export default function HomeScreen() {
       chocolate,
       beetroot,
     });
+    navigation.navigate("LandingPage");
   }
 
   return (
@@ -231,11 +232,14 @@ export default function HomeScreen() {
           value={beetroot}
         />
         <View style={styles.buttons}>
-          <TouchableOpacity style={styles.buttonstyle}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Allergies")}
+            style={styles.buttonstyle}
+          >
             <Text>Back</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttonstyle} onPress={postHandler}>
-            <Text>Next</Text>
+            <Text>Finish</Text>
           </TouchableOpacity>
         </View>
         <Text> {post}</Text>
@@ -274,7 +278,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C5_LIGHT_TEXT,
     left: 120,
     borderRadius: 5,
-    width: 70,
+    width: 80,
   },
 
   header: {

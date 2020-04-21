@@ -14,7 +14,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { MonoText } from "../components/StyledText";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [celery, setCelery] = useState(false);
   const [gluten, setGluten] = useState(false);
   const [crustaceans, setCrustaceans] = useState(false);
@@ -152,6 +152,7 @@ export default function HomeScreen() {
       soybeans,
       dioxide,
     });
+    navigation.navigate("Preferences");
   }
 
   return (
@@ -288,9 +289,6 @@ export default function HomeScreen() {
         />
 
         <View style={styles.buttons}>
-          <TouchableOpacity style={styles.formatted}>
-            <Text>Back</Text>
-          </TouchableOpacity>
           <TouchableOpacity style={styles.formatted} onPress={postHandler}>
             <Text>Next</Text>
           </TouchableOpacity>
@@ -332,6 +330,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     borderRadius: 5,
-    left: 100,
+    left: 160,
   },
 });

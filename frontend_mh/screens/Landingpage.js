@@ -13,43 +13,63 @@ import {
 } from "react-native";
 import { COLS } from "./COLS";
 
-export default function App() {
+export default function App({ navigation }) {
   return (
     <View style={styles.background}>
       <View style={styles.margin}>
         <View style={styles.logoCircle}>
-          <Image
-            style={styles.mealThingsLogo}
-            source={require("../assets/images/Mealthings.png")}
-          />
+          <TouchableOpacity onPress={() => navigation.navigate("Mealplanner")}>
+            <Image
+              style={styles.mealThingsLogo}
+              source={require("../assets/images/Mealthings.png")}
+            />
+          </TouchableOpacity>
         </View>
         <View style={styles.flex}>
-          <TouchableOpacity style={styles.note2}>
+          <TouchableOpacity
+            style={styles.note2}
+            onPress={() => navigation.navigate("ShoppingList")}
+          >
             <Text>Shopping List</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.note}>
+          <TouchableOpacity
+            style={styles.note}
+            onPress={() => navigation.navigate("TodaysRecipe")}
+          >
             <Text>Today's Recipe</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.flex}>
-          <TouchableOpacity style={styles.note}>
+          <TouchableOpacity
+            style={styles.note}
+            onPress={() => navigation.navigate("NewRecipe")}
+          >
             <Text>Random Recipe</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.note2}>
+          <TouchableOpacity
+            style={styles.note2}
+            onPress={() => navigation.navigate("YourStats")}
+          >
             <Text>Your Stats</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.flex}>
           <TouchableOpacity style={styles.note2}>
-            <Text>Change Preferences</Text>
+            <Text>Your Preferences</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.note}>
+          <TouchableOpacity
+            style={styles.note}
+            onPress={() => navigation.navigate("Home")}
+          >
             <Text>Logout</Text>
           </TouchableOpacity>
         </View>
       </View>
-      <TouchableOpacity style={styles.todaysMeal}>
+      <TouchableOpacity
+        style={styles.todaysMeal}
+        onPress={() => navigation.navigate("TodaysRecipe")}
+      >
         <Text>Today's meal</Text>
       </TouchableOpacity>
     </View>
@@ -90,8 +110,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     left: 50,
     shadowColor: COLS.C5_LIGHT_TEXT,
-    padding: 50,
+    padding: 10,
+    paddingVertical: 50,
     fontSize: 20,
+    shadowColor: "#000",
+    shadowOffset: { width: 200, height: 20 },
+    shadowOpacity: 2,
+    shadowRadius: 40,
+    elevation: 6,
   },
   note2: {
     width: 140,
@@ -102,7 +128,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     left: 50,
     shadowColor: COLS.C5_LIGHT_TEXT,
-    padding: 50,
+    paddingVertical: 50,
+    padding: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 200, height: 20 },
+    shadowOpacity: 2,
+    shadowRadius: 40,
+    elevation: 6,
+
     fontSize: 20,
   },
   todaysMeal: {
@@ -115,8 +148,3 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-
-// create more views holding two touchableOpacities
-// having alternating colors for buttons
-// do positioning
-// cretae a segment that enables dummy data to pass through

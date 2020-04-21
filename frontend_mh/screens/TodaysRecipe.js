@@ -53,7 +53,7 @@ function Item({ title }) {
   );
 }
 
-export default function TodaysRecipe() {
+export default function TodaysRecipe({ navigation }) {
   const [showIngredients, setShowIngredients] = useState(true);
 
   const ingredientsContainer = (
@@ -86,6 +86,14 @@ export default function TodaysRecipe() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.positioning}>
+        <TouchableOpacity onPress={() => navigation.navigate("LandingPage")}>
+          <Image
+            style={styles.arrow}
+            source={require("../assets/images/goback.png")}
+          />
+        </TouchableOpacity>
+      </View>
       <Text style={styles.pageTitle}>{exampleRecipe.name}</Text>
       <Image
         style={styles.image}
@@ -124,19 +132,37 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     alignItems: "center",
   },
+  positioning: {
+    right: 170,
+    top: 20,
+  },
+  arrow: {
+    height: 20,
+    width: 20,
+  },
+  formatting: {
+    marginTop: 10,
+  },
+
   pageTitle: {
     fontSize: 25,
     fontWeight: "bold",
-    marginTop: 10,
+    marginTop: -10,
+    marginBottom: 15,
   },
   image: {
-    width: "80%",
+    width: "90%",
     height: "30%",
     margin: 5,
     marginBottom: 15,
     marginTop: 15,
-    borderColor: COLS.C4_DARK_TEXT,
+    shadowColor: "#000",
+    shadowOffset: { width: 200, height: 20 },
+    shadowOpacity: 2,
+    shadowRadius: 40,
+    elevation: 6,
     borderWidth: 2,
+    borderRadius: 15,
   },
   buttonView: {
     flexDirection: "row",
@@ -154,7 +180,7 @@ const styles = StyleSheet.create({
     width: "50%",
   },
   selectedMethodIngredientsButton: {
-    backgroundColor: COLS.C_LOGO_BG,
+    backgroundColor: COLS.C_RED,
     width: "50%",
   },
   boxTitle: {
@@ -173,10 +199,14 @@ const styles = StyleSheet.create({
   ingredientsAndMethod: {
     margin: 15,
     marginTop: 5,
-    padding: 5,
-    borderWidth: 2,
+    padding: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 200, height: 20 },
+    shadowOpacity: 2,
+    shadowRadius: 40,
+    elevation: 6,
     borderColor: COLS.C4_DARK_TEXT,
     borderStyle: "solid",
-    backgroundColor: COLS.C5_LIGHT_TEXT,
+    backgroundColor: COLS.C6_WHITE_TEXT,
   },
 });

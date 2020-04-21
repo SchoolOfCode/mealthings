@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as WebBrowser from "expo-web-browser";
 import {
   Image,
   Platform,
@@ -12,7 +13,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { MonoText } from "../components/StyledText";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>
@@ -22,10 +23,11 @@ export default function HomeScreen() {
         <Text style={styles.tagLine}>Eat Well. Feel Amazing.</Text>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.buttonBackground}>
-          <Text style={styles.buttonText}>
-            Welcome aboard Let's get Started...
-          </Text>
+        <TouchableOpacity
+          style={styles.buttonBackground}
+          onPress={() => navigation.navigate("Allergies")}
+        >
+          <Text>Welcome aboard Let's get Started...</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -92,7 +94,7 @@ const styles = StyleSheet.create({
     color: COLS.C5_LIGHT_TEXT,
   },
   buttonContainer: {
-    marginTop: "20%",
+    marginTop: 20,
   },
   buttonBackground: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
@@ -100,6 +102,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 5,
     borderRadius: 5,
+    padding: 15,
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,

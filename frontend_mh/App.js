@@ -19,6 +19,11 @@ import YourStats from "./screens/YourStats";
 import SplashScreenDrink from "./screens/SplashScreenDrink";
 import SplashScreenExerciseSlow from "./screens/SplashScreenExerciseSlow";
 import SplashScreenExerciseQuick from "./screens/SplashScreenExerciseQuick";
+import SplashSuccess from "./screens/SplashSuccess";
+import Allergies from "./screens/Allergies";
+import Preferences from "./screens/DietaryPreference";
+import LandingPage from "./screens/Landingpage";
+import mealplanner from "./screens/Mealplanner";
 
 const Stack = createStackNavigator();
 
@@ -109,6 +114,31 @@ export default function App(props) {
               name="SplashScreenExerciseQuick"
               component={SplashScreenExerciseQuick}
               options={{ title: "Alert" }}
+            />
+            <Stack.Screen
+              name="SplashSuccess"
+              component={SplashSuccess}
+              options={{ title: "Splash Success" }}
+            />
+            <Stack.Screen
+              name="Allergies"
+              component={Allergies}
+              options={{ title: "Allergies" }}
+            />
+            <Stack.Screen
+              name="Preferences"
+              component={Preferences}
+              options={{ title: "Preferences" }}
+            />
+            <Stack.Screen
+              name="LandingPage"
+              component={LandingPage}
+              options={{ title: "LandingPage" }}
+            />
+            <Stack.Screen
+              name="Mealplanner"
+              component={mealplanner}
+              options={{ title: "Mealplanner" }}
             />
           </Stack.Navigator>
         </NavigationContainer>
