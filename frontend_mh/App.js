@@ -6,9 +6,10 @@ import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-// import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import useLinking from "./navigation/useLinking";
 import HomeScreen from "./screens/HomeScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import RegisterScreen2 from "./screens/RegisterScreen2";
 import Goals from "./screens/Goals";
 import ShoppingList from "./screens/ShoppingList";
 import NewRecipe from "./screens/NewRecipe";
@@ -74,9 +75,14 @@ export default function App(props) {
               options={{ title: "Home" }}
             />
             <Stack.Screen
-              name="YourStats"
-              component={YourStats}
-              options={{ title: "Your stats" }}
+              name="Register1"
+              component={RegisterScreen}
+              options={{ title: "Register" }}
+            />
+            <Stack.Screen
+              name="Register2"
+              component={RegisterScreen2}
+              options={{ title: "Register" }}
             />
             <Stack.Screen
               name="Goals"
@@ -97,6 +103,11 @@ export default function App(props) {
               name="TodaysRecipe"
               component={TodaysRecipe}
               options={{ title: "Today's recipe" }}
+            />
+            <Stack.Screen
+              name="YourStats"
+              component={YourStats}
+              options={{ title: "Your stats" }}
             />
             <Stack.Screen
               name="SplashScreenDrink"
@@ -131,7 +142,7 @@ export default function App(props) {
             <Stack.Screen
               name="LandingPage"
               component={LandingPage}
-              options={{ title: "LandingPage" }}
+              options={{ title: "Landing Page" }}
             />
             <Stack.Screen
               name="Mealplanner"

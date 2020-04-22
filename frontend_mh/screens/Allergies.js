@@ -1,20 +1,10 @@
 import React, { useState } from "react";
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Flatlist,
-  Switch,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { MonoText } from "../components/StyledText";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
+  const { dataPlusPlus } = route.params;
   const [celery, setCelery] = useState(false);
   const [gluten, setGluten] = useState(false);
   const [crustaceans, setCrustaceans] = useState(false);
@@ -135,7 +125,6 @@ export default function HomeScreen({ navigation }) {
   }
   function postHandler() {
     setPost("submitted");
-
     console.log({
       celery,
       gluten,
@@ -152,7 +141,51 @@ export default function HomeScreen({ navigation }) {
       soybeans,
       dioxide,
     });
-    navigation.navigate("Preferences");
+    var food_prefs_exc = "";
+    if (celery) {
+      food_prefs_exc += "celery,";
+    }
+    if (gluten) {
+      food_prefs_exc += "gluten,";
+    }
+    if (crustaceans) {
+      food_prefs_exc += "crustaceans,";
+    }
+    if (eggs) {
+      food_prefs_exc += "eggs,";
+    }
+    if (fish) {
+      food_prefs_exc += "fish,";
+    }
+    if (lupin) {
+      food_prefs_exc += "lupin,";
+    }
+    if (milk) {
+      food_prefs_exc += "milk,";
+    }
+    if (molluscs) {
+      food_prefs_exc += "molluscs,";
+    }
+    if (mustard) {
+      food_prefs_exc += "mustard,";
+    }
+    if (treeNuts) {
+      food_prefs_exc += "treeNuts,";
+    }
+    if (peanuts) {
+      food_prefs_exc += "peanuts,";
+    }
+    if (sesame_Seeds) {
+      food_prefs_exc += "sesame_Seeds,";
+    }
+    if (soybeans) {
+      food_prefs_exc += "soybeans,";
+    }
+    if (dioxide) {
+      food_prefs_exc += "dioxide";
+    }
+    const data = { ...dataPlusPlus, food_prefs_exc };
+    navigation.navigate("Preferences", { data });
   }
 
   return (

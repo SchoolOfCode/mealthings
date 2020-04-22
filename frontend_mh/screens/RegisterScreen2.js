@@ -5,45 +5,32 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
-  ScrollView,
   Image,
   TouchableOpacity,
 } from "react-native";
 import { COLS } from "./COLS";
 
-export default function App() {
+export default function App({ navigation, route }) {
+  const { data } = route.params;
   const [username, setUsername] = useState();
-  const [Password, setPassword] = useState();
+  const [password, setPassword] = useState();
   const [display, setDisplay] = useState();
 
   function usernameHandler(enteredText) {
     setUsername(enteredText);
   }
-  function PasswordHandler(enteredText) {
+  function passwordHandler(enteredText) {
     setPassword(enteredText);
   }
 
   function SubmitHandler() {
     setDisplay("Submitted");
-    console.log(username, Password);
-    // const data = { input, email, DOB, Gender };
-    // const options = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-    //   body: JSON.stringify(data),
-    // };
-    // fetch("", options)
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("this is", data);
-    //   });
+    console.log(username, password);
+    const dataPlus = { ...data, username, password };
+    console.log("dataPlus:", dataPlus);
+    navigation.navigate("Register2");
+    navigation.navigate("Goals", { dataPlus });
   }
 
   return (
@@ -62,7 +49,7 @@ export default function App() {
           <TextInput
             style={styles.inputField}
             placeholder="Email"
-            onChangeText={PasswordHandler}
+            onChangeText={passwordHandler}
             placeholderTextColor="black"
           />
         </View>

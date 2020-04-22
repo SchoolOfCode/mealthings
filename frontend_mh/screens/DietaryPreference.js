@@ -15,7 +15,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { MonoText } from "../components/StyledText";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen({ navigation, route }) {
+  const { data } = route.params;
   const [noRequirement, setNoRequirement] = useState(false);
   const [vegetarian, setVegetarian] = useState(false);
   const [ovovegetarian, setOvovegetarian] = useState(false);
@@ -113,7 +114,6 @@ export default function HomeScreen({ navigation }) {
 
   function postHandler() {
     setPost("submitted");
-
     console.log({
       noRequirement,
       vegetarian,
@@ -125,7 +125,49 @@ export default function HomeScreen({ navigation }) {
       chocolate,
       beetroot,
     });
-    navigation.navigate("LandingPage");
+
+    var food_prefs_inc = "";
+    if (vegetarian) {
+      food_prefs_inc = "vegetarian";
+    } else if (ovovegetarian) {
+      food_prefs_inc = "ovovegetarian";
+    } else if (lactoVegetarian) {
+      food_prefs_inc = "lactoVegetarian";
+    } else if (vegan) {
+      food_prefs_inc = "vegan";
+    } else {
+      food_prefs_inc = "noRequirement";
+    }
+
+    if (cheese) {
+      food_prefs_inc += ",cheese,";
+    } else if (orange) {
+      food_prefs_inc += ",orange,";
+    } else if (chocolate) {
+      food_prefs_inc += ",chocolate,";
+    } else if (beetroot) {
+      food_prefs_inc += ",beetroot,";
+    }
+    const dataPlus = { ...data, food_prefs_inc };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(dataPlus),
+    };
+    fetch(
+      "http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users",
+      options
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Return from RegisterScreen:", data);
+      });
+    navigation.navigate("LandingPage", dataPlus);
   }
 
   return (
