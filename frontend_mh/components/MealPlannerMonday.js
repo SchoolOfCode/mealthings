@@ -148,9 +148,9 @@ const sampleRecipes = [
 // add them all together
 // display total calories on screen
 
-const sum = randomArray
-  .map(item => item.amount)
-  .reduce((prev, curr) => prev + curr, 0);
+// const sum = randomArray
+//   .map(item => item.amount)
+//   .reduce((prev, curr) => prev + curr, 0);
 
 const originalData = sampleRecipes.map((item, index) => ({
   text: item.name,
