@@ -143,18 +143,21 @@ const sampleRecipes = [
   }
 ];
 
-// Create functionality to add all calories/protein/carbs/fat together
+// ==> Create functionality to add all calories/protein/carbs/fat together
 //
-// change string to number
+// - change string to number
 // const toNumber = recipes.map(item=>+item.amount)
 
-// get calories out the array of objects
-// add them all together
+// - get calories out the array of objects
+// - add them all together
 // const sum = recipes
-//   .map(item => +item.amount)
+//   .map(item => +item.calories)
 //   .reduce((prev, curr) => prev + curr, 0);
+//
 // TEST IN CONSOLE USING DUMMY DATA
 // TEST IN CONSOLE USING sampleRecipes, changing amount to calories
+//
+// store functionality in variables
 // display total calories on screen
 
 // FINAL FUNCTION TO EXTRACT CALORIES/PROTEIN/CARBOHYDRATES/FAT:
@@ -163,21 +166,37 @@ const sampleRecipes = [
 const calorieTotal = sampleRecipes
   .map(item => +item.calories)
   .reduce((prev, curr) => prev + curr, 0);
+// .map((item, index) => ({
+//   text: item.calories,
+//   color: colors[index % colors.length]
+// }));
 console.log(calorieTotal);
 
 const proteinTotal = sampleRecipes
   .map(item => +item.protein)
   .reduce((prev, curr) => prev + curr, 0);
+// .map((item, index) => ({
+//   text: item.protein,
+//   color: colors[index % colors.length]
+// }));
 console.log(proteinTotal);
 
 const carbTotal = sampleRecipes
   .map(item => +item.carbohydrates)
   .reduce((prev, curr) => prev + curr, 0);
+// .map((item, index) => ({
+//   text: item.carbohydrates,
+//   color: colors[index % colors.length]
+// }));
 console.log(carbTotal);
 
 const fatTotal = sampleRecipes
   .map(item => +item.fat)
   .reduce((prev, curr) => prev + curr, 0);
+// .map((item, index) => ({
+//   text: item.fat,
+//   color: colors[index % colors.length]
+// }));
 console.log(fatTotal);
 
 const originalData = sampleRecipes.map((item, index) => ({
@@ -187,6 +206,11 @@ const originalData = sampleRecipes.map((item, index) => ({
 
 const App = () => {
   const [data, setData] = useState(originalData);
+  const [totalCals, setTotalCals] = useState(0);
+
+  // const [totalProt, setTotalProt] = useState("");
+  // const [totalCarbs, setTotalCarbs] = useState("");
+  // const [totalFat, setTotalFat] = useState("");
 
   const keyExtractor = item => item.text;
 
@@ -202,9 +226,10 @@ const App = () => {
   return (
     <View>
       <Text> Monday</Text>
-      <Text> Calories</Text>
+      <Text>Calories</Text>
       <Text> Protein</Text>
-      <Text> Carbhydrates</Text>
+      <Text> Carbohydrates</Text>
+      <Text> Fat </Text>
       <FlatList
         data={data}
         keyExtractor={keyExtractor}
