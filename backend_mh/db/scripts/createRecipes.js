@@ -15,71 +15,9 @@ async function createRecipes() {
       salt TEXT,
       fibre TEXT,
       cooking_difficulty TEXT,
-      cooking_time_mins INT
+      cooking_time_mins INT,
+      method TEXT
   )`);
   console.log(res);
 }
 createRecipes();
-
-//async function populateUsers() {
-//   const json = await readFile(path.join(__dirname, "..", "populateRecipes.js"));
-//   const data = JSON.parse(json);
-//   const res = await Promise.all(
-//     data.map(
-//       async ({
-//         user_id,
-//         name,
-//         birthday,
-//         height,
-//         email_address,
-//         username,
-//         weight,
-//         password,
-//         new_mum,
-//         food_prefs_inc,
-//         food_prefs_exc,
-//         goals,
-//       }) => {
-//         const res = await query(
-//           `INSERT INTO users (
-//             user_id ,
-//             name ,
-//             birthday ,
-//             height ,
-//             email_address ,
-//             username ,
-//             weight ,
-//             password ,
-//             new_mum ,
-//             food_prefs_inc ,
-//             food_prefs_exc ,
-//             goals
-//       ) VALUES (
-//         $1,
-//         $2,
-//         $3,
-//         $4,
-//         $5,
-//         $6
-//       ) RETURNING *`,
-//           [
-//             user_id,
-//             name,
-//             birthday,
-//             height,
-//             email_address,
-//             username,
-//             weight,
-//             password,
-//             new_mum,
-//             food_prefs_inc,
-//             food_prefs_exc,
-//             goals,
-//           ]
-//         );
-//         return res.rows[0];
-//       }
-//     )
-//   );
-//   console.log(res);
-// }
