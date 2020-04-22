@@ -1,32 +1,36 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
-  View,
   Text,
-  Image,
   TouchableOpacity,
-  ScrollView,
   StyleSheet,
-  Dimensions,
-  FlatList,
+  View,
+  ScrollView,
+  SafeAreaView,
 } from "react-native";
-import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
-import { COLS } from "./COLS";
 
-export default function App() {
+import FlatList from "react-native-drag-flatlist";
+import Monday from "../components/MealPlannerMonday";
+import Tuesday from "../components/MealPlannerTuesday";
+import Wednesday from "../components/MealPlannerWednesday";
+import Thursday from "../components/MealPlannerThursday";
+import Friday from "../components/MealPlannerFriday";
+import Saturday from "../components/MealPlannerSaturday";
+import Sunday from "../components/MealPlannerSunday";
+
+const colors = ["#d3f261", "#7cb305", "#5b8c00", "#3f6600", "#254000"];
+
+function App() {
   return (
-    <View style={styles.container}>
-      <FlatList />
-
-      <Text>Hello</Text>
-    </View>
+    <ScrollView horizontal={true}>
+      <Monday />
+      <Tuesday />
+      <Wednesday />
+      <Thursday />
+      <Friday />
+      <Saturday />
+      <Sunday />
+    </ScrollView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLS.C_YELLOW,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default App;
