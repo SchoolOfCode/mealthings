@@ -148,9 +148,15 @@ const sampleRecipes = [
 // add them all together
 // display total calories on screen
 
-// const sum = randomArray
-//   .map(item => item.amount)
+// const toNumber = recipes.map(item=>+item.amount)
+// const sum = recipes
+//   .map(item => +item.amount)
 //   .reduce((prev, curr) => prev + curr, 0);
+// TEST IN CONSOLE USING DUMMY DATA
+// TEST IN CONSOLE USING sampleRecipes, changing amount to calories
+
+// FINAL FUNCTION TO EXTRACT CALORIES/PROTEIN/CARBOHYDRATES/FAT:
+// const sum = sampleRecipes.map(item => +item.calories).reduce((prev, curr) => prev + curr, 0);
 
 const originalData = sampleRecipes.map((item, index) => ({
   text: item.name,
