@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Text,
   TouchableOpacity,
   StyleSheet,
   View,
   ScrollView,
-  SafeAreaView,
+  SafeAreaView
 } from "react-native";
 
-import FlatList from "react-native-drag-flatlist";
+// import FlatList from "react-native-drag-flatlist";
 import Monday from "../components/MealPlannerMonday";
 import Tuesday from "../components/MealPlannerTuesday";
 import Wednesday from "../components/MealPlannerWednesday";
