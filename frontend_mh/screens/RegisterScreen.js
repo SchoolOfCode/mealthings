@@ -1,11 +1,9 @@
-import * as WebBrowser from "expo-web-browser";
 import React, { useState } from "react";
 
 import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
   ScrollView,
   Image,
@@ -13,15 +11,15 @@ import {
 } from "react-native";
 import { COLS } from "./COLS";
 
-export default function App() {
-  const [input, setInput] = useState();
+export default function App({ navigation }) {
+  const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [DOB, setDOB] = useState();
-  const [Gender, setGender] = useState();
+  const [gender, setGender] = useState();
   const [display, setDisplay] = useState();
 
-  function name(enteredText) {
-    setInput(enteredText);
+  function nameInput(enteredText) {
+    setName(enteredText);
   }
   function emailInput(enteredText) {
     setEmail(enteredText);
@@ -29,29 +27,15 @@ export default function App() {
   function DOBinput(enteredText) {
     setDOB(enteredText);
   }
-  function GenderInput(enteredText) {
+  function genderInput(enteredText) {
     setGender(enteredText);
   }
 
   function SubmitHandler() {
     setDisplay("Submitted");
-    console.log(input, email, DOB, Gender);
-    // const data = { input, email, DOB, Gender };
-    // const options = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-    //   body: JSON.stringify(data),
-    // };
-    // fetch("", options)
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("this is", data);
-    //   });
+    console.log("Submitted:", name, email, DOB, gender);
+    const data = { name, email_address: email, birthday: DOB, gender };
+    navigation.navigate("Register2", { data });
   }
 
   return (
@@ -64,7 +48,7 @@ export default function App() {
           <View>
             <TextInput
               style={styles.inputField}
-              onChangeText={name}
+              onChangeText={nameInput}
               placeholder="Name"
               placeholderTextColor="black"
             />
@@ -83,7 +67,7 @@ export default function App() {
             <TextInput
               style={styles.inputField}
               placeholder="Gender"
-              onChangeText={GenderInput}
+              onChangeText={genderInput}
               placeholderTextColor="black"
             />
           </View>
@@ -95,12 +79,18 @@ export default function App() {
 
           <View style={styles.buttonflex}>
             <View>
-              <TouchableOpacity style={styles.Direction}>
+              <TouchableOpacity
+                style={styles.Direction}
+                onPress={() => navigation.goBack()}
+              >
                 <Text>Back</Text>
               </TouchableOpacity>
             </View>
             <View style={styles.buttonText}>
-              <TouchableOpacity style={styles.Direction}>
+              <TouchableOpacity
+                style={styles.Direction}
+                onPress={() => navigation.navigate("Register2")}
+              >
                 <Text>Next</Text>
               </TouchableOpacity>
             </View>

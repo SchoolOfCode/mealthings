@@ -5,9 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
-  ScrollView,
   Image,
   TouchableOpacity,
 } from "react-native";
@@ -23,7 +21,7 @@ export default function App() {
   function tracker(enteredText) {
     setPassword(enteredText);
   }
-  function handleSubmit() {
+  function handleSubmit({ navigation }) {
     setPost(name, password);
     // const data = { name,email };
     // const options = {
@@ -41,6 +39,7 @@ export default function App() {
     //   .then((data) => {
     //     console.log("this is", data);
     //   });
+    navigation.navigate("Landingpage");
   }
   return (
     <View style={styles.container}>

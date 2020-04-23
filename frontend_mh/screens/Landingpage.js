@@ -1,16 +1,7 @@
 import * as WebBrowser from "expo-web-browser";
 import React, { useState } from "react";
 
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  TextInput,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { COLS } from "./COLS";
 
 export default function App({ navigation }) {

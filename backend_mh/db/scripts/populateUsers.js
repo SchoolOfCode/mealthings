@@ -22,6 +22,9 @@ async function populateUsers() {
         food_prefs_inc,
         food_prefs_exc,
         goals,
+        last_weeks_meals,
+        this_weeks_meals,
+        gender,
       }) => {
         const res = await query(
           `INSERT INTO users (
@@ -35,7 +38,10 @@ async function populateUsers() {
             new_mum,
             food_prefs_inc,
             food_prefs_exc,
-            goals 
+            goals, 
+            last_weeks_meals,
+            this_weeks_meals,
+            gender 
                      ) VALUES (
                        $1,
                        $2,
@@ -47,7 +53,10 @@ async function populateUsers() {
                        $8,
                        $9,
                        $10,
-                       $11
+                       $11,
+                       $12, 
+                       $13,
+                       $14
                      ) RETURNING *`,
           [
             name,
@@ -61,6 +70,9 @@ async function populateUsers() {
             food_prefs_inc,
             food_prefs_exc,
             goals,
+            last_weeks_meals,
+            this_weeks_meals,
+            gender,
           ]
         );
         return res.rows[0];

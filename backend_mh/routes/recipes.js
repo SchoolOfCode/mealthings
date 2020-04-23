@@ -19,7 +19,8 @@ router.get("/:recipeId", async (req, res) => {
   const { recipeId } = req.params;
   console.log("Recieved GET request for recipeId: ", recipeId);
   const data = await getRecipeById(recipeId);
-  if (data.rows) {
+  console.log("data", data);
+  if (data.length) {
     return res.status(200).json({
       message: "Received Recipe Using ID",
       success: true,

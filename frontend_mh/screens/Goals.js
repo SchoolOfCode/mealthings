@@ -1,20 +1,17 @@
 import React, { useState } from "react";
 import {
   Image,
-  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   TextInput,
-  Flatlist,
-  Button,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { MonoText } from "../components/StyledText";
 
-export default function Goals({ navigation }) {
+export default function Goals({ navigation, route }) {
+  const { dataPlus } = route.params;
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
   const [fatLoss, setFatLoss] = useState(false);
@@ -34,7 +31,25 @@ export default function Goals({ navigation }) {
   function HandleSubmit() {
     setDisplay("success");
     console.log({ weight, height, fatLoss, muscle, diet, time, cook });
-    navigation.navigate("SplashSuccess");
+    var goals = "";
+    if (fatLoss) {
+      goals += "Fat loss,";
+    }
+    if (muscle) {
+      goals += ",Muscle gain";
+    }
+    if (diet) {
+      goals += ",No diet";
+    }
+    if (time) {
+      goals += ",Save time";
+    }
+    if (cook) {
+      goals += ",Learn to cook";
+    }
+    const dataPlusPlus = { ...dataPlus, goals };
+    console.log(dataPlusPlus);
+    navigation.navigate("SplashSuccess", { dataPlusPlus });
   }
 
   function fatHandler() {
@@ -46,6 +61,7 @@ export default function Goals({ navigation }) {
       setFatLoss(false);
     }
   }
+
   function muscleHandler() {
     if (diet === true) {
       setMuscle(false);
@@ -55,6 +71,7 @@ export default function Goals({ navigation }) {
       setMuscle(false);
     }
   }
+
   function dietHandler() {
     if (diet === true) {
       setDiet(true);
@@ -62,6 +79,7 @@ export default function Goals({ navigation }) {
       setDiet(false);
     }
   }
+
   function timeHandler() {
     if (diet === true) {
       setTime(false);
@@ -71,6 +89,7 @@ export default function Goals({ navigation }) {
       setTime(false);
     }
   }
+
   function cookHandler() {
     if (diet === true) {
       setCook(false);
