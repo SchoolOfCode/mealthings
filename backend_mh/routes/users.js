@@ -27,7 +27,7 @@ router.get("/:userId", async (req, res) => {
   const { userId } = req.params;
   console.log("Recieved GET request for userId: ", userId);
   const data = await getUserById(userId);
-  if (data.rows) {
+  if (data.length) {
     return res.status(200).json({
       message: "Received User Using ID",
       success: true,
@@ -38,7 +38,6 @@ router.get("/:userId", async (req, res) => {
   return res.status(400).json({
     message: "Failed to fetch from database!",
     success: false,
-    payload: data,
   });
 });
 
@@ -61,6 +60,11 @@ router.post("/", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   const { id } = req.params;
   const { body } = req;
+  if (!id || !body) {
+    return res
+      .status(400)
+      .json({ message: "User Update failed", success: false });
+  }
   const data = await patchUser(body, id);
   console.log(data);
   if (data) {
