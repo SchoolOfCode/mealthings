@@ -186,7 +186,7 @@ export default function Preferences({ navigation, route }) {
 
   return (
     <ScrollView style={styles.background}>
-      <Text style={styles.Font}> Diet Preferences</Text>
+      <Text style={styles.heading}> Diet Preferences</Text>
 
       <View style={styles.container}>
         <Text style={styles.text}> No Requirement</Text>
@@ -290,11 +290,11 @@ export default function Preferences({ navigation, route }) {
         <View style={styles.buttons}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={styles.buttonstyle}
+            style={styles.button}
           >
             <Text>Back</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonstyle} onPress={postHandler}>
+          <TouchableOpacity style={styles.buttons} onPress={postHandler}>
             <Text>Finish</Text>
           </TouchableOpacity>
         </View>
@@ -307,43 +307,39 @@ export default function Preferences({ navigation, route }) {
 const styles = StyleSheet.create({
   background: { backgroundColor: COLS.C_BG },
   container: {
-    margin: 10
-  },
-  Font: {
-    alignSelf: "center",
-    marginBottom: 10,
-    marginVertical: 20
+    margin: FORMAT_containers.F_container_margin
   },
   text: {
-    margin: 5,
-    left: 40,
-    fontWeight: "bold"
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    marginBottom: FORMAT_text.F_text_marginBottom,
+    marginTop: FORMAT_text.F_text_marginTop,
+    margin: FORMAT_text.F_text_margin,
+    left: FORMAT_text.F_text_left,
+    fontWeight: FORMAT_fonts.F_font_fontWeight
   },
   switch: {
-    right: 40,
-    bottom: 27
+    right: FORMAT_switches.F_switch_right,
+    bottom: FORMAT_switches.F_switch_bottom
   },
   buttons: {
-    flexDirection: "row",
-    justifyContent: "space-around"
-  },
-  buttonstyle: {
-    margin: 10,
-    alignSelf: "center",
-    alignItems: "center",
-    padding: 15,
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
+    margin: FORMAT_navButton.F_navButton_margin,
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
+    alignItems: FORMAT_navButton.F_navButton_alignItems,
+    padding: FORMAT_navButton.F_navButton_padding,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    borderRadius: 5,
-    width: 80
+    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
+    width: FORMAT_navButton.F_navButton_width
   },
 
-  header: {
-    alignSelf: "center"
+  heading: {
+    alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf
   },
 
   subheading: {
-    fontSize: 10,
-    position: "relative",
-    left: 50
+    fontSize: FORMAT_headings.F_subHeading_fontSize,
+    position: FORMAT_headings.F_subHeading_position,
+    left: FORMAT_headings.F_subHeading_left
   }
 });

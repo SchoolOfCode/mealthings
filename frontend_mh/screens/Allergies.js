@@ -3,30 +3,9 @@ import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
+import { FORMAT_containers } from "./FORMAT_containers";
+import { FORMAT_switches } from "./FORMAT_extraComponents";
+import { FORMAT_navButton } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 export default function Allergies({ navigation, route }) {
@@ -198,7 +177,7 @@ export default function Allergies({ navigation, route }) {
 
   return (
     <ScrollView style={styles.background}>
-      <Text style={styles.text}> Allergies</Text>
+      <Text style={styles.heading}> Allergies</Text>
       <View style={styles.container}>
         <Text style={styles.text}> Celery</Text>
         <Switch
@@ -349,32 +328,49 @@ export default function Allergies({ navigation, route }) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    backgroundHeight: F_background_height
+    backgroundHeight: FORMAT_background.F_background_height
   },
   container: {
-    margin: F_container_margin,
+    margin: FORMAT_containers.F_container_margin,
+    backgroundColor: COLS.C_BG,
+    margin: FORMAT_containers.F_container_margin,
+    marginVertical: FORMAT_containers.F_container_marginVertical,
+    padding: FORMAT_containers.F_container_padding,
+    alignItems: FORMAT_containers.F_container_alignItems,
+    justifyContent: FORMAT_containers.F_container_justifyContent,
+    flex: FORMAT_containers.F_container_flex,
+    flexDirection: FORMAT_containers.F_container_flexDirection,
     backgroundColor: COLS.C_BG
   },
   text: {
-    alignSelf: F_text_alignSelf,
-    marginBottom: F_text_marginBottom,
-    marginTop: F_text_marginTop,
-    margin: F_text_margin,
-    left: F_text_left,
-    font: F_font_font
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    marginBottom: FORMAT_text.F_text_marginBottom,
+    marginTop: FORMAT_text.F_text_marginTop,
+    margin: FORMAT_text.F_text_margin,
+    left: FORMAT_text.F_text_left,
+    font: FORMAT_fonts.F_font_font
+  },
+  heading: {
+    alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
+    left: FORMAT_headings.F_headingMainTitle_left,
+    fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
+    fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
+    bottom: FORMAT_headings.F_headingMainTitle_bottom,
+    marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
+    marginTop: FORMAT_headings.F_headingMainTitle_marginTop
   },
   switch: {
-    right: F_switch_right,
-    bottom: F_switch_bottom
+    right: FORMAT_switches.F_switch_right,
+    bottom: FORMAT_switches.F_switch_bottom
   },
   buttons: {
-    flexDirection: F_navButton_flexDirection,
-    justifyContent: F_navButton_justifyContent,
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: F_navButton_width,
-    padding: F_navButton_padding,
-    alignItems: F_navButton_alignItems,
-    margin: F_navButton_margin,
-    borderRadius: F_navBitton_borderRadius
+    width: FORMAT_navButton.F_navButton_width,
+    padding: FORMAT_navButton.F_navButton_padding,
+    alignItems: FORMAT_navButton.F_navButton_alignItems,
+    margin: FORMAT_navButton.FORMAT_navButton.F_navButton_margin,
+    borderRadius: FORMAT_navButton.F_navBitton_borderRadius
   }
 });

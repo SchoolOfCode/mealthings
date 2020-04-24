@@ -11,7 +11,7 @@ const FORMAT_headings = {
   F_headingMainTitle_fontWeight: "bold",
   F_headingMainTitle_bottom: 8,
   F_headingMainTitle_marginBottom: 10,
-  F_headingMainTitle_marginTop: -10
+  F_headingMainTitle_marginTop: 10
 };
 
 const FORMAT_textBoxHeading = {
