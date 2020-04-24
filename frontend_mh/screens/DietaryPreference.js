@@ -14,30 +14,11 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
+import { FORMAT_containers } from "./FORMAT_containers";
+import { FORMAT_switches } from "./FORMAT_extraComponents";
+import { FORMAT_headings } from "./FORMAT_headings";
+
+import { FORMAT_navButton } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 import { MonoText } from "../components/StyledText";
 
@@ -305,9 +286,21 @@ export default function Preferences({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  background: { backgroundColor: COLS.C_BG },
+  background: {
+    backgroundColor: COLS.C_BG,
+    backgroundHeight: FORMAT_background.F_background_height
+  },
   container: {
-    margin: FORMAT_containers.F_container_margin
+    margin: FORMAT_containers.F_container_margin,
+    backgroundColor: COLS.C_BG,
+    margin: FORMAT_containers.F_container_margin,
+    marginVertical: FORMAT_containers.F_container_marginVertical,
+    padding: FORMAT_containers.F_container_padding,
+    alignItems: FORMAT_containers.F_container_alignItems,
+    justifyContent: FORMAT_containers.F_container_justifyContent,
+    flex: FORMAT_containers.F_container_flex,
+    flexDirection: FORMAT_containers.F_container_flexDirection,
+    backgroundColor: COLS.C_BG
   },
   text: {
     alignSelf: FORMAT_text.F_text_alignSelf,
@@ -334,12 +327,21 @@ const styles = StyleSheet.create({
   },
 
   heading: {
-    alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf
+    alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
+    left: FORMAT_headings.F_headingMainTitle_left,
+    fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
+    fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
+    bottom: FORMAT_headings.F_headingMainTitle_bottom,
+    marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
+    marginTop: FORMAT_headings.F_headingMainTitle_marginTop
   },
 
   subheading: {
     fontSize: FORMAT_headings.F_subHeading_fontSize,
     position: FORMAT_headings.F_subHeading_position,
-    left: FORMAT_headings.F_subHeading_left
+    left: FORMAT_headings.F_subHeading_left,
+    alignSelf: FORMAT_headings.F_subHeading_alignSelf,
+    alignItems: FORMAT_headings.F_subHeading_alignItems,
+    fontWeight: FORMAT_headings.F_subHeading_fontWeight
   }
 });
