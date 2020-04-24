@@ -19,10 +19,8 @@ export default function Registerscreen2({ navigation, route }) {
   const [password, setPassword] = useState();
   const [display, setDisplay] = useState();
 
-  const [register, setRegister] = useContext(RegisterContext);
-  console.log("RS2", register);
   function usernameHandler(enteredText) {
-    setRegister(enteredText);
+    setUsername(enteredText);
   }
   function passwordHandler(enteredText) {
     setPassword(enteredText);

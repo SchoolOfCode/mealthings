@@ -4,7 +4,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   View,
-  SafeAreaView
+  SafeAreaView,
 } from "react-native";
 
 import FlatList from "react-native-drag-flatlist";
@@ -24,7 +24,7 @@ const sampleRecipes = [
       "passata",
       "orzo",
       "ripe cherry tomatoes , on the vine",
-      "large cooked peeled king prawns"
+      "large cooked peeled king prawns",
     ],
     ingredientsQuantities: [
       "2 cloves",
@@ -35,7 +35,7 @@ const sampleRecipes = [
       "400ml",
       "300g",
       "200g",
-      "400g"
+      "400g",
     ],
     calories: "513",
     protein: "28.8",
@@ -54,8 +54,8 @@ const sampleRecipes = [
       "Add the passata and 300ml of water, then the orzo. Bring to the boil, reduce the heat and simmer for 10 to 15 minutes, or until the orzo is al dente, stirring occasionally to prevent it sticking.",
       "Spread the cherry tomatoes over a baking tray, drizzle with the rest of the oil and season. Roast for 10 minutes, or until soft.",
       "Stir half the basil into the pasta, along with the prawns.",
-      "Divide between bowls, top with the remaining basil and serve the roasted tomatoes alongside."
-    ]
+      "Divide between bowls, top with the remaining basil and serve the roasted tomatoes alongside.",
+    ],
   },
   {
     recipe_id: "72",
@@ -66,7 +66,7 @@ const sampleRecipes = [
       "flat-leaf parsley",
       "lemon",
       "dried chilli flakes",
-      "olive oil"
+      "olive oil",
     ],
     ingredientsQuantities: [
       "1kg topside",
@@ -74,7 +74,7 @@ const sampleRecipes = [
       "1/2 a bunch",
       "1",
       "1 tsp",
-      "4 tbp"
+      "4 tbp",
     ],
     calories: "226",
     protein: "38.8",
@@ -90,8 +90,8 @@ const sampleRecipes = [
       "Bring the meat to room temperature, then place it on a board and tenderise with a meat hammer or Jaccard-style tenderiser.",
       "Cut the meat into large chunks and transfer to a large bowl. Season to taste.",
       "Peel, finely chop and add the garlic. Pick, chop and add the parsley, then add the lemon zest and juice, the chilli and oil. Adjust the quantities to taste; there should be just a hint of each, to bring out the meat’s best aspects and not mask its flavour.",
-      "Transfer to a platter and serve immediately with ciabatta-style bread."
-    ]
+      "Transfer to a platter and serve immediately with ciabatta-style bread.",
+    ],
   },
   {
     recipe_id: "73",
@@ -107,7 +107,7 @@ const sampleRecipes = [
       "raw frozen prawns",
       "rice vermicelli",
       "soy sauce",
-      "lime"
+      "lime",
     ],
     ingredientsQuantities: [
       "4",
@@ -120,7 +120,7 @@ const sampleRecipes = [
       "225g",
       "300g",
       "1 splash",
-      "1/2"
+      "1/2",
     ],
     calories: "353",
     protein: "23.6",
@@ -138,9 +138,9 @@ const sampleRecipes = [
       "Separate the bok choy leaves (use other greens or frozen peas instead, if you prefer), rinse them and add to the stock together with the prawns, spring onions, lemongrass and garlic.",
       "Cook for a couple of minutes, until the prawns have turned pink and the bok choy has wilted.",
       "Divide the vermicelli between 4 bowls and ladle over the soup.",
-      "Scatter the chilli and coriander on top and season with soy and lime juice."
-    ]
-  }
+      "Scatter the chilli and coriander on top and season with soy and lime juice.",
+    ],
+  },
 ];
 
 // ==> Create functionality to add all calories/protein/carbs/fat together
@@ -164,30 +164,30 @@ const sampleRecipes = [
 // const sum = sampleRecipes.map(item => +item.calories).reduce((prev, curr) => prev + curr, 0);
 
 const calorieTotal = sampleRecipes
-  .map(item => +item.calories)
+  .map((item) => +item.calories)
   .reduce((prev, curr) => prev + curr, 0);
 console.log(calorieTotal);
 
-const proteinTotal = useEffect(() => {
-  sampleRecipes
-    .map(item => +item.protein)
-    .reduce((prev, curr) => prev + curr, 0);
-}, [sampleRecipes]);
-console.log(proteinTotal);
+// const proteinTotal = useEffect(() => {
+//   sampleRecipes
+//     .map((item) => +item.protein)
+//     .reduce((prev, curr) => prev + curr, 0);
+// }, [sampleRecipes]);
+// console.log(proteinTotal);
 
 const carbTotal = sampleRecipes
-  .map(item => +item.carbohydrates)
+  .map((item) => +item.carbohydrates)
   .reduce((prev, curr) => prev + curr, 0);
 console.log(carbTotal);
 
 const fatTotal = sampleRecipes
-  .map(item => +item.fat)
+  .map((item) => +item.fat)
   .reduce((prev, curr) => prev + curr, 0);
 console.log(fatTotal);
 
 const originalData = sampleRecipes.map((item, index) => ({
   text: item.name,
-  color: colors[index % colors.length]
+  color: colors[index % colors.length],
 }));
 
 const App = () => {
@@ -198,7 +198,7 @@ const App = () => {
   // const [totalCarbs, setTotalCarbs] = useState("");
   // const [totalFat, setTotalFat] = useState("");
 
-  const keyExtractor = item => item.text;
+  const keyExtractor = (item) => item.text;
 
   const renderItem = ({ item, drag }) => (
     <TouchableOpacity
@@ -233,8 +233,8 @@ const styles = StyleSheet.create({
     width: 390,
     height: 40,
     padding: -10,
-    margin: 5
-  }
+    margin: 5,
+  },
 });
 
 export default App;

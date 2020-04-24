@@ -10,6 +10,7 @@ import {
   Modal,
   Dimensions,
   Alert,
+  Image,
 } from "react-native";
 import { COLS } from "./COLS";
 
