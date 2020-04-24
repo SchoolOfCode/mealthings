@@ -98,20 +98,26 @@ async function patchUser(body, id) {
     food_prefs_inc,
     food_prefs_exc,
     goals,
+    this_weeks_meals,
+    last_weeks_meals,
+    gender,
   } = body;
   const res = await query(
-    `UPDATE users SET name= COALESCE($1, name),
-         birthday= COALESCE($2, birthday),
-         height= COALESCE($3, height),
-         email_address= COALESCE($4, email_address),
-         username= COALESCE($5, username),
-         weight= COALESCE($6, weight),
-         password= COALESCE($7, password),
-         new_mum= COALESCE($8, new_mum),
-         food_prefs_inc= COALESCE($9, food_prefs_inc),
-         food_prefs_exc= COALESCE($10, food_prefs_exc),
-         goals= COALESCE($11, goals)
-         WHERE user_id = $12
+    `UPDATE users SET name = COALESCE($1, name),
+         birthday = COALESCE($2, birthday),
+         height = COALESCE($3, height),
+         email_address = COALESCE($4, email_address),
+         username = COALESCE($5, username),
+         weight = COALESCE($6, weight),
+         password = COALESCE($7, password),
+         new_mum = COALESCE($8, new_mum),
+         food_prefs_inc = COALESCE($9, food_prefs_inc),
+         food_prefs_exc = COALESCE($10, food_prefs_exc),
+         goals = COALESCE($11, goals),
+         this_weeks_meals = COALESCE($12, this_weeks_meals),
+         last_weeks_meals = COALESCE($13, last_weeks_meals),
+         gender = COALESCE($14, gender)
+         WHERE user_id = $15
          RETURNING *
          `,
     [
@@ -126,6 +132,9 @@ async function patchUser(body, id) {
       food_prefs_inc,
       food_prefs_exc,
       goals,
+      this_weeks_meals,
+      last_weeks_meals,
+      gender,
       id,
     ]
   );

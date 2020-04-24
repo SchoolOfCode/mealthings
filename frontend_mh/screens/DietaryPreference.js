@@ -15,7 +15,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { MonoText } from "../components/StyledText";
 
-export default function HomeScreen({ navigation }) {
+export default function Preferences({ navigation, route }) {
+  const { data } = route.params;
   const [noRequirement, setNoRequirement] = useState(false);
   const [vegetarian, setVegetarian] = useState(false);
   const [ovovegetarian, setOvovegetarian] = useState(false);
@@ -56,10 +57,8 @@ export default function HomeScreen({ navigation }) {
       setOvovegetarian(false);
     } else if (ovovegetarian === false) {
       setOvovegetarian(true);
-      console.log("hello");
     } else if (ovovegetarian === true) {
       setOvovegetarian(false);
-      console.log("Goodbye");
     }
   }
   function lactoHander() {
@@ -104,28 +103,59 @@ export default function HomeScreen({ navigation }) {
   function beetrootHandler() {
     if (beetroot === false) {
       setBeetroot(true);
-      console.log("hello");
     } else if (beetroot === true) {
       setBeetroot(false);
-      console.log("Goodbye");
     }
   }
 
   function postHandler() {
     setPost("submitted");
+    var food_prefs_inc = "";
+    if (vegetarian) {
+      food_prefs_inc = "vegetarian";
+    } else if (ovovegetarian) {
+      food_prefs_inc = "ovovegetarian";
+    } else if (lactoVegetarian) {
+      food_prefs_inc = "lactoVegetarian";
+    } else if (vegan) {
+      food_prefs_inc = "vegan";
+    } else {
+      food_prefs_inc = "noRequirement";
+    }
 
-    console.log({
-      noRequirement,
-      vegetarian,
-      ovovegetarian,
-      lactoVegetarian,
-      vegan,
-      cheese,
-      orange,
-      chocolate,
-      beetroot,
-    });
-    navigation.navigate("LandingPage");
+    if (cheese) {
+      food_prefs_inc += ",cheese,";
+    } else if (orange) {
+      food_prefs_inc += ",orange,";
+    } else if (chocolate) {
+      food_prefs_inc += ",chocolate,";
+    } else if (beetroot) {
+      food_prefs_inc += ",beetroot,";
+    }
+    const dataPlus = { ...data, food_prefs_inc };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(dataPlus),
+    };
+    fetch(
+      "http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users",
+      options
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Return from RegisterScreen:", data);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+    console.log("final dataplus in dietary prefs", dataPlus);
+    navigation.navigate("LandingPage", dataPlus);
   }
 
   return (
@@ -233,7 +263,7 @@ export default function HomeScreen({ navigation }) {
         />
         <View style={styles.buttons}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Allergies")}
+            onPress={() => navigation.goBack()}
             style={styles.buttonstyle}
           >
             <Text>Back</Text>
@@ -269,6 +299,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
+    justifyContent: "space-around",
   },
   buttonstyle: {
     margin: 10,
@@ -276,7 +307,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    left: 120,
     borderRadius: 5,
     width: 80,
   },

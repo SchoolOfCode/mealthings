@@ -10,7 +10,10 @@
     "new_mum": "no",
     "food_prefs_inc": "cheese",
     "food_prefs_exc": "vegan",
-    "goals": "gaining muscle"
+    "goals": "gaining muscle",
+    "gender": "Male",
+    "last_weeks_meals": [1, 4, 7, 5, 8, 9, 34],
+    "this_weeks_meals": [1, 2, 3, 4, 5]
   },
   {
     "name": "ayla",
@@ -23,7 +26,10 @@
     "new_mum": "yes",
     "food_prefs_inc": "fish",
     "food_prefs_exc": "vegetarian",
-    "goals": "saving time"
+    "goals": "saving time",
+    "gender": "Female",
+    "last_weeks_meals": [1, 4, 7, 5, 8, 9, 34],
+    "this_weeks_meals": [1, 2, 3, 4, 5]
   },
   {
     "name": "anya",
@@ -36,6 +42,9 @@
     "new_mum": "no",
     "food_prefs_inc": "beer",
     "food_prefs_exc": "celiac",
-    "goals": "lose weight"
+    "goals": "lose weight",
+    "gender": "Female",
+    "last_weeks_meals": [1, 4, 7, 5, 8, 9, 34],
+    "this_weeks_meals": [1, 2, 3, 4, 5]
   }
 ]

@@ -1,20 +1,11 @@
 import React, { useState } from "react";
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Flatlist,
-  Switch,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { MonoText } from "../components/StyledText";
 
-export default function HomeScreen({ navigation }) {
+export default function Allergies({ navigation, route }) {
+  const { dataPlusPlus } = route.params;
+  console.log("dataplusplus at the start of Allergies", dataPlusPlus);
   const [celery, setCelery] = useState(false);
   const [gluten, setGluten] = useState(false);
   const [crustaceans, setCrustaceans] = useState(false);
@@ -48,10 +39,8 @@ export default function HomeScreen({ navigation }) {
   function crustaceansHandler() {
     if (crustaceans === false) {
       setCrustaceans(true);
-      console.log("hello");
     } else if (crustaceans === true) {
       setCrustaceans(false);
-      console.log("Goodbye");
     }
   }
   function eggHandler() {
@@ -92,10 +81,8 @@ export default function HomeScreen({ navigation }) {
   function mustardHandler() {
     if (mustard === false) {
       setMustard(true);
-      console.log("hello");
     } else if (mustard === true) {
       setMustard(false);
-      console.log("Goodbye");
     }
   }
   function treeNutsHandler() {
@@ -135,24 +122,52 @@ export default function HomeScreen({ navigation }) {
   }
   function postHandler() {
     setPost("submitted");
-
-    console.log({
-      celery,
-      gluten,
-      crustaceans,
-      eggs,
-      fish,
-      lupin,
-      milk,
-      molluscs,
-      mustard,
-      treeNuts,
-      peanuts,
-      sesame_Seeds,
-      soybeans,
-      dioxide,
-    });
-    navigation.navigate("Preferences");
+    var food_prefs_exc = "";
+    if (celery) {
+      food_prefs_exc += "celery,";
+    }
+    if (gluten) {
+      food_prefs_exc += "gluten,";
+    }
+    if (crustaceans) {
+      food_prefs_exc += "crustaceans,";
+    }
+    if (eggs) {
+      food_prefs_exc += "eggs,";
+    }
+    if (fish) {
+      food_prefs_exc += "fish,";
+    }
+    if (lupin) {
+      food_prefs_exc += "lupin,";
+    }
+    if (milk) {
+      food_prefs_exc += "milk,";
+    }
+    if (molluscs) {
+      food_prefs_exc += "molluscs,";
+    }
+    if (mustard) {
+      food_prefs_exc += "mustard,";
+    }
+    if (treeNuts) {
+      food_prefs_exc += "treeNuts,";
+    }
+    if (peanuts) {
+      food_prefs_exc += "peanuts,";
+    }
+    if (sesame_Seeds) {
+      food_prefs_exc += "sesame_Seeds,";
+    }
+    if (soybeans) {
+      food_prefs_exc += "soybeans,";
+    }
+    if (dioxide) {
+      food_prefs_exc += "dioxide";
+    }
+    const data = { ...dataPlusPlus, food_prefs_exc };
+    console.log("data in allergies", data);
+    navigation.navigate("Preferences", { data });
   }
 
   return (
@@ -289,6 +304,12 @@ export default function HomeScreen({ navigation }) {
         />
 
         <View style={styles.buttons}>
+          <TouchableOpacity
+            style={styles.formatted}
+            onPress={() => navigation.goBack()}
+          >
+            <Text>Back</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.formatted} onPress={postHandler}>
             <Text>Next</Text>
           </TouchableOpacity>
@@ -322,14 +343,15 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
+    justifyContent: "space-around",
   },
   formatted: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     width: 80,
     padding: 10,
-    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
     margin: 5,
     borderRadius: 5,
-    left: 160,
   },
 });

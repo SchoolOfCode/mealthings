@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
+    "start": "node -r dotenv/config app.js",
     "db:dropFoodIntake": "node -r dotenv/config ./db/scripts/dropFoodIntake.js",
     "db:dropUsers": "node -r dotenv/config ./db/scripts/dropUsers.js",
     "db:dropRecipes": "node -r dotenv/config ./db/scripts/dropRecipes.js",

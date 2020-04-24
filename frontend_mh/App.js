@@ -6,10 +6,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-// import BottomTabNavigator from "./navigation/BottomTabNavigator";
 import useLinking from "./navigation/useLinking";
 import HomeScreen from "./screens/HomeScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import RegisterScreen2 from "./screens/RegisterScreen2";
 import Goals from "./screens/Goals";
+import SplashSuccess from "./screens/SplashSuccess";
+import Allergies from "./screens/Allergies";
+import Preferences from "./screens/DietaryPreference";
 import ShoppingList from "./screens/ShoppingList";
 import NewRecipe from "./screens/NewRecipe";
 import TodaysRecipe from "./screens/TodaysRecipe";
@@ -17,9 +21,6 @@ import YourStats from "./screens/YourStats";
 import SplashScreenDrink from "./screens/SplashScreenDrink";
 import SplashScreenExerciseSlow from "./screens/SplashScreenExerciseSlow";
 import SplashScreenExerciseQuick from "./screens/SplashScreenExerciseQuick";
-import SplashSuccess from "./screens/SplashSuccess";
-import Allergies from "./screens/Allergies";
-import Preferences from "./screens/DietaryPreference";
 import LandingPage from "./screens/Landingpage";
 import mealplanner from "./screens/Mealplanner";
 
@@ -74,44 +75,19 @@ export default function App(props) {
               options={{ title: "Home" }}
             />
             <Stack.Screen
-              name="YourStats"
-              component={YourStats}
-              options={{ title: "Your stats" }}
+              name="Register1"
+              component={RegisterScreen}
+              options={{ title: "Register" }}
+            />
+            <Stack.Screen
+              name="Register2"
+              component={RegisterScreen2}
+              options={{ title: "Register" }}
             />
             <Stack.Screen
               name="Goals"
               component={Goals}
               options={{ title: "Goals" }}
-            />
-            <Stack.Screen
-              name="ShoppingList"
-              component={ShoppingList}
-              options={{ title: "Shopping List" }}
-            />
-            <Stack.Screen
-              name="NewRecipe"
-              component={NewRecipe}
-              options={{ title: "Add a new recipe" }}
-            />
-            <Stack.Screen
-              name="TodaysRecipe"
-              component={TodaysRecipe}
-              options={{ title: "Today's recipe" }}
-            />
-            <Stack.Screen
-              name="SplashScreenDrink"
-              component={SplashScreenDrink}
-              options={{ title: "Alert" }}
-            />
-            <Stack.Screen
-              name="SplashScreenExerciseSlow"
-              component={SplashScreenExerciseSlow}
-              options={{ title: "Alert" }}
-            />
-            <Stack.Screen
-              name="SplashScreenExerciseQuick"
-              component={SplashScreenExerciseQuick}
-              options={{ title: "Alert" }}
             />
             <Stack.Screen
               name="SplashSuccess"
@@ -129,9 +105,44 @@ export default function App(props) {
               options={{ title: "Preferences" }}
             />
             <Stack.Screen
+              name="ShoppingList"
+              component={ShoppingList}
+              options={{ title: "Shopping List" }}
+            />
+            <Stack.Screen
+              name="NewRecipe"
+              component={NewRecipe}
+              options={{ title: "Add a new recipe" }}
+            />
+            <Stack.Screen
+              name="TodaysRecipe"
+              component={TodaysRecipe}
+              options={{ title: "Today's recipe" }}
+            />
+            <Stack.Screen
+              name="YourStats"
+              component={YourStats}
+              options={{ title: "Your stats" }}
+            />
+            <Stack.Screen
+              name="SplashScreenDrink"
+              component={SplashScreenDrink}
+              options={{ title: "Alert" }}
+            />
+            <Stack.Screen
+              name="SplashScreenExerciseSlow"
+              component={SplashScreenExerciseSlow}
+              options={{ title: "Alert" }}
+            />
+            <Stack.Screen
+              name="SplashScreenExerciseQuick"
+              component={SplashScreenExerciseQuick}
+              options={{ title: "Alert" }}
+            />
+            <Stack.Screen
               name="LandingPage"
               component={LandingPage}
-              options={{ title: "LandingPage" }}
+              options={{ title: "Landing Page" }}
             />
             <Stack.Screen
               name="Mealplanner"
