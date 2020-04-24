@@ -11,6 +11,9 @@ import HomeScreen from "./screens/HomeScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import RegisterScreen2 from "./screens/RegisterScreen2";
 import Goals from "./screens/Goals";
+import SplashSuccess from "./screens/SplashSuccess";
+import Allergies from "./screens/Allergies";
+import Preferences from "./screens/DietaryPreference";
 import ShoppingList from "./screens/ShoppingList";
 import NewRecipe from "./screens/NewRecipe";
 import TodaysRecipe from "./screens/TodaysRecipe";
@@ -18,9 +21,6 @@ import YourStats from "./screens/YourStats";
 import SplashScreenDrink from "./screens/SplashScreenDrink";
 import SplashScreenExerciseSlow from "./screens/SplashScreenExerciseSlow";
 import SplashScreenExerciseQuick from "./screens/SplashScreenExerciseQuick";
-import SplashSuccess from "./screens/SplashSuccess";
-import Allergies from "./screens/Allergies";
-import Preferences from "./screens/DietaryPreference";
 import LandingPage from "./screens/Landingpage";
 import mealplanner from "./screens/Mealplanner";
 
@@ -90,6 +90,21 @@ export default function App(props) {
               options={{ title: "Goals" }}
             />
             <Stack.Screen
+              name="SplashSuccess"
+              component={SplashSuccess}
+              options={{ title: "Splash Success" }}
+            />
+            <Stack.Screen
+              name="Allergies"
+              component={Allergies}
+              options={{ title: "Allergies" }}
+            />
+            <Stack.Screen
+              name="Preferences"
+              component={Preferences}
+              options={{ title: "Preferences" }}
+            />
+            <Stack.Screen
               name="ShoppingList"
               component={ShoppingList}
               options={{ title: "Shopping List" }}
@@ -123,21 +138,6 @@ export default function App(props) {
               name="SplashScreenExerciseQuick"
               component={SplashScreenExerciseQuick}
               options={{ title: "Alert" }}
-            />
-            <Stack.Screen
-              name="SplashSuccess"
-              component={SplashSuccess}
-              options={{ title: "Splash Success" }}
-            />
-            <Stack.Screen
-              name="Allergies"
-              component={Allergies}
-              options={{ title: "Allergies" }}
-            />
-            <Stack.Screen
-              name="Preferences"
-              component={Preferences}
-              options={{ title: "Preferences" }}
             />
             <Stack.Screen
               name="LandingPage"

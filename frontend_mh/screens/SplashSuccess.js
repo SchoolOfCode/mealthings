@@ -1,10 +1,9 @@
 import * as React from "react";
-import * as WebBrowser from "expo-web-browser";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLS } from "./COLS";
 
-export default function HomeScreen({ navigation, route }) {
-  const dataPlusPlus = route.params;
+export default function SplashSuccess({ navigation, route }) {
+  const { dataPlusPlus } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>
