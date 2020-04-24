@@ -11,4 +11,10 @@ const FORMAT_containers = {
   F_containerHeaders_height: 60
 };
 
-export { FORMAT_containers };
+const FORMAT_welcomeContainer: {
+F_welcomeContainer_alignItems: "center",
+F_welcomeContainer_marginTop: 10,
+F_welcomeContainer_marginBottom: 20
+  };
+
+export { FORMAT_containers, FORMAT_welcomeContainer };
