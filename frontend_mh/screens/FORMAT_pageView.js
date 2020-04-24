@@ -1,6 +1,6 @@
 const FORMAT_pageView={
     F_pageMargin:
-    F_container:
+    F_container_margin:10;
 
 
 }
