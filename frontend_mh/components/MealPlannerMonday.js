@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -166,37 +166,23 @@ const sampleRecipes = [
 const calorieTotal = sampleRecipes
   .map(item => +item.calories)
   .reduce((prev, curr) => prev + curr, 0);
-// .map((item, index) => ({
-//   text: item.calories,
-//   color: colors[index % colors.length]
-// }));
 console.log(calorieTotal);
 
-const proteinTotal = sampleRecipes
-  .map(item => +item.protein)
-  .reduce((prev, curr) => prev + curr, 0);
-// .map((item, index) => ({
-//   text: item.protein,
-//   color: colors[index % colors.length]
-// }));
+const proteinTotal = useEffect(() => {
+  sampleRecipes
+    .map(item => +item.protein)
+    .reduce((prev, curr) => prev + curr, 0);
+}, [sampleRecipes]);
 console.log(proteinTotal);
 
 const carbTotal = sampleRecipes
   .map(item => +item.carbohydrates)
   .reduce((prev, curr) => prev + curr, 0);
-// .map((item, index) => ({
-//   text: item.carbohydrates,
-//   color: colors[index % colors.length]
-// }));
 console.log(carbTotal);
 
 const fatTotal = sampleRecipes
   .map(item => +item.fat)
   .reduce((prev, curr) => prev + curr, 0);
-// .map((item, index) => ({
-//   text: item.fat,
-//   color: colors[index % colors.length]
-// }));
 console.log(fatTotal);
 
 const originalData = sampleRecipes.map((item, index) => ({
@@ -226,10 +212,10 @@ const App = () => {
   return (
     <View>
       <Text> Monday</Text>
-      <Text>Calories</Text>
-      <Text> Protein</Text>
-      <Text> Carbohydrates</Text>
-      <Text> Fat </Text>
+      <Text> Calories: </Text>
+      <Text> Protein: {proteinTotal}</Text>
+      <Text> Carbohydrates: </Text>
+      <Text> Fat: </Text>
       <FlatList
         data={data}
         keyExtractor={keyExtractor}
