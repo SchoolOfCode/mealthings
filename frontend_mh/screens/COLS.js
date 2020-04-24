@@ -5,7 +5,7 @@ const COLS = {
   C_YELLOW: "#FFF4BA",
   C4_DARK_TEXT: "#65676F",
   C5_LIGHT_TEXT: "#C4C4C4",
-  C6_WHITE_TEXT: "#FFFFFF",
+  C6_WHITE_TEXT: "#FFFFFF"
 };
 
 export { COLS };
