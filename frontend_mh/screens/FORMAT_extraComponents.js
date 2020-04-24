@@ -1,6 +1,6 @@
 const FORMAT_switches ={
         F_switch_right: 40,
-        F_switch_Bottom: 27,
+        F_switch_bottom: 27,
       },
 
 const FORMAT_foodOptions={

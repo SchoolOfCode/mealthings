@@ -197,8 +197,8 @@ export default function Allergies({ navigation, route }) {
   }
 
   return (
-    <ScrollView style={styles.backgroundColor}>
-      <Text style={styles.Font}> Allergies</Text>
+    <ScrollView style={styles.background}>
+      <Text style={styles.text}> Allergies</Text>
       <View style={styles.container}>
         <Text style={styles.text}> Celery</Text>
         <Switch
@@ -331,12 +331,12 @@ export default function Allergies({ navigation, route }) {
 
         <View style={styles.buttons}>
           <TouchableOpacity
-            style={styles.formatted}
+            style={styles.buttons}
             onPress={() => navigation.goBack()}
           >
             <Text>Back</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.formatted} onPress={postHandler}>
+          <TouchableOpacity style={styles.buttons} onPress={postHandler}>
             <Text>Next</Text>
           </TouchableOpacity>
         </View>
@@ -347,37 +347,34 @@ export default function Allergies({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  backgroundColor: {
-    backgroundColor: COLS.C_BG
+  background: {
+    backgroundColor: COLS.C_BG,
+    backgroundHeight: F_background_height
   },
   container: {
-    margin: 10,
+    margin: F_container_margin,
     backgroundColor: COLS.C_BG
   },
-  Font: {
-    alignSelf: "center",
-    marginBottom: 10,
-    marginTop: 20
-  },
   text: {
-    margin: 5,
-    left: 40
+    alignSelf: F_text_alignSelf,
+    marginBottom: F_text_marginBottom,
+    marginTop: F_text_marginTop,
+    margin: F_text_margin,
+    left: F_text_left,
+    font: F_font_font
   },
   switch: {
-    right: 40,
-    bottom: 27
+    right: F_switch_right,
+    bottom: F_switch_bottom
   },
   buttons: {
-    flexDirection: "row",
-    justifyContent: "space-around"
-  },
-  formatted: {
+    flexDirection: F_navButton_flexDirection,
+    justifyContent: F_navButton_justifyContent,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 80,
-    padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 5,
-    borderRadius: 5
+    width: F_navButton_width,
+    padding: F_navButton_padding,
+    alignItems: F_navButton_alignItems,
+    margin: F_navButton_margin,
+    borderRadius: F_navBitton_borderRadius
   }
 });
