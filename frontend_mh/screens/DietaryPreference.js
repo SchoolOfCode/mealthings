@@ -1,19 +1,7 @@
 import React, { useState } from "react";
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Flatlist,
-  Switch,
-  Button,
-  TextInput,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { MonoText } from "../components/StyledText";
 
 export default function Preferences({ navigation, route }) {
   const { data } = route.params;
