@@ -11,4 +11,4 @@ const FORMAT_inputField = {
   F_inputField_backgroundColor: COLS.C5_LIGHT_TEXT
 };
 
-export { FORMAT_inpuitField };
+export { FORMAT_inputField };

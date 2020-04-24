@@ -1,6 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLS } from "./COLS";
+import { FORMAT_background } from "./FORMAT_background";
+import {
+  FORMAT_containers,
+  FORMAT_welcomeContainer,
+  FORMAT_moreChoicesContainer
+} from "./FORMAT_containers";
+import {
+  FORMAT_switches,
+  FORMAT_notes,
+  FORMAT_todaysMeal,
+  FORMAT_foodOptions,
+  FORMAT_swipeBar,
+  FORMAT_arrow,
+  FORMAT_icons,
+  FORMAT_mainRecipe
+} from "./FORMAT_extraComponents";
+import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+import { FORMAT_images } from "./FORMAT_images";
+import { FORMAT_inputField } from "./FORMAT_inputField";
+import { FORMAT_logo } from "./FORMAT_logo";
+import {
+  FORMAT_navButton,
+  FORMAT_navButtonText,
+  FORMAT_navButtonBackground
+} from "./FORMAT_navButton";
+import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 export default function HomeScreen({ navigation }) {
   // Record date of getting 7 days of recipes
@@ -46,19 +72,19 @@ export default function HomeScreen({ navigation }) {
     // Get total number of recipes TODO add backend function for this
     const totalNumRecipes = 40;
     // Get 14 random numbers with no duplicates
-    const tempNumbers = [...Array(100).keys()].map((num) => num + 1);
+    const tempNumbers = [...Array(100).keys()].map(num => num + 1);
     tempNumbers.sort(() => Math.random() - 0.5);
     const randNums = tempNumbers.slice(0, 14);
     // TODO Check that none of the recipes were in last weeks recipes by getting from database and checking
 
     // Get the recipes from the database
     let newRecipes = [];
-    randNums.forEach((num) => {
+    randNums.forEach(num => {
       fetch(
         `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
       )
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           newRecipes = [...newRecipes, data];
         });
     });
@@ -105,40 +131,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center",
+    justifyContent: "center"
   },
   mealThingsLogo: {
     alignItems: "center",
     margin: "auto",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   logoCircle: {
     width: 200,
     height: 200,
     borderRadius: 200,
-    backgroundColor: COLS.C_LOGO_BG,
+    backgroundColor: COLS.C_LOGO_BG
   },
   tagLine: {
-    color: COLS.C5_LIGHT_TEXT,
+    color: COLS.C5_LIGHT_TEXT
   },
   buttonContainer: {
-    marginTop: "20%",
+    marginTop: "20%"
   },
   buttonBackground: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     width: 200,
     alignSelf: "center",
     margin: 5,
-    borderRadius: 5,
+    borderRadius: 5
   },
   buttonText: {
     color: COLS.C4_DARK_TEXT,
     textAlign: "center",
-    padding: 5,
+    padding: 5
   },
   welcomeContainer: {
     alignItems: "center",
     marginTop: 10,
-    marginBottom: 20,
-  },
+    marginBottom: 20
+  }
 });

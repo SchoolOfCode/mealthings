@@ -9,10 +9,36 @@ import {
   Flatlist,
   Switch,
   Button,
-  TextInput,
+  TextInput
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
+import { FORMAT_background } from "./FORMAT_background";
+import {
+  FORMAT_containers,
+  FORMAT_welcomeContainer,
+  FORMAT_moreChoicesContainer
+} from "./FORMAT_containers";
+import {
+  FORMAT_switches,
+  FORMAT_notes,
+  FORMAT_todaysMeal,
+  FORMAT_foodOptions,
+  FORMAT_swipeBar,
+  FORMAT_arrow,
+  FORMAT_icons,
+  FORMAT_mainRecipe
+} from "./FORMAT_extraComponents";
+import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+import { FORMAT_images } from "./FORMAT_images";
+import { FORMAT_inputField } from "./FORMAT_inputField";
+import { FORMAT_logo } from "./FORMAT_logo";
+import {
+  FORMAT_navButton,
+  FORMAT_navButtonText,
+  FORMAT_navButtonBackground
+} from "./FORMAT_navButton";
+import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 import { MonoText } from "../components/StyledText";
 
 export default function Preferences({ navigation, route }) {
@@ -137,21 +163,21 @@ export default function Preferences({ navigation, route }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify(dataPlus),
+      body: JSON.stringify(dataPlus)
     };
     fetch(
       "http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users",
       options
     )
-      .then((response) => {
+      .then(response => {
         return response.json();
       })
-      .then((data) => {
+      .then(data => {
         console.log("Return from RegisterScreen:", data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.warn(err);
       });
     console.log("final dataplus in dietary prefs", dataPlus);
@@ -281,25 +307,25 @@ export default function Preferences({ navigation, route }) {
 const styles = StyleSheet.create({
   background: { backgroundColor: COLS.C_BG },
   container: {
-    margin: 10,
+    margin: 10
   },
   Font: {
     alignSelf: "center",
     marginBottom: 10,
-    marginVertical: 20,
+    marginVertical: 20
   },
   text: {
     margin: 5,
     left: 40,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   switch: {
     right: 40,
-    bottom: 27,
+    bottom: 27
   },
   buttons: {
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-around"
   },
   buttonstyle: {
     margin: 10,
@@ -308,16 +334,16 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: COLS.C5_LIGHT_TEXT,
     borderRadius: 5,
-    width: 80,
+    width: 80
   },
 
   header: {
-    alignSelf: "center",
+    alignSelf: "center"
   },
 
   subheading: {
     fontSize: 10,
     position: "relative",
-    left: 50,
-  },
+    left: 50
+  }
 });

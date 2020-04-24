@@ -2,6 +2,32 @@ import React, { useState } from "react";
 import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
+import { FORMAT_background } from "./FORMAT_background";
+import {
+  FORMAT_containers,
+  FORMAT_welcomeContainer,
+  FORMAT_moreChoicesContainer
+} from "./FORMAT_containers";
+import {
+  FORMAT_switches,
+  FORMAT_notes,
+  FORMAT_todaysMeal,
+  FORMAT_foodOptions,
+  FORMAT_swipeBar,
+  FORMAT_arrow,
+  FORMAT_icons,
+  FORMAT_mainRecipe
+} from "./FORMAT_extraComponents";
+import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+import { FORMAT_images } from "./FORMAT_images";
+import { FORMAT_inputField } from "./FORMAT_inputField";
+import { FORMAT_logo } from "./FORMAT_logo";
+import {
+  FORMAT_navButton,
+  FORMAT_navButtonText,
+  FORMAT_navButtonBackground
+} from "./FORMAT_navButton";
+import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 const multipleRecipes = [
   {
@@ -21,8 +47,8 @@ const multipleRecipes = [
       "Steam for approx. 5 min (depending on cabbage type) until cooked but still crunchy",
       "Remove from heat and drain. ",
       "Add the butter and gently stir cabbage until butter melts",
-      "Serve immediatly with remaining caraway seeds and several grinds of black pepper",
-    ],
+      "Serve immediatly with remaining caraway seeds and several grinds of black pepper"
+    ]
   },
   {
     recipe_id: "2",
@@ -33,7 +59,7 @@ const multipleRecipes = [
       "Beef tomato",
       "Wholemeal bread",
       "Freshly churned butter",
-      "Mayonaise",
+      "Mayonaise"
     ],
     ingredientsQuantities: [
       "2 rashers",
@@ -41,7 +67,7 @@ const multipleRecipes = [
       "1",
       "2 slices",
       "",
-      "",
+      ""
     ],
     calories: "286",
     protein: "20",
@@ -56,8 +82,8 @@ const multipleRecipes = [
       "Slice the tomato thinly",
       "Fry the bacon until crispy",
       "Tear the lettuce roughly by hand",
-      "layer the tomato slices, lettuce and bacon on the bread and serve as a sandwhich.",
-    ],
+      "layer the tomato slices, lettuce and bacon on the bread and serve as a sandwhich."
+    ]
   },
   {
     recipe_id: "3",
@@ -73,9 +99,9 @@ const multipleRecipes = [
     method: [
       "Mix ingredients in a saucepan",
       "Heat ingredients over a low heat, stirring gently until milk is fully absorbed",
-      "Serve while hot",
-    ],
-  },
+      "Serve while hot"
+    ]
+  }
 ];
 
 function IngredientItem({ item }) {
@@ -94,8 +120,8 @@ function IngredientItem({ item }) {
 
 export default function ShoppingList({ navigation }) {
   const listOfIngredients = [];
-  multipleRecipes.forEach((recipe) => {
-    recipe.ingredients.forEach((item) => {
+  multipleRecipes.forEach(recipe => {
+    recipe.ingredients.forEach(item => {
       listOfIngredients.push(item);
     });
   });
@@ -113,7 +139,7 @@ export default function ShoppingList({ navigation }) {
         />
       </TouchableOpacity>
       <ScrollView>
-        {listOfIngredients.map((item) => (
+        {listOfIngredients.map(item => (
           <IngredientItem item={item} />
         ))}
       </ScrollView>
@@ -134,7 +160,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    padding: 5,
+    padding: 5
   },
 
   arrow: {
@@ -142,18 +168,18 @@ const styles = StyleSheet.create({
     width: 30,
     left: 10,
     top: 20,
-    marginBottom: 40,
+    marginBottom: 40
   },
   formatting: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     marginBottom: 20,
     padding: 20,
-    alignItems: "center",
+    alignItems: "center"
   },
   ingredientItemContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    padding: 10,
+    padding: 10
   },
   circle: {
     marginRight: 10,
@@ -162,7 +188,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: COLS.C4_DARK_TEXT,
     borderStyle: "solid",
-    borderWidth: 3,
+    borderWidth: 3
   },
   circleChecked: {
     marginRight: 10,
@@ -172,16 +198,16 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C3_LIGHT_TEXT,
     borderColor: COLS.C3_LIGHT_TEXT,
     borderStyle: "solid",
-    borderWidth: 3,
+    borderWidth: 3
   },
   itemTextChecked: {
     fontSize: 18,
     textDecorationLine: "line-through",
     textDecorationStyle: "solid",
-    color: COLS.C5_LIGHT_TEXT,
+    color: COLS.C5_LIGHT_TEXT
   },
   itemText: {
     fontSize: 18,
-    color: COLS.C4_DARK_TEXT,
-  },
+    color: COLS.C4_DARK_TEXT
+  }
 });

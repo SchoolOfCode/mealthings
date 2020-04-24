@@ -1,28 +1,59 @@
-import { Ionicons } from '@expo/vector-icons';
-import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
+import { Ionicons } from "@expo/vector-icons";
+import * as WebBrowser from "expo-web-browser";
+import * as React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { RectButton, ScrollView } from "react-native-gesture-handler";
+import { FORMAT_background } from "./FORMAT_background";
+import {
+  FORMAT_containers,
+  FORMAT_welcomeContainer,
+  FORMAT_moreChoicesContainer
+} from "./FORMAT_containers";
+import {
+  FORMAT_switches,
+  FORMAT_notes,
+  FORMAT_todaysMeal,
+  FORMAT_foodOptions,
+  FORMAT_swipeBar,
+  FORMAT_arrow,
+  FORMAT_icons,
+  FORMAT_mainRecipe
+} from "./FORMAT_extraComponents";
+import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+import { FORMAT_images } from "./FORMAT_images";
+import { FORMAT_inputField } from "./FORMAT_inputField";
+import { FORMAT_logo } from "./FORMAT_logo";
+import {
+  FORMAT_navButton,
+  FORMAT_navButtonText,
+  FORMAT_navButtonBackground
+} from "./FORMAT_navButton";
+import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 export default function LinksScreen() {
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+    >
       <OptionButton
         icon="md-school"
         label="Read the Expo documentation"
-        onPress={() => WebBrowser.openBrowserAsync('https://docs.expo.io')}
+        onPress={() => WebBrowser.openBrowserAsync("https://docs.expo.io")}
       />
 
       <OptionButton
         icon="md-compass"
         label="Read the React Navigation documentation"
-        onPress={() => WebBrowser.openBrowserAsync('https://reactnavigation.org')}
+        onPress={() =>
+          WebBrowser.openBrowserAsync("https://reactnavigation.org")
+        }
       />
 
       <OptionButton
         icon="ios-chatboxes"
         label="Ask a question on the forums"
-        onPress={() => WebBrowser.openBrowserAsync('https://forums.expo.io')}
+        onPress={() => WebBrowser.openBrowserAsync("https://forums.expo.io")}
         isLastOption
       />
     </ScrollView>
@@ -31,8 +62,11 @@ export default function LinksScreen() {
 
 function OptionButton({ icon, label, onPress, isLastOption }) {
   return (
-    <RectButton style={[styles.option, isLastOption && styles.lastOption]} onPress={onPress}>
-      <View style={{ flexDirection: 'row' }}>
+    <RectButton
+      style={[styles.option, isLastOption && styles.lastOption]}
+      onPress={onPress}
+    >
+      <View style={{ flexDirection: "row" }}>
         <View style={styles.optionIconContainer}>
           <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" />
         </View>
@@ -47,28 +81,28 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: "#fafafa"
   },
   contentContainer: {
-    paddingTop: 15,
+    paddingTop: 15
   },
   optionIconContainer: {
-    marginRight: 12,
+    marginRight: 12
   },
   option: {
-    backgroundColor: '#fdfdfd',
+    backgroundColor: "#fdfdfd",
     paddingHorizontal: 15,
     paddingVertical: 15,
     borderWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: 0,
-    borderColor: '#ededed',
+    borderColor: "#ededed"
   },
   lastOption: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth
   },
   optionText: {
     fontSize: 15,
-    alignSelf: 'flex-start',
-    marginTop: 1,
-  },
+    alignSelf: "flex-start",
+    marginTop: 1
+  }
 });

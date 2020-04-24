@@ -6,9 +6,35 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Dimensions,
+  Dimensions
 } from "react-native";
 import { COLS } from "./COLS";
+import { FORMAT_background } from "./FORMAT_background";
+import {
+  FORMAT_containers,
+  FORMAT_welcomeContainer,
+  FORMAT_moreChoicesContainer
+} from "./FORMAT_containers";
+import {
+  FORMAT_switches,
+  FORMAT_notes,
+  FORMAT_todaysMeal,
+  FORMAT_foodOptions,
+  FORMAT_swipeBar,
+  FORMAT_arrow,
+  FORMAT_icons,
+  FORMAT_mainRecipe
+} from "./FORMAT_extraComponents";
+import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+import { FORMAT_images } from "./FORMAT_images";
+import { FORMAT_inputField } from "./FORMAT_inputField";
+import { FORMAT_logo } from "./FORMAT_logo";
+import {
+  FORMAT_navButton,
+  FORMAT_navButtonText,
+  FORMAT_navButtonBackground
+} from "./FORMAT_navButton";
+import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 const screenWidth = Dimensions.get("screen").width;
 
@@ -99,7 +125,7 @@ const styles = StyleSheet.create({
     width: screenWidth,
     backgroundColor: COLS.C_BG,
     alignContent: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   inputField: {
     marginVertical: 5,
@@ -107,7 +133,7 @@ const styles = StyleSheet.create({
     width: 200,
     alignSelf: "center",
     height: 50,
-    borderRadius: 5,
+    borderRadius: 5
   },
   buttonflex: {
     alignSelf: "center",
@@ -115,7 +141,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginVertical: 10,
-    padding: 10,
+    padding: 10
   },
   Direction: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
@@ -123,6 +149,6 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 5,
     alignItems: "center",
-    justifyContent: "center",
-  },
+    justifyContent: "center"
+  }
 });
