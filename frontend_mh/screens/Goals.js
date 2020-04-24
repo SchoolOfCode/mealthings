@@ -28,30 +28,6 @@ export default function Goals({ navigation, route }) {
     setHeight(enteredText);
   }
 
-  function HandleSubmit() {
-    setDisplay("success");
-    console.log({ weight, height, fatLoss, muscle, diet, time, cook });
-    var goals = "";
-    if (fatLoss) {
-      goals += "Fat loss,";
-    }
-    if (muscle) {
-      goals += ",Muscle gain";
-    }
-    if (diet) {
-      goals += ",No diet";
-    }
-    if (time) {
-      goals += ",Save time";
-    }
-    if (cook) {
-      goals += ",Learn to cook";
-    }
-    const dataPlusPlus = { ...dataPlus, goals };
-    console.log(dataPlusPlus);
-    navigation.navigate("SplashSuccess", { dataPlusPlus });
-  }
-
   function fatHandler() {
     if (diet === true) {
       setTime(false);
@@ -93,6 +69,7 @@ export default function Goals({ navigation, route }) {
   function cookHandler() {
     if (diet === true) {
       setCook(false);
+      <Image source={require("../assets/images/cookingConfirmed.png")} />;
     } else if (cook === false) {
       setCook(true);
     } else if (cook === true) {
@@ -100,15 +77,44 @@ export default function Goals({ navigation, route }) {
     }
   }
 
+  function HandleSubmit() {
+    setDisplay("success");
+    console.log({ weight, height, fatLoss, muscle, diet, time, cook });
+    var goals = "";
+    if (fatLoss) {
+      goals += "Fat loss,";
+    }
+    if (muscle) {
+      goals += ",Muscle gain";
+    }
+    if (diet) {
+      goals += ",No diet";
+    }
+    if (time) {
+      goals += ",Save time";
+    }
+    if (cook) {
+      goals += ",Learn to cook";
+    }
+    const dataPlusPlus = { ...dataPlus, goals };
+    console.log(dataPlusPlus);
+    navigation.navigate("SplashSuccess", { dataPlusPlus });
+  }
+
   return (
     <ScrollView>
       <View style={styles.header}>
+        <View style={styles.column}>
+          <Text style={styles.padding}> (Kg)</Text>
+          <Text style={styles.padding}> (cm)</Text>
+        </View>
         <TouchableOpacity>
           <Image
             style={styles.arrow}
             source={require("../assets/images/goback.png")}
           ></Image>
         </TouchableOpacity>
+
         <Text style={styles.Goals}>Goals</Text>
         <View style={styles.margin}>
           <TextInput
@@ -117,6 +123,7 @@ export default function Goals({ navigation, route }) {
             placeholder="Weight"
             placeholderTextColor="white"
             onChangeText={Track}
+            maxLength={3}
           ></TextInput>
           <TextInput
             style={styles.inputField}
@@ -124,16 +131,12 @@ export default function Goals({ navigation, route }) {
             placeholderTextColor="white"
             type="number"
             onChangeText={Tracked}
+            maxLength={3}
           ></TextInput>
         </View>
         <View style={styles.flex}>
           <View>
-            <TouchableOpacity
-              onPress={fatHandler}
-              onPress={() => {
-                backgroundColor: COLS.C_YELLOW;
-              }}
-            >
+            <TouchableOpacity onPress={fatHandler}>
               <Image
                 style={styles.img}
                 source={require("../assets/images/calories.png")}
@@ -192,6 +195,12 @@ export default function Goals({ navigation, route }) {
 const styles = StyleSheet.create({
   Goals: {
     alignSelf: "center",
+  },
+  header: { backgroundColor: COLS.C_BG },
+  padding: { padding: 15 },
+  column: {
+    left: 290,
+    top: 210,
   },
   positioning: {
     left: 180 / 2,

@@ -23,22 +23,25 @@ export default function App() {
   }
   function handleSubmit({ navigation }) {
     setPost(name, password);
-    // const data = { name,email };
-    // const options = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-    //   body: JSON.stringify(data),
-    // };
-    // fetch("", options)
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("this is", data);
-    //   });
+    const data = { name, email };
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(data),
+    };
+    fetch(
+      "http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users",
+      options
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log("this is", data);
+      });
     navigation.navigate("Landingpage");
   }
   return (
@@ -118,3 +121,22 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
 });
+
+// const options = {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//     "Access-Control-Allow-Origin": "*",
+//   },
+//   body: JSON.stringify(dataPlus),
+// };
+// fetch(
+//   "http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users",
+//   options
+// )
+//   .then((response) => {
+//     return response.json();
+//   })
+//   .then((data) => {
+//     console.log("Return from RegisterScreen:", data);
+//   });

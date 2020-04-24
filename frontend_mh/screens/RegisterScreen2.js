@@ -1,6 +1,7 @@
 import * as WebBrowser from "expo-web-browser";
-import React, { useState } from "react";
-
+import React, { useState, useContext } from "react";
+import { RegisterContext } from "../contexts/RegisterContext";
+import { Dropdown } from "react-native-material-dropdown";
 import {
   StyleSheet,
   Text,
@@ -8,6 +9,8 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
+  Alert,
+  Button,
 } from "react-native";
 import { COLS } from "./COLS";
 
@@ -17,50 +20,49 @@ export default function App({ navigation, route }) {
   const [password, setPassword] = useState();
   const [display, setDisplay] = useState();
 
+  const [register, setRegister] = useContext(RegisterContext);
+  console.log("RS2", register);
   function usernameHandler(enteredText) {
-    setUsername(enteredText);
+    setRegister(enteredText);
   }
   function passwordHandler(enteredText) {
     setPassword(enteredText);
   }
 
   function SubmitHandler() {
-    setDisplay("Submitted");
-    console.log(username, password);
-    const dataPlus = { ...data, username, password };
+    console.log(username, password, genderchoice);
+    const dataPlus = { ...data, username, password, genderchoice };
     console.log("dataPlus:", dataPlus);
-    navigation.navigate("Register2");
+    setDisplay("Submitted");
     navigation.navigate("Goals", { dataPlus });
   }
 
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.headerC}>
-          <Image source={require("../assets/images/arrow.png")} />
-        </Text>
-        <View>
-          <TextInput
-            style={styles.inputField}
-            onChangeText={usernameHandler}
-            placeholder="Name"
-            placeholderTextColor="black"
-          />
-          <TextInput
-            style={styles.inputField}
-            placeholder="Email"
-            onChangeText={passwordHandler}
-            placeholderTextColor="black"
-          />
-        </View>
-
-        <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
-          <Text style={styles.TextStyle}>Register</Text>
-        </TouchableOpacity>
-        <Text style={styles.formatting}>{display}</Text>
-
-        <View style={styles.buttonFormat}></View>
+        <TextInput
+          style={styles.inputField}
+          onChangeText={usernameHandler}
+          placeholder="Username"
+          placeholderTextColor="black"
+          value={register}
+          maxLength={12}
+        />
+        <TextInput
+          style={styles.inputField}
+          placeholder="Password"
+          onChangeText={passwordHandler}
+          value={password}
+          placeholderTextColor="black"
+        />
       </View>
+
+      <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
+        <Text style={styles.TextStyle}>Register</Text>
+      </TouchableOpacity>
+
+      <View style={styles.buttonFormat}></View>
+      <Text style={styles.formatting}>{display}</Text>
     </View>
   );
 }
@@ -81,8 +83,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   headerC: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    height: 60,
+    marginTop: 30,
   },
   formatting: {
     alignSelf: "center",
