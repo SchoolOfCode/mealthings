@@ -6,9 +6,13 @@ import {
   TouchableOpacity,
   View,
   TextInput,
+  Dimensions,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
+import { Row } from "react-native-drag-flatlist";
+
+const screenWidth = Dimensions.get("screen").width;
 
 export default function Goals({ navigation, route }) {
   const { dataPlus } = route.params;
@@ -26,6 +30,29 @@ export default function Goals({ navigation, route }) {
   }
   function Tracked(enteredText) {
     setHeight(enteredText);
+  }
+
+  function handleSubmit() {
+    setDisplay("success");
+    var goals = "";
+    if (fatLoss) {
+      goals += "Fat loss,";
+    }
+    if (muscle) {
+      goals += ",Muscle gain";
+    }
+    if (diet) {
+      goals += ",No diet";
+    }
+    if (time) {
+      goals += ",Save time";
+    }
+    if (cook) {
+      goals += ",Learn to cook";
+    }
+    const dataPlusPlus = { ...dataPlus, height, weight, goals };
+    console.log("dataPlusPlus in goals", dataPlusPlus);
+    navigation.navigate("SplashSuccess", { dataPlusPlus });
   }
 
   function fatHandler() {
@@ -185,32 +212,23 @@ export default function Goals({ navigation, route }) {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity style={styles.button} onPress={HandleSubmit}>
-          <Text style={{ color: "white" }}>Next</Text>
-        </TouchableOpacity>
+
+        <View style={styles.buttonFlex}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.buttonText}
+          >
+            <Text style={styles.TextStyle}>Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleSubmit} style={styles.buttonText}>
+            <Text style={styles.TextStyle}>Next</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
 }
 const styles = StyleSheet.create({
-  Goals: {
-    alignSelf: "center",
-  },
-  header: { backgroundColor: COLS.C_BG },
-  padding: { padding: 15 },
-  column: {
-    left: 290,
-    top: 210,
-  },
-  positioning: {
-    left: 180 / 2,
-  },
-  arrow: {
-    height: 20,
-    width: 20,
-    left: 30,
-    top: 20,
-  },
   margin: {
     marginVertical: 50,
   },
@@ -235,18 +253,21 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     alignSelf: "center",
-
     marginHorizontal: 10,
   },
   text: { alignSelf: "center", left: 50 / 2, marginVertical: 10 },
   text2: { alignSelf: "center" },
-  button: {
+  buttonFlex: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  buttonText: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     color: COLS.C_BG,
-    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
     padding: 5,
     width: 70,
-    alignSelf: "center",
     borderRadius: 5,
     marginVertical: 50,
   },

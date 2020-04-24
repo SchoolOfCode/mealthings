@@ -1,7 +1,5 @@
-import * as WebBrowser from "expo-web-browser";
-import React, { useState, useContext } from "react";
-import { RegisterContext } from "../contexts/RegisterContext";
-import { Dropdown } from "react-native-material-dropdown";
+import React, { useState } from "react";
+
 import {
   StyleSheet,
   Text,
@@ -9,12 +7,13 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  Alert,
-  Button,
+  Dimensions,
 } from "react-native";
 import { COLS } from "./COLS";
 
-export default function App({ navigation, route }) {
+const screenWidth = Dimensions.get("screen").width;
+
+export default function Registerscreen2({ navigation, route }) {
   const { data } = route.params;
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -30,39 +29,46 @@ export default function App({ navigation, route }) {
   }
 
   function SubmitHandler() {
-    console.log(username, password, genderchoice);
-    const dataPlus = { ...data, username, password, genderchoice };
-    console.log("dataPlus:", dataPlus);
     setDisplay("Submitted");
+    console.log(username, password);
+    const dataPlus = { ...data, username, password };
+    console.log("dataPlus in register 2:", dataPlus);
     navigation.navigate("Goals", { dataPlus });
   }
 
   return (
     <View style={styles.container}>
       <View>
-        <TextInput
-          style={styles.inputField}
-          onChangeText={usernameHandler}
-          placeholder="Username"
-          placeholderTextColor="black"
-          value={register}
-          maxLength={12}
-        />
-        <TextInput
-          style={styles.inputField}
-          placeholder="Password"
-          onChangeText={passwordHandler}
-          value={password}
-          placeholderTextColor="black"
-        />
+        <Text style={styles.headerC}>
+          <Image source={require("../assets/images/arrow.png")} />
+        </Text>
+        <View>
+          <TextInput
+            style={styles.inputField}
+            onChangeText={usernameHandler}
+            placeholder="Username"
+            placeholderTextColor="black"
+            maxLength={12}
+          />
+          <TextInput
+            style={styles.inputField}
+            placeholder="Password"
+            onChangeText={passwordHandler}
+            placeholderTextColor="black"
+          />
+        </View>
+        <View style={styles.buttonFlex}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.buttonText}
+          >
+            <Text style={styles.TextStyle}>Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
+            <Text style={styles.TextStyle}>Next</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-
-      <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
-        <Text style={styles.TextStyle}>Register</Text>
-      </TouchableOpacity>
-
-      <View style={styles.buttonFormat}></View>
-      <Text style={styles.formatting}>{display}</Text>
     </View>
   );
 }
@@ -73,8 +79,6 @@ const styles = StyleSheet.create({
     height: 1000,
   },
   inputField: {
-    position: "relative",
-    top: 80,
     marginVertical: 15,
     backgroundColor: COLS.C5_LIGHT_TEXT,
     width: 200,
@@ -88,32 +92,28 @@ const styles = StyleSheet.create({
   formatting: {
     alignSelf: "center",
   },
-  buttonText: {
-    position: "relative",
-    top: 170,
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    color: COLS.C6_WHITE_TEXT,
-    textAlign: "center",
-    padding: 5,
-    width: 150,
+  buttonFlex: {
+    flexDirection: "row",
+    width: screenWidth * 0.5,
+    alignItems: "center",
     alignSelf: "center",
+    justifyContent: "space-between",
+  },
+  buttonText: {
+    backgroundColor: COLS.C5_LIGHT_TEXT,
+    padding: 5,
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: 5,
     marginVertical: 3,
+    width: 80,
   },
   buttonFormat: {
-    position: "relative",
-    top: 80,
     flexDirection: "row",
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    justifyContent: "space-between",
-    margin: 30,
+    width: 80,
     alignSelf: "center",
     borderRadius: 5,
     justifyContent: "space-between",
-  },
-  textStyle: {
-    color: COLS.C6_WHITE_TEXT,
-    alignSelf: "center",
   },
 });

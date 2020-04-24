@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   TouchableOpacity,
@@ -143,14 +143,47 @@ const sampleRecipes = [
   }
 ];
 
-// Create functionality to add all calories/protein/carbs/fat together
-// get calories out the array of objects
-// add them all together
+// ==> Create functionality to add all calories/protein/carbs/fat together
+//
+// - change string to number
+// const toNumber = recipes.map(item=>+item.amount)
+
+// - get calories out the array of objects
+// - add them all together
+// const sum = recipes
+//   .map(item => +item.calories)
+//   .reduce((prev, curr) => prev + curr, 0);
+//
+// TEST IN CONSOLE USING DUMMY DATA
+// TEST IN CONSOLE USING sampleRecipes, changing amount to calories
+//
+// store functionality in variables
 // display total calories on screen
 
-// const sum = randomArray
-//   .map(item => item.amount)
-//   .reduce((prev, curr) => prev + curr, 0);
+// FINAL FUNCTION TO EXTRACT CALORIES/PROTEIN/CARBOHYDRATES/FAT:
+// const sum = sampleRecipes.map(item => +item.calories).reduce((prev, curr) => prev + curr, 0);
+
+const calorieTotal = sampleRecipes
+  .map(item => +item.calories)
+  .reduce((prev, curr) => prev + curr, 0);
+console.log(calorieTotal);
+
+const proteinTotal = useEffect(() => {
+  sampleRecipes
+    .map(item => +item.protein)
+    .reduce((prev, curr) => prev + curr, 0);
+}, [sampleRecipes]);
+console.log(proteinTotal);
+
+const carbTotal = sampleRecipes
+  .map(item => +item.carbohydrates)
+  .reduce((prev, curr) => prev + curr, 0);
+console.log(carbTotal);
+
+const fatTotal = sampleRecipes
+  .map(item => +item.fat)
+  .reduce((prev, curr) => prev + curr, 0);
+console.log(fatTotal);
 
 const originalData = sampleRecipes.map((item, index) => ({
   text: item.name,
@@ -159,13 +192,11 @@ const originalData = sampleRecipes.map((item, index) => ({
 
 const App = () => {
   const [data, setData] = useState(originalData);
-  // const [totalCalories, setTotalCalories]= useState[0];
+  const [totalCals, setTotalCals] = useState(0);
 
-  // function setCalories(){
-  // // take in each item calories and add them to initial state
-  // // return new calorie state
-  // setTotalCalories()
-  // }
+  // const [totalProt, setTotalProt] = useState("");
+  // const [totalCarbs, setTotalCarbs] = useState("");
+  // const [totalFat, setTotalFat] = useState("");
 
   const keyExtractor = item => item.text;
 
@@ -181,9 +212,10 @@ const App = () => {
   return (
     <View>
       <Text> Monday</Text>
-      <Text> Calories</Text>
-      <Text> Protein</Text>
-      <Text> Carbhydrates</Text>
+      <Text> Calories: </Text>
+      <Text> Protein: {proteinTotal}</Text>
+      <Text> Carbohydrates: </Text>
+      <Text> Fat: </Text>
       <FlatList
         data={data}
         keyExtractor={keyExtractor}

@@ -3,8 +3,9 @@ import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 
-export default function HomeScreen({ navigation, route }) {
+export default function Allergies({ navigation, route }) {
   const { dataPlusPlus } = route.params;
+  console.log("dataplusplus at the start of Allergies", dataPlusPlus);
   const [celery, setCelery] = useState(false);
   const [gluten, setGluten] = useState(false);
   const [crustaceans, setCrustaceans] = useState(false);
@@ -38,10 +39,8 @@ export default function HomeScreen({ navigation, route }) {
   function crustaceansHandler() {
     if (crustaceans === false) {
       setCrustaceans(true);
-      console.log("hello");
     } else if (crustaceans === true) {
       setCrustaceans(false);
-      console.log("Goodbye");
     }
   }
   function eggHandler() {
@@ -82,10 +81,8 @@ export default function HomeScreen({ navigation, route }) {
   function mustardHandler() {
     if (mustard === false) {
       setMustard(true);
-      console.log("hello");
     } else if (mustard === true) {
       setMustard(false);
-      console.log("Goodbye");
     }
   }
   function treeNutsHandler() {
@@ -125,22 +122,6 @@ export default function HomeScreen({ navigation, route }) {
   }
   function postHandler() {
     setPost("submitted");
-    console.log({
-      celery,
-      gluten,
-      crustaceans,
-      eggs,
-      fish,
-      lupin,
-      milk,
-      molluscs,
-      mustard,
-      treeNuts,
-      peanuts,
-      sesame_Seeds,
-      soybeans,
-      dioxide,
-    });
     var food_prefs_exc = "";
     if (celery) {
       food_prefs_exc += "celery,";
@@ -185,6 +166,7 @@ export default function HomeScreen({ navigation, route }) {
       food_prefs_exc += "dioxide";
     }
     const data = { ...dataPlusPlus, food_prefs_exc };
+    console.log("data in allergies", data);
     navigation.navigate("Preferences", { data });
   }
 
@@ -322,6 +304,12 @@ export default function HomeScreen({ navigation, route }) {
         />
 
         <View style={styles.buttons}>
+          <TouchableOpacity
+            style={styles.formatted}
+            onPress={() => navigation.goBack()}
+          >
+            <Text>Back</Text>
+          </TouchableOpacity>
           <TouchableOpacity style={styles.formatted} onPress={postHandler}>
             <Text>Next</Text>
           </TouchableOpacity>
@@ -355,14 +343,15 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
+    justifyContent: "space-around",
   },
   formatted: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     width: 80,
     padding: 10,
-    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
     margin: 5,
     borderRadius: 5,
-    left: 160,
   },
 });

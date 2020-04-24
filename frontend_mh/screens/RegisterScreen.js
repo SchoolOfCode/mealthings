@@ -6,15 +6,16 @@ import {
   Text,
   View,
   TextInput,
-  ScrollView,
-  Image,
   TouchableOpacity,
-  Alert,
   Modal,
+  Dimensions,
+  Alert,
 } from "react-native";
 import { COLS } from "./COLS";
 
-export default function App({ navigation }) {
+const screenWidth = Dimensions.get("screen").width;
+
+export default function Registerscreen({ navigation }) {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [DOB, setDOB] = useState();
@@ -107,19 +108,16 @@ export default function App({ navigation }) {
     const data = {
       name,
       email_address: email,
-      birthday: birthday,
-      other,
-      male,
-      female,
-      other,
+      birthday,
       mother,
+      gender: male ? "male" : female ? "female" : "other",
     };
 
     navigation.navigate("Register2", { data });
   }
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View>
         <View style={styles.margin}>
           <TextInput
@@ -218,13 +216,17 @@ export default function App({ navigation }) {
           </View>
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    width: screenWidth,
     backgroundColor: COLS.C_BG,
+    alignContent: "center",
+    justifyContent: "center",
   },
   row: {
     flexDirection: "row",
@@ -255,31 +257,21 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 5,
   },
-
   buttonflex: {
+    alignSelf: "center",
+    width: screenWidth * 0.7,
     flexDirection: "row",
+    justifyContent: "space-around",
     marginVertical: 10,
     padding: 10,
-  },
-  submit: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 80,
-    alignSelf: "center",
-    marginVertical: 40,
-    borderRadius: 5,
-    padding: 10,
-    alignItems: "center",
   },
   Direction: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     width: 80,
-    alignSelf: "center",
-    marginVertical: 40,
+    height: 30,
     borderRadius: 5,
-    padding: 10,
-    margin: 20,
     alignItems: "center",
-    left: 70,
+    justifyContent: "center",
   },
   row: {
     flexDirection: "row",

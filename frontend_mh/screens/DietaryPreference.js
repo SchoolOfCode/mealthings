@@ -1,21 +1,9 @@
 import React, { useState } from "react";
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Flatlist,
-  Switch,
-  Button,
-  TextInput,
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { MonoText } from "../components/StyledText";
 
-export default function HomeScreen({ navigation, route }) {
+export default function Preferences({ navigation, route }) {
   const { data } = route.params;
   const [noRequirement, setNoRequirement] = useState(false);
   const [vegetarian, setVegetarian] = useState(false);
@@ -57,10 +45,8 @@ export default function HomeScreen({ navigation, route }) {
       setOvovegetarian(false);
     } else if (ovovegetarian === false) {
       setOvovegetarian(true);
-      console.log("hello");
     } else if (ovovegetarian === true) {
       setOvovegetarian(false);
-      console.log("Goodbye");
     }
   }
   function lactoHander() {
@@ -105,27 +91,13 @@ export default function HomeScreen({ navigation, route }) {
   function beetrootHandler() {
     if (beetroot === false) {
       setBeetroot(true);
-      console.log("hello");
     } else if (beetroot === true) {
       setBeetroot(false);
-      console.log("Goodbye");
     }
   }
 
   function postHandler() {
     setPost("submitted");
-    console.log({
-      noRequirement,
-      vegetarian,
-      ovovegetarian,
-      lactoVegetarian,
-      vegan,
-      cheese,
-      orange,
-      chocolate,
-      beetroot,
-    });
-
     var food_prefs_inc = "";
     if (vegetarian) {
       food_prefs_inc = "vegetarian";
@@ -166,7 +138,11 @@ export default function HomeScreen({ navigation, route }) {
       })
       .then((data) => {
         console.log("Return from RegisterScreen:", data);
+      })
+      .catch((err) => {
+        console.warn(err);
       });
+    console.log("final dataplus in dietary prefs", dataPlus);
     navigation.navigate("LandingPage", dataPlus);
   }
 
@@ -275,7 +251,7 @@ export default function HomeScreen({ navigation, route }) {
         />
         <View style={styles.buttons}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Allergies")}
+            onPress={() => navigation.goBack()}
             style={styles.buttonstyle}
           >
             <Text>Back</Text>
@@ -311,6 +287,7 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
+    justifyContent: "space-around",
   },
   buttonstyle: {
     margin: 10,
@@ -318,7 +295,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 15,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    left: 120,
     borderRadius: 5,
     width: 80,
   },
