@@ -122,6 +122,7 @@ export default function Goals({ navigation, route }) {
   function cookHandler() {
     if (diet === true) {
       setCook(false);
+      <Image source={require("../assets/images/cookingConfirmed.png")} />;
     } else if (cook === false) {
       setCook(true);
     } else if (cook === true) {
@@ -129,91 +130,126 @@ export default function Goals({ navigation, route }) {
     }
   }
 
+  function HandleSubmit() {
+    setDisplay("success");
+    console.log({ weight, height, fatLoss, muscle, diet, time, cook });
+    var goals = "";
+    if (fatLoss) {
+      goals += "Fat loss,";
+    }
+    if (muscle) {
+      goals += ",Muscle gain";
+    }
+    if (diet) {
+      goals += ",No diet";
+    }
+    if (time) {
+      goals += ",Save time";
+    }
+    if (cook) {
+      goals += ",Learn to cook";
+    }
+    const dataPlusPlus = { ...dataPlus, goals };
+    console.log(dataPlusPlus);
+    navigation.navigate("SplashSuccess", { dataPlusPlus });
+  }
+
   return (
     <ScrollView>
-      <View style={styles.margin}>
-        <TextInput
-          type="number"
-          style={styles.inputField}
-          placeholder="Weight"
-          placeholderTextColor="white"
-          onChangeText={Track}
-        ></TextInput>
-        <TextInput
-          style={styles.inputField}
-          placeholder="Height"
-          placeholderTextColor="white"
-          type="number"
-          onChangeText={Tracked}
-        ></TextInput>
-      </View>
-      <View style={styles.flex}>
-        <View>
+      <View style={styles.header}>
+        <View style={styles.column}>
+          <Text style={styles.padding}> (Kg)</Text>
+          <Text style={styles.padding}> (cm)</Text>
+        </View>
+        <TouchableOpacity>
+          <Image
+            style={styles.arrow}
+            source={require("../assets/images/goback.png")}
+          ></Image>
+        </TouchableOpacity>
+
+        <Text style={styles.Goals}>Goals</Text>
+        <View style={styles.margin}>
+          <TextInput
+            type="number"
+            style={styles.inputField}
+            placeholder="Weight"
+            placeholderTextColor="white"
+            onChangeText={Track}
+            maxLength={3}
+          ></TextInput>
+          <TextInput
+            style={styles.inputField}
+            placeholder="Height"
+            placeholderTextColor="white"
+            type="number"
+            onChangeText={Tracked}
+            maxLength={3}
+          ></TextInput>
+        </View>
+        <View style={styles.flex}>
+          <View>
+            <TouchableOpacity onPress={fatHandler}>
+              <Image
+                style={styles.img}
+                source={require("../assets/images/calories.png")}
+              />
+
+              <Text style={styles.text}>Fatloss</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <TouchableOpacity onPress={muscleHandler}>
+              <Image
+                style={styles.img}
+                source={require("../assets/images/woman.png")}
+              />
+              <Text style={styles.text}>Gaining Muscle</Text>
+            </TouchableOpacity>
+          </View>
+          <View>
+            <TouchableOpacity onPress={dietHandler}>
+              <Image
+                style={styles.img}
+                source={require("../assets/images/eat.png")}
+              />
+              <Text style={styles.text}>No Diet</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.flex2}>
+          <View style={styles.positioning}>
+            <TouchableOpacity onPress={timeHandler}>
+              <Image
+                style={styles.img2}
+                source={require("../assets/images/time.png")}
+              />
+              <Text style={styles.text2}>Saving Time</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.positioning}>
+            <TouchableOpacity onPress={cookHandler}>
+              <Image
+                style={styles.img2}
+                source={require("../assets/images/Cooking.png")}
+              />
+              <Text style={styles.text2}>Learning to Cook</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={styles.buttonFlex}>
           <TouchableOpacity
-            onPress={fatHandler}
-            onPress={() => {
-              backgroundColor: COLS.C_YELLOW;
-            }}
+            onPress={() => navigation.goBack()}
+            style={styles.buttonText}
           >
-            <Image
-              style={styles.img}
-              source={require("../assets/images/calories.png")}
-            />
-
-            <Text style={styles.text}>Fatloss</Text>
+            <Text style={styles.TextStyle}>Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleSubmit} style={styles.buttonText}>
+            <Text style={styles.TextStyle}>Next</Text>
           </TouchableOpacity>
         </View>
-
-        <View>
-          <TouchableOpacity onPress={muscleHandler}>
-            <Image
-              style={styles.img}
-              source={require("../assets/images/woman.png")}
-            />
-            <Text style={styles.text}>Gaining Muscle</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity onPress={dietHandler}>
-            <Image
-              style={styles.img}
-              source={require("../assets/images/eat.png")}
-            />
-            <Text style={styles.text}>No Diet</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.flex2}>
-        <View style={styles.positioning}>
-          <TouchableOpacity onPress={timeHandler}>
-            <Image
-              style={styles.img2}
-              source={require("../assets/images/time.png")}
-            />
-            <Text style={styles.text2}>Saving Time</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.positioning}>
-          <TouchableOpacity onPress={cookHandler}>
-            <Image
-              style={styles.img2}
-              source={require("../assets/images/Cooking.png")}
-            />
-            <Text style={styles.text2}>Learning to Cook</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <View style={styles.buttonFlex}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.buttonText}
-        >
-          <Text style={styles.TextStyle}>Back</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleSubmit} style={styles.buttonText}>
-          <Text style={styles.TextStyle}>Next</Text>
-        </TouchableOpacity>
       </View>
     </ScrollView>
   );

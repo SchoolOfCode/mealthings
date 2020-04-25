@@ -72,6 +72,7 @@ export default function Registerscreen2({ navigation, route }) {
             onChangeText={usernameHandler}
             placeholder="Username"
             placeholderTextColor="black"
+            maxLength={12}
           />
           <TextInput
             style={styles.inputField}

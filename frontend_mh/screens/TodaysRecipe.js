@@ -80,7 +80,11 @@ function Item({ title }) {
 }
 
 export default function TodaysRecipe({ navigation }) {
-  const [showIngredients, setShowIngredients] = useState(true);
+  const [showIngredients, setShowIngredients] = seState(true);
+
+  function change() {
+    setShowIngredients(false)
+  }
 
   const ingredientsContainer = (
     <View style={styles.ingredientsAndMethodContainer}>

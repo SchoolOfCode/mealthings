@@ -23,6 +23,8 @@ import SplashScreenExerciseSlow from "./screens/SplashScreenExerciseSlow";
 import SplashScreenExerciseQuick from "./screens/SplashScreenExerciseQuick";
 import LandingPage from "./screens/Landingpage";
 import mealplanner from "./screens/Mealplanner";
+import LoginPage from "./screens/Loginpage";
+import RegisteredContextProvider from "./contexts/RegisterContext";
 
 const Stack = createStackNavigator();
 
