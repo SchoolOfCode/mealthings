@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
+import { FORMAT_background } from "./FORMAT_background";
+import { FORMAT_containers } from "./FORMAT_containers";
+import { FORMAT_switches } from "./FORMAT_extraComponents";
+import { FORMAT_headings } from "./FORMAT_headings";
+import { FORMAT_navButton } from "./FORMAT_navButton";
+import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+
 
 export default function Preferences({ navigation, route }) {
   const { data } = route.params;
@@ -125,21 +132,21 @@ export default function Preferences({ navigation, route }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify(dataPlus),
+      body: JSON.stringify(dataPlus)
     };
     fetch(
       "http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users",
       options
     )
-      .then((response) => {
+      .then(response => {
         return response.json();
       })
-      .then((data) => {
+      .then(data => {
         console.log("Return from RegisterScreen:", data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.warn(err);
       });
     console.log("final dataplus in dietary prefs", dataPlus);
@@ -148,7 +155,7 @@ export default function Preferences({ navigation, route }) {
 
   return (
     <ScrollView style={styles.background}>
-      <Text style={styles.Font}> Diet Preferences</Text>
+      <Text style={styles.heading}> Diet Preferences</Text>
 
       <View style={styles.container}>
         <Text style={styles.text}> No Requirement</Text>
@@ -252,11 +259,11 @@ export default function Preferences({ navigation, route }) {
         <View style={styles.buttons}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={styles.buttonstyle}
+            style={styles.button}
           >
             <Text>Back</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonstyle} onPress={postHandler}>
+          <TouchableOpacity style={styles.buttons} onPress={postHandler}>
             <Text>Finish</Text>
           </TouchableOpacity>
         </View>
@@ -267,45 +274,62 @@ export default function Preferences({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  background: { backgroundColor: COLS.C_BG },
-  container: {
-    margin: 10,
+  background: {
+    backgroundColor: COLS.C_BG,
+    backgroundHeight: FORMAT_background.F_background_height
   },
-  Font: {
-    alignSelf: "center",
-    marginBottom: 10,
-    marginVertical: 20,
+  container: {
+    margin: FORMAT_containers.F_container_margin,
+    backgroundColor: COLS.C_BG,
+    margin: FORMAT_containers.F_container_margin,
+    marginVertical: FORMAT_containers.F_container_marginVertical,
+    padding: FORMAT_containers.F_container_padding,
+    alignItems: FORMAT_containers.F_container_alignItems,
+    justifyContent: FORMAT_containers.F_container_justifyContent,
+    flex: FORMAT_containers.F_container_flex,
+    flexDirection: FORMAT_containers.F_container_flexDirection,
+    backgroundColor: COLS.C_BG
   },
   text: {
-    margin: 5,
-    left: 40,
-    fontWeight: "bold",
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    marginBottom: FORMAT_text.F_text_marginBottom,
+    marginTop: FORMAT_text.F_text_marginTop,
+    margin: FORMAT_text.F_text_margin,
+    left: FORMAT_text.F_text_left,
+    fontWeight: FORMAT_fonts.F_font_fontWeight
   },
   switch: {
-    right: 40,
-    bottom: 27,
+    right: FORMAT_switches.F_switch_right,
+    bottom: FORMAT_switches.F_switch_bottom
   },
   buttons: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  buttonstyle: {
-    margin: 10,
-    alignSelf: "center",
-    alignItems: "center",
-    padding: 15,
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
+    margin: FORMAT_navButton.F_navButton_margin,
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
+    alignItems: FORMAT_navButton.F_navButton_alignItems,
+    padding: FORMAT_navButton.F_navButton_padding,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    borderRadius: 5,
-    width: 80,
+    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
+    width: FORMAT_navButton.F_navButton_width
   },
 
-  header: {
-    alignSelf: "center",
+  heading: {
+    alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
+    left: FORMAT_headings.F_headingMainTitle_left,
+    fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
+    fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
+    bottom: FORMAT_headings.F_headingMainTitle_bottom,
+    marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
+    marginTop: FORMAT_headings.F_headingMainTitle_marginTop
   },
 
   subheading: {
-    fontSize: 10,
-    position: "relative",
-    left: 50,
-  },
+    fontSize: FORMAT_headings.F_subHeading_fontSize,
+    position: FORMAT_headings.F_subHeading_position,
+    left: FORMAT_headings.F_subHeading_left,
+    alignSelf: FORMAT_headings.F_subHeading_alignSelf,
+    alignItems: FORMAT_headings.F_subHeading_alignItems,
+    fontWeight: FORMAT_headings.F_subHeading_fontWeight
+  }
 });

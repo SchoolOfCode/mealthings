@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
+import { FORMAT_background } from "./FORMAT_background";
+import { FORMAT_containers } from "./FORMAT_containers";
+import { FORMAT_switches } from "./FORMAT_extraComponents";
+import { FORMAT_navButton } from "./FORMAT_navButton";
+import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 export default function Allergies({ navigation, route }) {
   const { dataPlusPlus } = route.params;
@@ -171,8 +176,8 @@ export default function Allergies({ navigation, route }) {
   }
 
   return (
-    <ScrollView style={styles.backgroundColor}>
-      <Text style={styles.Font}> Allergies</Text>
+    <ScrollView style={styles.background}>
+      <Text style={styles.heading}> Allergies</Text>
       <View style={styles.container}>
         <Text style={styles.text}> Celery</Text>
         <Switch
@@ -305,12 +310,12 @@ export default function Allergies({ navigation, route }) {
 
         <View style={styles.buttons}>
           <TouchableOpacity
-            style={styles.formatted}
+            style={styles.buttons}
             onPress={() => navigation.goBack()}
           >
             <Text>Back</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.formatted} onPress={postHandler}>
+          <TouchableOpacity style={styles.buttons} onPress={postHandler}>
             <Text>Next</Text>
           </TouchableOpacity>
         </View>
@@ -321,37 +326,51 @@ export default function Allergies({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  backgroundColor: {
+  background: {
     backgroundColor: COLS.C_BG,
+    backgroundHeight: FORMAT_background.F_background_height
   },
   container: {
-    margin: 10,
+    margin: FORMAT_containers.F_container_margin,
     backgroundColor: COLS.C_BG,
-  },
-  Font: {
-    alignSelf: "center",
-    marginBottom: 10,
-    marginTop: 20,
+    margin: FORMAT_containers.F_container_margin,
+    marginVertical: FORMAT_containers.F_container_marginVertical,
+    padding: FORMAT_containers.F_container_padding,
+    alignItems: FORMAT_containers.F_container_alignItems,
+    justifyContent: FORMAT_containers.F_container_justifyContent,
+    flex: FORMAT_containers.F_container_flex,
+    flexDirection: FORMAT_containers.F_container_flexDirection,
+    backgroundColor: COLS.C_BG
   },
   text: {
-    margin: 5,
-    left: 40,
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    marginBottom: FORMAT_text.F_text_marginBottom,
+    marginTop: FORMAT_text.F_text_marginTop,
+    margin: FORMAT_text.F_text_margin,
+    left: FORMAT_text.F_text_left,
+    font: FORMAT_fonts.F_font_font
+  },
+  heading: {
+    alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
+    left: FORMAT_headings.F_headingMainTitle_left,
+    fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
+    fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
+    bottom: FORMAT_headings.F_headingMainTitle_bottom,
+    marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
+    marginTop: FORMAT_headings.F_headingMainTitle_marginTop
   },
   switch: {
-    right: 40,
-    bottom: 27,
+    right: FORMAT_switches.F_switch_right,
+    bottom: FORMAT_switches.F_switch_bottom
   },
   buttons: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  formatted: {
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 80,
-    padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 5,
-    borderRadius: 5,
-  },
+    width: FORMAT_navButton.F_navButton_width,
+    padding: FORMAT_navButton.F_navButton_padding,
+    alignItems: FORMAT_navButton.F_navButton_alignItems,
+    margin: FORMAT_navButton.FORMAT_navButton.F_navButton_margin,
+    borderRadius: FORMAT_navButton.F_navBitton_borderRadius
+  }
 });

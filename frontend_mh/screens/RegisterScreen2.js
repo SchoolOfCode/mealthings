@@ -7,9 +7,35 @@ import {
   TextInput,
   Image,
   TouchableOpacity,
-  Dimensions,
+  Dimensions
 } from "react-native";
 import { COLS } from "./COLS";
+import { FORMAT_background } from "./FORMAT_background";
+import {
+  FORMAT_containers,
+  FORMAT_welcomeContainer,
+  FORMAT_moreChoicesContainer
+} from "./FORMAT_containers";
+import {
+  FORMAT_switches,
+  FORMAT_notes,
+  FORMAT_todaysMeal,
+  FORMAT_foodOptions,
+  FORMAT_swipeBar,
+  FORMAT_arrow,
+  FORMAT_icons,
+  FORMAT_mainRecipe
+} from "./FORMAT_extraComponents";
+import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+import { FORMAT_images } from "./FORMAT_images";
+import { FORMAT_inputField } from "./FORMAT_inputField";
+import { FORMAT_logo } from "./FORMAT_logo";
+import {
+  FORMAT_navButton,
+  FORMAT_navButtonText,
+  FORMAT_navButtonBackground
+} from "./FORMAT_navButton";
+import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 const screenWidth = Dimensions.get("screen").width;
 
@@ -74,7 +100,7 @@ export default function Registerscreen2({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLS.C_BG,
-    height: 1000,
+    height: 1000
   },
   inputField: {
     marginVertical: 15,
@@ -82,20 +108,21 @@ const styles = StyleSheet.create({
     width: 200,
     alignSelf: "center",
     height: 50,
-    borderRadius: 5,
+    borderRadius: 5
   },
   headerC: {
-    marginTop: 30,
+    backgroundColor: COLS.C5_LIGHT_TEXT,
+    height: 60
   },
   formatting: {
-    alignSelf: "center",
+    alignSelf: "center"
   },
   buttonFlex: {
     flexDirection: "row",
     width: screenWidth * 0.5,
     alignItems: "center",
     alignSelf: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   buttonText: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
@@ -104,7 +131,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 5,
     marginVertical: 3,
-    width: 80,
+    width: 80
   },
   buttonFormat: {
     flexDirection: "row",
@@ -112,6 +139,6 @@ const styles = StyleSheet.create({
     width: 80,
     alignSelf: "center",
     borderRadius: 5,
-    justifyContent: "space-between",
-  },
+    justifyContent: "space-between"
+  }
 });
