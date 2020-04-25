@@ -35,24 +35,48 @@ export default function HomeScreen({ navigation }) {
 
   const [recipeList, setRecipeList] = useState([]);
   const [fetchPlease, setFetchPlease] = useState(true);
+
   const userID = 1;
+
+  async function getLastRecipeDate() {
+    const res = await fetch(
+      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
+    );
+    const data = await res.json();
+    return data.payload[0].last_date_meals_requested;
+  }
+
+  async function getTotalNoRecipes() {
+    const res = await fetch(
+      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes?countOnly=true`
+    );
+    const data = await res.json();
+    return data.payload.count;
+  }
 
   // Get recipes
   useEffect(() => {
-    // Get userId TODO
-    if (recipeList.length < 1) {
-      // TODO Get date of last recipes
-      // const lastRecipeFetchDate =  // Change this to getting the last date when not debugging.
-      const now = new Date();
-      // CONST timeDiffInDays = (now.getTime() - lastRecipeFetchDate.getTime()) / (1000 * 3600 * 24); // 1000*3600*24 = miliseconds in a day.
-      const timeDiffInDays = 8;
-      if (timeDiffInDays > 6.5) {
-        getNewRecipes();
-        // TODO set lastRecipeFetchDate to be now in database
+    async function runGetRecipes() {
+      // Get userId TODO
+      if (recipeList.length < 1) {
+        // Get date of last recipes
+        const last_date_meals_requested_temp = await getLastRecipeDate();
+        const last_date_meals_requested = new Date(
+          last_date_meals_requested_temp
+        );
+        const now = new Date();
+        const timeDiffInDays =
+          (now.getTime() - last_date_meals_requested.getTime()) /
+          (1000 * 3600 * 24); // 1000*3600*24 = miliseconds in a day.
+        if (timeDiffInDays > 6.5) {
+          getNewRecipes();
+          // TODO PATCH to set lastRecipeFetchDate to be now in database
+        }
+        // TODO Try to get from local storage
+        // TODO If not in local storage, request again from database
       }
-      // TODO Try to get from local storage
-      // TODO If not in local storage, request again from database
     }
+    runGetRecipes();
   }, [fetchPlease]);
 
   // Get new recipes and load into state
@@ -66,8 +90,8 @@ export default function HomeScreen({ navigation }) {
       .replace(/"|{|}/g, "")
       .split(",")
       .map((x) => +x);
-    // TODO Get total number of recipes (add backend function for this)
-    const totalNumRecipes = 40;
+    // Get total number of recipes
+    const totalNumRecipes = (await getTotalNoRecipes()) || 50;
     // Get 14 random numbers with no duplicates
     const tempNumbers = [...Array(totalNumRecipes).keys()].map(
       (num) => num + 1
@@ -79,7 +103,6 @@ export default function HomeScreen({ navigation }) {
         tempNumbers.splice(index, 1);
       }
     });
-
     tempNumbers.sort(() => Math.random() - 0.5);
     const randNums = tempNumbers.slice(0, 14);
     // Get the recipes from the database
@@ -103,6 +126,7 @@ export default function HomeScreen({ navigation }) {
     });
     // TODO send PATCH to set last_weeks_recipes to the current this_weeks_recipes
     // TODO sent PATCH request to set this_weeks_recipes to the newly generated recipes (currently in variable randNums)
+    // Save recipes to local storage
   }
 
   return (
