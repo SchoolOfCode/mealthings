@@ -17,7 +17,8 @@ async function createUsers() {
         goals TEXT,
         last_weeks_meals TEXT, 
         this_weeks_meals TEXT, 
-        gender TEXT
+        gender TEXT,
+        late_date_meals_requested DATE
             )`
   );
   console.log(res);

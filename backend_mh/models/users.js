@@ -26,6 +26,7 @@ async function addUser(body) {
     food_prefs_inc,
     food_prefs_exc,
     goals,
+    gender,
   } = body;
   console.log(
     name,
@@ -38,7 +39,8 @@ async function addUser(body) {
     new_mum,
     food_prefs_inc,
     food_prefs_exc,
-    goals
+    goals,
+    gender
   );
   const res = await query(
     `INSERT INTO users(
@@ -52,7 +54,8 @@ async function addUser(body) {
         new_mum,
         food_prefs_inc,
         food_prefs_exc,
-        goals
+        goals,
+        gender
         )
         VALUES (
             $1,
@@ -65,7 +68,8 @@ async function addUser(body) {
             $8,
             $9,
             $10,
-            $11
+            $11,
+            $12
         ) RETURNING *`,
     [
       name,
@@ -79,6 +83,7 @@ async function addUser(body) {
       food_prefs_inc,
       food_prefs_exc,
       goals,
+      gender,
     ]
   );
   return res;
@@ -116,8 +121,9 @@ async function patchUser(body, id) {
          goals = COALESCE($11, goals),
          this_weeks_meals = COALESCE($12, this_weeks_meals),
          last_weeks_meals = COALESCE($13, last_weeks_meals),
-         gender = COALESCE($14, gender)
-         WHERE user_id = $15
+         gender = COALESCE($14, gender), 
+         late_date_meals_requested = COALESCE($15, late_date_meals_requested)
+         WHERE user_id = $16
          RETURNING *
          `,
     [
@@ -135,6 +141,7 @@ async function patchUser(body, id) {
       this_weeks_meals,
       last_weeks_meals,
       gender,
+      late_date_meals_requested,
       id,
     ]
   );
