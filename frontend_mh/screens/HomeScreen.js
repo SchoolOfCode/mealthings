@@ -30,74 +30,82 @@ import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 export default function HomeScreen({ navigation }) {
   // Record date of getting 7 days of recipes
-  // Every time app is opened:
-  // Check if 7 days passed
-  // If yes, set getNewRecipes to true
-  // If getNewRecipes = true
-  // Inside useEffect, get random numbers between 0 and number of rows -> SELECT COUNT(*) FROM recipes
-  // Check that none of the recipes were in last weeks recipes by getting from database and checking
-  // Get the recipes with those random numbers and put them in state
-  // Record in database that week's recipes, and move last weeks recipes into last weeks recipes
   // If no recipes in state, try to fetch from local storage. If none in local storage, fetch from database
   // Pass recipes to relevant screens
   // Save in local storage
 
-  // db TODO list
-  // Fix recipe Id
-  // Add field for last weeks meals
-  // Add field for this weeks meals
-  // Add gender field to users db
-  // Check patch route for users
-
-  const [recipeList, setRecipeList] = useState();
+  const [recipeList, setRecipeList] = useState([]);
+  const [fetchPlease, setFetchPlease] = useState(true);
+  const userID = 1;
 
   // Get recipes
-  // useEffect(() => {
-  //   if(!recipeList){
-  //     // Get date of last recipes
-  //     const lastRecipeFetchDate = new Date(); // Change this to getting the last date when not debugging.
-  //     const now = new Date();
-  //     const timeDiffInDays = (now.getTime() - lastRecipeFetchDate.getTime()) / (1000 * 3600 * 24); // 1000*3600*24 = miliseconds in a day.
-  //     if(timeDiffInDays > 6){
-  //       getNewRecipes();
-  //       // Set lastRecipeFetchDate to be now
-  //     }
-  //     // Try to get from local storage
-  //     //
-  //   }
-  // }, [])
+  useEffect(() => {
+    // Get userId TODO
+    if (recipeList.length < 1) {
+      // TODO Get date of last recipes
+      // const lastRecipeFetchDate =  // Change this to getting the last date when not debugging.
+      const now = new Date();
+      // CONST timeDiffInDays = (now.getTime() - lastRecipeFetchDate.getTime()) / (1000 * 3600 * 24); // 1000*3600*24 = miliseconds in a day.
+      const timeDiffInDays = 8;
+      if (timeDiffInDays > 6.5) {
+        getNewRecipes();
+        // TODO set lastRecipeFetchDate to be now in database
+      }
+      // TODO Try to get from local storage
+      // TODO If not in local storage, request again from database
+    }
+  }, [fetchPlease]);
 
   // Get new recipes and load into state
-  function getNewRecipes() {
-    // Get total number of recipes TODO add backend function for this
+  async function getNewRecipes() {
+    let last_week_food = [];
+    const res = await fetch(
+      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
+    );
+    const data = await res.json();
+    last_week_food = data.payload[0].last_weeks_meals
+      .replace(/"|{|}/g, "")
+      .split(",")
+      .map((x) => +x);
+    // TODO Get total number of recipes (add backend function for this)
     const totalNumRecipes = 40;
     // Get 14 random numbers with no duplicates
-    const tempNumbers = [...Array(100).keys()].map(num => num + 1);
+
+    const tempNumbers = [...Array(totalNumRecipes).keys()].map(
+      (num) => num + 1
+    );
+    // Check that none of the recipes were in last weeks recipes by getting from database and checking
+    last_week_food.forEach((x) => {
+      const index = tempNumbers.indexOf(x);
+      if (index > -1) {
+        tempNumbers.splice(index, 1);
+      }
+    });
+
     tempNumbers.sort(() => Math.random() - 0.5);
     const randNums = tempNumbers.slice(0, 14);
-    // TODO Check that none of the recipes were in last weeks recipes by getting from database and checking
-
     // Get the recipes from the database
-    let newRecipes = [];
-    randNums.forEach(num => {
-      fetch(
-        `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
-      )
-        .then(res => res.json())
-        .then(data => {
-          newRecipes = [...newRecipes, data];
+    const fetchData = (URI) => {
+      return fetch(URI)
+        .then((response) => response.json())
+        .then((data) => {
+          return data.payload[0];
         });
+    };
+    const requests = [];
+    randNums.forEach((num) => {
+      requests.push(
+        fetchData(
+          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
+        )
+      );
     });
-    setRecipeList(newRecipes);
+    Promise.all(requests).then((arrayWithData) => {
+      setRecipeList(arrayWithData);
+    });
+    // TODO send PATCH to set last_weeks_recipes to the current this_weeks_recipes
+    // TODO sent PATCH request to set this_weeks_recipes to the newly generated recipes (currently in variable randNums)
   }
-
-  // Check if it's time to get new recipes
-  // useEffect(() => {
-  //   if(){
-  //     //
-  //     //
-  //   }
-  // }, [])
 
   return (
     <View style={styles.container}>

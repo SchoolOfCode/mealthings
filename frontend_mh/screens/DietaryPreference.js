@@ -1,26 +1,14 @@
 import React, { useState } from "react";
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Flatlist,
-  Switch,
-  Button,
-  TextInput
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import { FORMAT_containers } from "./FORMAT_containers";
 import { FORMAT_switches } from "./FORMAT_extraComponents";
 import { FORMAT_headings } from "./FORMAT_headings";
-
 import { FORMAT_navButton } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
-import { MonoText } from "../components/StyledText";
+
 
 export default function Preferences({ navigation, route }) {
   const { data } = route.params;
