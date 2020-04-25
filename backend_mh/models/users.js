@@ -106,7 +106,9 @@ async function patchUser(body, id) {
     this_weeks_meals,
     last_weeks_meals,
     gender,
+    last_date_meals_requested,
   } = body;
+
   const res = await query(
     `UPDATE users SET name = COALESCE($1, name),
          birthday = COALESCE($2, birthday),
@@ -122,7 +124,7 @@ async function patchUser(body, id) {
          this_weeks_meals = COALESCE($12, this_weeks_meals),
          last_weeks_meals = COALESCE($13, last_weeks_meals),
          gender = COALESCE($14, gender), 
-         late_date_meals_requested = COALESCE($15, late_date_meals_requested)
+         last_date_meals_requested = COALESCE($15, last_date_meals_requested)
          WHERE user_id = $16
          RETURNING *
          `,
@@ -141,7 +143,7 @@ async function patchUser(body, id) {
       this_weeks_meals,
       last_weeks_meals,
       gender,
-      late_date_meals_requested,
+      last_date_meals_requested,
       id,
     ]
   );

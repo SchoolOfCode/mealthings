@@ -25,7 +25,7 @@ async function populateUsers() {
         last_weeks_meals,
         this_weeks_meals,
         gender,
-        late_date_meals_requested,
+        last_date_meals_requested,
       }) => {
         const res = await query(
           `INSERT INTO users (
@@ -43,7 +43,7 @@ async function populateUsers() {
             last_weeks_meals,
             this_weeks_meals,
             gender,
-            late_date_meals_requested 
+            last_date_meals_requested 
                      ) VALUES (
                        $1,
                        $2,
@@ -76,7 +76,7 @@ async function populateUsers() {
             last_weeks_meals,
             this_weeks_meals,
             gender,
-            late_date_meals_requested,
+            last_date_meals_requested,
           ]
         );
         return res.rows[0];

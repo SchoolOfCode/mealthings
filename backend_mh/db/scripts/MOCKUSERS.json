@@ -14,7 +14,7 @@
     "gender": "Male",
     "last_weeks_meals": [1, 4, 7, 5, 8, 9, 34],
     "this_weeks_meals": [1, 2, 3, 4, 5],
-    "late_date_meals_requested": "2019-04-12"
+    "last_date_meals_requested": "2019-04-12"
   },
   {
     "name": "ayla",
@@ -31,7 +31,7 @@
     "gender": "Female",
     "last_weeks_meals": [1, 4, 7, 5, 8, 9, 34],
     "this_weeks_meals": [1, 2, 3, 4, 5],
-    "late_date_meals_requested": "2019-05-12"
+    "last_date_meals_requested": "2019-05-12"
   },
   {
     "name": "anya",
@@ -48,6 +48,6 @@
     "gender": "Female",
     "last_weeks_meals": [1, 4, 7, 5, 8, 9, 34],
     "this_weeks_meals": [1, 2, 3, 4, 5],
-    "late_date_meals_requested": "2019-06-12"
+    "last_date_meals_requested": "2019-06-12"
   }
 ]
