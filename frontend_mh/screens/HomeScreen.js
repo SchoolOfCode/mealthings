@@ -5,7 +5,7 @@ import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -15,7 +15,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -24,12 +24,11 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 export default function HomeScreen({ navigation }) {
-  // Record date of getting 7 days of recipes
   // If no recipes in state, try to fetch from local storage. If none in local storage, fetch from database
   // Pass recipes to relevant screens
   // Save in local storage
@@ -70,7 +69,6 @@ export default function HomeScreen({ navigation }) {
     // TODO Get total number of recipes (add backend function for this)
     const totalNumRecipes = 40;
     // Get 14 random numbers with no duplicates
-
     const tempNumbers = [...Array(totalNumRecipes).keys()].map(
       (num) => num + 1
     );
@@ -139,79 +137,44 @@ HomeScreen.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    "https://docs.expo.io/versions/latest/workflow/development-mode/"
-  );
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    "https://docs.expo.io/versions/latest/get-started/create-a-new-app/#making-your-first-change"
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   mealThingsLogo: {
     alignItems: "center",
     margin: "auto",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   logoCircle: {
     width: 200,
     height: 200,
     borderRadius: 200,
-    backgroundColor: COLS.C_LOGO_BG
+    backgroundColor: COLS.C_LOGO_BG,
   },
   tagLine: {
-    color: COLS.C5_LIGHT_TEXT
+    color: COLS.C5_LIGHT_TEXT,
   },
   buttonContainer: {
-    marginTop: "20%"
+    marginTop: "20%",
   },
   buttonBackground: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     width: 200,
     alignSelf: "center",
     margin: 5,
-    borderRadius: 5
+    borderRadius: 5,
   },
   buttonText: {
     color: COLS.C4_DARK_TEXT,
     textAlign: "center",
-    padding: 5
+    padding: 5,
   },
   welcomeContainer: {
     alignItems: "center",
     marginTop: 10,
-    marginBottom: 20
-  }
+    marginBottom: 20,
+  },
 });

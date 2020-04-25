@@ -1,3 +1,7 @@
+import { COLS } from "./COLS";
+import { Dimensions } from "react-native";
+const screenWidth = Dimensions.get("screen").width;
+
 const FORMAT_images = {
   F_image_width: 100,
   F_image_height: 100,
@@ -15,8 +19,8 @@ const FORMAT_images = {
   F_image_marginBottom: 15,
   F_image_marginTop: 15,
   F_mainImage_width: screenWidth * 0.8,
-  F_mainImage_width: screenWidth * 04,
-  F_mainImage_marginTop: 10
+  F_mainImage_width: screenWidth * 0.4,
+  F_mainImage_marginTop: 10,
 };
 
 export { FORMAT_images };

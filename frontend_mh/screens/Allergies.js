@@ -7,6 +7,7 @@ import { FORMAT_containers } from "./FORMAT_containers";
 import { FORMAT_switches } from "./FORMAT_extraComponents";
 import { FORMAT_navButton } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_headings } from "./FORMAT_headings";
 
 export default function Allergies({ navigation, route }) {
   const { dataPlusPlus } = route.params;
@@ -328,7 +329,7 @@ export default function Allergies({ navigation, route }) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    backgroundHeight: FORMAT_background.F_background_height
+    flex: 1,
   },
   container: {
     margin: FORMAT_containers.F_container_margin,
@@ -340,7 +341,7 @@ const styles = StyleSheet.create({
     justifyContent: FORMAT_containers.F_container_justifyContent,
     flex: FORMAT_containers.F_container_flex,
     flexDirection: FORMAT_containers.F_container_flexDirection,
-    backgroundColor: COLS.C_BG
+    backgroundColor: COLS.C_BG,
   },
   text: {
     alignSelf: FORMAT_text.F_text_alignSelf,
@@ -348,7 +349,7 @@ const styles = StyleSheet.create({
     marginTop: FORMAT_text.F_text_marginTop,
     margin: FORMAT_text.F_text_margin,
     left: FORMAT_text.F_text_left,
-    font: FORMAT_fonts.F_font_font
+    fontFamily: FORMAT_fonts.F_font_font,
   },
   heading: {
     alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
@@ -357,11 +358,11 @@ const styles = StyleSheet.create({
     fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
     bottom: FORMAT_headings.F_headingMainTitle_bottom,
     marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
-    marginTop: FORMAT_headings.F_headingMainTitle_marginTop
+    marginTop: FORMAT_headings.F_headingMainTitle_marginTop,
   },
   switch: {
     right: FORMAT_switches.F_switch_right,
-    bottom: FORMAT_switches.F_switch_bottom
+    bottom: FORMAT_switches.F_switch_bottom,
   },
   buttons: {
     flexDirection: FORMAT_navButton.F_navButton_flexDirection,
@@ -370,7 +371,7 @@ const styles = StyleSheet.create({
     width: FORMAT_navButton.F_navButton_width,
     padding: FORMAT_navButton.F_navButton_padding,
     alignItems: FORMAT_navButton.F_navButton_alignItems,
-    margin: FORMAT_navButton.FORMAT_navButton.F_navButton_margin,
-    borderRadius: FORMAT_navButton.F_navBitton_borderRadius
-  }
+    margin: FORMAT_navButton.F_navButton_margin,
+    borderRadius: FORMAT_navButton.F_navBitton_borderRadius,
+  },
 });

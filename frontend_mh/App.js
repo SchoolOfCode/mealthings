@@ -77,6 +77,11 @@ export default function App(props) {
               options={{ title: "Home" }}
             />
             <Stack.Screen
+              name="LoginPage"
+              component={LoginPage}
+              options={{ title: "Log in" }}
+            />
+            <Stack.Screen
               name="Register1"
               component={RegisterScreen}
               options={{ title: "Register" }}

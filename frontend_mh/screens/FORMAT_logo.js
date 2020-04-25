@@ -1,3 +1,7 @@
+import { COLS } from "./COLS";
+import { Dimensions } from "react-native";
+const screenWidth = Dimensions.get("screen").width;
+
 const FORMAT_logo = {
   F_logo_margin: "auto",
   F_logo_alignItems: "center",
@@ -10,7 +14,7 @@ const FORMAT_logo = {
   F_logoCircle_left: 170,
   F_logoCircle_bottom: 20,
   F_logoCircle_borderRadius: 200,
-  F_logoCircle_backgroundColor: COLS.C_LOGO_BG
+  F_logoCircle_backgroundColor: COLS.C_LOGO_BG,
 };
 
 export { FORMAT_logo };
