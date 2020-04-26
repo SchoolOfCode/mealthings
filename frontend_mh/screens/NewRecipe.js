@@ -183,7 +183,7 @@ function recipeCard(recipeObject) {
 const screenWidth = Dimensions.get("window").width;
 
 export default function NewRecipe({ navigation }) {
-  const multipleRecipes2 = useContext(RecipeContext); // || multipleRecipes;
+  const multipleRecipes2 = useContext(RecipeContext);
   return (
     <View style={styles.container}>
       <View style={styles.positioning}>
