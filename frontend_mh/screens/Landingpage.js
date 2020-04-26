@@ -4,31 +4,10 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
+
+import { FORMAT_notes } from "./FORMAT_extraComponents";
 import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_navButton } from "./FORMAT_navButton";
 
 export default function App({ navigation }) {
   return (
@@ -44,14 +23,14 @@ export default function App({ navigation }) {
         </View>
         <View style={styles.flex}>
           <TouchableOpacity
-            style={styles.note2}
+            style={styles.notes}
             onPress={() => navigation.navigate("ShoppingList")}
           >
             <Text>Shopping List</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={styles.note}
+            style={styles.notes}
             onPress={() => navigation.navigate("TodaysRecipe")}
           >
             <Text>Today's Recipe</Text>
@@ -59,13 +38,13 @@ export default function App({ navigation }) {
         </View>
         <View style={styles.flex}>
           <TouchableOpacity
-            style={styles.note}
+            style={styles.notes}
             onPress={() => navigation.navigate("NewRecipe")}
           >
             <Text>Random Recipe</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.note2}
+            style={styles.notes}
             onPress={() => navigation.navigate("YourStats")}
           >
             <Text>Your Stats</Text>
@@ -76,7 +55,7 @@ export default function App({ navigation }) {
             <Text>Your Preferences</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.note}
+            style={styles.notes}
             onPress={() => navigation.navigate("Home")}
           >
             <Text>Logout</Text>
@@ -96,72 +75,56 @@ export default function App({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    height: 1000
+    height: FORMAT_background.F_background_height
   },
   mealThingsLogo: {
-    width: 60,
-    height: 60,
-    alignSelf: "center"
+    width: FORMAT_logo.F_logo_width,
+    height: FORMAT_logo.F_logo_height,
+    alignSelf: FORMAT_logo.F_logo_alignSelf,
+    alignItems: FORMAT_logo.F_logo_alignItems,
+    margin: FORMAT_logo.F_logo_margin,
+    justifyContent: FORMAT_logo.F_logo_justifyContent
   },
   logoCircle: {
-    width: 80,
-    height: 80,
-    borderRadius: 200,
-    backgroundColor: COLS.C_LOGO_BG,
-    left: 170,
-    bottom: 20
+    left: FFORMAT_logo.F_logoCircle_left,
+    bottom: FORMAT_logo.F_logoCircle_bottom,
+    width: FORMAT_logo.F_logoCircle_width,
+    height: FORMAT_logo.F_logoCircle_height,
+    borderRadius: FORMAT_logo.F_logoCircle_borderRadius,
+    backgroundColor: COLS.C_LOGO_BG
   },
   margin: {
-    top: 30,
+    top: FORMAT_navButton.F_navButtonText_padding,
     backgroundColor: COLS.C_BG
   },
   flex: {
-    flexDirection: "row"
+    flexDirection: FORMAT_navButton.F_navButtonText_flexDirection
   },
-  note: {
-    width: 140,
-    height: 140,
-    backgroundColor: COLS.C_YELLOW,
-    margin: 10,
-    alignSelf: "center",
-    alignItems: "center",
-    left: 50,
-    shadowColor: COLS.C5_LIGHT_TEXT,
-    padding: 10,
-    paddingVertical: 50,
-    fontSize: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 200, height: 20 },
-    shadowOpacity: 2,
-    shadowRadius: 40,
-    elevation: 6
-  },
-  note2: {
-    width: 140,
-    height: 140,
+  notes: {
+    width: FORMAT_notes.F_note_width,
+    height: FORMAT_notes.F_note_widthF_note_height,
     backgroundColor: COLS.C_LOGO_BG,
-    margin: 10,
-    alignSelf: "center",
-    alignItems: "center",
-    left: 50,
+    margin: FORMAT_notes.F_note_widthF_note_margin,
+    alignSelf: FORMAT_notes.F_note_widthF_note_alignSelf,
+    alignItems: FORMAT_notes.F_note_widthF_note_alignItems,
+    left: FORMAT_notes.F_note_widthF_note_left,
     shadowColor: COLS.C5_LIGHT_TEXT,
-    paddingVertical: 50,
-    padding: 10,
+    paddingVertical: FORMAT_notes.F_note_widthF_note_paddingVertical,
+    padding: FORMAT_notes.F_note_widthF_note_padding,
     shadowColor: "#000",
-    shadowOffset: { width: 200, height: 20 },
-    shadowOpacity: 2,
-    shadowRadius: 40,
-    elevation: 6,
-
-    fontSize: 20
+    shadowOffset: FORMAT_notes.F_note_widthF_note_shadowOffset,
+    shadowOpacity: FORMAT_notes.F_note_widthF_note_shadowOpacity,
+    shadowRadius: FORMAT_notes.F_note_widthF_note_shadowRadius,
+    elevation: FORMAT_notes.F_note_widthF_note_elevation,
+    fontSize: FORMAT_notes.F_note_widthF_note_fontSize
   },
   todaysMeal: {
-    top: 70,
-    width: 450,
-    padding: 10,
+    top: FORMAT_todaysMealF_todaysMeal_top,
+    width: FORMAT_todaysMealF_todaysMeal_width,
+    padding: FORMAT_todaysMealF_todaysMeal_padding,
     backgroundColor: COLS.C4_DARK_TEXT,
-    justifyContent: "flex-end",
-    alignSelf: "center",
-    alignItems: "center"
+    justifyContent: FORMAT_todaysMealF_todaysMeal_justifyContent,
+    alignSelf: FORMAT_todaysMealF_todaysMeal_alignSelf,
+    alignItems: FORMAT_todaysMealF_todaysMeal_alignItems
   }
 });

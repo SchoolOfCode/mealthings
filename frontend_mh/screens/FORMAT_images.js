@@ -17,10 +17,9 @@ const FORMAT_images = {
   F_image_borderRadius: 15,
   F_image_margin: 5,
   F_image_marginBottom: 15,
-  F_image_marginTop: 15,
   F_mainImage_width: screenWidth * 0.8,
   F_mainImage_width: screenWidth * 0.4,
-  F_mainImage_marginTop: 10,
+  F_mainImage_marginTop: 10
 };
 
 export { FORMAT_images };

@@ -10,32 +10,16 @@ import {
 } from "react-native";
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
+
 import {
   FORMAT_containers,
-  FORMAT_welcomeContainer,
   FORMAT_moreChoicesContainer
 } from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+import { FORMAT_arrow, FORMAT_icons } from "./FORMAT_extraComponents";
+
 import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+
+import { FORMAT_text } from "./FORMAT_text";
 
 const data = {
   recipe_id: "1",
@@ -226,17 +210,20 @@ export default function NewRecipe({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: FORMAT_containers.F_container_flex,
     backgroundColor: COLS.C_BG,
-    alignItems: "center"
+    justifyContent: FORMAT_containers.F_container_justifyContent
   },
   positioning: {
     right: 170,
     top: 20
   },
   arrow: {
-    height: 20,
-    width: 20
+    height: FORMAT_arrow.F_arrow_height,
+    width: FORMAT_arrow.F_arrow_width,
+    left: FORMAT_arrow.F_arrow_left,
+    top: FORMAT_arrow.F_arrow_top,
+    marginBottom: FORMAT_arrow.F_arrow_marginBottom
   },
 
   mainTitle: {
@@ -247,9 +234,9 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   mainImage: {
-    marginTop: 10,
-    width: screenWidth * 0.8,
-    height: screenWidth * 0.4
+    marginTop: FORMAT_images.F_mainImage_marginTop,
+    width: FORMAT_images.F_mainImage_width,
+    height: FORMAT_images.F_mainImage_height
   },
   mainRecipeInfo: {
     width: screenWidth,
@@ -273,11 +260,13 @@ const styles = StyleSheet.create({
     paddingRight: screenWidth * 0.1
   },
   moreChoicesContainer: {
-    flexWrap: "wrap",
-    width: screenWidth * 0.8,
+    width: FORMAT_moreChoicesContainer.F_moreChoicesContainer_width,
     backgroundColor: COLS.C_BG,
-    flexDirection: "row",
-    justifyContent: "space-between"
+    flexDirection:
+      FORMAT_moreChoicesContainer.F_moreChoicesContainer_flexDirection,
+    justifyContent:
+      FORMAT_moreChoicesContainer.F_moreChoicesContainer_justifyContent,
+    flexWrap: FORMAT_moreChoicesContainer.F_moreChoicesContainer_flexWrap
   },
   recipeCardContainer: {
     width: 150,
@@ -292,8 +281,8 @@ const styles = StyleSheet.create({
     elevation: 7
   },
   recipeCardImage: {
-    width: "100%",
-    height: 100
+    width: FORMAT_images.F_image_width,
+    height: FORMAT_images.F_image_height
   },
   recipeCardTextContainer: {
     width: "100%",
@@ -301,29 +290,31 @@ const styles = StyleSheet.create({
     padding: 5
   },
   recipeCardTitle: {
-    fontSize: 12,
-    textAlign: "center",
-    alignSelf: "center",
+    fontSize: FORMAT_text.F_text_fontSize,
+    alignItems: FORMAT_text.F_text_alignItems,
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    marginTop: 5,
     fontWeight: "bold"
   },
   recipeCardCookingTime: {
-    fontSize: 12,
-    alignItems: "center",
-    alignSelf: "center"
+    fontSize: FORMAT_text.F_text_fontSize,
+    alignItems: FORMAT_text.F_text_alignItems,
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    marginTop: 5
   },
   recipeCardDifficulty: {
-    fontSize: 12,
-    alignItems: "center",
-    marginTop: 5,
-    alignSelf: "center"
+    fontSize: FORMAT_text.F_text_fontSize,
+    alignItems: FORMAT_text.F_text_alignItems,
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    marginTop: 5
   },
   icons: {
-    alignSelf: "flex-end",
-    right: 10,
-    bottom: 30,
+    alignSelf: FORMAT_icons.F_icons_alignSelf,
+    right: FORMAT_icons.F_icons_right,
+    bottom: FORMAT_icons.F_icons_bottom,
     backgroundColor: COLS.C_RED,
-    borderRadius: 100,
-    borderWidth: 10,
+    borderRadius: FORMAT_icons.F_icons_borderRadius,
+    borderWidth: FORMAT_icons.F_icons_borderWidth,
     borderColor: COLS.C_RED
   }
 });

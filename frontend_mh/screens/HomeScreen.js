@@ -1,32 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
+  FORMAT_welcomeContainer
 } from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe,
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
+
 import { FORMAT_logo } from "./FORMAT_logo";
 import {
-  FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
+  FORMAT_navButtonBackground
 } from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 export default function HomeScreen({ navigation }) {
   // If no recipes in state, try to fetch from local storage. If none in local storage, fetch from database
@@ -89,15 +73,13 @@ export default function HomeScreen({ navigation }) {
     last_week_food = data.payload[0].last_weeks_meals
       .replace(/"|{|}/g, "")
       .split(",")
-      .map((x) => +x);
+      .map(x => +x);
     // Get total number of recipes
     const totalNumRecipes = (await getTotalNoRecipes()) || 50;
     // Get 14 random numbers with no duplicates
-    const tempNumbers = [...Array(totalNumRecipes).keys()].map(
-      (num) => num + 1
-    );
+    const tempNumbers = [...Array(totalNumRecipes).keys()].map(num => num + 1);
     // Check that none of the recipes were in last weeks recipes by getting from database and checking
-    last_week_food.forEach((x) => {
+    last_week_food.forEach(x => {
       const index = tempNumbers.indexOf(x);
       if (index > -1) {
         tempNumbers.splice(index, 1);
@@ -106,22 +88,22 @@ export default function HomeScreen({ navigation }) {
     tempNumbers.sort(() => Math.random() - 0.5);
     const randNums = tempNumbers.slice(0, 14);
     // Get the recipes from the database
-    const fetchData = (URI) => {
+    const fetchData = URI => {
       return fetch(URI)
-        .then((response) => response.json())
-        .then((data) => {
+        .then(response => response.json())
+        .then(data => {
           return data.payload[0];
         });
     };
     const requests = [];
-    randNums.forEach((num) => {
+    randNums.forEach(num => {
       requests.push(
         fetchData(
           `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
         )
       );
     });
-    Promise.all(requests).then((arrayWithData) => {
+    Promise.all(requests).then(arrayWithData => {
       setRecipeList(arrayWithData);
     });
     // TODO send PATCH to set last_weeks_recipes to the current this_weeks_recipes
@@ -158,47 +140,47 @@ export default function HomeScreen({ navigation }) {
 }
 
 HomeScreen.navigationOptions = {
-  header: null,
+  header: null
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: FORMAT_containers.F_container_flex,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center",
+    justifyContent: FORMAT_containers.F_container_justifyContent
   },
   mealThingsLogo: {
-    alignItems: "center",
-    margin: "auto",
-    justifyContent: "center",
+    alignItems: FORMAT_logo.F_logo_alignItems,
+    margin: FORMAT_logo.F_logo_margin,
+    justifyContent: FORMAT_logo.F_logo_justifyContent
   },
   logoCircle: {
-    width: 200,
-    height: 200,
-    borderRadius: 200,
-    backgroundColor: COLS.C_LOGO_BG,
+    width: FORMAT_logo.F_logoCircle_width,
+    height: FORMAT_logo.F_logoCircle_height,
+    borderRadius: FORMAT_logo.F_logoCircle_borderRadius,
+    backgroundColor: COLS.C_LOGO_BG
   },
   tagLine: {
-    color: COLS.C5_LIGHT_TEXT,
+    color: COLS.C5_LIGHT_TEXT
   },
   buttonContainer: {
-    marginTop: "20%",
+    marginTop: "20%"
   },
   buttonBackground: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    alignSelf: "center",
-    margin: 5,
-    borderRadius: 5,
+    width: FORMAT_navButtonBackground.F_navButtonBackground_width,
+    alignSelf: FORMAT_navButtonBackground.F_navButtonBackground_alignSelf,
+    margin: FORMAT_navButtonBackground.F_navButtonBackground_margin,
+    borderRadius: FORMAT_navButtonBackground.F_navButtonBackground_borderRadius
   },
   buttonText: {
     color: COLS.C4_DARK_TEXT,
-    textAlign: "center",
-    padding: 5,
+    textAlign: FORMAT_navButtonText.F_navButtonBackground_textAlign,
+    padding: FORMAT_navButtonBackground.F_navButtonBackground_padding
   },
   welcomeContainer: {
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20,
-  },
+    alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
+    marginTop: FORMAT_welcomeContainer.F_welcomeContainer_marginTop,
+    marginBottom: FORMAT_welcomeContainer.F_welcomeContainer_marginBottom
+  }
 });

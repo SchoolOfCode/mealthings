@@ -3,32 +3,8 @@ import * as WebBrowser from "expo-web-browser";
 import * as React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_containers } from "./FORMAT_containers";
+import { FORMAT_foodOptions } from "./FORMAT_extraComponents";
 
 export default function LinksScreen() {
   return (
@@ -80,29 +56,30 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fafafa"
+    flex: FORMAT_containers.F_container_flex,
+    backgroundColor: COLS.C_BG,
+    justifyContent: FORMAT_containers.F_container_justifyContent
   },
   contentContainer: {
-    paddingTop: 15
+    padding: FORMAT_containers.F_container_padding
   },
   optionIconContainer: {
     marginRight: 12
   },
   option: {
     backgroundColor: "#fdfdfd",
-    paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingHorizontal: FORMAT_foodOptions.F_options_paddingHorizontal,
+    paddingVertical: FORMAT_foodOptions.F_options_paddingVertical,
     borderWidth: StyleSheet.hairlineWidth,
-    borderBottomWidth: 0,
-    borderColor: "#ededed"
+    borderBottomWidth: FORMAT_foodOptions.F_options_borderBottomWidth,
+    borderColor: FORMAT_foodOptions.F_options_borderColor
   },
   lastOption: {
     borderBottomWidth: StyleSheet.hairlineWidth
   },
   optionText: {
-    fontSize: 15,
-    alignSelf: "flex-start",
-    marginTop: 1
+    fontSize: FORMAT_foodOptions.F_options_fontSize,
+    alignSelf: FORMAT_foodOptions.F_options_alignSelf,
+    marginTop: FORMAT_foodOptions.F_options_marginTop
   }
 });

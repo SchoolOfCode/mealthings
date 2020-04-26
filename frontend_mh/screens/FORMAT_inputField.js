@@ -10,9 +10,7 @@ const FORMAT_inputField = {
   F_inputField_alignItems: "center",
   F_inputField_borderRadius: 5,
   F_inputField_flexDirection: "row",
-  F_inputField_width: 200,
-  F_inputField_width: 200,
-  F_inputField_backgroundColor: COLS.C5_LIGHT_TEXT,
+  F_inputField_backgroundColor: COLS.C5_LIGHT_TEXT
 };
 
 export { FORMAT_inputField };

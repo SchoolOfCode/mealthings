@@ -10,33 +10,12 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+
 import { FORMAT_images } from "./FORMAT_images";
 import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
-import { Row } from "react-native-drag-flatlist";
+
+import { FORMAT_navButton } from "./FORMAT_navButton";
+import { FORMAT_text } from "./FORMAT_text";
 
 const screenWidth = Dimensions.get("screen").width;
 
@@ -191,7 +170,7 @@ export default function Goals({ navigation, route }) {
           <View>
             <TouchableOpacity onPress={fatHandler}>
               <Image
-                style={styles.img}
+                style={styles.image1}
                 source={require("../assets/images/calories.png")}
               />
 
@@ -202,7 +181,7 @@ export default function Goals({ navigation, route }) {
           <View>
             <TouchableOpacity onPress={muscleHandler}>
               <Image
-                style={styles.img}
+                style={styles.image1}
                 source={require("../assets/images/woman.png")}
               />
               <Text style={styles.text}>Gaining Muscle</Text>
@@ -211,7 +190,7 @@ export default function Goals({ navigation, route }) {
           <View>
             <TouchableOpacity onPress={dietHandler}>
               <Image
-                style={styles.img}
+                style={styles.image1}
                 source={require("../assets/images/eat.png")}
               />
               <Text style={styles.text}>No Diet</Text>
@@ -222,7 +201,7 @@ export default function Goals({ navigation, route }) {
           <View style={styles.positioning}>
             <TouchableOpacity onPress={timeHandler}>
               <Image
-                style={styles.img2}
+                style={styles.image2}
                 source={require("../assets/images/time.png")}
               />
               <Text style={styles.text2}>Saving Time</Text>
@@ -231,7 +210,7 @@ export default function Goals({ navigation, route }) {
           <View style={styles.positioning}>
             <TouchableOpacity onPress={cookHandler}>
               <Image
-                style={styles.img2}
+                style={styles.image2}
                 source={require("../assets/images/Cooking.png")}
               />
               <Text style={styles.text2}>Learning to Cook</Text>
@@ -239,14 +218,14 @@ export default function Goals({ navigation, route }) {
           </View>
         </View>
 
-        <View style={styles.buttonFlex}>
+        <View style={styles.buttons}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={styles.buttonText}
+            style={styles.buttons}
           >
             <Text style={styles.TextStyle}>Back</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={handleSubmit} style={styles.buttonText}>
+          <TouchableOpacity onPress={handleSubmit} style={styles.buttons}>
             <Text style={styles.TextStyle}>Next</Text>
           </TouchableOpacity>
         </View>
@@ -259,42 +238,49 @@ const styles = StyleSheet.create({
     marginVertical: 50
   },
   inputField: {
-    marginVertical: 5,
+    height: FORMAT_inputField.F_inputField_height,
+    width: FORMAT_inputField.F_inputField_width,
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
+    alignSelf: FORMAT_inputField.F_inputField_alignSelf,
+    alignItems: FORMAT_inputField.F_inputField_alignItems,
+    borderRadius: FORMAT_inputField.F_inputField_borderRadius,
+    flexDirection: FORMAT_inputField.F_inputField_flexDirection,
+    backgroundColor: COLS.C5_LIGHT_TEXT
+  },
+  flex: {
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    marginVertical: FORMAT_navButton.F_navButton_marginVertical
+  },
+  flex2: { flexDirection: FORMAT_navButton.F_navButton_flexDirection },
+  image1: {
+    width: FORMAT_images.F_image_width,
+    height: FORMAT_images.F_image_height,
+    alignSelf: FORMAT_images.F_image_alignSelf,
+    left: FORMAT_images.F_image_left,
+    marginHorizontal: FORMAT_images.F_image_marginHorizontal
+  },
+  image2: {
+    width: FORMAT_images.F_image_width,
+    height: FORMAT_images.F_image_height,
+    alignSelf: FORMAT_images.F_image_alignSelf,
+    marginHorizontal: FORMAT_images.F_image_marginHorizontal
+  },
+  text: {
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    left: FORMAT_text.F_text_left,
+    marginTop: FORMAT_text.F_text_marginTop
+  },
+  text2: { alignSelf: FORMAT_text.F_text_alignSelf },
+
+  buttons: {
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
+    margin: FORMAT_navButton.F_navButton_margin,
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
+    alignItems: FORMAT_navButton.F_navButton_alignItems,
+    padding: FORMAT_navButton.F_navButton_padding,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    alignSelf: "center",
-    height: 50,
-    borderRadius: 5
-  },
-  flex: { flexDirection: "row", marginVertical: 20 },
-  flex2: { flexDirection: "row" },
-  img: {
-    width: 100,
-    height: 100,
-    alignSelf: "center",
-    left: 50 / 2,
-    marginHorizontal: 10
-  },
-  img2: {
-    width: 100,
-    height: 100,
-    alignSelf: "center",
-    marginHorizontal: 10
-  },
-  text: { alignSelf: "center", left: 50 / 2, marginVertical: 10 },
-  text2: { alignSelf: "center" },
-  buttonFlex: {
-    flexDirection: "row",
-    justifyContent: "space-around"
-  },
-  buttonText: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    color: COLS.C_BG,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 5,
-    width: 70,
-    borderRadius: 5,
-    marginVertical: 50
+    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
+    width: FORMAT_navButton.F_navButton_width
   }
 });

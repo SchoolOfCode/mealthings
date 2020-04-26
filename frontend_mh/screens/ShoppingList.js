@@ -2,32 +2,8 @@ import React, { useState } from "react";
 import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_containers } from "./FORMAT_containers";
+import { FORMAT_arrow } from "./FORMAT_extraComponents";
 
 const multipleRecipes = [
   {
@@ -158,17 +134,17 @@ export default function ShoppingList({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: FORMAT_containers.F_container_flex,
     backgroundColor: COLS.C_BG,
-    padding: 5
+    justifyContent: FORMAT_containers.F_container_justifyContent
   },
 
   arrow: {
-    height: 30,
-    width: 30,
-    left: 10,
-    top: 20,
-    marginBottom: 40
+    height: FORMAT_arrow.F_arrow_height,
+    width: FORMAT_arrow.F_arrow_width,
+    left: FORMAT_arrow.F_arrow_left,
+    top: FORMAT_arrow.F_arrow_top,
+    marginBottom: FORMAT_arrow.F_arrow_marginBottom
   },
   formatting: {
     backgroundColor: COLS.C5_LIGHT_TEXT,

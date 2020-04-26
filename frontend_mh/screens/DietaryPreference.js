@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
 import { FORMAT_containers } from "./FORMAT_containers";
 import { FORMAT_switches } from "./FORMAT_extraComponents";
 import { FORMAT_headings } from "./FORMAT_headings";
@@ -131,21 +130,21 @@ export default function Preferences({ navigation, route }) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "*"
       },
-      body: JSON.stringify(dataPlus),
+      body: JSON.stringify(dataPlus)
     };
     fetch(
       "http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users",
       options
     )
-      .then((response) => {
+      .then(response => {
         return response.json();
       })
-      .then((data) => {
+      .then(data => {
         console.log("Return from RegisterScreen:", data);
       })
-      .catch((err) => {
+      .catch(err => {
         console.warn(err);
       });
     console.log("final dataplus in dietary prefs", dataPlus);
@@ -275,7 +274,7 @@ export default function Preferences({ navigation, route }) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    flex: 1,
+    flex: 1
   },
   container: {
     margin: FORMAT_containers.F_container_margin,
@@ -287,7 +286,7 @@ const styles = StyleSheet.create({
     justifyContent: FORMAT_containers.F_container_justifyContent,
     flex: FORMAT_containers.F_container_flex,
     flexDirection: FORMAT_containers.F_container_flexDirection,
-    backgroundColor: COLS.C_BG,
+    backgroundColor: COLS.C_BG
   },
   text: {
     alignSelf: FORMAT_text.F_text_alignSelf,
@@ -295,11 +294,11 @@ const styles = StyleSheet.create({
     marginTop: FORMAT_text.F_text_marginTop,
     margin: FORMAT_text.F_text_margin,
     left: FORMAT_text.F_text_left,
-    fontWeight: FORMAT_fonts.F_font_fontWeight,
+    fontWeight: FORMAT_fonts.F_font_fontWeight
   },
   switch: {
     right: FORMAT_switches.F_switch_right,
-    bottom: FORMAT_switches.F_switch_bottom,
+    bottom: FORMAT_switches.F_switch_bottom
   },
   buttons: {
     flexDirection: FORMAT_navButton.F_navButton_flexDirection,
@@ -310,7 +309,7 @@ const styles = StyleSheet.create({
     padding: FORMAT_navButton.F_navButton_padding,
     backgroundColor: COLS.C5_LIGHT_TEXT,
     borderRadius: FORMAT_navButton.F_navButton_borderRadius,
-    width: FORMAT_navButton.F_navButton_width,
+    width: FORMAT_navButton.F_navButton_width
   },
 
   heading: {
@@ -320,7 +319,7 @@ const styles = StyleSheet.create({
     fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
     bottom: FORMAT_headings.F_headingMainTitle_bottom,
     marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
-    marginTop: FORMAT_headings.F_headingMainTitle_marginTop,
+    marginTop: FORMAT_headings.F_headingMainTitle_marginTop
   },
 
   subheading: {
@@ -329,6 +328,6 @@ const styles = StyleSheet.create({
     left: FORMAT_headings.F_subHeading_left,
     alignSelf: FORMAT_headings.F_subHeading_alignSelf,
     alignItems: FORMAT_headings.F_subHeading_alignItems,
-    fontWeight: FORMAT_headings.F_subHeading_fontWeight,
-  },
+    fontWeight: FORMAT_headings.F_subHeading_fontWeight
+  }
 });

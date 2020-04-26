@@ -8,32 +8,13 @@ import {
   FlatList
 } from "react-native";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+
+import { FORMAT_containers } from "./FORMAT_containers";
+import { FORMAT_arrow } from "./FORMAT_extraComponents";
+import { FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+
+import { FORMAT_navButton } from "./FORMAT_navButton";
 
 const exampleRecipe = {
   recipe_id: "2",
@@ -83,7 +64,7 @@ export default function TodaysRecipe({ navigation }) {
   const [showIngredients, setShowIngredients] = seState(true);
 
   function change() {
-    setShowIngredients(false)
+    setShowIngredients(false);
   }
 
   const ingredientsContainer = (
@@ -158,17 +139,22 @@ export default function TodaysRecipe({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: FORMAT_containers.F_container_flex,
+    alignItems: FORMAT_containers.F_container_alignItems,
     backgroundColor: COLS.C_BG,
-    alignItems: "center"
+    justifyContent: FORMAT_containers.F_container_justifyContent,
+    margin: FORMAT_containers.F_container_margin
   },
   positioning: {
     right: 170,
     top: 20
   },
   arrow: {
-    height: 20,
-    width: 20
+    height: FORMAT_arrow.F_arrow_height,
+    width: FORMAT_arrow.F_arrow_width,
+    left: FORMAT_arrow.F_arrow_left,
+    top: FORMAT_arrow.F_arrow_top,
+    marginBottom: FORMAT_arrow.F_arrow_marginBottom
   },
   formatting: {
     marginTop: 10
@@ -183,22 +169,22 @@ const styles = StyleSheet.create({
   image: {
     width: "90%",
     height: "30%",
-    margin: 5,
-    marginBottom: 15,
+    margin: FORMAT_images.F_image_height,
+    marginBottom: FORMAT_images.F_image_marginBottom,
     marginTop: 15,
     shadowColor: "#000",
-    shadowOffset: { width: 200, height: 20 },
-    shadowOpacity: 2,
-    shadowRadius: 40,
-    elevation: 6,
-    borderWidth: 2,
-    borderRadius: 15
+    shadowOffset: FORMAT_images.F_image_shadowOffset,
+    shadowOpacity: FORMAT_images.F_image_shadowOpacity,
+    shadowRadius: FORMAT_images.F_image_shadowRadius,
+    elevation: FORMAT_images.F_image_elevation,
+    borderWidth: FORMAT_images.F_image_borderWidth,
+    borderRadius: FORMAT_images.F_image_borderRadius
   },
   buttonView: {
-    flexDirection: "row",
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
     height: 50,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
+    alignItems: FORMAT_navButton.F_navButton_alignItems
   },
   buttonText: {
     alignSelf: "center",
@@ -214,9 +200,9 @@ const styles = StyleSheet.create({
     width: "50%"
   },
   boxTitle: {
-    textAlign: "center",
-    margin: 10,
-    fontSize: 20,
+    textAlign: FORMAT_textBoxHeading.F_textBoxHeading_textAlign,
+    margin: FORMAT_textBoxHeading.F_textBoxHeading_margin,
+    fontSize: FORMAT_textBoxHeading.F_textBoxHeading_fontSize,
     backgroundColor: COLS.C_BG
   },
   ingredientsAndMethodContainer: {

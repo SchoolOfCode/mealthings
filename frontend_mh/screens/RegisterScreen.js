@@ -10,35 +10,13 @@ import {
   Modal,
   Dimensions,
   Alert,
-  Image,
+  Image
 } from "react-native";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
+import { FORMAT_containers } from "./FORMAT_containers";
+import { FORMAT_arrow } from "./FORMAT_extraComponents";
 import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_navButton } from "./FORMAT_navButton";
 
 const screenWidth = Dimensions.get("screen").width;
 
@@ -128,7 +106,7 @@ export default function Registerscreen({ navigation }) {
       email,
       birthday,
       decider,
-      mother,
+      mother
     });
     console.log(birthday);
 
@@ -137,7 +115,7 @@ export default function Registerscreen({ navigation }) {
       email_address: email,
       birthday,
       mother,
-      gender: male ? "male" : female ? "female" : "other",
+      gender: male ? "male" : female ? "female" : "other"
     };
 
     navigation.navigate("Register2", { data });
@@ -249,55 +227,61 @@ export default function Registerscreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: FORMAT_containers.F_container_flex,
+    backgroundColor: COLS.C_BG,
+    justifyContent: FORMAT_containers.F_container_justifyContent,
     width: screenWidth,
     backgroundColor: COLS.C_BG,
-    alignContent: "center",
+    alignItems: FORMAT_containers.F_container_alignItems,
     justifyContent: "center"
   },
   row: {
-    flexDirection: "row",
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection
   },
   mover: {
-    left: 110,
+    left: 110
   },
   margin: {
-    marginTop: 80,
+    marginTop: 80
   },
   arrow: {
-    width: 40,
-    height: 20,
-    marginHorizontal: 10,
-    marginVertical: 20,
+    height: FORMAT_arrow.F_arrow_height,
+    width: FORMAT_arrow.F_arrow_width,
+    left: FORMAT_arrow.F_arrow_left,
+    top: FORMAT_arrow.F_arrow_top,
+    marginBottom: FORMAT_arrow.F_arrow_marginBottom
   },
   tick: {
     width: 20,
     height: 20,
     left: 250,
-    bottom: 10,
+    bottom: 10
   },
   inputField: {
-    marginVertical: 5,
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    alignSelf: "center",
-    height: 50,
-    borderRadius: 5
+    width: FORMAT_inputField.F_inputField_width,
+    alignSelf: FORMAT_inputField.F_inputField_alignSelf,
+    alignItems: FORMAT_inputField.F_inputField_alignItems,
+    height: FORMAT_inputField.F_inputField_height,
+    borderRadius: FORMAT_inputField.F_inputField_borderRadius
   },
   buttonflex: {
-    alignSelf: "center",
     width: screenWidth * 0.7,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginVertical: 10,
-    padding: 10
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
+    alignSelf: "center",
+    padding: FORMAT_navButton.F_navButton_padding,
+    backgroundColor: COLS.C5_LIGHT_TEXT,
+    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
+    marginVertical: 20
   },
   Direction: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 80,
-    height: 30,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center"
+    width: FORMAT_navButton.F_navButton_width,
+    height: FORMAT_navButton.F_navButton_height,
+    borderRadius: FORMAT_navButton.F_inputField_borderRadius,
+    alignItems: FORMAT_navButton.F_inputField_alignItems,
+    justifyContent: FORMAT_navButton.F_inputField_justifyContent
   }
 });

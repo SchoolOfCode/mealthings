@@ -1,32 +1,13 @@
 import * as React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
+
 import {
   FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_welcomeContainer
 } from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
 import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_navButtonBackground } from "./FORMAT_navButton";
 
 export default function SplashSuccess({ navigation, route }) {
   const { dataPlusPlus } = route.params;
@@ -52,19 +33,25 @@ export default function SplashSuccess({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: FORMAT_containers.F_container_flex,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center"
+    justifyContent: FORMAT_containers.F_container_justifyContent,
+    margin: FORMAT_containers.F_container_margin
   },
   mealThingsLogo: {
-    alignItems: "center",
-    margin: "auto",
-    justifyContent: "center"
+    width: FORMAT_logo.F_logo_width,
+    height: FORMAT_logo.F_logo_height,
+    alignSelf: FORMAT_logo.F_logo_alignSelf,
+    alignItems: FORMAT_logo.F_logo_alignItems,
+    margin: FORMAT_logo.F_logo_margin,
+    justifyContent: FORMAT_logo.F_logo_justifyContent
   },
   logoCircle: {
-    width: 200,
-    height: 200,
-    borderRadius: 200,
+    left: FFORMAT_logo.F_logoCircle_left,
+    bottom: FORMAT_logo.F_logoCircle_bottom,
+    width: FORMAT_logo.F_logoCircle_width,
+    height: FORMAT_logo.F_logoCircle_height,
+    borderRadius: FORMAT_logo.F_logoCircle_borderRadius,
     backgroundColor: COLS.C_LOGO_BG
   },
   tagLine: {
@@ -75,11 +62,10 @@ const styles = StyleSheet.create({
   },
   buttonBackground: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    alignSelf: "center",
-    margin: 5,
-    borderRadius: 5,
-    padding: 15
+    width: FORMAT_navButtonBackground.F_navButtonBackground_width,
+    alignSelf: FORMAT_navButtonBackground.F_navButtonBackground_alignSelf,
+    margin: FORMAT_navButtonBackground.F_navButtonBackground_margin,
+    borderRadius: FORMAT_navButtonBackground.F_navButtonBackground_borderRadius
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
@@ -87,8 +73,8 @@ const styles = StyleSheet.create({
     padding: 5
   },
   welcomeContainer: {
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20
+    alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
+    marginTop: FORMAT_welcomeContainer.F_welcomeContainer_marginTop,
+    marginBottom: FORMAT_welcomeContainer.F_welcomeContainer_marginBottom
   }
 });

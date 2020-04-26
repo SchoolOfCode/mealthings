@@ -10,32 +10,8 @@ import {
   Dimensions
 } from "react-native";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_containers } from "./FORMAT_containers";
+import { FORMAT_navButton } from "./FORMAT_navButton";
 
 const screenWidth = Dimensions.get("screen").width;
 
@@ -81,7 +57,7 @@ export default function Registerscreen2({ navigation, route }) {
             placeholderTextColor="black"
           />
         </View>
-        <View style={styles.buttonFlex}>
+        <View style={styles.button}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={styles.buttonText}
@@ -99,46 +75,40 @@ export default function Registerscreen2({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
+    flex: FORMAT_containers.F_container_flex,
     backgroundColor: COLS.C_BG,
-    height: 1000
+    justifyContent: FORMAT_containers.F_container_justifyContent
   },
   inputField: {
-    marginVertical: 15,
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    alignSelf: "center",
-    height: 50,
-    borderRadius: 5
+    width: FORMAT_inputField.F_inputField_width,
+    alignSelf: FORMAT_inputField.F_inputField_alignSelf,
+    alignItems: FORMAT_inputField.F_inputField_alignItems,
+    height: FORMAT_inputField.F_inputField_height,
+    borderRadius: FORMAT_inputField.F_inputField_borderRadius
   },
   headerC: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     height: 60
   },
-  formatting: {
-    alignSelf: "center"
-  },
-  buttonFlex: {
-    flexDirection: "row",
-    width: screenWidth * 0.5,
-    alignItems: "center",
+  button: {
+    width: screenWidth * 0.7,
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
     alignSelf: "center",
-    justifyContent: "space-between"
+    padding: FORMAT_navButton.F_navButton_padding,
+    backgroundColor: COLS.C5_LIGHT_TEXT,
+    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
+    marginVertical: 20
   },
   buttonText: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     padding: 5,
     justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 5,
+    alignItems: FORMAT_navButton.F_navButton_alignItems,
+    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
     marginVertical: 3,
     width: 80
-  },
-  buttonFormat: {
-    flexDirection: "row",
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 80,
-    alignSelf: "center",
-    borderRadius: 5,
-    justifyContent: "space-between"
   }
 });

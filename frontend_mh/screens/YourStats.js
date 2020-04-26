@@ -2,32 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+
+import { FORMAT_containers } from "./FORMAT_containers";
+
 import { Pedometer } from "expo-sensors";
 
 export default function YourStats() {
@@ -54,29 +31,29 @@ export default function YourStats() {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    margin: 5,
-    justifyContent: "space-around",
+    flex: FORMAT_containers.F_container_flex,
+    alignItems: FORMAT_containers.F_container_alignItems,
     backgroundColor: COLS.C_BG,
-    flex: 1,
+    justifyContent: FORMAT_containers.F_container_justifyContent,
+    margin: FORMAT_containers.F_container_margin
   },
   graph1: {
     width: "75%",
     height: "25%",
-    backgroundColor: COLS.C_YELLOW,
+    backgroundColor: COLS.C_YELLOW
   },
   graph2: {
     width: "75%",
     height: "25%",
-    backgroundColor: COLS.C5_LIGHT_TEXT,
+    backgroundColor: COLS.C5_LIGHT_TEXT
   },
   graph3: {
     width: "75%",
     height: "25%",
-    backgroundColor: COLS.C_LOGO_BG,
+    backgroundColor: COLS.C_LOGO_BG
   },
   text: {
-    textAlign: "center",
+    textAlign: "center"
   },
   icon: { textAlign: "center", alignSelf: "center" },
   quoteContainer: {
@@ -84,16 +61,16 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C4_DARK_TEXT,
     borderWidth: 2,
     padding: 5,
-    margin: 5,
+    margin: 5
   },
   quote: {
     textAlign: "center",
     color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   quoteAuthor: {
     textAlign: "center",
     color: COLS.C6_WHITE_TEXT,
-    fontWeight: "normal",
-  },
+    fontWeight: "normal"
+  }
 });
