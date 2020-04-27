@@ -189,6 +189,7 @@ export default function HomeScreen({ navigation }) {
 
   // Get new recipes and load into state
   async function reRequestRecipes() {
+    console.log("reRequestRecipes triggered...");
     const res = await fetch(
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
     );
