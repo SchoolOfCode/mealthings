@@ -63,6 +63,7 @@ export default function HomeScreen({ navigation }) {
   const userID = _retrieveData("userID") || 1;
 
   async function getLastRecipeDate() {
+    console.log("Fetching last recipe date from remote server");
     const res = await fetch(
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
     );
@@ -71,6 +72,7 @@ export default function HomeScreen({ navigation }) {
   }
 
   async function getTotalNoRecipes() {
+    console.log("Fetching total number of recipes from remote server");
     const res = await fetch(
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes?countOnly=true`
     );
@@ -101,10 +103,14 @@ export default function HomeScreen({ navigation }) {
         }
         // If don't need new recipes, try to get them from local storage
         const localCopyOfRecipes = await _retrieveData("userRecipes");
-        // If not on local storage, get from database
-        if (localCopyOfRecipes.length < 1) {
+        // If not in local storage, get from database
+        if (!localCopyOfRecipes || localCopyOfRecipes.length < 1) {
+          console.log(
+            "localCopyOfRecipes not found or length shorter than 1. Re-requesting from remote server..."
+          );
           reRequestRecipes();
         } else {
+          console.log("Found local copy of recipes. Setting state...");
           setRecipeList(localCopyOfRecipes);
         }
       }
@@ -114,6 +120,7 @@ export default function HomeScreen({ navigation }) {
 
   // Get new recipes and load into state
   async function getNewRecipes() {
+    console.log("getNewRecipes triggered...");
     let last_week_food = [];
     const res = await fetch(
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
@@ -138,6 +145,7 @@ export default function HomeScreen({ navigation }) {
     });
     tempNumbers.sort(() => Math.random() - 0.5);
     const randNums = tempNumbers.slice(0, 14);
+    console.log("Random recipe IDs chosen:", randNums);
     // Get the recipes from the database
     const fetchData = (URI) => {
       return fetch(URI)
@@ -155,10 +163,10 @@ export default function HomeScreen({ navigation }) {
       );
     });
     Promise.all(requests).then((arrayWithData) => {
+      console.log("All promises resolved. Setting state...");
       setRecipeList(arrayWithData);
       // Save recipes to local storage
       _storeRecipes(arrayWithData);
-      console.log("retrieved local recipes:");
     });
     // Send PATCH to set last_weeks_recipes to the current this_weeks_recipes and this_weeks_recipes to the newly generated recipes (currently in variable randNums), and lastRecipeFetchDate to be today
     const patchResponse = await fetch(
