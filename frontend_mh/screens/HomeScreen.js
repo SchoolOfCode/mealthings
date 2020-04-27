@@ -215,7 +215,7 @@ export default function HomeScreen({ navigation }) {
       );
     });
     Promise.all(requests).then((arrayWithData) => {
-      console.log("re-requested recipes");
+      console.log("Resolved all promises for re-requested recipes");
       setRecipeList(arrayWithData);
       // Save recipes to local storage
       _storeRecipes(arrayWithData);
