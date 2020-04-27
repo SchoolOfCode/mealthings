@@ -24,6 +24,7 @@ async function populateRecipes() {
         cooking_difficulty,
         cooking_time_mins,
         method,
+        url,
       }) => {
         const res = await query(
           `INSERT INTO recipes (
@@ -39,7 +40,8 @@ async function populateRecipes() {
               fibre,
               cooking_difficulty,
               cooking_time_mins,
-              method
+              method,
+              url
                      ) VALUES (
                        $1,
                        $2,
@@ -53,7 +55,8 @@ async function populateRecipes() {
                        $10,
                        $11,
                        $12, 
-                       $13
+                       $13,
+                       $14
                      ) RETURNING *`,
           [
             name,
@@ -69,6 +72,7 @@ async function populateRecipes() {
             cooking_difficulty,
             cooking_time_mins,
             method,
+            url,
           ]
         );
         return res.rows[0];
