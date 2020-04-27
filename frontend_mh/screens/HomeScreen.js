@@ -115,7 +115,10 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>
         <View style={styles.logoCircle}>
-          <Image source={require("../assets/images/Mealthings.png")} />
+          <Image
+            style={styles.mealThingsLogo}
+            source={require("../assets/images/Mealthings.png")}
+          />
         </View>
         <Text style={styles.tagLine}>Eat Well. Feel Amazing.</Text>
       </View>
@@ -152,6 +155,7 @@ const styles = StyleSheet.create({
   mealThingsLogo: {
     alignItems: FORMAT_logo.F_logo_alignItems,
     margin: FORMAT_logo.F_logo_margin,
+
     justifyContent: FORMAT_logo.F_logo_justifyContent
   },
   logoCircle: {
@@ -175,8 +179,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: COLS.C4_DARK_TEXT,
-    textAlign: FORMAT_navButtonText.F_navButtonBackground_textAlign,
-    padding: FORMAT_navButtonBackground.F_navButtonBackground_padding
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    padding: FORMAT_navButtonText.F_navButtonText_padding
   },
   welcomeContainer: {
     alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,

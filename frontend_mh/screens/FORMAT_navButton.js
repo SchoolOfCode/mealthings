@@ -7,7 +7,7 @@ const FORMAT_navButton = {
   F_navButton_height: 10,
   F_navButton_padding: 10,
   F_navButton_borderRadius: 5,
-  F_navButton_margin: 10,
+  F_navButton_margin: 5,
   F_navButton_marginTop: "20%",
   F_navButton_marginVertical: 10,
   F_navButton_marginBottom: 10,

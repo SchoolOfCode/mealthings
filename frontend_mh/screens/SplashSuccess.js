@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     justifyContent: FORMAT_logo.F_logo_justifyContent
   },
   logoCircle: {
-    left: FFORMAT_logo.F_logoCircle_left,
+    left: FORMAT_logo.F_logoCircle_left,
     bottom: FORMAT_logo.F_logoCircle_bottom,
     width: FORMAT_logo.F_logoCircle_width,
     height: FORMAT_logo.F_logoCircle_height,

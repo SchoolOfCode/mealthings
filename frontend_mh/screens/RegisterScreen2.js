@@ -12,6 +12,7 @@ import {
 import { COLS } from "./COLS";
 import { FORMAT_containers } from "./FORMAT_containers";
 import { FORMAT_navButton } from "./FORMAT_navButton";
+import { FORMAT_inputField } from "./FORMAT_inputField";
 
 const screenWidth = Dimensions.get("screen").width;
 

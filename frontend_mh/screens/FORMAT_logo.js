@@ -9,12 +9,12 @@ const FORMAT_logo = {
   F_logo_width: 60,
   F_logo_height: 60,
   F_logo_alignSelf: "center",
-  F_logoCircle_width: 200,
-  F_logoCircle_height: 200,
+  F_logoCircle_width: 210,
+  F_logoCircle_height: 210,
   F_logoCircle_left: 170,
   F_logoCircle_bottom: 20,
   F_logoCircle_borderRadius: 200,
-  F_logoCircle_backgroundColor: COLS.C_LOGO_BG,
+  F_logoCircle_backgroundColor: COLS.C_LOGO_BG
 };
 
 export { FORMAT_logo };

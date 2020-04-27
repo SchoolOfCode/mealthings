@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     margin: FORMAT_containers.F_container_margin
   },
   circle: {
-    left: FFORMAT_logo.F_logoCircle_left,
+    left: FORMAT_logo.F_logoCircle_left,
     bottom: FORMAT_logo.F_logoCircle_bottom,
     width: FORMAT_logo.F_logoCircle_width,
     height: FORMAT_logo.F_logoCircle_height,

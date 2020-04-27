@@ -8,6 +8,7 @@ import { FORMAT_background } from "./FORMAT_background";
 import { FORMAT_notes } from "./FORMAT_extraComponents";
 import { FORMAT_logo } from "./FORMAT_logo";
 import { FORMAT_navButton } from "./FORMAT_navButton";
+import { FORMAT_todaysMeal } from "./FORMAT_extraComponents";
 
 export default function App({ navigation }) {
   return (
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: FORMAT_logo.F_logo_justifyContent
   },
   logoCircle: {
-    left: FFORMAT_logo.F_logoCircle_left,
+    left: FORMAT_logo.F_logoCircle_left,
     bottom: FORMAT_logo.F_logoCircle_bottom,
     width: FORMAT_logo.F_logoCircle_width,
     height: FORMAT_logo.F_logoCircle_height,
@@ -119,12 +120,12 @@ const styles = StyleSheet.create({
     fontSize: FORMAT_notes.F_note_widthF_note_fontSize
   },
   todaysMeal: {
-    top: FORMAT_todaysMealF_todaysMeal_top,
-    width: FORMAT_todaysMealF_todaysMeal_width,
-    padding: FORMAT_todaysMealF_todaysMeal_padding,
+    top: FORMAT_todaysMeal.F_todaysMeal_top,
+    width: FORMAT_todaysMeal.F_todaysMeal_width,
+    padding: FORMAT_todaysMeal.F_todaysMeal_padding,
     backgroundColor: COLS.C4_DARK_TEXT,
-    justifyContent: FORMAT_todaysMealF_todaysMeal_justifyContent,
-    alignSelf: FORMAT_todaysMealF_todaysMeal_alignSelf,
-    alignItems: FORMAT_todaysMealF_todaysMeal_alignItems
+    justifyContent: FORMAT_todaysMeal.F_todaysMeal_justifyContent,
+    alignSelf: FORMAT_todaysMeal.F_todaysMeal_alignSelf,
+    alignItems: FORMAT_todaysMeal.F_todaysMeal_alignItems
   }
 });
