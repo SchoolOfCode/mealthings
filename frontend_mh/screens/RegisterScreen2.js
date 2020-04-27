@@ -51,6 +51,7 @@ export default function Registerscreen2({ navigation, route }) {
           <TextInput
             style={styles.inputField}
             placeholder="Password"
+            keyboardType="password"
             onChangeText={passwordHandler}
             placeholderTextColor="black"
           />

@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState, Component, useEffect } from "react";
 
 import { CheckBox } from "react-native-elements";
 import {
@@ -11,6 +11,7 @@ import {
   Dimensions,
   Alert,
   Image,
+  Button,
 } from "react-native";
 import { COLS } from "./COLS";
 
@@ -26,7 +27,8 @@ export default function Registerscreen({ navigation }) {
   const [other, setOther] = useState(false);
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
-  const [decider, setDecider] = useState();
+  const [gender, setGender] = useState(null);
+  const [confirm, setConfirm] = useState();
   const [display, setDisplay] = useState();
 
   function nameInput(enteredText) {
@@ -34,10 +36,6 @@ export default function Registerscreen({ navigation }) {
   }
 
   function emailInput(enteredText) {
-    function setEmail(enteredtext) {
-      var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-      return emailPattern.test(enteredtext);
-    }
     setEmail(enteredText);
   }
   //NOTES ON REGEX FOR REFERENCE
@@ -66,55 +64,80 @@ export default function Registerscreen({ navigation }) {
     }
   }
 
+  function otherHandler() {
+    if (other == false) {
+      setOther(true);
+      setMale(false);
+      setFemale(false);
+    } else if (other == true) {
+      setOther(false);
+    }
+  }
+
   function maleHandler() {
     if (male == false) {
       setMale(true);
-    } else if (male == true) {
+      setOther(false);
+      setFemale(false);
+    } else if (male == false) {
       setMale(false);
     }
   }
   function femaleHandler() {
     if (female == false) {
       setFemale(true);
+      setOther(false);
+      setMale(false);
     } else if (female == true) {
       setFemale(false);
     }
   }
-  function otherHandler() {
-    if (other == false) {
-      setOther(true);
-    } else if (other == true) {
-      setOther(false);
+  function confirmChoices() {
+    if (other == true) {
+      setGender("Other");
+    } else if (female == true) {
+      setGender("female");
+    } else {
+      setGender("Male");
+    }
+    if (email == /^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/) {
+      setEmail(email);
+    } else if (email == "" || null) {
+      Alert.alert("enter a correct email address");
+    }
+    if ((gender, name, email, DOB, DOB2, DOB3 == null)) {
+      setConfirm(false);
+      console.log(gender, name, email, DOB, DOB2, DOB3);
+    } else {
+      setConfirm(true);
+      console.log((gender, name, email, DOB, DOB2, DOB3));
     }
   }
 
   function SubmitHandler() {
-    if (other == false || male == false) {
-      setDecider("Female");
-    } else if (male == false || female == false) {
-      setDecider("Male");
-    } else setDecider("");
+    if (confirm == true) {
+      setDisplay("Submitted");
+      const birthday = DOB + "-" + DOB2 + "-" + DOB3;
+      console.log("Submitted:", {
+        name,
+        email,
+        birthday,
+        gender,
+        mother,
+      });
 
-    setDisplay("Submitted");
-    const birthday = DOB + "-" + DOB2 + "-" + DOB3;
-    console.log("Submitted:", {
-      name,
-      email,
-      birthday,
-      decider,
-      mother,
-    });
-    console.log(birthday);
-
-    const data = {
-      name,
-      email_address: email,
-      birthday,
-      mother,
-      gender: male ? "male" : female ? "female" : "other",
-    };
-
-    navigation.navigate("Register2", { data });
+      const data = {
+        name,
+        email_address: email,
+        birthday,
+        mother,
+        gender,
+      };
+      console.log(data);
+      navigation.navigate("Register2", { data });
+    } else {
+      Alert.alert("ensure all data fields are complete");
+    }
   }
 
   return (
@@ -124,7 +147,7 @@ export default function Registerscreen({ navigation }) {
           <TextInput
             style={styles.inputField}
             onChangeText={nameInput}
-            placeholder="Name"
+            placeholder="Namett"
             placeholderTextColor="black"
             isRequired
           />
@@ -132,6 +155,7 @@ export default function Registerscreen({ navigation }) {
             style={styles.inputField}
             placeholder="Email"
             onChangeText={emailInput}
+            keyboardType="email-address"
             placeholderTextColor="black"
           />
           <View style={styles.row}>
@@ -161,26 +185,6 @@ export default function Registerscreen({ navigation }) {
             />
           </View>
         </View>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.mover} onPress={femaleHandler}>
-            <Image
-              style={styles.arrow}
-              source={require("../assets/images/female.png")}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.mover} onPress={maleHandler}>
-            <Image
-              style={styles.arrow}
-              source={require("../assets/images/male.png")}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.mover} onPress={otherHandler}>
-            <Image
-              style={styles.arrow}
-              source={require("../assets/images/other.png")}
-            ></Image>
-          </TouchableOpacity>
-        </View>
 
         <View styles={styles.position}>
           <Text style={styles.motherText}>New Mother? </Text>
@@ -200,6 +204,60 @@ export default function Registerscreen({ navigation }) {
             checked={mother}
             onPress={motherInput}
           />
+          <Text> Select Gender</Text>
+          <View>
+            <Text style={styles.motherText}>Female </Text>
+            <CheckBox
+              checkedIcon={
+                <Image
+                  style={styles.tick}
+                  source={require("../assets/images/check-box.png")}
+                />
+              }
+              uncheckedIcon={
+                <Image
+                  style={styles.tick}
+                  source={require("../assets/images/blank-square.png")}
+                />
+              }
+              checked={female}
+              onPress={femaleHandler}
+            />
+            <Text style={styles.motherText}>Male </Text>
+            <CheckBox
+              checkedIcon={
+                <Image
+                  style={styles.tick}
+                  source={require("../assets/images/check-box.png")}
+                />
+              }
+              uncheckedIcon={
+                <Image
+                  style={styles.tick}
+                  source={require("../assets/images/blank-square.png")}
+                />
+              }
+              checked={male}
+              onPress={maleHandler}
+            />
+            <Text style={styles.motherText}> Other </Text>
+            <CheckBox
+              checkedIcon={
+                <Image
+                  style={styles.tick}
+                  source={require("../assets/images/check-box.png")}
+                />
+              }
+              uncheckedIcon={
+                <Image
+                  style={styles.tick}
+                  source={require("../assets/images/blank-square.png")}
+                />
+              }
+              checked={other}
+              onPress={otherHandler}
+            />
+          </View>
         </View>
         <View style={styles.buttonflex}>
           <View>
@@ -211,6 +269,7 @@ export default function Registerscreen({ navigation }) {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonText}>
+            <Button title="click" onPress={confirmChoices} />
             <TouchableOpacity style={styles.Direction} onPress={SubmitHandler}>
               <Text>Next</Text>
             </TouchableOpacity>

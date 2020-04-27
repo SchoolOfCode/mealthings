@@ -54,10 +54,10 @@ function Item({ title }) {
 }
 
 export default function TodaysRecipe({ navigation }) {
-  const [showIngredients, setShowIngredients] = seState(true);
+  const [showIngredients, setShowIngredients] = setState(true);
 
   function change() {
-    setShowIngredients(false)
+    setShowIngredients(false);
   }
 
   const ingredientsContainer = (

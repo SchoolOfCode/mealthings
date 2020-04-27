@@ -151,6 +151,11 @@ export default function App(props) {
               component={mealplanner}
               options={{ title: "Mealplanner" }}
             />
+            <Stack.Screen
+              name="LoginPage"
+              component={LoginPage}
+              options={{ title: "LoginPage" }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

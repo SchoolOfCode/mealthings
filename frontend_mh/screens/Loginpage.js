@@ -11,9 +11,10 @@ import {
 } from "react-native";
 import { COLS } from "./COLS";
 
-export default function App() {
+export default function App({ navigation }) {
   const [name, setName] = useState();
   const [password, setPassword] = useState();
+  const [post, setPost] = useState();
 
   function tracked(enteredText) {
     setName(enteredText);
@@ -23,7 +24,7 @@ export default function App() {
   }
   function handleSubmit({ navigation }) {
     setPost(name, password);
-    const data = { name, email };
+    const data = { name, password };
     const options = {
       method: "POST",
       headers: {
@@ -42,7 +43,7 @@ export default function App() {
       .then((data) => {
         console.log("this is", data);
       });
-    navigation.navigate("Landingpage");
+    navigation.navigate("LandingPage");
   }
   return (
     <View style={styles.container}>
@@ -70,7 +71,10 @@ export default function App() {
           placeholderTextColor="white"
         />
 
-        <TouchableOpacity style={styles.button} onPressText={handleSubmit}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={(handleSubmit, () => navigation.navigate("LandingPage"))}
+        >
           <Text>Login</Text>
         </TouchableOpacity>
       </View>
