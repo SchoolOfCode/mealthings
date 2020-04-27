@@ -41,7 +41,7 @@ throw new Error(`incorrect query for FoodIntake`)
 }
 await actions.getFoodIntake("string", "string", "string", "number","boolean","string",mockQuery)
 
-expect(mockQuery.mock.calls[])
+expect(mockQuery.mock.calls)
 
   });
   
