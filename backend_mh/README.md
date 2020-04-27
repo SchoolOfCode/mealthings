@@ -1,4 +1,19 @@
-# ToDo list
+//PLAN: SET UP AUTH COOKIES
+//http://localhost:5000/posts?name=hannah
+//http://localhost:5000/logout
+
+~~Install Cookie-Parser~~
+~~Add a cookie using response on all requests/set url paths~~
+~~return a cookie as object, attributes, expire, send~~
+
+//PLAN
+//1. make a route for login
+//2. set a cookie based on the query string of name
+//3. 1 route for logging in with the query string
+//4. Second route for post where you post to the name
+//5. Third to clear the cookie
+
+//PLAN: CREATE EXPRESS SERVER
 
 - ~~Create db:reset script~~
 
