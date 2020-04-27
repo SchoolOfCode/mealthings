@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { AsyncStorage } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -22,6 +22,8 @@ import mealplanner from "./Mealplanner";
 const Stack2 = createStackNavigator();
 export const RecipeContext = createContext({});
 
+AsyncStorage.clear();
+
 const _storeRecipes = async (recipeArray) => {
   try {
     const now = new Date();
@@ -30,7 +32,7 @@ const _storeRecipes = async (recipeArray) => {
     await AsyncStorage.setItem("recipeSetDate", JSON.stringify(now));
     console.log("Sucessfullly stored data in AsyncStorage");
   } catch (error) {
-    console.log("Failed to store recipes in local storage ");
+    console.log("Failed to store recipes in local storage.");
     console.warn(error);
   }
 };
@@ -40,17 +42,22 @@ const _retrieveData = async (key) => {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
       console.log(
-        "retrieved",
+        "Retrieved",
         key,
         "from AsyncStorage, returning value:",
         value
       );
       return JSON.parse(value);
     }
+    console.log(
+      "Returned null when trying to get key:" + key + " from local storage."
+    );
     return null;
   } catch (error) {
     console.log(
-      "Threw an error trying to get key:" + key + " from local storage."
+      "Threw an error trying to get key:" +
+        key +
+        " from local storage. Returning null."
     );
     console.warn(error);
     return null;
@@ -59,15 +66,21 @@ const _retrieveData = async (key) => {
 
 export default function HomeScreen({ navigation }) {
   const [recipeList, setRecipeList] = useState([]);
-
-  const userID = _retrieveData("userID") || 1;
+  const [userID, setUserID] = useState(null);
 
   async function getLastRecipeDate() {
-    console.log("Fetching last recipe date from remote server");
+    console.log(
+      "Fetching last recipe date from remote server for userID:",
+      userID
+    );
     const res = await fetch(
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
     );
     const data = await res.json();
+    console.log(
+      "Got data for getLastRecipeDate",
+      data.payload[0].last_date_meals_requested
+    );
     return data.payload[0].last_date_meals_requested;
   }
 
@@ -77,62 +90,97 @@ export default function HomeScreen({ navigation }) {
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes?countOnly=true`
     );
     const data = await res.json();
-    return data.payload.count;
+    return parseInt(data.payload.count);
+  }
+
+  async function getUserIdAsync() {
+    const localStorageUserID = (await _retrieveData("userID")) || 3; // TODO change this from a constant to redirect to login/register
+    console.log("localStorageUserID:", localStorageUserID);
+    setUserID(localStorageUserID);
+  }
+
+  // Get userID if null
+  if (!userID) {
+    console.log(
+      "userID state is falsy; trying to get userID from local storage..."
+    );
+    getUserIdAsync();
   }
 
   // Get recipes
   useEffect(() => {
+    console.log("Starting useEffect in HomeScreen");
     async function runGetRecipes() {
-      if (recipeList.length < 1) {
+      if (recipeList.length < 14) {
+        console.log("Recipe list is less than 1 in length");
         // Try to get of last recipes from local storage
-        let last_date_meals_requested = new Date(
-          _retrieveData("recipeSetDate")
+        const last_date_meals_requested_temp = await _retrieveData(
+          "recipeSetDate"
         );
-        // If date of last recipes not in local storage, get from server
-        if (!last_date_meals_requested) {
-          const last_date_meals_requested_temp = await getLastRecipeDate();
+        let last_date_meals_requested;
+        // Try to get last date meals requested
+        if (last_date_meals_requested_temp) {
+          console.log(
+            "inside if, last_date_meals_requested_temp",
+            last_date_meals_requested_temp
+          );
           last_date_meals_requested = new Date(last_date_meals_requested_temp);
+        } else {
+          // If date of last recipes not in local storage, get from server
+          const last_date_meals_requested_temp2 = await getLastRecipeDate();
+          last_date_meals_requested = new Date(last_date_meals_requested_temp2);
         }
+        console.log("last_date_meals_requested", last_date_meals_requested);
         const now = new Date();
         const timeDiffInDays =
           (now.getTime() - last_date_meals_requested.getTime()) /
           (1000 * 3600 * 24); // 1000*3600*24 = miliseconds in a day.
         // If need new recipes, get new recipes.
         if (timeDiffInDays > 6.5) {
-          getNewRecipes();
-        }
-        // If don't need new recipes, try to get them from local storage
-        const localCopyOfRecipes = await _retrieveData("userRecipes");
-        // If not in local storage, get from database
-        if (!localCopyOfRecipes || localCopyOfRecipes.length < 1) {
           console.log(
-            "localCopyOfRecipes not found or length shorter than 1. Re-requesting from remote server..."
+            `Last date: ${last_date_meals_requested}, today's date: ${now}, timeDiffInDays:${timeDiffInDays}`
           );
-          reRequestRecipes();
+          getNewRecipes(userID);
         } else {
-          console.log("Found local copy of recipes. Setting state...");
-          setRecipeList(localCopyOfRecipes);
+          // If don't need new recipes, try to get them from local storage
+          const localCopyOfRecipes = await _retrieveData("userRecipes");
+          // If not in local storage, get from database
+          if (!localCopyOfRecipes || localCopyOfRecipes.length < 1) {
+            console.log(
+              "localCopyOfRecipes not found or length shorter than 1. Re-requesting from remote server..."
+            );
+            reRequestRecipes(userID);
+          } else {
+            console.log("Found local copy of recipes. Setting state...");
+            setRecipeList(localCopyOfRecipes);
+          }
         }
       }
     }
     runGetRecipes();
-  }, []);
+  }, [userID]);
 
   // Get new recipes and load into state
-  async function getNewRecipes() {
-    console.log("getNewRecipes triggered...");
+  async function getNewRecipes(userID2) {
+    const uID = userID || userID2 || 2;
+    console.log("getNewRecipes triggered. userID2:", uID);
     let last_week_food = [];
     const res = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
+      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${uID}`
     );
     const data = await res.json();
+    console.log(
+      "Got the result of getNewRecipes:",
+      data.payload[0].this_weeks_meals
+    );
     last_week_food = data.payload[0].this_weeks_meals
       .replace(/"|{|}/g, "")
       .split(",")
       .map((x) => +x);
     // Get total number of recipes
     const totalNumRecipes = (await getTotalNoRecipes()) || 50;
-    // Get 14 random numbers with no duplicates
+    console.log("totalNumber of recipes", totalNumRecipes);
+    // Get 14 random numbers with no duplicates of last weeks meals
     const tempNumbers = [...Array(totalNumRecipes).keys()].map(
       (num) => num + 1
     );
@@ -145,7 +193,6 @@ export default function HomeScreen({ navigation }) {
     });
     tempNumbers.sort(() => Math.random() - 0.5);
     const randNums = tempNumbers.slice(0, 14);
-    console.log("Random recipe IDs chosen:", randNums);
     // Get the recipes from the database
     const fetchData = (URI) => {
       return fetch(URI)
@@ -169,6 +216,14 @@ export default function HomeScreen({ navigation }) {
       _storeRecipes(arrayWithData);
     });
     // Send PATCH to set last_weeks_recipes to the current this_weeks_recipes and this_weeks_recipes to the newly generated recipes (currently in variable randNums), and lastRecipeFetchDate to be today
+    console.log(
+      "json body object: ",
+      JSON.stringify({
+        last_weeks_meals: last_week_food,
+        this_weeks_meals: randNums,
+        last_date_meals_requested: new Date().toISOString(),
+      })
+    );
     const patchResponse = await fetch(
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`,
       {
@@ -188,16 +243,19 @@ export default function HomeScreen({ navigation }) {
   }
 
   // Get new recipes and load into state
-  async function reRequestRecipes() {
+  async function reRequestRecipes(userIDNotState) {
     console.log("reRequestRecipes triggered...");
+    console.log("userID:", userIDNotState);
     const res = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
+      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userIDNotState}`
     );
     const data = await res.json();
+    console.log("reRequested data arrived:", data);
     const this_week_food = data.payload[0].this_weeks_meals
       .replace(/"|{|}/g, "")
       .split(",")
       .map((x) => +x);
+    console.log("This weeks food:", this_week_food);
     // Get the recipes from the database
     const fetchData = (URI) => {
       return fetch(URI)
@@ -222,13 +280,9 @@ export default function HomeScreen({ navigation }) {
     });
   }
 
-  const recipeList2 = useMemo(() => {
-    return recipeList;
-  }, [recipeList]);
-
   return (
     <NavigationContainer independent={true}>
-      <RecipeContext.Provider value={recipeList2}>
+      <RecipeContext.Provider value={recipeList}>
         <Stack2.Navigator initialRouteName="Home2">
           <Stack2.Screen
             name="Home2"
