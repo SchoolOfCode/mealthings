@@ -16,7 +16,8 @@ async function createRecipes() {
       fibre TEXT,
       cooking_difficulty TEXT,
       cooking_time_mins INT,
-      method TEXT
+      method TEXT,
+      url TEXT,
   )`);
   console.log(res);
 }
