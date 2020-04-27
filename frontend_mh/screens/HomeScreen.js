@@ -30,6 +30,7 @@ const _storeRecipes = async (recipeArray) => {
     await AsyncStorage.setItem("recipeSetDate", JSON.stringify(now));
     console.log("Sucessfullly stored data in AsyncStorage");
   } catch (error) {
+    console.log("Failed to store recipes in local storage ");
     console.warn(error);
   }
 };
@@ -48,6 +49,9 @@ const _retrieveData = async (key) => {
     }
     return null;
   } catch (error) {
+    console.log(
+      "Threw an error trying to get key:" + key + " from local storage."
+    );
     console.warn(error);
     return null;
   }
