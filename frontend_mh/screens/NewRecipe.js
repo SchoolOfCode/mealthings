@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -6,15 +6,16 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
 import { COLS } from "./COLS";
+import { RecipeContext } from "./HomeScreen";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -24,7 +25,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -33,7 +34,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -54,8 +55,8 @@ const data = {
     "Steam for approx. 5 min (depending on cabbage type) until cooked but still crunchy",
     "Remove from heat and drain. ",
     "Add the butter and gently stir cabbage until butter melts",
-    "Serve immediatly with remaining caraway seeds and several grinds of black pepper"
-  ]
+    "Serve immediatly with remaining caraway seeds and several grinds of black pepper",
+  ],
 };
 
 const multipleRecipes = [
@@ -76,8 +77,8 @@ const multipleRecipes = [
       "Steam for approx. 5 min (depending on cabbage type) until cooked but still crunchy",
       "Remove from heat and drain. ",
       "Add the butter and gently stir cabbage until butter melts",
-      "Serve immediatly with remaining caraway seeds and several grinds of black pepper"
-    ]
+      "Serve immediatly with remaining caraway seeds and several grinds of black pepper",
+    ],
   },
   {
     recipe_id: "2",
@@ -88,7 +89,7 @@ const multipleRecipes = [
       "Beef tomato",
       "Wholemeal bread",
       "Freshly churned butter",
-      "Mayonaise"
+      "Mayonaise",
     ],
     ingredientsQuantities: [
       "2 rashers",
@@ -96,7 +97,7 @@ const multipleRecipes = [
       "1",
       "2 slices",
       "",
-      ""
+      "",
     ],
     calories: "286",
     protein: "20",
@@ -111,8 +112,8 @@ const multipleRecipes = [
       "Slice the tomato thinly",
       "Fry the bacon until crispy",
       "Tear the lettuce roughly by hand",
-      "layer the tomato slices, lettuce and bacon on the bread and serve as a sandwhich."
-    ]
+      "layer the tomato slices, lettuce and bacon on the bread and serve as a sandwhich.",
+    ],
   },
   {
     recipe_id: "3",
@@ -128,8 +129,8 @@ const multipleRecipes = [
     method: [
       "Mix ingredients in a saucepan",
       "Heat ingredients over a very low heat, stirring gently until milk is fully absorbed",
-      "Serve while hot"
-    ]
+      "Serve while hot",
+    ],
   },
   {
     recipe_id: "4",
@@ -145,9 +146,9 @@ const multipleRecipes = [
     method: [
       "Mix ingredients in a saucepan",
       "Heat ingredients over a low heat, stirring gently until milk is fully absorbed",
-      "Serve while hot"
-    ]
-  }
+      "Serve while hot",
+    ],
+  },
 ];
 
 function recipeCard(recipeObject) {
@@ -182,6 +183,7 @@ function recipeCard(recipeObject) {
 const screenWidth = Dimensions.get("window").width;
 
 export default function NewRecipe({ navigation }) {
+  const multipleRecipes2 = useContext(RecipeContext);
   return (
     <View style={styles.container}>
       <View style={styles.positioning}>
@@ -218,7 +220,7 @@ export default function NewRecipe({ navigation }) {
         <AntDesign name="arrowdown" size={32} color="black" />
       </View>
       <ScrollView contentContainerStyle={styles.moreChoicesContainer}>
-        {multipleRecipes.map(recipe => recipeCard(recipe))}
+        {multipleRecipes2.map((recipe) => recipeCard(recipe))}
       </ScrollView>
     </View>
   );
@@ -228,15 +230,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    alignItems: "center"
+    alignItems: "center",
   },
   positioning: {
     right: 170,
-    top: 20
+    top: 20,
   },
   arrow: {
     height: 20,
-    width: 20
+    width: 20,
   },
 
   mainTitle: {
@@ -244,12 +246,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     bottom: 8,
-    marginBottom: 10
+    marginBottom: 10,
   },
   mainImage: {
     marginTop: 10,
     width: screenWidth * 0.8,
-    height: screenWidth * 0.4
+    height: screenWidth * 0.4,
   },
   mainRecipeInfo: {
     width: screenWidth,
@@ -259,10 +261,10 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingLeft: screenWidth * 0.1,
     paddingRight: screenWidth * 0.1,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   infoTextLine: {
-    marginTop: 5
+    marginTop: 5,
   },
   swipeForMoreBar: {
     flexDirection: "row",
@@ -270,14 +272,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_LOGO_BG,
     width: screenWidth,
     paddingLeft: screenWidth * 0.1,
-    paddingRight: screenWidth * 0.1
+    paddingRight: screenWidth * 0.1,
   },
   moreChoicesContainer: {
     flexWrap: "wrap",
     width: screenWidth * 0.8,
     backgroundColor: COLS.C_BG,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   recipeCardContainer: {
     width: 150,
@@ -289,33 +291,33 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 200, height: 20 },
     shadowOpacity: 2,
     shadowRadius: 40,
-    elevation: 7
+    elevation: 7,
   },
   recipeCardImage: {
     width: "100%",
-    height: 100
+    height: 100,
   },
   recipeCardTextContainer: {
     width: "100%",
     marginTop: 5,
-    padding: 5
+    padding: 5,
   },
   recipeCardTitle: {
     fontSize: 12,
     textAlign: "center",
     alignSelf: "center",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   recipeCardCookingTime: {
     fontSize: 12,
     alignItems: "center",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   recipeCardDifficulty: {
     fontSize: 12,
     alignItems: "center",
     marginTop: 5,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   icons: {
     alignSelf: "flex-end",
@@ -324,6 +326,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_RED,
     borderRadius: 100,
     borderWidth: 10,
-    borderColor: COLS.C_RED
-  }
+    borderColor: COLS.C_RED,
+  },
 });

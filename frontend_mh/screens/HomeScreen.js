@@ -1,42 +1,62 @@
-import React, { useState, useEffect } from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe,
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import React, { useState, useEffect, useMemo, createContext } from "react";
+import { AsyncStorage } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import LoginPage from "./Loginpage";
+import RegisterScreen from "./RegisterScreen";
+import RegisterScreen2 from "./RegisterScreen2";
+import HomeScreen2 from "./HomeScreen2";
+import Goals from "./Goals";
+import SplashSuccess from "./SplashSuccess";
+import Allergies from "./Allergies";
+import Preferences from "./DietaryPreference";
+import ShoppingList from "./ShoppingList";
+import NewRecipe from "./NewRecipe";
+import TodaysRecipe from "./TodaysRecipe";
+import YourStats from "./YourStats";
+import SplashScreenDrink from "./SplashScreenDrink";
+import SplashScreenExerciseSlow from "./SplashScreenExerciseSlow";
+import SplashScreenExerciseQuick from "./SplashScreenExerciseQuick";
+import LandingPage from "./Landingpage";
+import mealplanner from "./Mealplanner";
+const Stack2 = createStackNavigator();
+export const RecipeContext = createContext({});
+
+const _storeRecipes = async (recipeArray) => {
+  try {
+    const now = new Date();
+    const jsonRecipeArray = await JSON.stringify(recipeArray);
+    await AsyncStorage.setItem("userRecipes", jsonRecipeArray);
+    await AsyncStorage.setItem("recipeSetDate", JSON.stringify(now));
+    console.log("Sucessfullly stored data in AsyncStorage");
+  } catch (error) {
+    console.warn(error);
+  }
+};
+
+const _retrieveData = async (key) => {
+  try {
+    const value = await AsyncStorage.getItem(key);
+    if (value !== null) {
+      console.log(
+        "retrieved",
+        key,
+        "from AsyncStorage, returning value:",
+        value
+      );
+      return JSON.parse(value);
+    }
+    return null;
+  } catch (error) {
+    console.warn(error);
+    return null;
+  }
+};
 
 export default function HomeScreen({ navigation }) {
-  // If no recipes in state, try to fetch from local storage. If none in local storage, fetch from database
-  // Pass recipes to relevant screens
-  // Save in local storage
-
   const [recipeList, setRecipeList] = useState([]);
-  const [fetchPlease, setFetchPlease] = useState(true);
 
-  const userID = 1;
+  const userID = _retrieveData("userID") || 1;
 
   async function getLastRecipeDate() {
     const res = await fetch(
@@ -57,27 +77,36 @@ export default function HomeScreen({ navigation }) {
   // Get recipes
   useEffect(() => {
     async function runGetRecipes() {
-      // Get userId TODO
       if (recipeList.length < 1) {
-        // Get date of last recipes
-        const last_date_meals_requested_temp = await getLastRecipeDate();
-        const last_date_meals_requested = new Date(
-          last_date_meals_requested_temp
+        // Try to get of last recipes from local storage
+        let last_date_meals_requested = new Date(
+          _retrieveData("recipeSetDate")
         );
+        // If date of last recipes not in local storage, get from server
+        if (!last_date_meals_requested) {
+          const last_date_meals_requested_temp = await getLastRecipeDate();
+          last_date_meals_requested = new Date(last_date_meals_requested_temp);
+        }
         const now = new Date();
         const timeDiffInDays =
           (now.getTime() - last_date_meals_requested.getTime()) /
           (1000 * 3600 * 24); // 1000*3600*24 = miliseconds in a day.
+        // If need new recipes, get new recipes.
         if (timeDiffInDays > 6.5) {
           getNewRecipes();
-          // TODO PATCH to set lastRecipeFetchDate to be now in database
         }
-        // TODO Try to get from local storage
-        // TODO If not in local storage, request again from database
+        // If don't need new recipes, try to get them from local storage
+        const localCopyOfRecipes = await _retrieveData("userRecipes");
+        // If not on local storage, get from database
+        if (localCopyOfRecipes.length < 1) {
+          reRequestRecipes();
+        } else {
+          setRecipeList(localCopyOfRecipes);
+        }
       }
     }
     runGetRecipes();
-  }, [fetchPlease]);
+  }, []);
 
   // Get new recipes and load into state
   async function getNewRecipes() {
@@ -86,7 +115,7 @@ export default function HomeScreen({ navigation }) {
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
     );
     const data = await res.json();
-    last_week_food = data.payload[0].last_weeks_meals
+    last_week_food = data.payload[0].this_weeks_meals
       .replace(/"|{|}/g, "")
       .split(",")
       .map((x) => +x);
@@ -123,82 +152,158 @@ export default function HomeScreen({ navigation }) {
     });
     Promise.all(requests).then((arrayWithData) => {
       setRecipeList(arrayWithData);
+      // Save recipes to local storage
+      _storeRecipes(arrayWithData);
+      console.log("retrieved local recipes:");
     });
-    // TODO send PATCH to set last_weeks_recipes to the current this_weeks_recipes
-    // TODO sent PATCH request to set this_weeks_recipes to the newly generated recipes (currently in variable randNums)
-    // Save recipes to local storage
+    // Send PATCH to set last_weeks_recipes to the current this_weeks_recipes and this_weeks_recipes to the newly generated recipes (currently in variable randNums), and lastRecipeFetchDate to be today
+    const patchResponse = await fetch(
+      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`,
+      {
+        method: "PATCH",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          last_weeks_meals: last_week_food,
+          this_weeks_meals: randNums,
+          last_date_meals_requested: new Date().toISOString(),
+        }),
+      }
+    );
+    console.log("patchResponse:", patchResponse);
   }
 
+  // Get new recipes and load into state
+  async function reRequestRecipes() {
+    const res = await fetch(
+      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
+    );
+    const data = await res.json();
+    const this_week_food = data.payload[0].this_weeks_meals
+      .replace(/"|{|}/g, "")
+      .split(",")
+      .map((x) => +x);
+    // Get the recipes from the database
+    const fetchData = (URI) => {
+      return fetch(URI)
+        .then((response) => response.json())
+        .then((data) => {
+          return data.payload[0];
+        });
+    };
+    const requests = [];
+    this_week_food.forEach((num) => {
+      requests.push(
+        fetchData(
+          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
+        )
+      );
+    });
+    Promise.all(requests).then((arrayWithData) => {
+      console.log("re-requested recipes");
+      setRecipeList(arrayWithData);
+      // Save recipes to local storage
+      _storeRecipes(arrayWithData);
+    });
+  }
+
+  const recipeList2 = useMemo(() => {
+    return recipeList;
+  }, [recipeList]);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.welcomeContainer}>
-        <View style={styles.logoCircle}>
-          <Image source={require("../assets/images/Mealthings.png")} />
-        </View>
-        <Text style={styles.tagLine}>Eat Well. Feel Amazing.</Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.buttonBackground}
-          onPress={() => navigation.navigate("Register1")}
-        >
-          <Text style={styles.buttonText}>Try out now!</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonBackground}>
-          <Text
-            onPress={() => navigation.navigate("LoginPage")}
-            style={styles.buttonText}
-          >
-            Login
-          </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <NavigationContainer independent={true}>
+      <RecipeContext.Provider value={recipeList2}>
+        <Stack2.Navigator initialRouteName="Home2">
+          <Stack2.Screen
+            name="Home2"
+            component={HomeScreen2}
+            options={{ title: "Home" }}
+          />
+          <Stack2.Screen
+            name="LoginPage"
+            component={LoginPage}
+            options={{ title: "Log in" }}
+          />
+          <Stack2.Screen
+            name="Register1"
+            component={RegisterScreen}
+            options={{ title: "Register" }}
+          />
+          <Stack2.Screen
+            name="Register2"
+            component={RegisterScreen2}
+            options={{ title: "Register" }}
+          />
+          <Stack2.Screen
+            name="Goals"
+            component={Goals}
+            options={{ title: "Goals" }}
+          />
+          <Stack2.Screen
+            name="SplashSuccess"
+            component={SplashSuccess}
+            options={{ title: "Splash Success" }}
+          />
+          <Stack2.Screen
+            name="Allergies"
+            component={Allergies}
+            options={{ title: "Allergies" }}
+          />
+          <Stack2.Screen
+            name="Preferences"
+            component={Preferences}
+            options={{ title: "Preferences" }}
+          />
+          <Stack2.Screen
+            name="ShoppingList"
+            component={ShoppingList}
+            options={{ title: "Shopping List" }}
+          />
+          <Stack2.Screen
+            name="NewRecipe"
+            component={NewRecipe}
+            options={{ title: "Add a new recipe" }}
+          />
+          <Stack2.Screen
+            name="TodaysRecipe"
+            component={TodaysRecipe}
+            options={{ title: "Today's recipe" }}
+          />
+          <Stack2.Screen
+            name="YourStats"
+            component={YourStats}
+            options={{ title: "Your stats" }}
+          />
+          <Stack2.Screen
+            name="SplashScreenDrink"
+            component={SplashScreenDrink}
+            options={{ title: "Alert" }}
+          />
+          <Stack2.Screen
+            name="SplashScreenExerciseSlow"
+            component={SplashScreenExerciseSlow}
+            options={{ title: "Alert" }}
+          />
+          <Stack2.Screen
+            name="SplashScreenExerciseQuick"
+            component={SplashScreenExerciseQuick}
+            options={{ title: "Alert" }}
+          />
+          <Stack2.Screen
+            name="LandingPage"
+            component={LandingPage}
+            options={{ title: "LandingPage" }}
+          />
+          <Stack2.Screen
+            name="Mealplanner"
+            component={mealplanner}
+            options={{ title: "Mealplanner" }}
+          />
+        </Stack2.Navigator>
+      </RecipeContext.Provider>
+    </NavigationContainer>
   );
 }
-
-HomeScreen.navigationOptions = {
-  header: null,
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLS.C_BG,
-    justifyContent: "center",
-  },
-  mealThingsLogo: {
-    alignItems: "center",
-    margin: "auto",
-    justifyContent: "center",
-  },
-  logoCircle: {
-    width: 200,
-    height: 200,
-    borderRadius: 200,
-    backgroundColor: COLS.C_LOGO_BG,
-  },
-  tagLine: {
-    color: COLS.C5_LIGHT_TEXT,
-  },
-  buttonContainer: {
-    marginTop: "20%",
-  },
-  buttonBackground: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    alignSelf: "center",
-    margin: 5,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: COLS.C4_DARK_TEXT,
-    textAlign: "center",
-    padding: 5,
-  },
-  welcomeContainer: {
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20,
-  },
-});
