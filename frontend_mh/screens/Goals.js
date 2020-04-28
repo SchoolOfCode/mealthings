@@ -256,45 +256,52 @@ export default function Goals({ navigation, route }) {
 }
 const styles = StyleSheet.create({
   margin: {
-    marginVertical: 50
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical
   },
   inputField: {
-    marginVertical: 5,
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    alignSelf: "center",
-    height: 50,
-    borderRadius: 5
+    width: FORMAT_inputField.F_inputField_width,
+    alignSelf: FORMAT_inputField.F_inputField_alignSelf,
+    height: FORMAT_inputField.F_inputField_height,
+    borderRadius: FORMAT_inputField.F_inputField_borderRadius
   },
-  flex: { flexDirection: "row", marginVertical: 20 },
-  flex2: { flexDirection: "row" },
+  flex: {
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    marginVertical: FORMAT_navButton.F_navButton_marginVertical
+  },
+  flex2: { flexDirection: FORMAT_navButton.F_navButton_flexDirection },
   img: {
-    width: 100,
-    height: 100,
-    alignSelf: "center",
-    left: 50 / 2,
-    marginHorizontal: 10
+    width: FORMAT_images.F_image_width,
+    height: FORMAT_images.F_image_height,
+    alignSelf: FORMAT_images.F_image_alignSelf,
+    left: FORMAT_images.F_image_left,
+    marginHorizontal: FORMAT_images.F_image_marginHorizontal
   },
   img2: {
-    width: 100,
-    height: 100,
-    alignSelf: "center",
-    marginHorizontal: 10
+    width: FORMAT_images.F_image_width,
+    height: FORMAT_images.F_image_height,
+    alignSelf: FORMAT_images.F_image_alignSelf,
+    marginHorizontal: FORMAT_images.F_image_marginHorizontal
   },
-  text: { alignSelf: "center", left: 50 / 2, marginVertical: 10 },
-  text2: { alignSelf: "center" },
+  text: {
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    left: 50 / 2,
+    marginVertical: 10
+  },
+  text2: { alignSelf: FORMAT_text.F_text_alignSelf },
   buttonFlex: {
-    flexDirection: "row",
-    justifyContent: "space-around"
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    justifyContent: FORMAT_navButton.F_navButton_justifyContent
   },
   buttonText: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     color: COLS.C_BG,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 5,
-    width: 70,
-    borderRadius: 5,
-    marginVertical: 50
+    justifyContent: FORMAT_navButton.F_navButtonText_justifyContent,
+    alignItems: FORMAT_navButton.F_navButtonText_alignItems,
+    padding: FORMAT_navButton.F_navButtonText_padding,
+    width: FORMAT_navButton.F_navButtonText_width,
+    borderRadius: FORMAT_navButton.F_navButtonText_borderRadius,
+    marginVertical: FORMAT_navButton.F_navButtonText_marginVertical
   }
 });

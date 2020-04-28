@@ -96,72 +96,77 @@ export default function App({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    height: 1000
+    height: FORMAT_background.F_background_height
   },
   mealThingsLogo: {
-    width: 60,
-    height: 60,
-    alignSelf: "center"
+    width: FORMAT_logo.F_logo_width,
+    height: FORMAT_logo.F_logo_height,
+    alignSelf: FORMAT_logo.F_logoCircle_alignSelf
   },
   logoCircle: {
-    width: 80,
-    height: 80,
-    borderRadius: 200,
+    width: FORMAT_logo.F_logoCircle_width,
+    height: FORMAT_logo.F_logoCircle_height,
+    borderRadius: FORMAT_logo.F_logoCircle_borderRadius,
     backgroundColor: COLS.C_LOGO_BG,
-    left: 170,
-    bottom: 20
+    left: FORMAT_logo.F_logoCircle_left,
+    bottom: FORMAT_logo.F_logoCircle_bottom
   },
   margin: {
     top: 30,
     backgroundColor: COLS.C_BG
   },
   flex: {
-    flexDirection: "row"
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection
   },
-  note: {
-    width: 140,
-    height: 140,
-    backgroundColor: COLS.C_YELLOW,
-    margin: 10,
-    alignSelf: "center",
-    alignItems: "center",
-    left: 50,
+  notes: {
+    width: FORMAT_notes.F_note_width,
+    height: FORMAT_notes.F_note_height,
+    backgroundColor: COLS.C_LOGO_BG,
+    margin: FORMAT_notes.F_note_margin,
+    alignSelf: FORMAT_notes.F_note_alignSelf,
+    alignItems: FORMAT_notes.F_note_alignItems,
+    left: FORMAT_notes.F_note_left,
     shadowColor: COLS.C5_LIGHT_TEXT,
-    padding: 10,
-    paddingVertical: 50,
-    fontSize: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 200, height: 20 },
-    shadowOpacity: 2,
-    shadowRadius: 40,
-    elevation: 6
+    paddingVertical: FORMAT_notes.F_note_paddingVertical,
+    padding: FORMAT_notes.F_note_padding,
+    shadowColor: FORMAT_notes.F_note_shadowColor,
+    shadowOffset: {
+      width: FORMAT_notes.F_note_width,
+      height: FORMAT_notes.F_note_height
+    },
+    shadowOpacity: FORMAT_notes.F_note_shadowOpacity,
+    shadowRadius: FORMAT_notes.F_note_shadowRadius,
+    elevation: FORMAT_notes.F_note_elevation
   },
   note2: {
-    width: 140,
-    height: 140,
+    width: FORMAT_notes.F_note_width,
+    height: FORMAT_notes.F_note_height,
     backgroundColor: COLS.C_LOGO_BG,
-    margin: 10,
-    alignSelf: "center",
-    alignItems: "center",
-    left: 50,
+    margin: FORMAT_notes.F_note_margin,
+    alignSelf: FORMAT_notes.F_note_alignSelf,
+    alignItems: FORMAT_notes.F_note_alignItems,
+    left: FORMAT_notes.F_note_left,
     shadowColor: COLS.C5_LIGHT_TEXT,
-    paddingVertical: 50,
-    padding: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 200, height: 20 },
-    shadowOpacity: 2,
-    shadowRadius: 40,
-    elevation: 6,
+    paddingVertical: FORMAT_notes.F_note_paddingVertical,
+    padding: FORMAT_notes.F_note_padding,
+    shadowColor: FORMAT_notes.F_note_shadowColor,
+    shadowOffset: {
+      width: FORMAT_notes.F_note_width,
+      height: FORMAT_notes.F_note_height
+    },
+    shadowOpacity: FORMAT_notes.F_note_shadowOpacity,
+    shadowRadius: FORMAT_notes.F_note_shadowRadius,
+    elevation: FORMAT_notes.F_note_elevation,
 
-    fontSize: 20
+    fontSize: FORMAT_notes.F_note_fontSize
   },
   todaysMeal: {
-    top: 70,
-    width: 450,
-    padding: 10,
+    top: FORMAT_todaysMeal.F_todaysMeal_top,
+    width: FORMAT_todaysMeal.F_todaysMeal_width,
+    padding: FORMAT_todaysMeal.F_todaysMeal_padding,
     backgroundColor: COLS.C4_DARK_TEXT,
-    justifyContent: "flex-end",
-    alignSelf: "center",
-    alignItems: "center"
+    justifyContent: FORMAT_todaysMeal.F_todaysMeal_justifyContent,
+    alignSelf: FORMAT_todaysMeal.F_todaysMeal_alignSelf,
+    alignItems: FORMAT_todaysMeal.F_todaysMeal_alignItems
   }
 });

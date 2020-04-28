@@ -81,7 +81,7 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fafafa"
+    backgroundColor: COLS.C_BG
   },
   contentContainer: {
     paddingTop: 15
@@ -91,8 +91,8 @@ const styles = StyleSheet.create({
   },
   option: {
     backgroundColor: "#fdfdfd",
-    paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingHorizontal: FORMAT_foodOptions.F_options_paddingHorizontal,
+    paddingVertical: FORMAT_foodOptions.F_options_paddingVertical,
     borderWidth: StyleSheet.hairlineWidth,
     borderBottomWidth: 0,
     borderColor: "#ededed"
@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth
   },
   optionText: {
-    fontSize: 15,
-    alignSelf: "flex-start",
+    fontSize: FORMAT_foodOptions.F_optionsText_fontSize,
+    alignSelf: FORMAT_foodOptions.F_optionsText_alignSelf,
     marginTop: 1
   }
 });
