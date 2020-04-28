@@ -5,7 +5,9 @@ import {
   FORMAT_navButtonBackground,
   FORMAT_navButtonText
 } from "./FORMAT_navButton";
+import { FORMAT_logo } from "./FORMAT_logo";
 import { FORMAT_welcomeContainer } from "./FORMAT_containers";
+import { FORMAT_tagLine } from "./FORMAT_extraComponents";
 
 export default function HomeScreen2({ navigation }) {
   return (
@@ -58,7 +60,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_LOGO_BG
   },
   tagLine: {
-    color: COLS.C5_LIGHT_TEXT
+    color: COLS.C5_LIGHT_TEXT,
+    fontSize: FORMAT_tagLine.F_tagLine_fontSize
   },
   buttonContainer: {
     marginTop: "20%"
@@ -73,7 +76,8 @@ const styles = StyleSheet.create({
   buttonText: {
     color: COLS.C4_DARK_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
-    padding: FORMAT_navButtonText.F_navButtonText_padding
+    padding: FORMAT_navButtonText.F_navButtonText_padding,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize
   },
   welcomeContainer: {
     alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
