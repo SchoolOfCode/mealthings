@@ -1,6 +1,11 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { COLS } from "./COLS";
+import {
+  FORMAT_navButtonBackground,
+  FORMAT_navButtonText
+} from "./FORMAT_navButton";
+import { FORMAT_welcomeContainer } from "./FORMAT_containers";
 
 export default function HomeScreen2({ navigation }) {
   return (
@@ -32,47 +37,47 @@ export default function HomeScreen2({ navigation }) {
 }
 
 HomeScreen2.navigationOptions = {
-  header: null,
+  header: null
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center",
+    justifyContent: "center"
   },
   mealThingsLogo: {
-    alignItems: "center",
-    margin: "auto",
-    justifyContent: "center",
+    alignItems: FORMAT_logo.F_logo_alignItems,
+    margin: FORMAT_logo.F_logo_margin,
+    justifyContent: FORMAT_logo.F_logo_justifyContent
   },
   logoCircle: {
-    width: 200,
-    height: 200,
-    borderRadius: 200,
-    backgroundColor: COLS.C_LOGO_BG,
+    width: FORMAT_logo.F_logoCircle_width,
+    height: FORMAT_logo.F_logoCircle_height,
+    borderRadius: FORMAT_logo.F_logoCircle_borderRadius,
+    backgroundColor: COLS.C_LOGO_BG
   },
   tagLine: {
-    color: COLS.C5_LIGHT_TEXT,
+    color: COLS.C5_LIGHT_TEXT
   },
   buttonContainer: {
-    marginTop: "20%",
+    marginTop: "20%"
   },
   buttonBackground: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    alignSelf: "center",
-    margin: 5,
-    borderRadius: 5,
+    width: FORMAT_navButtonBackground.F_navButtonBackground_width,
+    alignSelf: FORMAT_navButtonBackground.F_navButtonBackground_alignSelf,
+    margin: FORMAT_navButtonBackground.F_navButtonBackground_margin,
+    borderRadius: FORMAT_navButtonBackground.F_navButtonBackground_borderRadius
   },
   buttonText: {
     color: COLS.C4_DARK_TEXT,
-    textAlign: "center",
-    padding: 5,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    padding: FORMAT_navButtonText.F_navButtonText_padding
   },
   welcomeContainer: {
-    alignItems: "center",
-    marginTop: 10,
-    marginBottom: 20,
-  },
+    alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
+    marginTop: FORMAT_welcomeContainer.F_welcomeContainer_marginTop,
+    marginBottom: FORMAT_welcomeContainer.F_welcomeContainer_marginBottom
+  }
 });
