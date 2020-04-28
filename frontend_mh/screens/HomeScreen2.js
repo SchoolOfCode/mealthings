@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     width: FORMAT_logo.F_logoCircle_width,
     height: FORMAT_logo.F_logoCircle_height,
     borderRadius: FORMAT_logo.F_logoCircle_borderRadius,
-    backgroundColor: COLS.C_LOGO_BG
+    backgroundColor: COLS.C_LOGO_BG,
+    marginBottom: 15
   },
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,

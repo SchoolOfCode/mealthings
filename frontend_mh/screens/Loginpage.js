@@ -91,7 +91,7 @@ export default function Loginpage({ navigation }) {
         />
         <TextInput
           style={styles.inputField}
-          placeholder="enter password"
+          placeholder=" enter password"
           value={password}
           onChangeText={tracker}
           placeholderTextColor="white"
@@ -121,7 +121,8 @@ const styles = StyleSheet.create({
     width: FORMAT_logo.F_logoCircle_width,
     height: FORMAT_logo.F_logoCircle_height,
     borderRadius: FORMAT_logo.F_logoCircle_borderRadius,
-    backgroundColor: COLS.C_LOGO_BG
+    backgroundColor: COLS.C_LOGO_BG,
+    marginBottom: FORMAT_logo.F_logoCircle_marginBottom
   },
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,

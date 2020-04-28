@@ -13,8 +13,9 @@ const FORMAT_logo = {
   F_logoCircle_height: 200,
   F_logoCircle_left: 170,
   F_logoCircle_bottom: 20,
+  F_logoCircle_marginBottom: 15,
   F_logoCircle_borderRadius: 200,
-  F_logoCircle_backgroundColor: COLS.C_LOGO_BG,
+  F_logoCircle_backgroundColor: COLS.C_LOGO_BG
 };
 
 export { FORMAT_logo };

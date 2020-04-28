@@ -1,6 +1,5 @@
 import * as WebBrowser from "expo-web-browser";
 import React, { useState } from "react";
-
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -29,7 +28,6 @@ import {
   FORMAT_navButtonBackground
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
-
 export default function App({ navigation }) {
   return (
     <View style={styles.background}>
@@ -49,7 +47,6 @@ export default function App({ navigation }) {
           >
             <Text>Shopping List</Text>
           </TouchableOpacity>
-
           <TouchableOpacity
             style={styles.note}
             onPress={() => navigation.navigate("TodaysRecipe")}
@@ -92,81 +89,64 @@ export default function App({ navigation }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    height: FORMAT_background.F_background_height
+    height: 1000
   },
   mealThingsLogo: {
-    width: FORMAT_logo.F_logo_width,
-    height: FORMAT_logo.F_logo_height,
-    alignSelf: FORMAT_logo.F_logoCircle_alignSelf
+    width: 60,
+    height: 60,
+    alignSelf: "center"
   },
   logoCircle: {
-    width: FORMAT_logo.F_logoCircle_width,
-    height: FORMAT_logo.F_logoCircle_height,
-    borderRadius: FORMAT_logo.F_logoCircle_borderRadius,
+    width: 80,
+    height: 80,
+    borderRadius: 200,
     backgroundColor: COLS.C_LOGO_BG,
-    left: FORMAT_logo.F_logoCircle_left,
-    bottom: FORMAT_logo.F_logoCircle_bottom
+    left: 170,
+    bottom: 20
   },
   margin: {
-    top: 30,
+    // top: 30,
     backgroundColor: COLS.C_BG
   },
   flex: {
-    flexDirection: FORMAT_navButton.F_navButton_flexDirection
+    flexDirection: "row"
   },
-  notes: {
-    width: FORMAT_notes.F_note_width,
-    height: FORMAT_notes.F_note_height,
-    backgroundColor: COLS.C_LOGO_BG,
-    margin: FORMAT_notes.F_note_margin,
-    alignSelf: FORMAT_notes.F_note_alignSelf,
-    alignItems: FORMAT_notes.F_note_alignItems,
-    left: FORMAT_notes.F_note_left,
+  note: {
+    width: 140,
+    height: 140,
+    backgroundColor: COLS.C_YELLOW,
+    margin: 10,
+    alignSelf: "center",
+    alignItems: "center",
+    left: 50,
     shadowColor: COLS.C5_LIGHT_TEXT,
-    paddingVertical: FORMAT_notes.F_note_paddingVertical,
-    padding: FORMAT_notes.F_note_padding,
-    shadowColor: FORMAT_notes.F_note_shadowColor,
-    shadowOffset: {
-      width: FORMAT_notes.F_note_width,
-      height: FORMAT_notes.F_note_height
-    },
-    shadowOpacity: FORMAT_notes.F_note_shadowOpacity,
-    shadowRadius: FORMAT_notes.F_note_shadowRadius,
-    elevation: FORMAT_notes.F_note_elevation
+    padding: 10,
+    paddingVertical: 50,
+    fontSize: 20
   },
   note2: {
-    width: FORMAT_notes.F_note_width,
-    height: FORMAT_notes.F_note_height,
+    width: 140,
+    height: 140,
     backgroundColor: COLS.C_LOGO_BG,
-    margin: FORMAT_notes.F_note_margin,
-    alignSelf: FORMAT_notes.F_note_alignSelf,
-    alignItems: FORMAT_notes.F_note_alignItems,
-    left: FORMAT_notes.F_note_left,
+    margin: 10,
+    alignSelf: "center",
+    alignItems: "center",
+    left: 50,
     shadowColor: COLS.C5_LIGHT_TEXT,
-    paddingVertical: FORMAT_notes.F_note_paddingVertical,
-    padding: FORMAT_notes.F_note_padding,
-    shadowColor: FORMAT_notes.F_note_shadowColor,
-    shadowOffset: {
-      width: FORMAT_notes.F_note_width,
-      height: FORMAT_notes.F_note_height
-    },
-    shadowOpacity: FORMAT_notes.F_note_shadowOpacity,
-    shadowRadius: FORMAT_notes.F_note_shadowRadius,
-    elevation: FORMAT_notes.F_note_elevation,
-
-    fontSize: FORMAT_notes.F_note_fontSize
+    paddingVertical: 50,
+    padding: 10,
+    fontSize: 20
   },
   todaysMeal: {
-    top: FORMAT_todaysMeal.F_todaysMeal_top,
-    width: FORMAT_todaysMeal.F_todaysMeal_width,
-    padding: FORMAT_todaysMeal.F_todaysMeal_padding,
+    top: 70,
+    width: 450,
+    padding: 10,
     backgroundColor: COLS.C4_DARK_TEXT,
-    justifyContent: FORMAT_todaysMeal.F_todaysMeal_justifyContent,
-    alignSelf: FORMAT_todaysMeal.F_todaysMeal_alignSelf,
-    alignItems: FORMAT_todaysMeal.F_todaysMeal_alignItems
+    justifyContent: "flex-end",
+    alignSelf: "center",
+    alignItems: "center"
   }
 });
