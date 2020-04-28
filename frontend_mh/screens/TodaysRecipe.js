@@ -5,7 +5,7 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  FlatList,
+  FlatList
 } from "react-native";
 import { COLS } from "./COLS";
 import { RecipeContext } from "./HomeScreen";
@@ -13,7 +13,7 @@ import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
+  FORMAT_moreChoicesContainer
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -23,7 +23,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe,
+  FORMAT_mainRecipe
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -32,7 +32,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
+  FORMAT_navButtonBackground
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -98,7 +98,7 @@ function Item({ title }) {
 }
 
 function cleanString(string) {
-  return string.split('","').map((x) => x.replace(/"|{|}|\\|\//g, ""));
+  return string.split('","').map(x => x.replace(/"|{|}|\\|\//g, ""));
 }
 
 export default function TodaysRecipe({ navigation }) {
@@ -121,7 +121,7 @@ export default function TodaysRecipe({ navigation }) {
           style={styles.ingredientsAndMethod}
           data={ingredients}
           renderItem={({ item }) => <Item title={`\u2022 ${item}`} />}
-          keyExtractor={(item) => item}
+          keyExtractor={item => item}
         />
       </View>
     </View>
@@ -135,7 +135,7 @@ export default function TodaysRecipe({ navigation }) {
           style={styles.ingredientsAndMethod}
           data={method}
           renderItem={({ item, index }) => <Item title={`${index}: ${item}`} />}
-          keyExtractor={(item) => item}
+          keyExtractor={item => item}
         />
       </View>
     </View>
@@ -179,25 +179,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    alignItems: "center",
+    alignItems: "center"
   },
   positioning: {
     right: 170,
-    top: 20,
+    top: 20
   },
   arrow: {
     height: 20,
-    width: 20,
+    width: 20
   },
   formatting: {
-    marginTop: 10,
+    marginTop: 10
   },
 
   pageTitle: {
     fontSize: 25,
     fontWeight: "bold",
     marginTop: -10,
-    marginBottom: 15,
+    marginBottom: 15
   },
   image: {
     width: "90%",
@@ -206,41 +206,41 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     marginTop: 15,
     borderWidth: 2,
-    borderRadius: 15,
+    borderRadius: 15
   },
   buttonView: {
     flexDirection: "row",
     height: 50,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   buttonText: {
     alignSelf: "center",
     fontSize: 20,
-    padding: 12,
+    padding: 12
   },
   methodIngredientsButton: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: "50%",
+    width: "50%"
   },
   selectedMethodIngredientsButton: {
     backgroundColor: COLS.C_RED,
-    width: "50%",
+    width: "50%"
   },
   boxTitle: {
     textAlign: "center",
     margin: 10,
     fontSize: 20,
-    backgroundColor: COLS.C_BG,
+    backgroundColor: COLS.C_BG
   },
   ingredientsAndMethodContainer: {
     width: "100%",
-    height: "100%",
+    height: "100%"
   },
   ingredientsAndMethodView: {
     height: "100%",
     width: "90%",
-    alignSelf: "center",
+    alignSelf: "center"
   },
   ingredientsAndMethod: {
     height: "100%",
@@ -254,6 +254,6 @@ const styles = StyleSheet.create({
     elevation: 6,
     borderColor: COLS.C4_DARK_TEXT,
     borderStyle: "solid",
-    backgroundColor: COLS.C6_WHITE_TEXT,
-  },
+    backgroundColor: COLS.C6_WHITE_TEXT
+  }
 });
