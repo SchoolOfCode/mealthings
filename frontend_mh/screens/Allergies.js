@@ -309,7 +309,7 @@ export default function Allergies({ navigation, route }) {
           value={treeNuts}
         />
 
-        <View style={styles.buttons}>
+        <View style={styles.buttons_Direction}>
           <TouchableOpacity
             style={styles.buttons}
             onPress={() => navigation.goBack()}
@@ -339,8 +339,6 @@ const styles = StyleSheet.create({
     padding: FORMAT_containers.F_container_padding,
     alignItems: FORMAT_containers.F_container_alignItems,
     justifyContent: FORMAT_containers.F_container_justifyContent,
-    flex: FORMAT_containers.F_container_flex,
-    flexDirection: FORMAT_containers.F_container_flexDirection,
     backgroundColor: COLS.C_BG,
   },
   text: {
@@ -363,6 +361,9 @@ const styles = StyleSheet.create({
   switch: {
     right: FORMAT_switches.F_switch_right,
     bottom: FORMAT_switches.F_switch_bottom,
+  },
+  buttons_Direction: {
+    flexDirection: "row",
   },
   buttons: {
     flexDirection: FORMAT_navButton.F_navButton_flexDirection,

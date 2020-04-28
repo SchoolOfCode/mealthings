@@ -158,7 +158,7 @@ export default function Preferences({ navigation, route }) {
 
       <View style={styles.container}>
         <Text style={styles.text}> No Requirement</Text>
-        <Text style={styles.subheading}> I have no dietary Requirements</Text>
+        <Text style={styles.subheading}> I have no dietary Requirements.</Text>
         <Switch
           style={styles.switch}
           trackColor={{ false: "#767577", true: "#81b0ff" }}
@@ -169,7 +169,7 @@ export default function Preferences({ navigation, route }) {
         />
         <Text style={styles.text}> Vegetarian</Text>
         <Text style={styles.subheading}>
-          I do not eat meat, fish nor poultry
+          I do not eat meat, fish nor poultry.
         </Text>
         <Switch
           style={styles.switch}
@@ -181,7 +181,7 @@ export default function Preferences({ navigation, route }) {
         />
         <Text style={styles.text}> Ovo-Vegetarian </Text>
         <Text style={styles.subheading}>
-          I do not eat diary foods, meat, poultry or fish
+          I do not eat diary foods, meat, poultry nor fish.
         </Text>
         <Switch
           style={styles.switch}
@@ -193,7 +193,7 @@ export default function Preferences({ navigation, route }) {
         />
         <Text style={styles.text}> Lacto-vegetarian</Text>
         <Text style={styles.subheading}>
-          I do not eat eggs, meat, poultry nor fish
+          I do not eat eggs, meat, poultry nor fish.
         </Text>
         <Switch
           style={styles.switch}
@@ -206,7 +206,7 @@ export default function Preferences({ navigation, route }) {
 
         <Text style={styles.text}> Vegan</Text>
         <Text style={styles.subheading}>I do not eat meats, poultry,</Text>
-        <Text style={styles.subheading}>fish nor animal products</Text>
+        <Text style={styles.subheading}>fish nor animal products.</Text>
 
         <Switch
           style={styles.switch}
@@ -255,12 +255,12 @@ export default function Preferences({ navigation, route }) {
           onValueChange={beetrootHandler}
           value={beetroot}
         />
-        <View style={styles.buttons}>
+        <View style={styles.button_Direction}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={styles.button}
           >
-            <Text>Back</Text>
+            <Text style={styles.buttons}>Back</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttons} onPress={postHandler}>
             <Text>Finish</Text>
@@ -286,7 +286,6 @@ const styles = StyleSheet.create({
     alignItems: FORMAT_containers.F_container_alignItems,
     justifyContent: FORMAT_containers.F_container_justifyContent,
     flex: FORMAT_containers.F_container_flex,
-    flexDirection: FORMAT_containers.F_container_flexDirection,
     backgroundColor: COLS.C_BG,
   },
   text: {
@@ -300,6 +299,9 @@ const styles = StyleSheet.create({
   switch: {
     right: FORMAT_switches.F_switch_right,
     bottom: FORMAT_switches.F_switch_bottom,
+  },
+  button_Direction: {
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
   },
   buttons: {
     flexDirection: FORMAT_navButton.F_navButton_flexDirection,
