@@ -3,8 +3,8 @@ import { Dimensions } from "react-native";
 const screenWidth = Dimensions.get("screen").width;
 
 const FORMAT_switches = {
-  F_switch_right: 40,
-  F_switch_bottom: 27,
+  F_switch_right: -120,
+  F_switch_bottom: 32,
 };
 
 const FORMAT_foodOptions = {

@@ -6,7 +6,7 @@ const FORMAT_headings = {
   F_subHeading_position: "relative",
   F_subHeading_fontSize: 10,
   F_subHeading_left: 50,
-  F_subHeading_alignSelf: "center",
+  F_subHeading_alignSelf: "flex-start",
   F_subHeading_alignItems: "center",
   F_subHeading_fontWeight: "bold",
   F_heading_alignSelf: "center",
