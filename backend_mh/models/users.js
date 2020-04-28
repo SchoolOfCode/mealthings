@@ -28,6 +28,7 @@ async function addUser(body) {
     goals,
     gender,
   } = body;
+
   console.log(
     name,
     birthday,

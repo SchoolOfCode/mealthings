@@ -65,13 +65,12 @@ router.get("/:userId", async (req, res) => {
 // Post request to add/insert new user
 router.post("/", async (req, res) => {
   const { body } = req;
-  if (!body) {
-    return res
-      .status(400)
-      .json({
-        message: "Failed to insert user. No body recieved on request.",
-        success: false,
-      });
+  if (!body || Object.keys(body).length < 4) {
+    return res.status(400).json({
+      message:
+        "Failed to insert user. No body recieved on request, or body has less than 3 fields.",
+      success: false,
+    });
   }
   console.log("Recieved a POST request to users", body);
   try {
@@ -103,14 +102,12 @@ router.patch("/:id", async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   if (!id || !body) {
-    return res
-      .status(400)
-      .json({
-        message: "User Update failed, problem with id or body",
-        success: false,
-        id,
-        body,
-      });
+    return res.status(400).json({
+      message: "User Update failed, problem with id or body",
+      success: false,
+      id,
+      body,
+    });
   }
   const data = await patchUser(body, id);
   console.log(data);

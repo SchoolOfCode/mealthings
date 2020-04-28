@@ -104,13 +104,12 @@ router.get("/", async (req, res) => {
 // Post request to add/insert new user
 router.post("/", async (req, res) => {
   const { body } = req;
-  if (!body) {
-    return res
-      .status(400)
-      .json({
-        message: "Failed to insert foodIntake. No body found:" + body,
-        success: false,
-      });
+  if (!body || Object.keys(body) < 2) {
+    return res.status(400).json({
+      message:
+        "Failed to insert foodIntake. No body found, or body too short:" + body,
+      success: false,
+    });
   }
   try {
     console.log("Recieved a POST request to foodIntake", body);
@@ -125,12 +124,10 @@ router.post("/", async (req, res) => {
       .json({ message: "Failed to insert foodIntake", success: false });
   } catch (err) {
     console.warn("Got an error in post request. Error:", err);
-    return res
-      .status(400)
-      .json({
-        message: "Failed to insert foodIntake. Got an error.",
-        success: false,
-      });
+    return res.status(400).json({
+      message: "Failed to insert foodIntake. Got an error.",
+      success: false,
+    });
   }
 });
 
@@ -139,20 +136,16 @@ router.patch("/:id", async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   if (!id) {
-    return res
-      .status(400)
-      .json({
-        message: "foodIntake Update failed. No id found.",
-        success: false,
-      });
+    return res.status(400).json({
+      message: "foodIntake Update failed. No id found.",
+      success: false,
+    });
   }
   if (!body) {
-    return res
-      .status(400)
-      .json({
-        message: "foodIntake Update failed. No body found.",
-        success: false,
-      });
+    return res.status(400).json({
+      message: "foodIntake Update failed. No body found.",
+      success: false,
+    });
   }
   try {
     console.log(body);
@@ -169,12 +162,10 @@ router.patch("/:id", async (req, res) => {
       .status(400)
       .json({ message: "foodIntake Update failed", success: false });
   } catch (err) {
-    return res
-      .status(400)
-      .json({
-        message: "foodIntake Update failed. Got an error",
-        success: false,
-      });
+    return res.status(400).json({
+      message: "foodIntake Update failed. Got an error",
+      success: false,
+    });
   }
 });
 
