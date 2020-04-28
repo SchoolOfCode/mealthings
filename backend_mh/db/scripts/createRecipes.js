@@ -17,7 +17,7 @@ async function createRecipes() {
       cooking_difficulty TEXT,
       cooking_time_mins INT,
       method TEXT,
-      url TEXT,
+      url TEXT
   )`);
   console.log(res);
 }
