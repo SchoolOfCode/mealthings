@@ -8,7 +8,6 @@ const foodIntakeRouter = require("./routes/foodIntake.js");
 const app = express();
 // Gets body of requests for use in POST routes
 app.use(express.json());
-app.use(cookieParser());
 
 app.use("/users", usersRouter);
 app.use("/recipes", recipesRouter);
