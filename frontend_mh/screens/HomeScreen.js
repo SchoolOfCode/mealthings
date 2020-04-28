@@ -90,6 +90,7 @@ export default function HomeScreen({ navigation }) {
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes?countOnly=true`
     );
     const data = await res.json();
+    console.log("Recieved from total number of recipes:", data);
     return parseInt(data.payload.count);
   }
 
