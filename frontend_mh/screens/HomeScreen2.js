@@ -23,7 +23,7 @@ export default function HomeScreen2({ navigation }) {
           style={styles.buttonBackground}
           onPress={() => navigation.navigate("Register1")}
         >
-          <Text style={styles.buttonText}>Try out now!</Text>
+          <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.buttonBackground}>
           <Text
