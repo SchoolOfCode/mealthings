@@ -186,14 +186,6 @@ export default function NewRecipe({ navigation }) {
   const multipleRecipes2 = useContext(RecipeContext);
   return (
     <View style={styles.container}>
-      <View style={styles.positioning}>
-        <TouchableOpacity onPress={() => navigation.navigate("LandingPage")}>
-          <Image
-            style={styles.arrow}
-            source={require("../assets/images/goback.png")}
-          />
-        </TouchableOpacity>
-      </View>
       <Text style={styles.mainTitle}>{data.name}</Text>
       <Image
         source={require("../assets/images/posh-blt.jpg")}
