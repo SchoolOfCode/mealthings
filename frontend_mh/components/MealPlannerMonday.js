@@ -5,10 +5,11 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
-  Button,
+  Button
 } from "react-native";
 
 import FlatList from "react-native-drag-flatlist";
+import { FORMAT_headings } from "../screens/FORMAT_headings";
 
 const colors = ["#d3f261", "#7cb305", "#5b8c00", "#3f6600", "#254000"]; // CORRECT THIS TO COLOR SCHEME
 
@@ -25,7 +26,7 @@ const sampleRecipes = [
       "passata",
       "orzo",
       "ripe cherry tomatoes , on the vine",
-      "large cooked peeled king prawns",
+      "large cooked peeled king prawns"
     ],
     ingredientsQuantities: [
       "2 cloves",
@@ -36,7 +37,7 @@ const sampleRecipes = [
       "400ml",
       "300g",
       "200g",
-      "400g",
+      "400g"
     ],
     calories: "513",
     protein: "28.8",
@@ -55,8 +56,8 @@ const sampleRecipes = [
       "Add the passata and 300ml of water, then the orzo. Bring to the boil, reduce the heat and simmer for 10 to 15 minutes, or until the orzo is al dente, stirring occasionally to prevent it sticking.",
       "Spread the cherry tomatoes over a baking tray, drizzle with the rest of the oil and season. Roast for 10 minutes, or until soft.",
       "Stir half the basil into the pasta, along with the prawns.",
-      "Divide between bowls, top with the remaining basil and serve the roasted tomatoes alongside.",
-    ],
+      "Divide between bowls, top with the remaining basil and serve the roasted tomatoes alongside."
+    ]
   },
   {
     recipe_id: "72",
@@ -67,7 +68,7 @@ const sampleRecipes = [
       "flat-leaf parsley",
       "lemon",
       "dried chilli flakes",
-      "olive oil",
+      "olive oil"
     ],
     ingredientsQuantities: [
       "1kg topside",
@@ -75,7 +76,7 @@ const sampleRecipes = [
       "1/2 a bunch",
       "1",
       "1 tsp",
-      "4 tbp",
+      "4 tbp"
     ],
     calories: "226",
     protein: "42.8",
@@ -91,8 +92,8 @@ const sampleRecipes = [
       "Bring the meat to room temperature, then place it on a board and tenderise with a meat hammer or Jaccard-style tenderiser.",
       "Cut the meat into large chunks and transfer to a large bowl. Season to taste.",
       "Peel, finely chop and add the garlic. Pick, chop and add the parsley, then add the lemon zest and juice, the chilli and oil. Adjust the quantities to taste; there should be just a hint of each, to bring out the meat’s best aspects and not mask its flavour.",
-      "Transfer to a platter and serve immediately with ciabatta-style bread.",
-    ],
+      "Transfer to a platter and serve immediately with ciabatta-style bread."
+    ]
   },
   {
     recipe_id: "73",
@@ -108,7 +109,7 @@ const sampleRecipes = [
       "raw frozen prawns",
       "rice vermicelli",
       "soy sauce",
-      "lime",
+      "lime"
     ],
     ingredientsQuantities: [
       "4",
@@ -121,7 +122,7 @@ const sampleRecipes = [
       "225g",
       "300g",
       "1 splash",
-      "1/2",
+      "1/2"
     ],
     calories: "353",
     protein: "23.6",
@@ -139,14 +140,14 @@ const sampleRecipes = [
       "Separate the bok choy leaves (use other greens or frozen peas instead, if you prefer), rinse them and add to the stock together with the prawns, spring onions, lemongrass and garlic.",
       "Cook for a couple of minutes, until the prawns have turned pink and the bok choy has wilted.",
       "Divide the vermicelli between 4 bowls and ladle over the soup.",
-      "Scatter the chilli and coriander on top and season with soy and lime juice.",
-    ],
-  },
+      "Scatter the chilli and coriander on top and season with soy and lime juice."
+    ]
+  }
 ];
 
 const originalData = sampleRecipes.map((item, index) => ({
   text: item.name + "Insert whatever info you want here" + item.calories,
-  color: colors[index % colors.length],
+  color: colors[index % colors.length]
 }));
 
 const App = () => {
@@ -158,27 +159,27 @@ const App = () => {
 
   useEffect(() => {
     let proteins = sampleRecipes
-      .map((item) => +item.protein)
+      .map(item => +item.protein)
       .reduce((prev, curr) => prev + curr, 0);
     setProtein(Math.round(proteins));
   }, []);
 
   useEffect(() => {
     const caloriesTot = sampleRecipes
-      .map((item) => +item.calories)
+      .map(item => +item.calories)
       .reduce((prev, curr) => prev + curr, 0);
     setCaloriesTot(Math.round(caloriesTot));
   }, []);
   useEffect(() => {
     const carbohydrated = sampleRecipes
-      .map((item) => +item.carbohydrates)
+      .map(item => +item.carbohydrates)
       .reduce((prev, curr) => prev + curr, 0);
     setCarbohydrate(carbohydrated);
   }, []);
 
   useEffect(() => {
     const fatty = sampleRecipes
-      .map((item) => +item.fat)
+      .map(item => +item.fat)
       .reduce((prev, curr) => prev + curr, 0);
     setFat(fatty);
   }, []);
@@ -190,9 +191,11 @@ const App = () => {
   function duplicate() {
     setProtein(protein * 2);
     setCarbohydrate(carbohydrate * 2);
+    setFat(fat * 2);
+    setCaloriesTot(caloriesTot * 2);
   }
 
-  const keyExtractor = (item) => item.text;
+  const keyExtractor = item => item.text;
 
   const renderItem = ({ item, drag }) => (
     <TouchableOpacity
@@ -205,7 +208,7 @@ const App = () => {
 
   return (
     <View style={styles.margin}>
-      <Text> Monday</Text>
+      <Text style={styles.mainTitle}> Monday</Text>
       <FlatList
         data={data}
         keyExtractor={keyExtractor}
@@ -213,28 +216,34 @@ const App = () => {
         onMoveEnd={setData}
       />
 
-      <Text> Nutruition Breakdown</Text>
+      <Text> Nutrition Breakdown</Text>
       <Text> Calories: {caloriesTot}g </Text>
       <Text> Protein: {protein}g </Text>
       <Text> Carbohydrates: {carbohydrate}g </Text>
       <Text> Fat: {fat}g </Text>
-      <Button title="double it" onPress={duplicate} />
+      <Button title="Double the portion size" onPress={duplicate} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  mainTitle: {
+    fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
+    fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
+    marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
+    alignSelf: FORMAT_headings.F_heading_alignSelf
+  },
   item: {
     justifyContent: "center",
     alignItems: "center",
-    width: 390,
-    height: 40,
-    padding: -10,
-    margin: 5,
+    width: 360,
+    height: 70,
+    padding: 10,
+    margin: 5
   },
   margin: {
-    marginTop: 60,
-  },
+    marginTop: 20
+  }
 });
 
 export default App;
