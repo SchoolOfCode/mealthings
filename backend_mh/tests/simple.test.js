@@ -1,4 +1,5 @@
 /* global jest expect, describe, it */
+
 /* eslint-disable no-console */
 function sum(a, b) {
   return a + b;

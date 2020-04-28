@@ -49,3 +49,25 @@
 
   - Post (add) new recipe
   - patch / change recipe
+
+# Defensive programming plan
+
+- Need routes to fail loudly
+  - If database returns an error, return an error in the reply to the http request
+    - try / catch / finally on each database request
+      - ~~users~~
+      - ~~recipes~~
+      - foodIntake
+  - Check all incoming types of requests
+    - e.g. strings, numbers
+      - user id must be a number not a string
+      - user name must be a string not a number
+      - recipe countOnly must be true or false
+        - if false then reply
+      - user post AND patch
+        - name must have no numbers
+        - email can't have slashes
+        - birthday can't have letters (unless "april" ?! ) - possibly a job for the front end validation
+        - username can't have slashes
+        - Weight cant have letters
+        - height can't have letters
