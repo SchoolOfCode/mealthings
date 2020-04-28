@@ -6,7 +6,7 @@ import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -16,7 +16,8 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
+  FORMAT_Graph,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -25,7 +26,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 import { Pedometer } from "expo-sensors";
@@ -54,46 +55,46 @@ export default function YourStats() {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    margin: 5,
-    justifyContent: "space-around",
+    alignItems: FORMAT_containers.F_container_alignItems,
+    margin: FORMAT_containers.F_container_margin,
+    justifyContent: FORMAT_containers.F_container_justifyContent,
     backgroundColor: COLS.C_BG,
-    flex: 1,
+    flex: FORMAT_containers.F_Flex,
   },
   graph1: {
-    width: "75%",
-    height: "25%",
+    width: FORMAT_Graph.F_width,
+    height: FORMAT_Graph.F_height,
     backgroundColor: COLS.C_YELLOW,
   },
   graph2: {
-    width: "75%",
-    height: "25%",
+    width: FORMAT_Graph.F_width,
+    height: FORMAT_Graph.F_height,
     backgroundColor: COLS.C5_LIGHT_TEXT,
   },
   graph3: {
-    width: "75%",
-    height: "25%",
+    width: FORMAT_Graph.F_width,
+    height: FORMAT_Graph.F_height,
     backgroundColor: COLS.C_LOGO_BG,
   },
   text: {
-    textAlign: "center",
+    alignSelf: FORMAT_Graph.F_alignSelf,
   },
-  icon: { textAlign: "center", alignSelf: "center" },
+  icon: {
+    textAlign: FORMAT_Graph.F_textAlign,
+    alignSelf: FORMAT_Graph.F_alignSelf,
+  },
   quoteContainer: {
     borderColor: COLS.C5_LIGHT_TEXT,
     backgroundColor: COLS.C4_DARK_TEXT,
-    borderWidth: 2,
-    padding: 5,
-    margin: 5,
   },
   quote: {
-    textAlign: "center",
+    textAlign: FORMAT_Graph.F_textAlign,
     color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold",
+    fontWeight: FORMAT_Graph.F_fontWeight,
   },
   quoteAuthor: {
-    textAlign: "center",
+    textAlign: FORMAT_Graph.F_textAlign,
     color: COLS.C6_WHITE_TEXT,
-    fontWeight: "normal",
+    fontWeight: FORMAT_Graph.F_sub_fontWeight,
   },
 });

@@ -5,6 +5,7 @@ const screenWidth = Dimensions.get("screen").width;
 const FORMAT_navButton = {
   F_navButton_width: 70,
   F_navButton_height: 10,
+  F_navButton_secondary_height: 50,
   F_navButton_padding: 10,
   F_navButton_borderRadius: 5,
   F_navButton_margin: 10,
@@ -20,6 +21,7 @@ const FORMAT_navButton = {
 const FORMAT_navButtonText = {
   F_navButtonText_padding: 5,
   F_navButtonText_textAlign: "center",
+  F_navButtonText_alignSelf: "center",
   F_navButtonText_justifyContent: "center",
   F_navButtonText_alignItems: "center",
   F_navButtonText_width: 70,
@@ -27,6 +29,7 @@ const FORMAT_navButtonText = {
   F_navButtonText_borderRadius: 5,
   F_navButtonText_marginVertical: 50,
   F_navButtonText_color: COLS.C4_DARK_TEXT,
+  F_navButtonText_padding: 12,
 };
 
 const FORMAT_navButtonBackground = {

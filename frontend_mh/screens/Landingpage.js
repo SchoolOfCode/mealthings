@@ -7,7 +7,7 @@ import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -17,7 +17,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -26,7 +26,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -96,12 +96,12 @@ export default function App({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    height: 1000
+    height: 1000,
   },
   mealThingsLogo: {
     width: 60,
     height: 60,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   logoCircle: {
     width: 80,
@@ -109,14 +109,14 @@ const styles = StyleSheet.create({
     borderRadius: 200,
     backgroundColor: COLS.C_LOGO_BG,
     left: 170,
-    bottom: 20
+    bottom: 20,
   },
   margin: {
     top: 30,
-    backgroundColor: COLS.C_BG
+    backgroundColor: COLS.C_BG,
   },
   flex: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   note: {
     width: 140,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 200, height: 20 },
     shadowOpacity: 2,
     shadowRadius: 40,
-    elevation: 6
+    elevation: 6,
   },
   note2: {
     width: 140,
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     shadowRadius: 40,
     elevation: 6,
 
-    fontSize: 20
+    fontSize: 20,
   },
   todaysMeal: {
     top: 70,
@@ -162,6 +162,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C4_DARK_TEXT,
     justifyContent: "flex-end",
     alignSelf: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });

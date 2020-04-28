@@ -24,6 +24,7 @@ import {
   FORMAT_arrow,
   FORMAT_icons,
   FORMAT_mainRecipe,
+  FORMAT_todaysMealAdditionals,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -177,9 +178,9 @@ export default function TodaysRecipe({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: FORMAT_containers.F_Flex,
     backgroundColor: COLS.C_BG,
-    alignItems: "center",
+    alignItems: FORMAT_containers.F_container_alignself,
   },
   positioning: {
     right: 170,
@@ -209,38 +210,38 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   buttonView: {
-    flexDirection: "row",
-    height: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: FORMAT_todaysMealAdditionals.F_TDA_flexDirection,
+    height: FORMAT_todaysMealAdditionals.F_TDA_secondary_height,
+    justifyContent: FORMAT_todaysMealAdditionals.F_TDA_justifyContent,
+    alignItems: FORMAT_todaysMealAdditionals.F_TDA_alignSelf,
   },
   buttonText: {
-    alignSelf: "center",
-    fontSize: 20,
-    padding: 12,
+    alignSelf: FORMAT_todaysMealAdditionals.F_TDA__alignSelf,
+    fontSize: FORMAT_todaysMealAdditionals.F_TDA__fontSize,
+    padding: FORMAT_todaysMealAdditionals.F_TDA__padding,
   },
   methodIngredientsButton: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: "50%",
+    width: FORMAT_todaysMealAdditionals.F_TDA_width,
   },
   selectedMethodIngredientsButton: {
     backgroundColor: COLS.C_RED,
-    width: "50%",
+    width: FORMAT_todaysMealAdditionals.F_TDA_width,
   },
   boxTitle: {
-    textAlign: "center",
-    margin: 10,
-    fontSize: 20,
+    textAlign: FORMAT_todaysMealAdditionals.F_TDA_textAlign,
+    margin: FORMAT_todaysMealAdditionals.F_TDA_margin,
+    fontSize: FORMAT_todaysMealAdditionals.F_TDA_fontSize,
     backgroundColor: COLS.C_BG,
   },
   ingredientsAndMethodContainer: {
-    width: "100%",
-    height: "100%",
+    width: FORMAT_todaysMealAdditionals.F_TDA_FULL_width,
+    height: FORMAT_todaysMealAdditionals.F_TDA_FULL_height,
   },
   ingredientsAndMethodView: {
-    height: "100%",
-    width: "90%",
-    alignSelf: "center",
+    height: FORMAT_todaysMealAdditionals.F_TDA_FULL_height,
+    width: FORMAT_todaysMealAdditionals.F_TDA_FULL_width,
+    alignSelf: FORMAT_todaysMealAdditionals.F_TDA_justifyContent,
   },
   ingredientsAndMethod: {
     height: "100%",

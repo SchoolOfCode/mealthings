@@ -14,6 +14,8 @@ const FORMAT_containers = {
   F_container_backgroundColor: COLS.C_BG,
   F_containerHeaders_backgroundColor: COLS.CS_LIGHT_TEXT,
   F_containerHeaders_height: 60,
+  F_Flex: 1,
+  F_container_alignself: "center",
 };
 
 const FORMAT_welcomeContainer = {

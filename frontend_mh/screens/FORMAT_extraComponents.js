@@ -48,6 +48,25 @@ const FORMAT_todaysMeal = {
   F_todaysMeal_alignItems: "center",
 };
 
+const FORMAT_todaysMealAdditionals = {
+  F_TDA_padding: 5,
+  F_TDA_textAlign: "center",
+  F_TDA_alignSelf: "center",
+  F_TDA_justifyContent: "center",
+  F_TDA_alignItems: "center",
+  F_TDA_width: 70,
+  F_TDA_fontSize: 20,
+  F_TDA_borderRadius: 5,
+  F_TDA_marginVertical: 50,
+  F_TDA_color: COLS.C4_DARK_TEXT,
+  F_TDA_padding: 12,
+  F_TDA_width: 200,
+  F_TDA_margin: 10,
+  F_TDA_fontSize: 20,
+  F_TDA_FULL_width: 300,
+  F_TDA_FULL_height: 300,
+};
+
 const FORMAT_mainRecipe = {
   F_mainRecipe_width: screenWidth,
   F_mainRecipe_alignItems: "flex-start",
@@ -87,6 +106,15 @@ const FORMAT_swipeBar = {
   F_swipeBar_paddingRight: screenWidth * 0.1,
 };
 
+const FORMAT_Graph = {
+  F_width: 300,
+  F_height: 170,
+  F_alignSelf: "center",
+  F_fontWeight: "bold",
+  F_textAlign: "center",
+  F_sub_fontWeight: "normal",
+};
+
 export {
   FORMAT_switches,
   FORMAT_notes,
@@ -96,4 +124,6 @@ export {
   FORMAT_arrow,
   FORMAT_icons,
   FORMAT_mainRecipe,
+  FORMAT_Graph,
+  FORMAT_todaysMealAdditionals,
 };
