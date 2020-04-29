@@ -1,3 +1,6 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../config");
 const { query } = require("../db");
 
 // Get all users
@@ -10,6 +13,23 @@ async function getUsers() {
 async function getUserById(user_id) {
   const res = await query(`SELECT * FROM users WHERE user_id = $1`, [user_id]);
   return res.rows;
+}
+
+// Add a function to check whether the user's email already exists in the database.
+async function checkEmail(emailInBodyOfRequest) {
+  const emails = await query("SELECT email_address FROM users");
+  return emails.rows
+    .map((item) => item.email_address)
+    .includes(emailInBodyOfRequest);
+  //returns a boolean by default, (therefore no true/false prompt required)
+}
+
+// Note to selves - Does this need to be below the addUser function for it to be in scope?!
+async function saveNewUser(body) {
+  var salt = bcrypt.genSaltSync(10);
+  var hash = bcrypt.hashSync(body.password, salt);
+  const data = await addUser({ ...body, password: hash });
+  return data;
 }
 
 // Add a new user
@@ -90,6 +110,12 @@ async function addUser(body) {
   return res;
 }
 
+async function getToken(body) {
+  //Note to selves - toDo - ensure we can pull the user id not only email - work out how to do this. Also think carefully as to whether we actually NEED to do this...?
+  const token = await jwt.sign({ email: body.email }, JWT_SECRET);
+  return token;
+}
+
 // PATCH to change a user
 async function patchUser(body, id) {
   const {
@@ -152,4 +178,12 @@ async function patchUser(body, id) {
   return res.rows[0];
 }
 
-module.exports = { getUsers, getUserById, addUser, patchUser };
+module.exports = {
+  getUsers,
+  getUserById,
+  checkEmail,
+  saveNewUser,
+  addUser,
+  getToken,
+  patchUser,
+};

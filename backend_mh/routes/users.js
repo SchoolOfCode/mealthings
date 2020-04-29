@@ -2,7 +2,10 @@ const express = require("express");
 const {
   getUsers,
   getUserById,
+  checkEmail,
+  saveNewUser,
   addUser,
+  getToken,
   patchUser,
 } = require("../models/users");
 const router = express.Router();
@@ -65,25 +68,33 @@ router.get("/:userId", async (req, res) => {
 // Post request to add/insert new user
 router.post("/", async (req, res) => {
   const { body } = req;
+  const { email, password } = body;
   if (!body || Object.keys(body).length < 4) {
     return res.status(400).json({
       message:
-        "Failed to insert user. No body recieved on request, or body has less than 3 fields.",
+        "Failed to insert user. No body recieved on request, or body has less than 4 fields.",
       success: false,
     });
   }
+  if (await checkEmail(email)) {
+    return res
+      .status(401)
+      .json({ message: "Email is already in use!", success: false });
+  }
   console.log("Recieved a POST request to users", body);
   try {
-    const data = await addUser(body);
+    const data = await saveNewUser(body);
     if (data.rows) {
+      const token = await getToken(body);
       return res
         .status(201)
-        .json({ message: "Inserted new user", success: true });
+        .json({ message: "Inserted new user", success: true, token });
     }
     console.warn("Failed to insert new user. Request body:", body);
-    return res
-      .status(400)
-      .json({ message: "Failed to insert user", success: false });
+    return res.status(500).json({
+      message: "Failed to create user in the database",
+      success: false,
+    });
   } catch (err) {
     console.warn(
       "Failed to insert new user. Request body:",
