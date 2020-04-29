@@ -1,6 +1,4 @@
-import * as WebBrowser from "expo-web-browser";
 import React, { useState } from "react";
-
 import {
   StyleSheet,
   Text,
@@ -37,11 +35,9 @@ import {
   FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
-
 export default function Loginpage({ navigation }) {
   const [name, setName] = useState();
   const [password, setPassword] = useState();
-
   function tracked(enteredText) {
     setName(enteredText);
   }
@@ -50,7 +46,6 @@ export default function Loginpage({ navigation }) {
   }
   function handleSubmit() {
     // TODO - This should not be a POST, but should do a get request with the username (use the query string route), and check if the password the user entered matches the password that the user entered. If the password is wrong the user should get an error message and another change to enter their password. If the password is correct they should be routed to the Landing Page screen.
-
     // const options = {
     //   method: "POST",
     //   headers: {
@@ -96,7 +91,6 @@ export default function Loginpage({ navigation }) {
           onChangeText={tracker}
           placeholderTextColor="white"
         />
-
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text>Login</Text>
         </TouchableOpacity>
