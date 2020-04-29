@@ -96,7 +96,6 @@ export default function Loginpage({ navigation }) {
           onChangeText={tracker}
           placeholderTextColor="white"
         />
-
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text>Login</Text>
         </TouchableOpacity>
