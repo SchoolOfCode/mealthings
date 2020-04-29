@@ -8,6 +8,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import useLinking from "./navigation/useLinking";
 import HomeScreen from "./screens/HomeScreen";
+import LandingPage from "./screens/Landingpage";
 
 import RegisteredContextProvider from "./contexts/RegisterContext";
 
@@ -60,6 +61,11 @@ export default function App(props) {
               name="Home"
               component={HomeScreen}
               options={{ title: "Home" }}
+            />
+            <Stack.Screen
+              name="LandingPage"
+              component={LandingPage}
+              options={{ title: "LandingPage" }}
             />
           </Stack.Navigator>
         </NavigationContainer>

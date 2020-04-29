@@ -1,6 +1,4 @@
-import * as WebBrowser from "expo-web-browser";
 import React, { useState } from "react";
-
 import {
   StyleSheet,
   Text,
@@ -37,11 +35,9 @@ import {
   FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
-
 export default function Loginpage({ navigation }) {
   const [name, setName] = useState();
   const [password, setPassword] = useState();
-
   function tracked(enteredText) {
     setName(enteredText);
   }
@@ -52,7 +48,6 @@ export default function Loginpage({ navigation }) {
 
   function handleSubmit() {
     // TODO - This should not be a POST, but should do a get request with the username (use the query string route), and check if the password the user entered matches the password that the user entered. If the password is wrong the user should get an error message and another change to enter their password. If the password is correct they should be routed to the Landing Page screen.
-
     // const options = {
     //   method: "POST",
     //   headers: {
@@ -99,7 +94,10 @@ export default function Loginpage({ navigation }) {
           onChangeText={tracker}
           placeholderTextColor="white"
         />
-      
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text>Login</Text>
+        </TouchableOpacity>
+      </View>
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text>Login</Text>
       </TouchableOpacity>
@@ -107,15 +105,19 @@ export default function Loginpage({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
+  border: {
+    marginVertical: 50,
+  },
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center",
+    height: FORMAT_containers.F_containerHeaders_height,
+    justifyContent: "center"
   },
   welcomeContainer: {
     alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
     marginTop: FORMAT_welcomeContainer.F_welcomeContainer_marginTop,
-    marginBottom: FORMAT_welcomeContainer.F_welcomeContainer_marginBottom,
+    marginBottom: FORMAT_welcomeContainer.F_welcomeContainer_marginBottom
   },
   mealThingsLogo: {
     alignItems: FORMAT_logo.F_logo_alignItems,
@@ -127,12 +129,16 @@ const styles = StyleSheet.create({
     height: FORMAT_logo.F_logoCircle_height,
     borderRadius: FORMAT_logo.F_logoCircle_borderRadius,
     backgroundColor: COLS.C_LOGO_BG,
-    marginBottom: 15,
+    marginBottom: FORMAT_logo.F_logoCircle_marginBottom,
+    marginBottom: 15
   },
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
     marginBottom: 60,
-    fontSize: FORMAT_tagLine.F_tagLine_fontSize,
+    fontSize: FORMAT_tagLine.F_tagLine_fontSize
+  },
+  positioning: {
+    left: 100
   },
   inputField: {
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
