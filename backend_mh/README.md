@@ -57,7 +57,7 @@
     - try / catch / finally on each database request
       - ~~users~~
       - ~~recipes~~
-      - foodIntake
+      - ~~foodIntake~~
   - Check all incoming types of requests
     - e.g. strings, numbers
       - user id must be a number not a string

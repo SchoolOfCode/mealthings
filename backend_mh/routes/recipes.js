@@ -53,21 +53,22 @@ router.get("/", async (req, res) => {
         "Recieved a GET request for the number of recipes in the database"
       );
       //if count only is not false or count only is not true return an error message, status 400
-      if (countOnly !== false && countOnly !== true) {
+      if (countOnly == true || countOnly == "true") {
+        //create a constant data and send an asyncronous request to get number of recipes
+        const data = await getRecipeCount();
+        //if the data is truthy return data in json format with confirmation status
+        if (data) {
+          return res.status(200).json({
+            message: "Total number of recipes enclosed.",
+            success: true,
+            payload: data,
+          });
+        }
+      } else {
         return res.status(400).json({
           message:
             "Failed to fetch total number of recipes from database. countOnly can only be true or false!",
           success: false,
-        });
-      }
-      //create a constant data and send an asyncronous request to get number of recipes
-      const data = await getRecipeCount();
-      //if the data is truthy return data in json format with confirmation status
-      if (data) {
-        return res.status(200).json({
-          message: "Total number of recipes enclosed.",
-          success: true,
-          payload: data,
         });
       }
       //else if the data is not available return data in json format with confirmation status

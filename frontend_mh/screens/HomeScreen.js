@@ -22,7 +22,7 @@ import mealplanner from "./Mealplanner";
 const Stack2 = createStackNavigator();
 export const RecipeContext = createContext({});
 
-AsyncStorage.clear();
+AsyncStorage.clear(); // TODO remove this for production.
 
 const _storeRecipes = async (recipeArray) => {
   try {
@@ -73,24 +73,30 @@ export default function HomeScreen({ navigation }) {
       "Fetching last recipe date from remote server for userID:",
       userID
     );
-    const res = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
-    );
-    const data = await res.json();
-    console.log(
-      "Got data for getLastRecipeDate",
-      data.payload[0].last_date_meals_requested
-    );
-    return data.payload[0].last_date_meals_requested;
+    try {
+      const res = await fetch(
+        `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
+      );
+      const data = await res.json();
+      return data.payload[0].last_date_meals_requested;
+    } catch (err) {
+      console.log("Failed to get last recipe date:", err);
+      return null;
+    }
   }
 
   async function getTotalNoRecipes() {
     console.log("Fetching total number of recipes from remote server");
-    const res = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes?countOnly=true`
-    );
-    const data = await res.json();
-    return parseInt(data.payload.count);
+    try {
+      const res = await fetch(
+        `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes?countOnly=true`
+      );
+      const data = await res.json();
+      console.log("Recieved from total number of recipes:", data);
+      return parseInt(data.payload.count);
+    } catch (err) {
+      console.log("Failed to get total number of recipes:", err, data);
+    }
   }
 
   async function getUserIdAsync() {
@@ -169,6 +175,7 @@ export default function HomeScreen({ navigation }) {
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${uID}`
     );
     const data = await res.json();
+    console.log("here2");
     console.log(
       "Got the result of getNewRecipes:",
       data.payload[0].this_weeks_meals
@@ -194,10 +201,12 @@ export default function HomeScreen({ navigation }) {
     tempNumbers.sort(() => Math.random() - 0.5);
     const randNums = tempNumbers.slice(0, 14);
     // Get the recipes from the database
+    console.log("here3");
     const fetchData = (URI) => {
       return fetch(URI)
         .then((response) => response.json())
         .then((data) => {
+          console.log("here7", data);
           return data.payload[0];
         });
     };
@@ -251,6 +260,7 @@ export default function HomeScreen({ navigation }) {
     );
     const data = await res.json();
     console.log("reRequested data arrived:", data);
+    console.log("here4");
     const this_week_food = data.payload[0].this_weeks_meals
       .replace(/"|{|}/g, "")
       .split(",")
@@ -261,6 +271,7 @@ export default function HomeScreen({ navigation }) {
       return fetch(URI)
         .then((response) => response.json())
         .then((data) => {
+          console.log("here5", data);
           return data.payload[0];
         });
     };
