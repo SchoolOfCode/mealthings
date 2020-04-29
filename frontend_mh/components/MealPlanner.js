@@ -5,13 +5,13 @@ import {
   StyleSheet,
   View,
   SafeAreaView,
-  Button
+  Button,
+  ScrollView,
 } from "react-native";
 
 import FlatList from "react-native-drag-flatlist";
 import { FORMAT_headings } from "../screens/FORMAT_headings";
-
-const colors = ["#d3f261", "#7cb305", "#5b8c00", "#3f6600", "#254000"]; // CORRECT THIS TO COLOR SCHEME
+import { COLS } from "../screens/COLS";
 
 const sampleRecipes = [
   {
@@ -26,7 +26,7 @@ const sampleRecipes = [
       "passata",
       "orzo",
       "ripe cherry tomatoes , on the vine",
-      "large cooked peeled king prawns"
+      "large cooked peeled king prawns",
     ],
     ingredientsQuantities: [
       "2 cloves",
@@ -37,7 +37,7 @@ const sampleRecipes = [
       "400ml",
       "300g",
       "200g",
-      "400g"
+      "400g",
     ],
     calories: "513",
     protein: "28.8",
@@ -56,8 +56,8 @@ const sampleRecipes = [
       "Add the passata and 300ml of water, then the orzo. Bring to the boil, reduce the heat and simmer for 10 to 15 minutes, or until the orzo is al dente, stirring occasionally to prevent it sticking.",
       "Spread the cherry tomatoes over a baking tray, drizzle with the rest of the oil and season. Roast for 10 minutes, or until soft.",
       "Stir half the basil into the pasta, along with the prawns.",
-      "Divide between bowls, top with the remaining basil and serve the roasted tomatoes alongside."
-    ]
+      "Divide between bowls, top with the remaining basil and serve the roasted tomatoes alongside.",
+    ],
   },
   {
     recipe_id: "72",
@@ -68,7 +68,7 @@ const sampleRecipes = [
       "flat-leaf parsley",
       "lemon",
       "dried chilli flakes",
-      "olive oil"
+      "olive oil",
     ],
     ingredientsQuantities: [
       "1kg topside",
@@ -76,7 +76,7 @@ const sampleRecipes = [
       "1/2 a bunch",
       "1",
       "1 tsp",
-      "4 tbp"
+      "4 tbp",
     ],
     calories: "226",
     protein: "42.8",
@@ -92,8 +92,8 @@ const sampleRecipes = [
       "Bring the meat to room temperature, then place it on a board and tenderise with a meat hammer or Jaccard-style tenderiser.",
       "Cut the meat into large chunks and transfer to a large bowl. Season to taste.",
       "Peel, finely chop and add the garlic. Pick, chop and add the parsley, then add the lemon zest and juice, the chilli and oil. Adjust the quantities to taste; there should be just a hint of each, to bring out the meat’s best aspects and not mask its flavour.",
-      "Transfer to a platter and serve immediately with ciabatta-style bread."
-    ]
+      "Transfer to a platter and serve immediately with ciabatta-style bread.",
+    ],
   },
   {
     recipe_id: "73",
@@ -109,7 +109,7 @@ const sampleRecipes = [
       "raw frozen prawns",
       "rice vermicelli",
       "soy sauce",
-      "lime"
+      "lime",
     ],
     ingredientsQuantities: [
       "4",
@@ -122,7 +122,7 @@ const sampleRecipes = [
       "225g",
       "300g",
       "1 splash",
-      "1/2"
+      "1/2",
     ],
     calories: "353",
     protein: "23.6",
@@ -140,8 +140,8 @@ const sampleRecipes = [
       "Separate the bok choy leaves (use other greens or frozen peas instead, if you prefer), rinse them and add to the stock together with the prawns, spring onions, lemongrass and garlic.",
       "Cook for a couple of minutes, until the prawns have turned pink and the bok choy has wilted.",
       "Divide the vermicelli between 4 bowls and ladle over the soup.",
-      "Scatter the chilli and coriander on top and season with soy and lime juice."
-    ]
+      "Scatter the chilli and coriander on top and season with soy and lime juice.",
+    ],
   },
   {
     recipe_id: "36",
@@ -151,7 +151,7 @@ const sampleRecipes = [
       "fresh coriander",
       "whole sea bass , scaled, gutted, trimmed, from sustainable sources",
       "thai red curry paste",
-      "lime"
+      "lime",
     ],
     ingredientsQuantities: ["4", "15 g", "600 g", "2 tbs", "1"],
     calories: "410",
@@ -171,10 +171,10 @@ const sampleRecipes = [
       "Pack the coriander stalks into the cavities, season with sea salt and black pepper, then place in the hot pan with 1 tablespoon of olive oil.                    ",
       "Cook for 3 to 4 minutes per side, or until dark golden and cooked through (depending on the thickness of your fish).                    ",
       "Drain and shake off the spring onions and coriander and pile on to your plates.                    ",
-      "Sit the sea bass on top, spooning over any spicy oil from the pan. Finely grate over the lime zest, and serve with lime halves, for squeezing over.                    "
+      "Sit the sea bass on top, spooning over any spicy oil from the pan. Finely grate over the lime zest, and serve with lime halves, for squeezing over.                    ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975515.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975515.jpg?tr=w-330",
   },
   {
     recipe_id: "37",
@@ -184,7 +184,7 @@ const sampleRecipes = [
       "teaspoons pickled ginger",
       "low-salt soy sauce",
       "frozen soya beans",
-      "tuna steaks , (ideally 2cm thick), from sustainable sources                      "
+      "tuna steaks , (ideally 2cm thick), from sustainable sources                      ",
     ],
     ingredientsQuantities: ["200 g", "2 tsp", "2 tsp", "250 g", "300 g"],
     calories: "426",
@@ -203,10 +203,10 @@ const sampleRecipes = [
       "Place the beans in a non-stick frying pan on a high heat, cover with boiling kettle water, boil for 2 minutes, then drain. Return the pan to a medium-high heat.                      ",
       "Rub the tuna with 1 teaspoon of olive oil and a pinch of sea salt and black pepper, then sear for 1½ minutes on each side, so it’s blushing in the middle.                      ",
       "Divide the beans and radishes between your plates, half-tear the tuna and place proudly on top, then spoon over the pickled ginger mixture, drizzling all the juices around the plate.                      ",
-      "Finish with 1 teaspoon of extra virgin olive oil.                      "
+      "Finish with 1 teaspoon of extra virgin olive oil.                      ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89081010.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89081010.jpg?tr=w-330",
   },
 
   {
@@ -217,7 +217,7 @@ const sampleRecipes = [
       "white fish fillets , such as cod, skin off, pin-boned, from sustainable sources",
       "fresh rosemary",
       "cooked lentils",
-      "spinach"
+      "spinach",
     ],
     ingredientsQuantities: ["8", "300 g", "15 g", "250 g", "200 g"],
     calories: "348",
@@ -235,10 +235,10 @@ const sampleRecipes = [
       "Place in a large non-stick frying pan on a medium heat and cook for 8 minutes, turning occasionally, adding the rosemary for the last 2 minutes.                        ",
       "Remove the fish to a plate. Toss the lentils into the pan with 1 tablespoon of red wine vinegar and push to one side to reheat for 1 minute and pick up all that residual flavour, while you quickly wilt the spinach with a splash of water alongside.                        ",
       "Taste, season to perfection with sea salt and pepper, and divide both between your plates.                        ",
-      "Sit the wrapped cod on top of the lentils with the rosemary, and drizzle with 1 teaspoon of extra virgin olive oil.                        "
+      "Sit the wrapped cod on top of the lentils with the rosemary, and drizzle with 1 teaspoon of extra virgin olive oil.                        ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89081003.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89081003.jpg?tr=w-330",
   },
   {
     recipe_id: "39",
@@ -248,7 +248,7 @@ const sampleRecipes = [
       "garlic",
       "fresh chives",
       "cornish cider",
-      "clotted cream"
+      "clotted cream",
     ],
     ingredientsQuantities: ["600 g", "4", "30 g", "250 ml", "50 g"],
     calories: "348",
@@ -267,10 +267,10 @@ const sampleRecipes = [
       "Put a large deep pan on a high heat. Pour in 1 tablespoon of olive oil, then add the garlic and most of the chives, followed 1 minute later by the cider.                          ",
       "Bring to a fast boil, then add the mussels and clotted cream, cover and leave for 3 to 4 minutes, shaking the pan occasionally.                          ",
       "When all the mussels have opened and are soft and juicy, they’re ready. If any remain closed, discard them.                          ",
-      "Taste the sauce, season to perfection with sea salt and black pepper, then dish up and sprinkle over the remaining chives before tucking in.                          "
+      "Taste the sauce, season to perfection with sea salt and black pepper, then dish up and sprinkle over the remaining chives before tucking in.                          ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89080979.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89080979.jpg?tr=w-330",
   },
   {
     recipe_id: "40",
@@ -280,7 +280,7 @@ const sampleRecipes = [
       "mixed-colour courgettes",
       "fresh mint",
       "sides of flat white fish , such as lemon sole, skin on, scaled, from sustainable sources",
-      "fresh mixed-colour chillies"
+      "fresh mixed-colour chillies",
     ],
     ingredientsQuantities: ["280 g", "2", "30 g", "400 g", "1.5"],
     calories: "309",
@@ -301,10 +301,10 @@ const sampleRecipes = [
       "Rub the sole with a little olive oil, sea salt and black pepper, then lay skin side up on the veg.                            ",
       "Place the pan directly under the grill for 7 to 10 minutes, or until the skin is wonderfully crisp – keep an eye on it!                            ",
       "Meanwhile, finely slice the chillies, mix as much as you dare with the remaining mint, 2 tablespoons of red wine vinegar and 1 tablespoon of extra virgin olive oil, then taste and season to perfection.                            ",
-      "Plate up the veg and sole, pulling back half the crispy skin to expose the fish, then drizzle over the chilli mint dressing.                            "
+      "Plate up the veg and sole, pulling back half the crispy skin to expose the fish, then drizzle over the chilli mint dressing.                            ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975491.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975491.jpg?tr=w-330",
   },
   {
     recipe_id: "41",
@@ -314,7 +314,7 @@ const sampleRecipes = [
       "spring onions",
       "baby spinach",
       "cheddar cheese",
-      "sheets of filo pastry"
+      "sheets of filo pastry",
     ],
     ingredientsQuantities: ["400 g", "60 g", "250 g", "150 g", "4"],
     calories: "431",
@@ -335,10 +335,10 @@ const sampleRecipes = [
       "Spoon 100ml of the soaking water over the spinach, then drain the fish, break up the pieces and sit them evenly around the pan.                              ",
       "Finely grate over most of the cheese and season well with black pepper.                              ",
       "Quickly layer the filo on top, tucking it around the fish and up the sides of the pan, tearing the last sheet on top in a nutty fashion.                              ",
-      "Grate over the last bit of cheese, drizzle with ½ a tablespoon of olive oil, and bake for 15 to 17 minutes, or until golden and crisp. Easy as pie!                              "
+      "Grate over the last bit of cheese, drizzle with ½ a tablespoon of olive oil, and bake for 15 to 17 minutes, or until golden and crisp. Easy as pie!                              ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975481.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975481.jpg?tr=w-330",
   },
   {
     recipe_id: "42",
@@ -348,7 +348,7 @@ const sampleRecipes = [
       "ripe mixed-colour cherry tomatoes",
       "fresh basil",
       "black olives , (stone in)",
-      "higher-welfare chorizo"
+      "higher-welfare chorizo",
     ],
     ingredientsQuantities: ["300 g", "300 g", "30 g", "8", "30 g"],
     calories: "363",
@@ -367,10 +367,10 @@ const sampleRecipes = [
       "Meanwhile, halve the cherry tomatoes, tear up most of the basil leaves, then toss it all with 1 tablespoon of red wine vinegar and a pinch of sea salt and black pepper.                                ",
       "Squash the olives and discard the stones, then finely chop the flesh. Mix with 1 teaspoon of extra virgin olive oil and a splash of water.",
       "Finely slice the chorizo, add to the pan for the last 2 minutes, then toss in the dressed tomatoes for 30 seconds.                                ",
-      "Divide between your plates, with the salmon on top. Spoon over the dressed olives and pick over the remaining basil.                                "
+      "Divide between your plates, with the salmon on top. Spoon over the dressed olives and pick over the remaining basil.                                ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/75993165.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/75993165.jpg?tr=w-330",
   },
   {
     recipe_id: "43",
@@ -380,7 +380,7 @@ const sampleRecipes = [
       "spring onions",
       "fresh mixed-colour chillies",
       "regular oranges , or blood oranges",
-      "hoisin sauce"
+      "hoisin sauce",
     ],
     ingredientsQuantities: ["200 g", "8", "1.5", "3", "2 tbs"],
     calories: "430",
@@ -402,10 +402,10 @@ const sampleRecipes = [
       "Remove the chicken skin and soft spring onions from the pan and put aside.                                  ",
       "Cook the chicken for 10 more minutes, or until tender and cooked through.                                  ",
       "In a bowl, loosen the hoisin with a splash of red wine vinegar, then spoon over the chicken. Leave it in the oven while you drain and divide up the salad.                                  ",
-      "Sit the chicken and soft spring onions on top and crack over the crispy skin.                                  "
+      "Sit the chicken and soft spring onions on top and crack over the crispy skin.                                  ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89080978.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89080978.jpg?tr=w-330",
   },
   {
     recipe_id: "44",
@@ -415,7 +415,7 @@ const sampleRecipes = [
       "free-range skinless chicken breasts",
       "green pesto",
       "ripe cherry tomatoes , on the vine",
-      "green beans                                    "
+      "green beans                                    ",
     ],
     ingredientsQuantities: ["320 g", "480 g", "4 tsp", "400 g", "400 g"],
     calories: "618",
@@ -436,10 +436,10 @@ const sampleRecipes = [
       "Lightly dress the tomato vines in olive oil, season and put into a second tray. Place the chicken tray on the top shelf of the oven with the tomatoes below, and cook for 20 minutes, or until the pastry is golden and the chicken is cooked through.                                    ",
       "Meanwhile, line up the beans, trim off just the stalk ends, then cook in a pan of boiling salted water for 7 minutes, or until tender.                                    ",
       "Remove the chicken to a board with half the tomatoes, squashing the rest in the tray and discarding the vines. Drain and toss in the beans, taste and season to perfection.                                    ",
-      "Slice the chicken at an angle and serve on top of the beans, with the whole tomatoes.                                    "
+      "Slice the chicken at an angle and serve on top of the beans, with the whole tomatoes.                                    ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975501.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975501.jpg?tr=w-330",
   },
   {
     recipe_id: "46",
@@ -449,7 +449,7 @@ const sampleRecipes = [
       "garlic",
       "mixed-colour seedless grapes",
       "red vermouth",
-      "fresh tarragon                                   "
+      "fresh tarragon                                   ",
     ],
     ingredientsQuantities: ["400 g", "1 bulb", "250 g", "100 ml", "30 g"],
     calories: "440",
@@ -467,10 +467,10 @@ const sampleRecipes = [
       "Put a non-stick ovenproof frying pan on a high heat. Rub the chicken all over with ½ a tablespoon of olive oil, season with sea salt and black pepper and place skin side down in the pan.                                      ",
       "Fry for a couple of minutes until golden, then lightly squash the unpeeled garlic cloves with the heel of your hand and add to the pan. Pick in the grapes.                                      ",
       "Turn the chicken skin side up, pour in the vermouth and transfer to the oven to roast for 40 minutes, or until the chicken is golden and tender, and the sauce is sticky and reduced.                                      ",
-      "Add a splash of water to the pan and give it a gentle shimmy to pick up all the sticky bits. Pick over the tarragon, and dish up.                                      "
+      "Add a splash of water to the pan and give it a gentle shimmy to pick up all the sticky bits. Pick over the tarragon, and dish up.                                      ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975478.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975478.jpg?tr=w-330",
   },
   {
     recipe_id: "47",
@@ -480,7 +480,7 @@ const sampleRecipes = [
       "seeded wholemeal bread",
       "garlic",
       "lemon",
-      "rocket                                   "
+      "rocket                                   ",
     ],
     ingredientsQuantities: ["240 g", "150 g", "1 clove", "1", "50 g"],
     calories: "366",
@@ -498,272 +498,17 @@ const sampleRecipes = [
       "Tear the bread into a food processor, then peel, chop and add the garlic, and blitz into fairly fine crumbs.                                        ",
       "Pour the crumbs over the chicken, roughly pat on to each side, then re-cover with the paper and whack again, to hammer the crumbs into the chicken and flatten them further.                                        ",
       "Put the pan on a medium heat. Fry the crumbed chicken in 1 tablespoon of olive oil for 3 minutes on each side, or until crisp, golden and cooked through.                                        ",
-      "Slice, plate up, season to perfection with sea salt and black pepper, sprinkle with lemon-dressed rocket, and serve with lemon wedges, for squeezing over.                                        "
+      "Slice, plate up, season to perfection with sea salt and black pepper, sprinkle with lemon-dressed rocket, and serve with lemon wedges, for squeezing over.                                        ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89080977.jpg?tr=w-330"
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89080977.jpg?tr=w-330",
   },
-  {
-    recipe_id: "48",
-    name: "Harissa chicken traybake                                        ",
-    ingredients: [
-      "mixed-colour peppers",
-      "red onions",
-      "whole free-range chicken",
-      "rose harissa",
-      "fresh mint                                   "
-    ],
-    ingredientsQuantities: ["4", "2", "1200 g", "4 tsp", "30 g"],
-    calories: "297",
-    protein: "35",
-    carbohydrates: "13.9",
-    fat: "11.4",
-    saturates: "2.7",
-    sugars: "12.2",
-    salt: "0.9",
-    fibre: "5.8",
-    cooking_difficulty: "2",
-    cooking_time_mins: "68",
-    method: [
-      "Preheat the oven to 180ºC/350ºF/gas 4.                                          ",
-      "Deseed the peppers and tear into big chunks, peel and quarter the onions and break apart into petals, then place it all in a 30cm x 40cm roasting tray.                                          ",
-      "Use a large sharp knife to carefully cut down the back of the chicken, so you can open it out flat, then score the legs. Add to the tray with the harissa, and a little sea salt, black pepper and red wine vinegar. Toss well, making sure you get into all the nooks and crannies of the chicken.                                          ",
-      "Sit the chicken flat on top of the veg, skin side up, and roast it all for 50 minutes, or until gnarly and cooked through. Pick over the mint leaves before dishing up.                                          "
-    ],
-    url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89080991.jpg?tr=w-330"
-  },
-  {
-    recipe_id: "45",
-    name: "Harissa chicken traybake                                        ",
-    ingredients: [
-      "mixed-colour peppers",
-      "red onions",
-      "whole free-range chicken",
-      "rose harissa",
-      "fresh mint                                   "
-    ],
-    ingredientsQuantities: ["4", "2", "1200 g", "4 tsp", "30 g"],
-    calories: "297",
-    protein: "35",
-    carbohydrates: "13.9",
-    fat: "11.4",
-    saturates: "2.7",
-    sugars: "12.2",
-    salt: "0.9",
-    fibre: "5.8",
-    cooking_difficulty: "2",
-    cooking_time_mins: "68",
-    method: [
-      "Preheat the oven to 180ºC/350ºF/gas 4.                                          ",
-      "Deseed the peppers and tear into big chunks, peel and quarter the onions and break apart into petals, then place it all in a 30cm x 40cm roasting tray.                                          ",
-      "Use a large sharp knife to carefully cut down the back of the chicken, so you can open it out flat, then score the legs. Add to the tray with the harissa, and a little sea salt, black pepper and red wine vinegar. Toss well, making sure you get into all the nooks and crannies of the chicken.                                          ",
-      "Sit the chicken flat on top of the veg, skin side up, and roast it all for 50 minutes, or until gnarly and cooked through. Pick over the mint leaves before dishing up.                                          "
-    ],
-    url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975484.jpg?tr=w-330"
-  },
-  {
-    recipe_id: "54",
-    name: "Gnarly peanut chicken",
-    ingredients: [
-      "free-range skinless chicken breasts",
-      "limes",
-      "garlic",
-      "peanut butter",
-      "fresh red chillies                                   "
-    ],
-    ingredientsQuantities: ["240 g", "2", "4 cloves", "2 tbs", "1.5"],
-    calories: "405",
-    protein: "38.6",
-    carbohydrates: "6",
-    fat: "25",
-    saturates: "4.6",
-    sugars: "1.8",
-    salt: "0.9",
-    fibre: "1.8",
-    cooking_difficulty: "2",
-    cooking_time_mins: "12",
-    method: [
-      "Turn the grill on to medium-high.                                              ",
-      "Score the chicken breasts in a criss-cross fashion, rub with 1 tablespoon of olive oil, a pinch of sea salt and black pepper and the finely grated zest of 1 lime.                                              ",
-      "Place criss-cross side down in a cold 26cm non-stick ovenproof frying pan and put it on a medium-high heat, while you peel and finely grate the garlic into a bowl.                                              ",
-      "Squeeze in the juice from 1½ limes, stir in the peanut butter and loosen with enough water to give you a spoonable consistency.                                              ",
-      "Finely slice the chilli, then mix (as much as you dare!) through the sauce, taste and season to perfection.                                              ",
-      "Flip the chicken over, spoon over the sauce, then transfer to the grill, roughly 10cm from the heat, for 5 minutes, or until gnarly and cooked through.                                              ",
-      "Finely grate over the remaining lime zest, then drizzle with 1 teaspoon of extra virgin olive oil. Serve with lime wedges, for squeezing over.                                              "
-    ],
-    url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975511.jpg?tr=w-330"
-  },
-  {
-    recipe_id: "49",
-    name: "Sticky kickin' wings                                              ",
-    ingredients: [
-      "sesame seeds",
-      "large free-range chicken wings",
-      "teriyaki sauce",
-      "fresh red chilli",
-      "spring onions"
-    ],
-    ingredientsQuantities: ["1 tbs", "4", "2 tbs", "1", "2"],
-    calories: "306",
-    protein: "27.1",
-    carbohydrates: "7.4",
-    fat: "18.6",
-    saturates: "4.9",
-    sugars: "6.2",
-    salt: "1.4",
-    fibre: "0",
-    cooking_difficulty: "2",
-    cooking_time_mins: "46",
-    method: [
-      "Toast the sesame seeds in a dry 20cm non-stick frying pan on a medium heat until lightly golden, then remove to a plate.                                             ",
-      "Still on the heat, sit the wings in the pan – they should fit snugly. Let them colour for 1 minute on each side, then add the teriyaki and just cover the wings with water.                                                ",
-      "Halve the chilli lengthways and add to the pan. Simmer for 35 to 40 minutes, or until the chicken is tender and the sauce is nice and sticky, turning occasionally.                                                ",
-      "Add a splash of red wine vinegar to the pan and jiggle around to pick up the gnarly bits.                                                ",
-      "Trim and finely slice the spring onions, scatter them over the chicken with the toasted sesame seeds, and get stuck in.                                                "
-    ],
-    url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975511.jpg?tr=w-330"
-  },
-
-  {
-    recipe_id: "50",
-    name:
-      "Pear & gorgonzola farfalle                                                ",
-    ingredients: [
-      "dried farfalle",
-      "gorgonzola cheese",
-      "red chicory",
-      "super-ripe pears",
-      "shelled unsalted walnut halves"
-    ],
-    ingredientsQuantities: ["150 g", "75 g", "2", "2", "30 g"],
-    calories: "575",
-    protein: "20.1",
-    carbohydrates: "73.2",
-    fat: "24.5",
-    saturates: "8.5",
-    sugars: "19.4",
-    salt: "1.3",
-    fibre: "6.8",
-    cooking_difficulty: "2",
-    cooking_time_mins: "15",
-    method: [
-      "Cook the pasta in a medium pan of boiling salted water according to the packet instructions, then drain, reserving a mugful of cooking water.                                                  ",
-      "Melt the cheese in a heatproof bowl above the pasta as it cooks, removing carefully when gooey.                                                  ",
-      "Meanwhile, slice the radicchio 1cm thick. Place it in a large dry non-stick frying pan on a high heat to char for 5 minutes, turning halfway.                                                  ",
-      "Peel the pears with a speed-peeler, then quarter, core and finely slice lengthways. Toss into the pan, crumble in most of the walnuts, add a splash of pasta cooking water, reduce to a medium heat and pop the lid on, then leave to caramelize slightly.                                                  ",
-      "Toss the drained pasta and oozy Gorgonzola into the pear pan with a splash of red wine vinegar, and a splash of reserved cooking water, if needed.                                                  ",
-      "Taste, season to perfection with sea salt and black pepper, crumble over the remaining walnuts and drizzle with 1 teaspoon of extra virgin olive oil.                                                  "
-    ],
-    url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89080982.jpg?tr=w-330"
-  },
-  {
-    recipe_id: "51",
-    name: "Asian fried eggs                                                ",
-    ingredients: [
-      "springs onions",
-      "fresh mixed-colour chillies",
-      "mixed sesame seeds",
-      "free-range eggs",
-      "hoisin sauce"
-    ],
-    ingredientsQuantities: ["60 g", "1.5", "2 tbs", "4", "2"],
-    calories: "350",
-    protein: "17.6",
-    carbohydrates: "7.4",
-    fat: "18.6",
-    saturates: "4.9",
-    sugars: "6.2",
-    salt: "1.4",
-    fibre: "0",
-    cooking_difficulty: "2",
-    cooking_time_mins: "10",
-    method: [
-      "Trim the spring onions, very finely slice at an angle with the chillies, pop both into a bowl of ice-cold water, add a swig of red wine vinegar and put aside.                                                  ",
-      "Place a large non-stick frying pan on a medium-high heat and lightly toast the sesame seeds for 1 minute.                                                  ",
-      "Drizzle in 1 tablespoon of olive oil, then crack in the eggs. Put a lid on the pan, and fry to your liking.                                                  ",
-      "Place the eggs on your plates – I like one facing up and one facing down.                                                  ",
-      "From a height, drizzle over the hoisin (loosening with a splash of water first, if needed).                                                  ",
-      "Drain and scatter over the spring onions and chillies, stab the yolks, and enjoy.                                                  "
-    ],
-    url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89080974.jpg?tr=w-330"
-  },
-  {
-    recipe_id: "52",
-    name:
-      "Spicy 'nduja vongole                                                    ",
-    ingredients: [
-      "dried linguine",
-      "clams , scrubbed, from sustainable sources",
-      "higher-welfare ’nduja",
-      "fresh flat-leaf parsley",
-      "light rosé wine"
-    ],
-    ingredientsQuantities: ["150 g", "500 g", "20 g", "15 g", "100 ml"],
-    calories: "556",
-    protein: "41.9",
-    carbohydrates: "62.5",
-    fat: "12.5",
-    saturates: "2.1",
-    sugars: "2.9",
-    salt: "0.6",
-    fibre: "2.2",
-    cooking_difficulty: "2",
-    cooking_time_mins: "15",
-    method: [
-      "Cook the pasta in a pan of boiling salted water according to the packet instructions, draining 1 minute early and reserving a mugful of cooking water.                                                      ",
-      "Meanwhile, sort through the clams, giving any that aren’t tightly closed a tap. If they don’t close, discard them.                                                      ",
-      "Tear the ’nduja into a large cold non-stick frying pan, add 1 tablespoon of olive oil, place on a medium heat and let the ’nduja melt while you finely chop the parsley (stalks and all).                                                      ",
-      "Stir most of the parsley into the ’nduja pan with the clams and rosé, and put the lid on.                                                      ",
-      "After 3 or 4 minutes the clams will start to open – keep jiggling the pan until they’ve all opened, then remove from the heat, discarding any unopened clams.                                                      ",
-      "Toss the drained pasta into the clam pan with a splash of reserved cooking water and simmer for 1 minute. Taste and season to perfection with sea salt and black pepper, if needed.                                                      ",
-      "Dish up, drizzle with a little extra virgin olive oil and scatter over the remaining parsley, and tuck in."
-    ],
-    url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975493.jpg?tr=w-330"
-  },
-  {
-    recipe_id: "53",
-    name:
-      "Garlic mushroom pasta                                                      ",
-    ingredients: [
-      "dried trofie , or fusilli",
-      "garlic       ",
-      "mixed mushrooms",
-      "Parmesan cheese",
-      "half-fat crème fraîche"
-    ],
-    ingredientsQuantities: ["150 g", "2 cloves", "250 g", "25 g", "2 tbs"],
-    calories: "402",
-    protein: "16.8",
-    carbohydrates: "58.1",
-    fat: "13",
-    saturates: "5.7",
-    sugars: "3.7",
-    salt: "0.8",
-    fibre: "3.6",
-    cooking_difficulty: "2",
-    cooking_time_mins: "16",
-    method: [
-      "Cook the pasta in a pan of boiling salted water according to the packet instructions, then drain, reserving a mugful of cooking water.                                                        ",
-      "Meanwhile, peel and finely slice the garlic. Place it in a large non-stick frying pan on a medium-high heat with ½ a tablespoon of olive oil, followed 1 minute later by the mushrooms, tearing up any larger ones.                                                        ",
-      "Season with sea salt and black pepper, and cook for 8 minutes, or until golden, tossing regularly.                                                        ",
-      "Toss the drained pasta into the mushroom pan with a splash of reserved cooking water.                                                        ",
-      "Finely grate in most of the Parmesan, stir in the crème fraîche, taste, season to perfection, and dish up, finishing with a final grating of Parmesan.                                                        "
-    ],
-    url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/73711714.jpg?tr=w-330"
-  }
 ];
+const colors = ["#FFC9D9", "#FFF4BA", "#65676F", "#C4C4C4", "#FFF4BA"]; // CORRECT THIS TO COLOR SCHEME
 
 const originalData = sampleRecipes.map((item, index) => ({
-  text: item.name + "Insert whatever info you want here" + item.calories,
-  color: colors[index % colors.length]
+  text: item.name + "cals" + item.calories,
+  color: colors[index % colors.length],
 }));
 
 const App = () => {
@@ -775,27 +520,27 @@ const App = () => {
 
   useEffect(() => {
     let proteins = sampleRecipes
-      .map(item => +item.protein)
+      .map((item) => +item.protein)
       .reduce((prev, curr) => prev + curr, 0);
     setProtein(Math.round(proteins));
   }, []);
 
   useEffect(() => {
     const caloriesTot = sampleRecipes
-      .map(item => +item.calories)
+      .map((item) => +item.calories)
       .reduce((prev, curr) => prev + curr, 0);
     setCaloriesTot(Math.round(caloriesTot));
   }, []);
   useEffect(() => {
     const carbohydrated = sampleRecipes
-      .map(item => +item.carbohydrates)
+      .map((item) => +item.carbohydrates)
       .reduce((prev, curr) => prev + curr, 0);
-    setCarbohydrate(carbohydrated);
+    setCarbohydrate(Math.round(carbohydrated));
   }, []);
 
   useEffect(() => {
     const fatty = sampleRecipes
-      .map(item => +item.fat)
+      .map((item) => +item.fat)
       .reduce((prev, curr) => prev + curr, 0);
     setFat(fatty);
   }, []);
@@ -811,12 +556,13 @@ const App = () => {
     setCaloriesTot(caloriesTot * 2);
   }
 
-  const keyExtractor = item => item.text;
+  const keyExtractor = (item) => item.text;
 
-  const renderItem = ({ item, drag }) => (
+  const renderItem = ({ item, drag, index }) => (
     <TouchableOpacity
       style={[styles.item, { backgroundColor: item.color }]}
       onLongPress={drag}
+      onPress={() => console.log(item)}
     >
       <Text>{item.text}</Text>
     </TouchableOpacity>
@@ -824,41 +570,70 @@ const App = () => {
 
   return (
     <View style={styles.margin}>
-      <Text style={styles.mainTitle}> Monday</Text>
       <FlatList
+        style={styles.BG}
         data={data}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         onMoveEnd={setData}
       />
-      <Text> Nutrition Breakdown</Text>
-      <Text> Calories: {caloriesTot}g </Text>
-      <Text> Protein: {protein}g </Text>
-      <Text> Carbohydrates: {carbohydrate}g </Text>
-      <Text> Fat: {fat}g </Text>
-      <Button title="Double the portion size" onPress={duplicate} />
+      <View style={styles.border}>
+        <Text> Nutrition Breakdown</Text>
+        <Text>
+          {" "}
+          Calories: Weekly {caloriesTot}kcal / {Math.round(caloriesTot / 7)}kcal
+          per day{" "}
+        </Text>
+        <Text>
+          {" "}
+          Protein: Weekly {protein}g / {Math.round(protein)}g per day
+        </Text>
+        <Text>
+          {" "}
+          Carbohydrates: Weekly {carbohydrate}g / {Math.round(carbohydrate / 7)}
+          g per day
+        </Text>
+        <Text>
+          {" "}
+          Fat: Weekly {fat}g / {Math.round(fat / 7)}g per day{" "}
+        </Text>
+        <Button title="Double the portion size" onPress={duplicate} />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  BG: {
+    backgroundColor: "black",
+  },
   mainTitle: {
     fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
     fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
     marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
-    alignSelf: FORMAT_headings.F_heading_alignSelf
+    alignSelf: FORMAT_headings.F_heading_alignSelf,
   },
   item: {
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
-    width: 360,
-    height: 70,
+    width: 300,
+    height: 30,
     padding: 10,
-    margin: 5
+    margin: 5,
+    fontSize: 10,
   },
   margin: {
-    marginTop: 20
-  }
+    marginTop: 20,
+    backgroundColor: "white",
+    borderBottomColor: "black",
+  },
+  border: {
+    borderBottomWidth: 4,
+
+    borderRightColor: "black",
+    borderRightWidth: 2,
+    backgroundColor: COLS.C_BG,
+  },
 });
 
 export default App;

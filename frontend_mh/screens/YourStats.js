@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
 import { COLS } from "./COLS";
@@ -30,7 +30,25 @@ import {
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 import { Pedometer } from "expo-sensors";
 
-export default function YourStats() {
+ const url =  "https://quotes.rest/qod"
+ 
+
+
+ 
+export default function useFetch(url) {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  async function fetchUrl() {
+    const response = await fetch(url);
+    const json = await response.json();
+    setData(json);
+    setLoading(false);
+  }
+  useEffect(() => {
+    fetchUrl();
+  }, []);
+  return [data, loading];
+
   return (
     <View style={styles.container}>
       <View style={styles.graph1}>

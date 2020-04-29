@@ -172,7 +172,7 @@ export default function Registerscreen({ navigation }) {
           <TextInput
             style={styles.inputField}
             onChangeText={nameInput}
-            placeholder="Namett"
+            placeholder="Name"
             placeholderTextColor="black"
             isRequired
           />
