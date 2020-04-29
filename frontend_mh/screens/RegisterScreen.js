@@ -11,14 +11,14 @@ import {
   Dimensions,
   Alert,
   Button,
-  Image,
+  Image
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
+  FORMAT_moreChoicesContainer
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -28,7 +28,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe,
+  FORMAT_mainRecipe
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -37,7 +37,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
+  FORMAT_navButtonBackground
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -148,7 +148,7 @@ export default function Registerscreen({ navigation }) {
         email,
         birthday,
         gender,
-        mother,
+        mother
       });
 
       const data = {
@@ -156,7 +156,7 @@ export default function Registerscreen({ navigation }) {
         email_address: email,
         birthday,
         mother,
-        gender,
+        gender
       };
       console.log(data);
       navigation.navigate("Register2", { data });
@@ -169,6 +169,7 @@ export default function Registerscreen({ navigation }) {
     <View style={styles.container}>
       <View>
         <View style={styles.margin}>
+          <Text style={styles.title}>Please Enter Details Below:</Text>
           <TextInput
             style={styles.inputField}
             onChangeText={nameInput}
@@ -178,7 +179,7 @@ export default function Registerscreen({ navigation }) {
           />
           <TextInput
             style={styles.inputField}
-            placeholder="Email"
+            placeholder=" Email"
             onChangeText={emailInput}
             keyboardType="email-address"
             placeholderTextColor="black"
@@ -229,7 +230,7 @@ export default function Registerscreen({ navigation }) {
             checked={mother}
             onPress={motherInput}
           />
-          <Text> Select Gender</Text>
+          <Text style={styles.title}>Select Gender: </Text>
           <View>
             <Text style={styles.motherText}>Female </Text>
             <CheckBox
@@ -309,30 +310,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: screenWidth,
-    backgroundColor: COLS.C_BG,
-    alignContent: "center",
-    justifyContent: "center",
+    backgroundColor: COLS.C_BG
   },
   row: {
-    flexDirection: "row",
+    flexDirection: "row"
   },
   mover: {
-    left: 110,
+    left: 110
   },
   margin: {
-    marginTop: 80,
+    marginTop: 30
   },
   arrow: {
     width: 40,
     height: 20,
     marginHorizontal: 10,
-    marginVertical: 20,
+    marginVertical: 20
   },
   tick: {
     width: 20,
     height: 20,
-    left: 250,
-    bottom: 10,
+    left: 180,
+    bottom: 15
   },
   inputField: {
     marginVertical: 5,
@@ -340,7 +339,7 @@ const styles = StyleSheet.create({
     width: 200,
     alignSelf: "center",
     height: 50,
-    borderRadius: 5,
+    borderRadius: 5
   },
   buttonflex: {
     alignSelf: "center",
@@ -348,7 +347,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginVertical: 10,
-    padding: 10,
+    padding: 10
   },
   Direction: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
@@ -356,26 +355,30 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 5,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   row: {
-    flexDirection: "row",
+    flexDirection: "row"
   },
   box: {
     width: 40,
     backgroundColor: COLS.C5_LIGHT_TEXT,
     margin: 10,
-    left: 110,
+    left: 98,
     borderRadius: 5,
-    alignSelf: "center",
+    alignSelf: "center"
   },
   position: {
     flexDirection: "row",
     top: 40,
-    marginTop: 30,
+    marginTop: 30
   },
   motherText: {
-    top: 25,
-    left: 150,
+    top: 20,
+    left: 100
   },
+  title: {
+    left: 10,
+    fontWeight: "bold"
+  }
 });
