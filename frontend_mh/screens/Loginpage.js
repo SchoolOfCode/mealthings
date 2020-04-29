@@ -84,22 +84,22 @@ export default function Loginpage({ navigation }) {
         <View>
           <Text style={styles.tagLine}>Eat Well. Feel Amazing.</Text>
         </View>
-      </View>
-      <TextInput
-        style={styles.inputField}
-        placeholder=" enter username"
-        value={name}
-        onChangeText={tracked}
-        placeholderTextColor="white"
-      />
-      <TextInput
-        style={styles.inputField}
-        placeholder=" enter password"
-        value={password}
-        onChangeText={tracker}
-        placeholderTextColor="white"
-      />
 
+        <TextInput
+          style={styles.inputField}
+          placeholder=" enter username"
+          value={name}
+          onChangeText={tracked}
+          placeholderTextColor="white"
+        />
+        <TextInput
+          style={styles.inputField}
+          placeholder=" enter password"
+          value={password}
+          onChangeText={tracker}
+          placeholderTextColor="white"
+        />
+      
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text>Login</Text>
       </TouchableOpacity>
