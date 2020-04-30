@@ -169,12 +169,12 @@ export default function Registerscreen({ navigation }) {
     <View style={styles.container}>
       <View>
         <View style={styles.margin}>
-          <Text style={styles.title}>Please Enter Details Below:</Text>
+          <Text style={styles.title}>Create Your Account:</Text>
           <TextInput
             style={styles.inputField}
             onChangeText={nameInput}
             placeholder="Name"
-            placeholderTextColor="black"
+            placeholderTextColor="#FDFFF7"
             isRequired
           />
           <TextInput
@@ -182,14 +182,14 @@ export default function Registerscreen({ navigation }) {
             placeholder=" Email"
             onChangeText={emailInput}
             keyboardType="email-address"
-            placeholderTextColor="black"
+            placeholderTextColor="#FDFFF7"
           />
           <View style={styles.row}>
             <TextInput
               style={styles.box}
               placeholder="DD"
               onChangeText={DOBinput}
-              placeholderTextColor="black"
+              placeholderTextColor="#FDFFF7"
               keyboardType="numeric"
               maxLength={2}
             />
@@ -197,7 +197,7 @@ export default function Registerscreen({ navigation }) {
               style={styles.box}
               placeholder="MM"
               onChangeText={DOBinput2}
-              placeholderTextColor="black"
+              placeholderTextColor="#FDFFF7"
               keyboardType="numeric"
               maxLength={2}
             />
@@ -205,7 +205,7 @@ export default function Registerscreen({ navigation }) {
               style={styles.box}
               placeholder="YYYY"
               onChangeText={DOBinput3}
-              placeholderTextColor="black"
+              placeholderTextColor="#FDFFF7"
               keyboardType="numeric"
               maxLength={4}
             />
@@ -232,7 +232,7 @@ export default function Registerscreen({ navigation }) {
           />
           <Text style={styles.title}>Select Gender: </Text>
           <View>
-            <Text style={styles.motherText}>Female </Text>
+            <Text style={styles.female}>Female </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -249,7 +249,7 @@ export default function Registerscreen({ navigation }) {
               checked={female}
               onPress={femaleHandler}
             />
-            <Text style={styles.motherText}>Male </Text>
+            <Text style={styles.male}>Male </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -266,7 +266,7 @@ export default function Registerscreen({ navigation }) {
               checked={male}
               onPress={maleHandler}
             />
-            <Text style={styles.motherText}> Other </Text>
+            <Text style={styles.other}> Other </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -288,16 +288,19 @@ export default function Registerscreen({ navigation }) {
         <View style={styles.buttonflex}>
           <View>
             <TouchableOpacity
-              style={styles.Direction}
+              style={styles.directionBack}
               onPress={() => navigation.goBack()}
             >
-              <Text>Back</Text>
+              <Text style={styles.buttonText}>Back</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonText}>
-            <Button title="click" onPress={confirmChoices} />
-            <TouchableOpacity style={styles.Direction} onPress={SubmitHandler}>
-              <Text>Next</Text>
+            <Button title="" onPress={confirmChoices} />
+            <TouchableOpacity
+              style={styles.directionNext}
+              onPress={SubmitHandler}
+            >
+              <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -331,15 +334,29 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     left: 180,
-    bottom: 15
+    bottom: 15,
+    borderWidth: 3,
+    borderColor: COLS.C6_WHITE_TEXT
   },
   inputField: {
     marginVertical: 5,
-    backgroundColor: COLS.C5_LIGHT_TEXT,
+    backgroundColor: COLS.C_BG,
     width: 200,
     alignSelf: "center",
     height: 50,
-    borderRadius: 5
+    borderRadius: 5,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+
+    elevation: 5,
+    color: COLS.C6_WHITE_TEXT
   },
   buttonflex: {
     alignSelf: "center",
@@ -349,24 +366,69 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 10
   },
-  Direction: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
+  directionBack: {
+    backgroundColor: COLS.C_BG,
     width: 80,
     height: 30,
     borderRadius: 5,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    top: -30,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+
+    elevation: 5
+  },
+  directionNext: {
+    backgroundColor: COLS.C_BG,
+    width: 80,
+    height: 30,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    top: -61,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+
+    elevation: 5
   },
   row: {
     flexDirection: "row"
   },
   box: {
-    width: 40,
-    backgroundColor: COLS.C5_LIGHT_TEXT,
+    width: 45,
+    height: 25,
+    backgroundColor: COLS.C_BG,
     margin: 10,
-    left: 98,
+    left: 85,
     borderRadius: 5,
-    alignSelf: "center"
+    alignSelf: "center",
+    color: COLS.C6_WHITE_TEXT,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+
+    elevation: 5
   },
   position: {
     flexDirection: "row",
@@ -375,10 +437,39 @@ const styles = StyleSheet.create({
   },
   motherText: {
     top: 20,
-    left: 100
+    left: 100,
+    color: COLS.C6_WHITE_TEXT,
+    fontWeight: "bold"
   },
   title: {
     left: 10,
+    fontWeight: "bold",
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: 24,
+    padding: 10,
+    top: -10
+  },
+  female: {
+    top: 19,
+    left: 120,
+    color: COLS.C6_WHITE_TEXT,
+    fontWeight: "bold"
+  },
+  male: {
+    top: 19,
+    left: 130,
+    color: COLS.C6_WHITE_TEXT,
+    fontWeight: "bold"
+  },
+  other: {
+    top: 19,
+    left: 125,
+    color: COLS.C6_WHITE_TEXT,
+    fontWeight: "bold"
+  },
+  buttonText: {
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
     fontWeight: "bold"
   }
 });
