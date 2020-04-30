@@ -68,7 +68,7 @@ router.get("/:userId", async (req, res) => {
 // Post request to add/insert new user
 router.post("/", async (req, res) => {
   const { body } = req;
-  const { email, password } = body;
+  const { email_address, password } = body;
   if (!body || Object.keys(body).length < 4) {
     return res.status(400).json({
       message:
@@ -76,7 +76,7 @@ router.post("/", async (req, res) => {
       success: false,
     });
   }
-  if (await checkEmail(email)) {
+  if (await checkEmail(email_address)) {
     return res
       .status(401)
       .json({ message: "Email is already in use!", success: false });

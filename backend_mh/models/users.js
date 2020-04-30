@@ -18,6 +18,7 @@ async function getUserById(user_id) {
 // Add a function to check whether the user's email already exists in the database.
 async function checkEmail(emailInBodyOfRequest) {
   const emails = await query("SELECT email_address FROM users");
+  console.log("Emails: ", emails, "single email:", emailInBodyOfRequest);
   return emails.rows
     .map((item) => item.email_address)
     .includes(emailInBodyOfRequest);
