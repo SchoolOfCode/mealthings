@@ -7,6 +7,11 @@ import {
   SafeAreaView,
   Button,
   ScrollView,
+  Alert,
+  Modal,
+  TouchableHighlight,
+  CheckBox,
+  Image,
 } from "react-native";
 
 import FlatList from "react-native-drag-flatlist";
@@ -507,8 +512,9 @@ const sampleRecipes = [
 const colors = ["#FFC9D9", "#FFF4BA", "#65676F", "#C4C4C4", "#FFF4BA"]; // CORRECT THIS TO COLOR SCHEME
 
 const originalData = sampleRecipes.map((item, index) => ({
-  text: item.name + "cals" + item.calories,
+  text: item.name + item.calories + "kcal",
   color: colors[index % colors.length],
+  backgroundColor: "red",
 }));
 
 const App = () => {
@@ -517,7 +523,45 @@ const App = () => {
   const [carbohydrate, setCarbohydrate] = useState(0);
   const [fat, setFat] = useState(0);
   const [caloriesTot, setCaloriesTot] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [display, setDisplay] = useState();
+  const [good, setGood] = useState(false);
+  const [vgood, setVGood] = useState(false);
+  const [egood, setEGood] = useState(false);
 
+  function goodHandler() {
+    if (good == false) {
+      setGood(true);
+      setEGood(false);
+      setVGood(false);
+    } else if (good == true) {
+      setGood(false);
+    }
+  }
+  function greatHandler() {
+    if (vgood == false) {
+      setVGood(true);
+      setEGood(false);
+      setGood(false);
+    } else if (vgood == true) {
+      setVGood(false);
+    }
+  }
+  function excellentHandler() {
+    if (egood == false) {
+      setEGood(true);
+      setVGood(false);
+      setGood(false);
+    } else if (egood == true) {
+      setEGood(false);
+    }
+  }
+
+  function rating() {
+    console.log;
+
+    Alert.alert("Thanks for your feedback");
+  }
   useEffect(() => {
     let proteins = sampleRecipes
       .map((item) => +item.protein)
@@ -556,20 +600,116 @@ const App = () => {
     setCaloriesTot(caloriesTot * 2);
   }
 
-  const keyExtractor = (item) => item.text;
+  const keyExtractor = (item) => {
+    () => {
+      item.text, console.log(item);
+    };
+  };
 
   const renderItem = ({ item, drag, index }) => (
     <TouchableOpacity
       style={[styles.item, { backgroundColor: item.color }]}
       onLongPress={drag}
-      onPress={() => console.log(item)}
+      onPress={() => {
+        toggleModal(item), console.log(index);
+      }}
     >
       <Text>{item.text}</Text>
     </TouchableOpacity>
   );
-
+  function toggleModal(item) {
+    setDisplay(item.text);
+    if (modalVisible == false) {
+      setModalVisible(true);
+    }
+  }
   return (
     <View style={styles.margin}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.headingText}>{display}</Text>
+            <Text>How was your meal?</Text>
+            <View style={styles.row}>
+              <CheckBox
+                checkedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/check-box.png")}
+                  />
+                }
+                uncheckedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/blank-square.png")}
+                  />
+                }
+                checked={good}
+                onPress={goodHandler}
+              />
+              <Text style={styles.modalext}>Bad </Text>
+              <CheckBox
+                checkedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/check-box.png")}
+                  />
+                }
+                uncheckedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/blank-square.png")}
+                  />
+                }
+                checked={vgood}
+                onPress={greatHandler}
+              />
+              <Text style={styles.modalText}> Okay </Text>
+
+              <CheckBox
+                checkedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/check-box.png")}
+                  />
+                }
+                uncheckedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/blank-square.png")}
+                  />
+                }
+                checked={egood}
+                onPress={excellentHandler}
+              />
+              <Text style={styles.modalText}> Fantastic </Text>
+            </View>
+            <TouchableOpacity onPress={rating}>
+              <Text>Submit</Text>
+            </TouchableOpacity>
+            <TouchableHighlight
+              style={{
+                ...styles.openButton,
+                backgroundColor: "#2196F3",
+                marginVertical: 17,
+              }}
+              onPress={() => {
+                setModalVisible(false);
+              }}
+            >
+              <Text style={styles.textStyle}>Hide Modal</Text>
+            </TouchableHighlight>
+          </View>
+        </View>
+      </Modal>
+
       <FlatList
         style={styles.BG}
         data={data}
@@ -577,33 +717,37 @@ const App = () => {
         renderItem={renderItem}
         onMoveEnd={setData}
       />
+
       <View style={styles.border}>
-        <Text> Nutrition Breakdown</Text>
-        <Text>
-          {" "}
-          Calories: Weekly {caloriesTot}kcal / {Math.round(caloriesTot / 7)}kcal
-          per day{" "}
-        </Text>
-        <Text>
-          {" "}
-          Protein: Weekly {protein}g / {Math.round(protein)}g per day
-        </Text>
-        <Text>
-          {" "}
-          Carbohydrates: Weekly {carbohydrate}g / {Math.round(carbohydrate / 7)}
-          g per day
-        </Text>
-        <Text>
-          {" "}
-          Fat: Weekly {fat}g / {Math.round(fat / 7)}g per day{" "}
-        </Text>
-        <Button title="Double the portion size" onPress={duplicate} />
+        <ScrollView style={styles.size}>
+          <Text style={styles.headingText}> Nutrition Breakdown</Text>
+          <Text>
+            {" "}
+            Calories: Weekly {caloriesTot}kcal / {Math.round(caloriesTot / 7)}
+            kcal per day{" "}
+          </Text>
+          <Text>
+            {" "}
+            Protein: Weekly {protein}g / {Math.round(protein)}g per day
+          </Text>
+          <Text>
+            {" "}
+            Carbohydrates: Weekly {carbohydrate}g /{" "}
+            {Math.round(carbohydrate / 7)}g per day
+          </Text>
+          <Text>
+            {" "}
+            Fat: Weekly {fat}g / {Math.round(fat / 7)}g per day{" "}
+          </Text>
+          <Button title="Double the portion size" onPress={duplicate} />
+        </ScrollView>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  size: {},
   BG: {
     backgroundColor: "black",
   },
@@ -614,25 +758,71 @@ const styles = StyleSheet.create({
     alignSelf: FORMAT_headings.F_heading_alignSelf,
   },
   item: {
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: "space-around",
     width: 300,
     height: 30,
     padding: 10,
     margin: 5,
-    fontSize: 10,
+    fontSize: 5,
+    textAlign: "justify",
   },
   margin: {
     marginTop: 20,
-    backgroundColor: "white",
+    backgroundColor: COLS.C_BG,
     borderBottomColor: "black",
   },
   border: {
-    borderBottomWidth: 4,
-
     borderRightColor: "black",
-    borderRightWidth: 2,
-    backgroundColor: COLS.C_BG,
+    borderColor: "black",
+    backgroundColor: "white",
+    bottom: 10,
+    height: 120,
+    width: 300,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  row: {
+    flexDirection: "row",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  headingText: {
+    marginBottom: 15,
+    textAlign: "center",
+    justifyContent: "space-around",
+    fontWeight: "bold",
   },
 });
 
