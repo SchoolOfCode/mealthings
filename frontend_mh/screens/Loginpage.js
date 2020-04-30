@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     height: 300,
     width: 300,
     left: 41,
-    bottom: 20
+    bottom: 0
   },
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
@@ -145,7 +145,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    fontSize: 16
+    fontSize: 16,
+    top: 25
   },
   button: {
     alignSelf: FORMAT_navButton.F_navButton_alignSelf,
@@ -162,7 +163,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-    elevation: 5
+    elevation: 5,
+    top: 13
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,

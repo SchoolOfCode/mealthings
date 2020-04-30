@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
     margin: FORMAT_logo.F_logo_margin,
     justifyContent: FORMAT_logo.F_logo_justifyContent,
     width: 300,
-    height: 300
+    height: 300,
+    top: -20
   },
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    top: -50
+    top: -90
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
