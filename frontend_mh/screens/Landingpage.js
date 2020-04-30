@@ -45,13 +45,13 @@ export default function App({ navigation }) {
             style={styles.note2}
             onPress={() => navigation.navigate("ShoppingList")}
           >
-            <Text>Shopping List</Text>
+            <Text style={styles.buttonText}>Shopping List</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.note}
             onPress={() => navigation.navigate("TodaysRecipe")}
           >
-            <Text>Today's Recipe</Text>
+            <Text style={styles.buttonText}>Today's Recipe</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.flex}>
@@ -59,24 +59,24 @@ export default function App({ navigation }) {
             style={styles.note}
             onPress={() => navigation.navigate("NewRecipe")}
           >
-            <Text>Random Recipe</Text>
+            <Text style={styles.buttonText}>Random Recipe</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.note2}
             onPress={() => navigation.navigate("YourStats")}
           >
-            <Text>Your Stats</Text>
+            <Text style={styles.buttonText}>Your Stats</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.flex}>
           <TouchableOpacity style={styles.note2}>
-            <Text>Your Preferences</Text>
+            <Text style={styles.buttonText}>Your Preferences</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.note}
             onPress={() => navigation.navigate("Home")}
           >
-            <Text>Logout</Text>
+            <Text style={styles.buttonText}>Logout</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -84,7 +84,7 @@ export default function App({ navigation }) {
         style={styles.todaysMeal}
         onPress={() => navigation.navigate("TodaysRecipe")}
       >
-        <Text>Today's meal</Text>
+        <Text style={styles.buttonText}>Today's Meal</Text>
       </TouchableOpacity>
     </View>
   );
@@ -96,17 +96,10 @@ const styles = StyleSheet.create({
   },
   mealThingsLogo: {
     width: 60,
-    height: 60,
+    height: 20,
     alignSelf: "center"
   },
-  logoCircle: {
-    width: 80,
-    height: 80,
-    borderRadius: 200,
-    backgroundColor: COLS.C_LOGO_BG,
-    left: 170,
-    bottom: 20
-  },
+
   margin: {
     // top: 30,
     backgroundColor: COLS.C_BG
@@ -117,12 +110,22 @@ const styles = StyleSheet.create({
   note: {
     width: 140,
     height: 140,
-    backgroundColor: COLS.C_YELLOW,
+    backgroundColor: COLS.C_BG,
     margin: 10,
     alignSelf: "center",
     alignItems: "center",
-    left: 50,
-    shadowColor: COLS.C5_LIGHT_TEXT,
+    left: 30,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+
+    elevation: 5,
     padding: 10,
     paddingVertical: 50,
     fontSize: 20
@@ -130,23 +133,50 @@ const styles = StyleSheet.create({
   note2: {
     width: 140,
     height: 140,
-    backgroundColor: COLS.C_LOGO_BG,
+    backgroundColor: COLS.C_BG,
     margin: 10,
     alignSelf: "center",
     alignItems: "center",
-    left: 50,
-    shadowColor: COLS.C5_LIGHT_TEXT,
+    left: 30,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
     paddingVertical: 50,
     padding: 10,
     fontSize: 20
   },
   todaysMeal: {
-    top: 70,
-    width: 450,
+    top: 20,
+    width: 200,
     padding: 10,
-    backgroundColor: COLS.C4_DARK_TEXT,
+    backgroundColor: COLS.C_RED,
     justifyContent: "flex-end",
     alignSelf: "center",
-    alignItems: "center"
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5
+  },
+  buttonText: {
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    padding: FORMAT_navButtonText.F_navButtonText_padding,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+    fontSize: 18
   }
 });

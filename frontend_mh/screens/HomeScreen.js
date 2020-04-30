@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginPage from "./Loginpage";
@@ -19,12 +19,13 @@ import SplashScreenExerciseSlow from "./SplashScreenExerciseSlow";
 import SplashScreenExerciseQuick from "./SplashScreenExerciseQuick";
 import LandingPage from "./Landingpage";
 import mealplanner from "./Mealplanner";
+import { COLS } from "./COLS";
 const Stack2 = createStackNavigator();
 export const RecipeContext = createContext({});
 
 AsyncStorage.clear(); // TODO remove this for production.
 
-const _storeRecipes = async (recipeArray) => {
+const _storeRecipes = async recipeArray => {
   try {
     const now = new Date();
     const jsonRecipeArray = await JSON.stringify(recipeArray);
@@ -37,7 +38,7 @@ const _storeRecipes = async (recipeArray) => {
   }
 };
 
-const _retrieveData = async (key) => {
+const _retrieveData = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
@@ -183,16 +184,14 @@ export default function HomeScreen({ navigation }) {
     last_week_food = data.payload[0].this_weeks_meals
       .replace(/"|{|}/g, "")
       .split(",")
-      .map((x) => +x);
+      .map(x => +x);
     // Get total number of recipes
     const totalNumRecipes = (await getTotalNoRecipes()) || 50;
     console.log("totalNumber of recipes", totalNumRecipes);
     // Get 14 random numbers with no duplicates of last weeks meals
-    const tempNumbers = [...Array(totalNumRecipes).keys()].map(
-      (num) => num + 1
-    );
+    const tempNumbers = [...Array(totalNumRecipes).keys()].map(num => num + 1);
     // Check that none of the recipes were in last weeks recipes by getting from database and checking
-    last_week_food.forEach((x) => {
+    last_week_food.forEach(x => {
       const index = tempNumbers.indexOf(x);
       if (index > -1) {
         tempNumbers.splice(index, 1);
@@ -202,23 +201,23 @@ export default function HomeScreen({ navigation }) {
     const randNums = tempNumbers.slice(0, 14);
     // Get the recipes from the database
     console.log("here3");
-    const fetchData = (URI) => {
+    const fetchData = URI => {
       return fetch(URI)
-        .then((response) => response.json())
-        .then((data) => {
+        .then(response => response.json())
+        .then(data => {
           console.log("here7", data);
           return data.payload[0];
         });
     };
     const requests = [];
-    randNums.forEach((num) => {
+    randNums.forEach(num => {
       requests.push(
         fetchData(
           `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
         )
       );
     });
-    Promise.all(requests).then((arrayWithData) => {
+    Promise.all(requests).then(arrayWithData => {
       console.log("All promises resolved. Setting state...");
       setRecipeList(arrayWithData);
       // Save recipes to local storage
@@ -230,7 +229,7 @@ export default function HomeScreen({ navigation }) {
       JSON.stringify({
         last_weeks_meals: last_week_food,
         this_weeks_meals: randNums,
-        last_date_meals_requested: new Date().toISOString(),
+        last_date_meals_requested: new Date().toISOString()
       })
     );
     const patchResponse = await fetch(
@@ -239,13 +238,13 @@ export default function HomeScreen({ navigation }) {
         method: "PATCH",
         mode: "no-cors",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           last_weeks_meals: last_week_food,
           this_weeks_meals: randNums,
-          last_date_meals_requested: new Date().toISOString(),
-        }),
+          last_date_meals_requested: new Date().toISOString()
+        })
       }
     );
     console.log("patchResponse:", patchResponse);
@@ -264,26 +263,26 @@ export default function HomeScreen({ navigation }) {
     const this_week_food = data.payload[0].this_weeks_meals
       .replace(/"|{|}/g, "")
       .split(",")
-      .map((x) => +x);
+      .map(x => +x);
     console.log("This weeks food:", this_week_food);
     // Get the recipes from the database
-    const fetchData = (URI) => {
+    const fetchData = URI => {
       return fetch(URI)
-        .then((response) => response.json())
-        .then((data) => {
+        .then(response => response.json())
+        .then(data => {
           console.log("here5", data);
           return data.payload[0];
         });
     };
     const requests = [];
-    this_week_food.forEach((num) => {
+    this_week_food.forEach(num => {
       requests.push(
         fetchData(
           `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
         )
       );
     });
-    Promise.all(requests).then((arrayWithData) => {
+    Promise.all(requests).then(arrayWithData => {
       console.log("Resolved all promises for re-requested recipes");
       setRecipeList(arrayWithData);
       // Save recipes to local storage
@@ -303,17 +302,17 @@ export default function HomeScreen({ navigation }) {
           <Stack2.Screen
             name="LoginPage"
             component={LoginPage}
-            options={{ title: "Log in" }}
+            options={{ title: "Login" }}
           />
           <Stack2.Screen
             name="Register1"
             component={RegisterScreen}
-            options={{ title: "Register" }}
+            options={{ title: "Sign Up" }}
           />
           <Stack2.Screen
             name="Register2"
             component={RegisterScreen2}
-            options={{ title: "Register" }}
+            options={{ title: "Sign Up" }}
           />
           <Stack2.Screen
             name="Goals"
@@ -358,7 +357,7 @@ export default function HomeScreen({ navigation }) {
           <Stack2.Screen
             name="SplashScreenDrink"
             component={SplashScreenDrink}
-            options={{ title: "Alert" }}
+            options={{ title: "Grab some water!" }}
           />
           <Stack2.Screen
             name="SplashScreenExerciseSlow"
@@ -373,15 +372,21 @@ export default function HomeScreen({ navigation }) {
           <Stack2.Screen
             name="LandingPage"
             component={LandingPage}
-            options={{ title: "LandingPage" }}
+            options={{ title: "Landing Page" }}
           />
           <Stack2.Screen
             name="Mealplanner"
             component={mealplanner}
-            options={{ title: "Mealplanner" }}
+            options={{ title: "Meal Planner" }}
           />
         </Stack2.Navigator>
       </RecipeContext.Provider>
     </NavigationContainer>
   );
 }
+
+// const styles = StyleSheet.create({
+//   background: {
+//     backgroundColor: "black"
+//   }
+// });
