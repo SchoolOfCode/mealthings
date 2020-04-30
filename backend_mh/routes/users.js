@@ -1,11 +1,17 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
+const generator = require("generate-password");
 const {
   getUsers,
   getUserById,
   checkEmail,
   saveNewUser,
+  verifyJwt,
   addUser,
   getToken,
+  getPassword,
+  saveTempPassword,
+  sendTempPasswordEmail,
   patchUser,
 } = require("../models/users");
 const router = express.Router();
@@ -68,7 +74,7 @@ router.get("/:userId", async (req, res) => {
 // Post request to add/insert new user
 router.post("/", async (req, res) => {
   const { body } = req;
-  const { email_address, password } = body;
+  const { email_address } = body;
   if (!body || Object.keys(body).length < 4) {
     return res.status(400).json({
       message:
@@ -106,6 +112,96 @@ router.post("/", async (req, res) => {
       .status(400)
       .json({ message: "Failed to insert user", success: false });
   }
+});
+
+// User login and JWT verification route
+router.post("/login", async (req, res) => {
+  const { authorization } = req.headers;
+  if (authorization) {
+    const token = authorization.split(" ")[1];
+    const verifyResponse = verifyJwt(token);
+    if (verifyResponse) {
+      res.status(200).json({ success: true, message: "Welcome back!" });
+    } else {
+      return res
+        .status(401)
+        .json({ success: false, message: "JWT verification failed!" });
+    }
+  } else {
+    const { email_address, password } = req.body;
+    const { body } = req;
+    if (email_address && password) {
+      const hashedPassword = await getPassword(email_address);
+      if (!hashedPassword) {
+        return res.status(400).json({
+          success: false,
+          message: "Couldn't find a user with that email.",
+        });
+      }
+      const bcryptResult = bcrypt.compareSync(password, hashedPassword);
+      if (bcryptResult) {
+        const token = await getToken(body);
+        if (token) {
+          return res
+            .status(200)
+            .json({ success: true, message: "Welcome back!", token });
+        } else {
+          return res.status(500).json({
+            success: false,
+            message:
+              "Problem generating JWT, internal server error. Please wait and retry login.",
+          });
+        }
+      } else {
+        return res
+          .status(400)
+          .json({ success: false, message: "Incorrect password!" });
+      }
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: "Must supply a username and password!",
+      });
+    }
+  }
+});
+
+// Password reset route
+router.post("/passwordreset", async (req, res) => {
+  //Get user email
+  const { email_address } = req.body;
+  if (!email_address) {
+    return res.status(400).json({
+      success: false,
+      message: "No email address found; password reset unsuccessful.",
+    });
+  }
+  // Generate a random temporary password
+  const randomTempPassword = generator.generate({
+    length: 10,
+    numbers: true,
+  });
+  console.log("Random password:", randomTempPassword);
+  const reply = saveTempPassword(email_address, randomTempPassword);
+  if (!reply) {
+    return res.status(500).json({
+      success: false,
+      message: "Problem inserting recovery password into database.",
+    });
+  }
+  const emailOutcome = await sendTempPasswordEmail(
+    email_address,
+    randomTempPassword
+  );
+  if (emailOutcome) {
+    return res
+      .status(200)
+      .json({ success: true, message: "Password reset email sent." });
+  }
+  return res.status(500).json({
+    success: false,
+    message: "Password reset email not sent; internal server error.",
+  });
 });
 
 // Patch request to update a user
