@@ -27,13 +27,11 @@ export default function HomeScreen2({ navigation }) {
         >
           <Text style={styles.buttonText}>Get Started</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.buttonBackground}>
-          <Text
-            onPress={() => navigation.navigate("LoginPage")}
-            style={styles.buttonText}
-          >
-            Login
-          </Text>
+        <TouchableOpacity
+          style={styles.buttonBackground}
+          onPress={() => navigation.navigate("LoginPage")}
+        >
+          <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
       </View>
     </View>
