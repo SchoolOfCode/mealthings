@@ -14,7 +14,10 @@ export default function HomeScreen2({ navigation }) {
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>
         <View style={styles.logoCircle}>
-          <Image source={require("../assets/images/Mealthings.png")} />
+          <Image
+            style={styles.mealThingsLogo}
+            source={require("../assets/images/Mealthings.png")}
+          />
         </View>
       </View>
       <View style={styles.buttonContainer}>

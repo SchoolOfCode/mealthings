@@ -143,7 +143,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-
     elevation: 5,
     fontSize: 16
   },

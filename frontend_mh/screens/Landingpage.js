@@ -84,7 +84,7 @@ export default function App({ navigation }) {
         style={styles.todaysMeal}
         onPress={() => navigation.navigate("TodaysRecipe")}
       >
-        <Text style={styles.buttonText}>Today's meal</Text>
+        <Text style={styles.buttonText}>Today's Meal</Text>
       </TouchableOpacity>
     </View>
   );
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     margin: 10,
     alignSelf: "center",
     alignItems: "center",
-    left: 50,
+    left: 30,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     margin: 10,
     alignSelf: "center",
     alignItems: "center",
-    left: 50,
+    left: 30,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -153,19 +153,30 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   todaysMeal: {
-    top: 70,
-    width: 450,
+    top: 20,
+    width: 200,
     padding: 10,
     backgroundColor: COLS.C_RED,
     justifyContent: "flex-end",
     alignSelf: "center",
-    alignItems: "center"
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     padding: FORMAT_navButtonText.F_navButtonText_padding,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: 18
   }
 });

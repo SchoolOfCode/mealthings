@@ -169,7 +169,7 @@ export default function Registerscreen({ navigation }) {
     <View style={styles.container}>
       <View>
         <View style={styles.margin}>
-          <Text style={styles.title}>Please Enter Details Below:</Text>
+          <Text style={styles.title}>Create Your Account:</Text>
           <TextInput
             style={styles.inputField}
             onChangeText={nameInput}
@@ -232,7 +232,7 @@ export default function Registerscreen({ navigation }) {
           />
           <Text style={styles.title}>Select Gender: </Text>
           <View>
-            <Text style={styles.motherText}>Female </Text>
+            <Text style={styles.female}>Female </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -249,7 +249,7 @@ export default function Registerscreen({ navigation }) {
               checked={female}
               onPress={femaleHandler}
             />
-            <Text style={styles.motherText}>Male </Text>
+            <Text style={styles.male}>Male </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -266,7 +266,7 @@ export default function Registerscreen({ navigation }) {
               checked={male}
               onPress={maleHandler}
             />
-            <Text style={styles.motherText}> Other </Text>
+            <Text style={styles.other}> Other </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -288,16 +288,19 @@ export default function Registerscreen({ navigation }) {
         <View style={styles.buttonflex}>
           <View>
             <TouchableOpacity
-              style={styles.Direction}
+              style={styles.directionBack}
               onPress={() => navigation.goBack()}
             >
-              <Text>Back</Text>
+              <Text style={styles.buttonText}>Back</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonText}>
-            <Button title="click" onPress={confirmChoices} />
-            <TouchableOpacity style={styles.Direction} onPress={SubmitHandler}>
-              <Text>Next</Text>
+            <Button title="" onPress={confirmChoices} />
+            <TouchableOpacity
+              style={styles.directionNext}
+              onPress={SubmitHandler}
+            >
+              <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -310,9 +313,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: screenWidth,
-    backgroundColor: COLS.C_BG,
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT
+    backgroundColor: COLS.C_BG
   },
   row: {
     flexDirection: "row"
@@ -354,7 +355,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 2,
 
-    elevation: 5
+    elevation: 5,
+    color: COLS.C6_WHITE_TEXT
   },
   buttonflex: {
     alignSelf: "center",
@@ -364,13 +366,45 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 10
   },
-  Direction: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
+  directionBack: {
+    backgroundColor: COLS.C_BG,
     width: 80,
     height: 30,
     borderRadius: 5,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    top: -30,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+
+    elevation: 5
+  },
+  directionNext: {
+    backgroundColor: COLS.C_BG,
+    width: 80,
+    height: 30,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    top: -61,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+
+    elevation: 5
   },
   row: {
     flexDirection: "row"
@@ -383,6 +417,7 @@ const styles = StyleSheet.create({
     left: 85,
     borderRadius: 5,
     alignSelf: "center",
+    color: COLS.C6_WHITE_TEXT,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -410,6 +445,31 @@ const styles = StyleSheet.create({
     left: 10,
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
-    fontSize: 24
+    fontSize: 24,
+    padding: 10,
+    top: -10
+  },
+  female: {
+    top: 19,
+    left: 120,
+    color: COLS.C6_WHITE_TEXT,
+    fontWeight: "bold"
+  },
+  male: {
+    top: 19,
+    left: 130,
+    color: COLS.C6_WHITE_TEXT,
+    fontWeight: "bold"
+  },
+  other: {
+    top: 19,
+    left: 125,
+    color: COLS.C6_WHITE_TEXT,
+    fontWeight: "bold"
+  },
+  buttonText: {
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold"
   }
 });
