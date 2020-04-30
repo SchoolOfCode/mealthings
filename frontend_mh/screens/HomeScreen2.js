@@ -13,10 +13,10 @@ export default function HomeScreen2({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>
-        <View style={styles.logoCircle}>
+        <View>
           <Image
             style={styles.mealThingsLogo}
-            source={require("../assets/images/Mealthings.png")}
+            source={require("../assets/images/newLogo.png")}
           />
         </View>
       </View>
@@ -41,7 +41,6 @@ export default function HomeScreen2({ navigation }) {
 HomeScreen2.navigationOptions = {
   header: null
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -56,9 +55,10 @@ const styles = StyleSheet.create({
   mealThingsLogo: {
     alignItems: FORMAT_logo.F_logo_alignItems,
     margin: FORMAT_logo.F_logo_margin,
-    justifyContent: FORMAT_logo.F_logo_justifyContent
+    justifyContent: FORMAT_logo.F_logo_justifyContent,
+    width: 300,
+    height: 300
   },
-
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
     fontSize: FORMAT_tagLine.F_tagLine_fontSize
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-
-    elevation: 5
+    elevation: 5,
+    top: -50
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
