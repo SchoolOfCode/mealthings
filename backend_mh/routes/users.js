@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 const {
   getUsers,
   getUserById,
@@ -7,6 +8,7 @@ const {
   verifyJwt,
   addUser,
   getToken,
+  getPassword,
   patchUser,
 } = require("../models/users");
 const router = express.Router();
@@ -109,16 +111,55 @@ router.post("/", async (req, res) => {
   }
 });
 
+// User login and JWT verification route
 router.post("/login", async (req, res) => {
   const { authorization } = req.headers;
-  const token = authorization.split(" ")[1];
-  const verifyResponse = verifyJwt(token);
-  if (verifyResponse) {
-    res.status(200).json({ success: true, message: "Welcome back!" });
+  if (authorization) {
+    const token = authorization.split(" ")[1];
+    const verifyResponse = verifyJwt(token);
+    if (verifyResponse) {
+      res.status(200).json({ success: true, message: "Welcome back!" });
+    } else {
+      return res
+        .status(401)
+        .json({ success: false, message: "JWT verification failed!" });
+    }
   } else {
-    return res
-      .status(401)
-      .json({ success: false, message: "JWT verification failed!" });
+    const { email_address, password } = req.body;
+    const { body } = req;
+    if (email_address && password) {
+      const hashedPassword = await getPassword(email_address);
+      if (!hashedPassword) {
+        return res.status(400).json({
+          success: false,
+          message: "Couldn't find a user with that email.",
+        });
+      }
+      const bcryptResult = bcrypt.compareSync(password, hashedPassword);
+      if (bcryptResult) {
+        const token = await getToken(body);
+        if (token) {
+          return res
+            .status(200)
+            .json({ success: true, message: "Welcome back!", token });
+        } else {
+          return res.status(500).json({
+            success: false,
+            message:
+              "Problem generating JWT, internal server error. Please wait and retry login.",
+          });
+        }
+      } else {
+        return res
+          .status(400)
+          .json({ success: false, message: "Incorrect password!" });
+      }
+    } else {
+      return res.status(400).json({
+        success: false,
+        message: "Must supply a username and password!",
+      });
+    }
   }
 });
 

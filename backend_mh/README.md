@@ -121,16 +121,16 @@
 
 - Set up /login route (Note 2 use cases, either comes from Home with JWT, or from Login with email/password in body.)
   router.post("/login", async (req, res) => {
-  })
+  })✅
 
-  - Recieve a POST request
+  - Recieve a POST request✅
 
     - if POST request has JWT in the header.
-      const { authorization } = req.headers;
+      const { authorization } = req.headers;✅
 
       - Check if JWT is valid
-        const token = authorization.split(" ")[1]; // console.log authorization to find out why it's split etc.
-        const verifyResponse = verifyJwt(token)
+        const token = authorization.split(" ")[1]; ✅
+        const verifyResponse = verifyJwt(token)✅
         function verifyJwt(userJWT){
         - If yes return true, and if throws an error (which signals failed to jwt authenticate), return false
           let decoded;
@@ -140,42 +140,46 @@
           } catch (err) {
           console.warn("Error in jwt verification:", err);
           return false;
-          }
+          }✅
           }
           if(verifyResponse){
           res.status(200).json({success:true, message: "Welcome back!"})
           } else {
           return res.status(401).end()
-          }
+          }✅
 
-    - else if no JWT
+    - else if no JWT (means request is coming from the login form that the user has filled out.)
 
       - Check if email and password in body
+        const {email_address, password} = req.body;✅
       - if there is a password in body,
-
         - Hash the password from the body of the POST request
         - Check whether POST hashed password === database hashed password - If yes - Generate JWT - Return JWT, and return true and logged in - if no - return false and a wrong password message.
-          const {email, password} = req.body;
-          if(email && password){
+          if(email_address && password){✅
           // Use email to get hashed password from database
-          const hashedPassword = await getPassword(email);
+          const hashedPassword = await getPassword(email_address);
           // The below function should be in models
-          async getPassword(email){
-          const hashedPassword = await query("SELECT password FROM users WHERE email = \$1",[email]);
+          async function getPassword(email_address){✅
+          const hashedPassword = await query("SELECT password FROM users WHERE email_address = \$1",[email_address]);
           return hashedPassword;
-          }
+          }✅
           // use bcrypt to check the supplied password in the POST request  
-           const bcryptResult = bcrypt.compareSync(password, hashedPassword);
-          if(bcryptResult){
+           const bcryptResult = bcrypt.compareSync(password, hashedPassword);✅
+          if(bcryptResult){✅
           // Generate a JWT
-          const token = jwt.sign({ email:email, userID:userID }, JWT_SECRET);
+          const token = getToken(body);
+          if(token){✅
           return res.status(200).json({success:true, message:"Welcome back!", token})
-          } else {
+          } else {✅
+          return res.status(500).json({success:false, message:"Problem generating JWT, internal server error. Please wait and retry login."})
+          }
+          }
+          else {✅
           return res.status(400).json({success:false, message:"Incorrect password!"})
           }
-          } else {
+          } else {✅
         - if no password in body, return failure and no password message
-          return res.status(400).json({success:false, message:"Must send a username and password!"})
+          return res.status(400).json({success:false, message:"Must supply a username and password!"})
           }
 
 - Set up password reset route

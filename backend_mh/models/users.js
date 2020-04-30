@@ -123,9 +123,16 @@ async function addUser(body) {
 
 async function getToken(body) {
   //Note to selves - toDo - ensure we can pull the user id not only email - work out how to do this. Also think carefully as to whether we actually NEED to do this...?
-  console.log("body:", body);
   const token = await jwt.sign({ email: body.email_address }, JWT_SECRET);
   return token;
+}
+
+async function getPassword(email_address) {
+  const hashedPassword = await query(
+    "SELECT password FROM users WHERE email_address = $1",
+    [email_address]
+  );
+  return hashedPassword.rows[0] ? hashedPassword.rows[0].password : null;
 }
 
 // PATCH to change a user
@@ -198,5 +205,6 @@ module.exports = {
   verifyJwt,
   addUser,
   getToken,
+  getPassword,
   patchUser,
 };
