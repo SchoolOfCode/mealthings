@@ -18,7 +18,6 @@ async function getUserById(user_id) {
 // Add a function to check whether the user's email already exists in the database.
 async function checkEmail(emailInBodyOfRequest) {
   const emails = await query("SELECT email_address FROM users");
-  console.log("Emails: ", emails, "single email:", emailInBodyOfRequest);
   return emails.rows
     .map((item) => item.email_address)
     .includes(emailInBodyOfRequest);
@@ -113,7 +112,8 @@ async function addUser(body) {
 
 async function getToken(body) {
   //Note to selves - toDo - ensure we can pull the user id not only email - work out how to do this. Also think carefully as to whether we actually NEED to do this...?
-  const token = await jwt.sign({ email: body.email }, JWT_SECRET);
+  console.log("body:", body);
+  const token = await jwt.sign({ email: body.email_address }, JWT_SECRET);
   return token;
 }
 
