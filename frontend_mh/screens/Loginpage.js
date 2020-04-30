@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     padding: FORMAT_navButtonText.F_navButtonText_padding,
-    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontSize: 20,
     fontWeight: "bold"
   }
 });
