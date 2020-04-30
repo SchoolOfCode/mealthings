@@ -120,25 +120,34 @@
       });
 
 - Set up /login route (Note 2 use cases, either comes from Home with JWT, or from Login with email/password in body.)
+  router.post("/login", async (req, res) => {
+  })
 
   - Recieve a POST request
 
     - if POST request has JWT in the header.
       const { authorization } = req.headers;
+
       - Check if JWT is valid
-        const token = authorization.split(" ")[1];
-        const decoded = jwt.verify(token, JWT_SECRET);
+        const token = authorization.split(" ")[1]; // console.log authorization to find out why it's split etc.
+        const verifyResponse = verifyJwt(token)
+        function verifyJwt(userJWT){
         - If yes return true, and if throws an error (which signals failed to jwt authenticate), return false
-          let jwtPayload
+          let decoded;
           try {
-          jwtPayload = jwt.verify(token, jwtKey)
-          } catch (e) {
-          if (e instanceof jwt.JsonWebTokenError) {
+          decoded = jwt.verify(token, JWT_SECRET);
+          return true;
+          } catch (err) {
+          console.warn("Error in jwt verification:", err);
+          return false;
+          }
+          }
+          if(verifyResponse){
+          res.status(200).json({success:true, message: "Welcome back!"})
+          } else {
           return res.status(401).end()
           }
-          return res.status(400).end()
-          }
-          res.status(200).json({success:true, message: "Welcome back!"})
+
     - else if no JWT
 
       - Check if email and password in body

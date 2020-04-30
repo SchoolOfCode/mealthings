@@ -4,6 +4,7 @@ const {
   getUserById,
   checkEmail,
   saveNewUser,
+  verifyJwt,
   addUser,
   getToken,
   patchUser,
@@ -68,7 +69,7 @@ router.get("/:userId", async (req, res) => {
 // Post request to add/insert new user
 router.post("/", async (req, res) => {
   const { body } = req;
-  const { email_address, password } = body;
+  const { email_address } = body;
   if (!body || Object.keys(body).length < 4) {
     return res.status(400).json({
       message:
@@ -105,6 +106,19 @@ router.post("/", async (req, res) => {
     return res
       .status(400)
       .json({ message: "Failed to insert user", success: false });
+  }
+});
+
+router.post("/login", async (req, res) => {
+  const { authorization } = req.headers;
+  const token = authorization.split(" ")[1];
+  const verifyResponse = verifyJwt(token);
+  if (verifyResponse) {
+    res.status(200).json({ success: true, message: "Welcome back!" });
+  } else {
+    return res
+      .status(401)
+      .json({ success: false, message: "JWT verification failed!" });
   }
 });
 

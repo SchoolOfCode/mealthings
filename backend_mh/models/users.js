@@ -24,12 +24,23 @@ async function checkEmail(emailInBodyOfRequest) {
   //returns a boolean by default, (therefore no true/false prompt required)
 }
 
-// Note to selves - Does this need to be below the addUser function for it to be in scope?!
+// Hash a new user's password then call addUser().
 async function saveNewUser(body) {
   var salt = bcrypt.genSaltSync(10);
   var hash = bcrypt.hashSync(body.password, salt);
   const data = await addUser({ ...body, password: hash });
   return data;
+}
+
+function verifyJwt(token) {
+  let decoded;
+  try {
+    decoded = jwt.verify(token, JWT_SECRET);
+    return true;
+  } catch (err) {
+    console.warn("Error in jwt verification:", err);
+    return false;
+  }
 }
 
 // Add a new user
@@ -184,6 +195,7 @@ module.exports = {
   getUserById,
   checkEmail,
   saveNewUser,
+  verifyJwt,
   addUser,
   getToken,
   patchUser,
