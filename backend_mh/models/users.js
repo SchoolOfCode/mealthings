@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../config");
+const nodemailer = require("nodemailer");
+const { JWT_SECRET, MEALTHINGS_GMAIL_PASSWORD } = require("../config");
 const { query } = require("../db");
 
 // Get all users
@@ -135,6 +136,47 @@ async function getPassword(email_address) {
   return hashedPassword.rows[0] ? hashedPassword.rows[0].password : null;
 }
 
+async function saveTempPassword(email_address, randomTempPassword) {
+  const res = await query(
+    "UPDATE users SET password = $1 WHERE email_address = $2 RETURNING email_address",
+    [randomTempPassword, email_address]
+  );
+  return res; // res.rows? res.rows[0] ?
+}
+
+async function sendTempPasswordEmail(email_address, randomTempPassword) {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "mealthings@gmail.com",
+      pass: MEALTHINGS_GMAIL_PASSWORD,
+    },
+  });
+  var mailOptions = {
+    from: "mealthings@gmail.com",
+    to: email_address,
+    subject: "Mealthings Password Reset",
+    text: `
+Hi there!
+We've reset your password. Your new password is ${randomTempPassword}. You can sign in with this password; we reccomend you change it to something more memorable as soon as you can.
+If you weren't expecting this password reset then contact us straight away by replying to this email.
+Best wishes,
+The MealThings team x`,
+  };
+  const emailResp = await transporter.sendMail(mailOptions);
+  console.log("emailResp:", emailResp);
+  return emailResp.accepted[0] ? true : false;
+  /*   , function (error, info) {
+    if (error) {
+      console.log("Error:", error);
+      return false;
+    } else {
+      console.log("Email sent: " + info.response);
+      return true;
+    }
+  } */
+}
+
 // PATCH to change a user
 async function patchUser(body, id) {
   const {
@@ -206,5 +248,7 @@ module.exports = {
   addUser,
   getToken,
   getPassword,
+  saveTempPassword,
+  sendTempPasswordEmail,
   patchUser,
 };

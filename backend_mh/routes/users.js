@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const generator = require("generate-password");
 const {
   getUsers,
   getUserById,
@@ -9,6 +10,8 @@ const {
   addUser,
   getToken,
   getPassword,
+  saveTempPassword,
+  sendTempPasswordEmail,
   patchUser,
 } = require("../models/users");
 const router = express.Router();
@@ -161,6 +164,44 @@ router.post("/login", async (req, res) => {
       });
     }
   }
+});
+
+// Password reset route
+router.post("/passwordreset", async (req, res) => {
+  //Get user email
+  const { email_address } = req.body;
+  if (!email_address) {
+    return res.status(400).json({
+      success: false,
+      message: "No email address found; password reset unsuccessful.",
+    });
+  }
+  // Generate a random temporary password
+  const randomTempPassword = generator.generate({
+    length: 10,
+    numbers: true,
+  });
+  console.log("Random password:", randomTempPassword);
+  const reply = saveTempPassword(email_address, randomTempPassword);
+  if (!reply) {
+    return res.status(500).json({
+      success: false,
+      message: "Problem inserting recovery password into database.",
+    });
+  }
+  const emailOutcome = await sendTempPasswordEmail(
+    email_address,
+    randomTempPassword
+  );
+  if (emailOutcome) {
+    return res
+      .status(200)
+      .json({ success: true, message: "Password reset email sent." });
+  }
+  return res.status(500).json({
+    success: false,
+    message: "Password reset email not sent; internal server error.",
+  });
 });
 
 // Patch request to update a user

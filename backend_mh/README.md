@@ -183,47 +183,51 @@
           }
 
 - Set up password reset route
-  - Get user email
-    const {email} = req.body;
-    - Generate a random temporary password
-      const generator = require('generate-password');
-      const randomTempPassword = generator.generate({
-      length: 10,
-      numbers: true
-      });
-    - Save temp password into database
-      // Make below in models/users.js
-      async saveTempPassword(email, randomTempPassword){
-      const res = await query("UPDATE users SET password = $1 WHERE email = $2 RETURNING email", [randomTempPassword, email]);
-      return res;
-      }
-      // import into this file
-      const {saveTempPassword} = require("./models/users.js");
-      const reply = saveTempPassword(email, randomTempPassword);
-      if(!reply){
-      return res.status(500).json({success:false, message: "Problem inserting recovery password into database."})
-      }
-    - Send a temp password to user email - var nodemailer = require('nodemailer');
-      var transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-      user: 'youremail@gmail.com',
-      pass: 'yourpassword'
-      }
-      });
-      var mailOptions = {
-      from: 'youremail@gmail.com',
-      to: email,
-      subject: 'Mealthings password reset',
-      text: `Hi there! \n We've reset your password. Your new password is ${randomTempPassword}. You can sign in with this password; we reccomend you change it to something more memorable as soon as you can.\nIf you weren't expecting this password reset then contact us straight away by replying to this email.\n\nBest wishes,\nThe MealThings team x`
-      };
-      transporter.sendMail(mailOptions, function(error, info){
-      if (error) {
-      console.log(error);
-      } else {
-      console.log('Email sent: ' + info.response);
-      }
-      });
+  router.post("/passwordreset", async (req, res) => {✅
+  //Get user email
+  const {email} = req.body;✅
+  // Generate a random temporary password
+  const generator = require('generate-password');✅
+  const randomTempPassword = generator.generate({
+  length: 10,
+  numbers: true
+  });✅
+  console.log("Random password:", randomTempPassword);✅
+  });
+  - Save temp password into database
+    // Make below in models/users.js
+    async saveTempPassword(email_address, randomTempPassword){
+    const res = await query("UPDATE users SET password = $1 WHERE email_address = $2 RETURNING email_address", [randomTempPassword, email_address]);
+    return res; // res.rows? res.rows[0] ?
+    }✅
+    // import function into routes
+    const {saveTempPassword} = require("./models/users.js");✅
+    const reply = saveTempPassword(email_address, randomTempPassword);
+    if(!reply){
+    return res.status(500).json({success:false, message: "Problem inserting recovery password into database."})
+    }✅
+  - Send a temp password to user email
+    const nodemailer = require('nodemailer');✅
+    const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+    user: 'mealthings@gmail.com',
+    pass: MEALTHINGS_GMAIL_PASSWORD
+    }
+    });
+    var mailOptions = {
+    from: 'mealthings@gmail.com',
+    to: email_address,
+    subject: 'Mealthings Password Reset',
+    text: `Hi there! We've reset your password. Your new password is \${randomTempPassword}. You can sign in with this password; we reccomend you change it to something more memorable as soon as you can. If you weren't expecting this password reset then contact us straight away by replying to this email. Best wishes, The MealThings team x`
+    };
+    transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+    console.log(error);
+    } else {
+    console.log('Email sent: ' + info.response);
+    }
+    });✅
 
 2. Front end
    - Hello screen - Check if JWT present.
