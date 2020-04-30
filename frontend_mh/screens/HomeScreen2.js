@@ -53,9 +53,11 @@ const styles = StyleSheet.create({
     marginBottom: FORMAT_welcomeContainer.F_welcomeContainer_marginBottom
   },
   mealThingsLogo: {
-    width: 50,
-    height: 50
+    alignItems: FORMAT_logo.F_logo_alignItems,
+    margin: FORMAT_logo.F_logo_margin,
+    justifyContent: FORMAT_logo.F_logo_justifyContent
   },
+
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
     fontSize: FORMAT_tagLine.F_tagLine_fontSize
