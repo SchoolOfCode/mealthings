@@ -1,5 +1,5 @@
 const COLS = {
-  C_BG: "#47EF84",
+  C_BG: "#A6E6AB",
   C_RED: "#FB4B3D",
   C_LOGO_BG: "#FFC9D9",
   C_YELLOW: "#FFF4BA",

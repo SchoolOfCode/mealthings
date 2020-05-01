@@ -102,20 +102,26 @@ function cleanString(string) {
 }
 
 export default function TodaysRecipe({ navigation }) {
-  const [showIngredients, setShowIngredients] = useState(true);
+  const [showIngredients, setShowIngredients] = useState(false);
+  const [showMethod, setShowMethod] = useState(false);
   const allRecipes = useContext(RecipeContext);
   const recipeIndex = 0; // TODO make this increment depending on the number of days since last recipe request
   const todaysRecipe = allRecipes[recipeIndex];
   const ingredients = cleanString(todaysRecipe.ingredients);
   const method = cleanString(todaysRecipe.method);
 
-  function change() {
+  function changeButtonColour() {
     setShowIngredients(false);
+    setShowMethod(true);
+  }
+
+  function changeButtonColour2() {
+    setShowIngredients(true);
+    setShowMethod(false);
   }
 
   const ingredientsContainer = (
     <View style={styles.ingredientsAndMethodContainer}>
-      <Text style={styles.boxTitle}>Ingredients</Text>
       <View style={styles.ingredientsAndMethodView}>
         <FlatList
           style={styles.ingredientsAndMethod}
@@ -129,12 +135,13 @@ export default function TodaysRecipe({ navigation }) {
 
   const methodContainer = (
     <View style={styles.ingredientsAndMethodContainer}>
-      <Text style={styles.boxTitle}>Method</Text>
       <View style={styles.ingredientsAndMethodView}>
         <FlatList
           style={styles.ingredientsAndMethod}
           data={method}
-          renderItem={({ item, index }) => <Item title={`${index}: ${item}`} />}
+          renderItem={({ item, index }) => (
+            <Item title={`${index + 1}. ${item}`} />
+          )}
           keyExtractor={item => item}
         />
       </View>
@@ -155,7 +162,7 @@ export default function TodaysRecipe({ navigation }) {
               ? styles.methodIngredientsButton
               : styles.selectedMethodIngredientsButton
           }
-          onPress={() => setShowIngredients(!showIngredients)}
+          onPress={() => changeButtonColour()}
         >
           <Text style={styles.buttonText}>Method</Text>
         </TouchableOpacity>
@@ -165,7 +172,7 @@ export default function TodaysRecipe({ navigation }) {
               ? styles.selectedMethodIngredientsButton
               : styles.methodIngredientsButton
           }
-          onPress={() => setShowIngredients(!showIngredients)}
+          onPress={() => changeButtonColour2()}
         >
           <Text style={styles.buttonText}>Ingredients</Text>
         </TouchableOpacity>
@@ -174,7 +181,6 @@ export default function TodaysRecipe({ navigation }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -192,12 +198,27 @@ const styles = StyleSheet.create({
   formatting: {
     marginTop: 10
   },
-
   pageTitle: {
     fontSize: 25,
     fontWeight: "bold",
-    marginTop: -10,
-    marginBottom: 15
+    color: COLS.C6_WHITE_TEXT,
+    marginTop: 5,
+    marginBottom: 15,
+    backgroundColor: COLS.C_BG,
+    width: 300,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+    alignSelf: "center",
+    top: 5,
+    textAlign: "center"
   },
   image: {
     width: "90%",
@@ -206,21 +227,36 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     marginTop: 15,
     borderWidth: 2,
-    borderRadius: 15
+    borderRadius: 15,
+    left: 15,
+    bottom: 10
   },
   buttonView: {
     flexDirection: "row",
     height: 50,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    top: -10,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5
   },
   buttonText: {
     alignSelf: "center",
     fontSize: 20,
-    padding: 12
+    padding: 12,
+    fontWeight: "bold",
+    color: COLS.C6_WHITE_TEXT
   },
   methodIngredientsButton: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
+    backgroundColor: COLS.C_BG,
     width: "50%"
   },
   selectedMethodIngredientsButton: {
@@ -231,7 +267,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
     margin: 10,
     fontSize: 20,
-    backgroundColor: COLS.C_BG
+    color: COLS.C6_WHITE_TEXT,
+    fontWeight: "bold",
+    backgroundColor: COLS.C_BG,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+    height: 30
   },
   ingredientsAndMethodContainer: {
     width: "100%",
@@ -254,6 +303,7 @@ const styles = StyleSheet.create({
     elevation: 6,
     borderColor: COLS.C4_DARK_TEXT,
     borderStyle: "solid",
-    backgroundColor: COLS.C6_WHITE_TEXT
+    backgroundColor: COLS.C6_WHITE_TEXT,
+    fontSize: 16
   }
 });

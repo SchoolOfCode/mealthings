@@ -41,11 +41,9 @@ export default function Loginpage({ navigation }) {
   function tracked(enteredText) {
     setName(enteredText);
   }
-
   function tracker(enteredText) {
     setPassword(enteredText);
   }
-
   function handleSubmit() {
     // TODO - This should not be a POST, but should do a get request with the username (use the query string route), and check if the password the user entered matches the password that the user entered. If the password is wrong the user should get an error message and another change to enter their password. If the password is correct they should be routed to the Landing Page screen.
     // const options = {
@@ -69,7 +67,6 @@ export default function Loginpage({ navigation }) {
     navigation.navigate("LandingPage");
   }
   console.log("Hi from login page! ");
-
   return (
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>
@@ -127,9 +124,8 @@ const styles = StyleSheet.create({
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
     marginBottom: 60,
-    fontSize: FORMAT_tagLine.F_tagLine_fontSize,
+    fontSize: FORMAT_tagLine.F_tagLine_fontSize
   },
-
   inputField: {
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
     backgroundColor: COLS.C_BG,
@@ -166,8 +162,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-
     elevation: 5,
+    top: 13
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
