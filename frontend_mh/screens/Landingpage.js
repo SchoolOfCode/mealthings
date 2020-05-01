@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   todaysMeal: {
-    top: 20,
+    top: 10,
     width: 200,
     padding: 10,
     backgroundColor: COLS.C_RED,
