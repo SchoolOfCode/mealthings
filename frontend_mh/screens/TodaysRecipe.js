@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   pageTitle: {
     fontSize: 25,
     fontWeight: "bold",
-    marginTop: -10,
+    marginTop: 5,
     marginBottom: 15
   },
   image: {
@@ -206,13 +206,16 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     marginTop: 15,
     borderWidth: 2,
-    borderRadius: 15
+    borderRadius: 15,
+    left: 15,
+    bottom: 10
   },
   buttonView: {
     flexDirection: "row",
     height: 50,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    top: -10
   },
   buttonText: {
     alignSelf: "center",
