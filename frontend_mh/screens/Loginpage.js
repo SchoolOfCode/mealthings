@@ -5,14 +5,14 @@ import {
   View,
   TextInput,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -23,7 +23,7 @@ import {
   FORMAT_arrow,
   FORMAT_icons,
   FORMAT_mainRecipe,
-  FORMAT_tagLine
+  FORMAT_tagLine,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -32,7 +32,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 export default function Loginpage({ navigation }) {
@@ -99,13 +99,13 @@ export default function Loginpage({ navigation }) {
 }
 const styles = StyleSheet.create({
   border: {
-    marginVertical: 50
+    marginVertical: 50,
   },
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
     // height: FORMAT_containers.F_containerHeaders_height,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   welcomeContainer: {
     // alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
     // justifyContent: FORMAT_logo.F_logo_justifyContent,
     height: 300,
     width: 300,
-    left: 41,
-    bottom: 0
+    left: 55,
+    bottom: 60,
   },
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
@@ -140,13 +140,12 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
     fontSize: 16,
-    top: 25
   },
   button: {
     alignSelf: FORMAT_navButton.F_navButton_alignSelf,
@@ -159,7 +158,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
@@ -170,7 +169,7 @@ const styles = StyleSheet.create({
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     padding: FORMAT_navButtonText.F_navButtonText_padding,
-    fontSize: 20,
-    fontWeight: "bold"
-  }
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+  },
 });

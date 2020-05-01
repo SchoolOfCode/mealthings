@@ -7,6 +7,11 @@ import {
   SafeAreaView,
   Button,
   ScrollView,
+  Alert,
+  Modal,
+  TouchableHighlight,
+  CheckBox,
+  Image,
 } from "react-native";
 
 import FlatList from "react-native-drag-flatlist";
@@ -45,6 +50,8 @@ const sampleRecipes = [
     fat: "15.7",
     saturates: "2.6",
     sugars: "6.8",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg",
     salt: "1.1",
     fibre: "3.6",
     cooking_difficulty: "3",
@@ -85,6 +92,8 @@ const sampleRecipes = [
     saturates: "3.1",
     sugars: "0.2",
     salt: "0.3",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg",
     fibre: "0.1",
     cooking_difficulty: "1",
     cooking_time_mins: "10",
@@ -161,6 +170,8 @@ const sampleRecipes = [
     saturates: "4.8",
     sugars: "1.2",
     salt: "1.5",
+    image:
+      "https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg",
     fibre: "0.2",
     cooking_difficulty: "2",
     cooking_time_mins: "19",
@@ -174,7 +185,7 @@ const sampleRecipes = [
       "Sit the sea bass on top, spooning over any spicy oil from the pan. Finely grate over the lime zest, and serve with lime halves, for squeezing over.                    ",
     ],
     url:
-      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/64975515.jpg?tr=w-330",
+      "https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg",
   },
   {
     recipe_id: "37",
@@ -507,54 +518,38 @@ const sampleRecipes = [
 const colors = ["#FFC9D9", "#FFF4BA", "#65676F", "#C4C4C4", "#FFF4BA"]; // CORRECT THIS TO COLOR SCHEME
 
 const originalData = sampleRecipes.map((item, index) => ({
-  text: item.name + "cals" + item.calories,
+  text: "☰" + item.name,
+  url: item.url,
+  fat: item.fat,
+  carbohydrate: item.carbohydrates,
+  sugars: item.sugars,
+  calories: item.calories,
+  protein: item.protein,
+  fibre: item.fibre,
+  cooktime: item.cooking_time_mins,
   color: colors[index % colors.length],
+  backgroundColor: "red",
 }));
 
 const App = () => {
   const [data, setData] = useState(originalData);
-  const [protein, setProtein] = useState(0);
-  const [carbohydrate, setCarbohydrate] = useState(0);
-  const [fat, setFat] = useState(0);
-  const [caloriesTot, setCaloriesTot] = useState(0);
 
-  useEffect(() => {
-    let proteins = sampleRecipes
-      .map((item) => +item.protein)
-      .reduce((prev, curr) => prev + curr, 0);
-    setProtein(Math.round(proteins));
-  }, []);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [display, setDisplay] = useState();
 
-  useEffect(() => {
-    const caloriesTot = sampleRecipes
-      .map((item) => +item.calories)
-      .reduce((prev, curr) => prev + curr, 0);
-    setCaloriesTot(Math.round(caloriesTot));
-  }, []);
-  useEffect(() => {
-    const carbohydrated = sampleRecipes
-      .map((item) => +item.carbohydrates)
-      .reduce((prev, curr) => prev + curr, 0);
-    setCarbohydrate(Math.round(carbohydrated));
-  }, []);
+  const [visual, setVisual] = useState();
+  const [carbs, setCarbs] = useState();
+  const [prot, setProt] = useState();
+  const [cals, setCals] = useState();
+  const [sugar, setSugar] = useState();
+  const [saturates, setsaturates] = useState();
+  const [cooking, setCooking] = useState();
 
-  useEffect(() => {
-    const fatty = sampleRecipes
-      .map((item) => +item.fat)
-      .reduce((prev, curr) => prev + curr, 0);
-    setFat(fatty);
-  }, []);
   // const [totalProt, setTotalProt] = useState("");
   // const [totalCarbs, setTotalCarbs] = useState("");
   // const [totalFat, setTotalFat] = useState("");
 
   // additional functionality if you want to alter how many people are eating the meals.
-  function duplicate() {
-    setProtein(protein * 2);
-    setCarbohydrate(carbohydrate * 2);
-    setFat(fat * 2);
-    setCaloriesTot(caloriesTot * 2);
-  }
 
   const keyExtractor = (item) => item.text;
 
@@ -562,14 +557,74 @@ const App = () => {
     <TouchableOpacity
       style={[styles.item, { backgroundColor: item.color }]}
       onLongPress={drag}
-      onPress={() => console.log(item)}
+      onPress={() => {
+        toggleModal(item, item.text, item.url, item.calories, item.fat);
+        setVisual(item.url);
+        setCarbs(item.carbohydrate);
+        setProt(item.protein);
+        setCals(item.calories);
+        setsaturates(item.fat);
+        setSugar(item.sugars);
+        setCooking(item.cooktime);
+        setDisplay(item.text);
+
+        console.log(item.url);
+        // console.log(item.image);
+      }}
     >
       <Text>{item.text}</Text>
     </TouchableOpacity>
   );
 
+  function toggleModal() {
+    if (modalVisible == false) {
+      setModalVisible(true);
+    }
+  }
   return (
     <View style={styles.margin}>
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.headingText}>{display}</Text>
+            <Image
+              style={{
+                width: 250,
+                height: 150,
+
+                resizeMode: "contain",
+              }}
+              source={{
+                uri: visual,
+              }}
+            />
+            <View styles={styles.textmovement}>
+              <Text> Nutritional breakdown</Text>
+              <Text> Carbohydrates: {carbs}g </Text>
+              <Text> Protein: {prot}g</Text>
+              <Text> Calories:{cals} /Kcals</Text>
+              <Text> Sugars: {sugar}g </Text>
+              <Text> Preparation Time: {cooking} minutes</Text>
+              <Text> Fats: {saturates}</Text>
+            </View>
+          </View>
+
+          <TouchableHighlight
+            style={{
+              ...styles.openButton,
+              backgroundColor: "#2196F3",
+              marginVertical: 17,
+              bottom: 40,
+            }}
+            onPress={() => {
+              setModalVisible(false);
+            }}
+          >
+            <Text style={styles.textStyle}>Nice</Text>
+          </TouchableHighlight>
+        </View>
+      </Modal>
+
       <FlatList
         style={styles.BG}
         data={data}
@@ -577,33 +632,16 @@ const App = () => {
         renderItem={renderItem}
         onMoveEnd={setData}
       />
-      <View style={styles.border}>
-        <Text> Nutrition Breakdown</Text>
-        <Text>
-          {" "}
-          Calories: Weekly {caloriesTot}kcal / {Math.round(caloriesTot / 7)}kcal
-          per day{" "}
-        </Text>
-        <Text>
-          {" "}
-          Protein: Weekly {protein}g / {Math.round(protein)}g per day
-        </Text>
-        <Text>
-          {" "}
-          Carbohydrates: Weekly {carbohydrate}g / {Math.round(carbohydrate / 7)}
-          g per day
-        </Text>
-        <Text>
-          {" "}
-          Fat: Weekly {fat}g / {Math.round(fat / 7)}g per day{" "}
-        </Text>
-        <Button title="Double the portion size" onPress={duplicate} />
-      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  textmovement: {
+    alignSelf: "flex-start",
+    fontSize: 20,
+    right: 10,
+  },
   BG: {
     backgroundColor: "black",
   },
@@ -614,25 +652,79 @@ const styles = StyleSheet.create({
     alignSelf: FORMAT_headings.F_heading_alignSelf,
   },
   item: {
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: "space-around",
     width: 300,
-    height: 30,
+    height: 40,
     padding: 10,
+    paddingLeft: 50,
     margin: 5,
     fontSize: 10,
+
+    borderRadius: 5,
+    alignContent: "center",
+    alignSelf: "center",
   },
   margin: {
     marginTop: 20,
-    backgroundColor: "white",
+    backgroundColor: COLS.C_BG,
     borderBottomColor: "black",
   },
   border: {
-    borderBottomWidth: 4,
-
     borderRightColor: "black",
-    borderRightWidth: 2,
-    backgroundColor: COLS.C_BG,
+    borderColor: "black",
+    backgroundColor: "white",
+    bottom: 10,
+    height: 120,
+    width: 300,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  row: {
+    flexDirection: "row",
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  headingText: {
+    marginBottom: 15,
+    borderRadius: 4,
+    textAlign: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    justifyContent: "center",
+    backgroundColor: "red",
+    justifyContent: "space-around",
+    fontWeight: "bold",
   },
 });
 
