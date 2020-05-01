@@ -84,7 +84,7 @@ router.post("/", async (req, res) => {
   }
   if (await checkEmail(email_address)) {
     return res
-      .status(401)
+      .status(409)
       .json({ message: "Email is already in use!", success: false });
   }
   console.log("Recieved a POST request to users", body);
