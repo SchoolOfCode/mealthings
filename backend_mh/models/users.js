@@ -33,11 +33,16 @@ async function saveNewUser(body) {
   return data;
 }
 
-function verifyJwt(token) {
+async function verifyJwt(token) {
   let decoded;
   try {
     decoded = jwt.verify(token, JWT_SECRET);
-    return true;
+    console.log("Decoded:", decoded);
+    const resp = await query(
+      "SELECT user_id, email_address FROM users WHERE email_address = $1",
+      [decoded.email_address || decoded.email]
+    );
+    return resp.rows;
   } catch (err) {
     console.warn("Error in jwt verification:", err);
     return false;
@@ -124,7 +129,10 @@ async function addUser(body) {
 
 async function getToken(body) {
   //Note to selves - toDo - ensure we can pull the user id not only email - work out how to do this. Also think carefully as to whether we actually NEED to do this...?
-  const token = await jwt.sign({ email: body.email_address }, JWT_SECRET);
+  const token = await jwt.sign(
+    { email_address: body.email_address },
+    JWT_SECRET
+  );
   return token;
 }
 
