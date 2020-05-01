@@ -242,8 +242,8 @@
     --> in from routes: res.status(200).json({etc, userID})✅
 - In HomeScreen.js itself
 - Set state for logged in or not and for whether finished checking server on not.
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [finishedCheckingServer, setFinishedCheckingServer] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);✅
+  const [finishedCheckingServer, setFinishedCheckingServer] = useState(false);✅
   -Check if JWT present.
   let token;
   // Try to get from AsyncStorage
