@@ -41,11 +41,9 @@ export default function Loginpage({ navigation }) {
   function tracked(enteredText) {
     setName(enteredText);
   }
-
   function tracker(enteredText) {
     setPassword(enteredText);
   }
-
   function handleSubmit() {
     // TODO - This should not be a POST, but should do a get request with the username (use the query string route), and check if the password the user entered matches the password that the user entered. If the password is wrong the user should get an error message and another change to enter their password. If the password is correct they should be routed to the Landing Page screen.
     // const options = {
@@ -69,12 +67,14 @@ export default function Loginpage({ navigation }) {
     navigation.navigate("LandingPage");
   }
   console.log("Hi from login page! ");
-
   return (
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>
         <View>
-          <Image source={require("../assets/images/Mealthings.png")} />
+          <Image
+            style={styles.mealThingsLogo}
+            source={require("../assets/images/newLogo.png")}
+          />
         </View>
         <TextInput
           style={styles.inputField}
@@ -104,26 +104,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    height: FORMAT_containers.F_containerHeaders_height,
+    // height: FORMAT_containers.F_containerHeaders_height,
     justifyContent: "center"
   },
   welcomeContainer: {
-    alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
-    marginTop: FORMAT_welcomeContainer.F_welcomeContainer_marginTop,
-    marginBottom: FORMAT_welcomeContainer.F_welcomeContainer_marginBottom
+    // alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
+    // marginTop: FORMAT_welcomeContainer.F_welcomeContainer_marginTop,
+    // marginBottom: FORMAT_welcomeContainer.F_welcomeContainer_marginBottom,
   },
   mealThingsLogo: {
-    alignItems: FORMAT_logo.F_logo_alignItems,
-    margin: FORMAT_logo.F_logo_margin,
-    justifyContent: FORMAT_logo.F_logo_justifyContent
+    // alignItems: FORMAT_logo.F_logo_alignItems,
+    // margin: FORMAT_logo.F_logo_margin,
+    // justifyContent: FORMAT_logo.F_logo_justifyContent,
+    height: 300,
+    width: 300,
+    left: 41,
+    bottom: 0
   },
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
     marginBottom: 60,
     fontSize: FORMAT_tagLine.F_tagLine_fontSize
-  },
-  positioning: {
-    left: 100
   },
   inputField: {
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
@@ -144,7 +145,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    fontSize: 16
+    fontSize: 16,
+    top: 25
   },
   button: {
     alignSelf: FORMAT_navButton.F_navButton_alignSelf,
@@ -161,14 +163,14 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-
-    elevation: 5
+    elevation: 5,
+    top: 13
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     padding: FORMAT_navButtonText.F_navButtonText_padding,
-    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontSize: 20,
     fontWeight: "bold"
   }
 });
