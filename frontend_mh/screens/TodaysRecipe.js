@@ -102,7 +102,8 @@ function cleanString(string) {
 }
 
 export default function TodaysRecipe({ navigation }) {
-  const [showIngredients, setShowIngredients] = useState(true);
+  const [showIngredients, setShowIngredients] = useState(false);
+  const [showMethod, setShowMethod] = useState(false);
   const allRecipes = useContext(RecipeContext);
   const recipeIndex = 0; // TODO make this increment depending on the number of days since last recipe request
   const todaysRecipe = allRecipes[recipeIndex];
@@ -111,6 +112,12 @@ export default function TodaysRecipe({ navigation }) {
 
   function change() {
     setShowIngredients(false);
+    setShowMethod(true);
+  }
+
+  function change2() {
+    setShowIngredients(true);
+    setShowMethod(false);
   }
 
   const ingredientsContainer = (
@@ -155,7 +162,7 @@ export default function TodaysRecipe({ navigation }) {
               ? styles.methodIngredientsButton
               : styles.selectedMethodIngredientsButton
           }
-          onPress={() => setShowIngredients(!showIngredients)}
+          onPress={() => change()}
         >
           <Text style={styles.buttonText}>Method</Text>
         </TouchableOpacity>
@@ -165,7 +172,7 @@ export default function TodaysRecipe({ navigation }) {
               ? styles.selectedMethodIngredientsButton
               : styles.methodIngredientsButton
           }
-          onPress={() => setShowIngredients(!showIngredients)}
+          onPress={() => change2()}
         >
           <Text style={styles.buttonText}>Ingredients</Text>
         </TouchableOpacity>
