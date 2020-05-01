@@ -26,15 +26,19 @@ export default function app() {
 const styles = StyleSheet.create({
   row: {
     flexDirection: "column",
-    backgroundColor: COLS.C_BG,
+    backgroundColor: "#5B625A",
     borderBottomColor: COLS.C_BG,
     borderBottomWidth: 4,
   },
   spacing: {
-    marginVertical: 28,
-    top: 42,
-    borderBottomColor: "black",
-
+    marginVertical: 34,
+    top: 75,
+    borderBottomColor: "white",
+    color: "white",
     borderBottomWidth: 4,
+    borderRadius: 5,
+    shadowOffset: { width: 30, height: 10 },
+    shadowColor: "white",
+    shadowOpacity: 7.0,
   },
 });
