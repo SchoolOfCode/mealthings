@@ -141,7 +141,9 @@ export default function TodaysRecipe({ navigation }) {
         <FlatList
           style={styles.ingredientsAndMethod}
           data={method}
-          renderItem={({ item, index }) => <Item title={`${index}: ${item}`} />}
+          renderItem={({ item, index }) => (
+            <Item title={`${index + 1}. ${item}`} />
+          )}
           keyExtractor={item => item}
         />
       </View>
