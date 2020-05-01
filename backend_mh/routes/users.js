@@ -92,9 +92,13 @@ router.post("/", async (req, res) => {
     const data = await saveNewUser(body);
     if (data.rows) {
       const token = await getToken(body);
-      return res
-        .status(201)
-        .json({ message: "Inserted new user", success: true, token });
+      return res.status(201).json({
+        message: "Inserted new user",
+        success: true,
+        email_address: data.rows[0].email_address,
+        userID: data.rows[0].user_id,
+        token,
+      });
     }
     console.warn("Failed to insert new user. Request body:", body);
     return res.status(500).json({
@@ -119,9 +123,14 @@ router.post("/login", async (req, res) => {
   const { authorization } = req.headers;
   if (authorization) {
     const token = authorization.split(" ")[1];
-    const verifyResponse = verifyJwt(token);
+    const verifyResponse = await verifyJwt(token);
     if (verifyResponse) {
-      res.status(200).json({ success: true, message: "Welcome back!" });
+      res.status(200).json({
+        success: true,
+        message: "Welcome back!",
+        email_address: verifyResponse[0].email_address,
+        userID: verifyResponse[0].user_id,
+      });
     } else {
       return res
         .status(401)

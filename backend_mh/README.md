@@ -235,11 +235,11 @@
 - Change back end routes so when logged in, the userId is always sent back
   - Change in /register
     - Get as result from successful registration
-      --> in SQL call in models: RETURNING email, userID
-      --> in from routes: res.status(200).json({etc, userID})
+      --> in SQL call in models: RETURNING email, userID✅
+      --> in from routes: res.status(200).json({etc, userID})✅
   - Change in /login
-    --> in SQL call in models: RETURNING email, userID
-    --> in from routes: res.status(200).json({etc, userID})
+    --> in SQL call in models: RETURNING email, userID✅
+    --> in from routes: res.status(200).json({etc, userID})✅
 - In HomeScreen.js itself
 - Set state for logged in or not and for whether finished checking server on not.
   const [loggedIn, setLoggedIn] = useState(false);
