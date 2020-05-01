@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { COLS } from "./COLS";
 import {
   FORMAT_navButtonBackground,
-  FORMAT_navButtonText
+  FORMAT_navButtonText,
 } from "./FORMAT_navButton";
 import { FORMAT_logo } from "./FORMAT_logo";
 import { FORMAT_welcomeContainer } from "./FORMAT_containers";
@@ -16,7 +16,7 @@ export default function HomeScreen2({ navigation }) {
         <View style={styles.logoCircle}>
           <Image
             style={styles.mealThingsLogo}
-            source={require("../assets/images/Mealthings.png")}
+            source={require("../assets/images/newLogo.png")}
           />
         </View>
       </View>
@@ -39,32 +39,34 @@ export default function HomeScreen2({ navigation }) {
 }
 
 HomeScreen2.navigationOptions = {
-  header: null
+  header: null,
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   welcomeContainer: {
     alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
     marginTop: FORMAT_welcomeContainer.F_welcomeContainer_marginTop,
-    marginBottom: FORMAT_welcomeContainer.F_welcomeContainer_marginBottom
+    marginBottom: FORMAT_welcomeContainer.F_welcomeContainer_marginBottom,
   },
   mealThingsLogo: {
     alignItems: FORMAT_logo.F_logo_alignItems,
     margin: FORMAT_logo.F_logo_margin,
-    justifyContent: FORMAT_logo.F_logo_justifyContent
+    justifyContent: FORMAT_logo.F_logo_justifyContent,
+    width: 400,
+    height: 400,
   },
 
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
-    fontSize: FORMAT_tagLine.F_tagLine_fontSize
+    fontSize: FORMAT_tagLine.F_tagLine_fontSize,
   },
   buttonContainer: {
-    marginTop: "20%"
+    marginTop: "20%",
   },
   buttonBackground: {
     backgroundColor: COLS.C_BG,
@@ -77,18 +79,18 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
 
-    elevation: 5
+    elevation: 5,
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     padding: FORMAT_navButtonText.F_navButtonText_padding,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });

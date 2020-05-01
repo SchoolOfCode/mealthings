@@ -512,7 +512,7 @@ const sampleRecipes = [
 const colors = ["#FFC9D9", "#FFF4BA", "#65676F", "#C4C4C4", "#FFF4BA"]; // CORRECT THIS TO COLOR SCHEME
 
 const originalData = sampleRecipes.map((item, index) => ({
-  text: item.name + item.calories + "kcal",
+  text: item.name + "" + item.calories + "kcal",
   color: colors[index % colors.length],
   backgroundColor: "red",
 }));
@@ -548,18 +548,26 @@ const App = () => {
     }
   }
   function excellentHandler() {
-    if (egood == false) {
+    if (good == false) {
       setEGood(true);
       setVGood(false);
       setGood(false);
-    } else if (egood == true) {
+    } else if (good == true) {
       setEGood(false);
     }
   }
 
   function rating() {
-    console.log;
-
+    if (good == true) {
+      setVGood(false);
+      setEGood(false);
+    } else if (vgood == true) {
+      setGood(false);
+      setEGood(false);
+    } else if (egood == true) {
+      setVGood(false);
+      setGood(false);
+    }
     Alert.alert("Thanks for your feedback");
   }
   useEffect(() => {
@@ -600,18 +608,14 @@ const App = () => {
     setCaloriesTot(caloriesTot * 2);
   }
 
-  const keyExtractor = (item) => {
-    () => {
-      item.text, console.log(item);
-    };
-  };
+  const keyExtractor = (item) => item.text;
 
   const renderItem = ({ item, drag, index }) => (
     <TouchableOpacity
       style={[styles.item, { backgroundColor: item.color }]}
       onLongPress={drag}
       onPress={() => {
-        toggleModal(item), console.log(index);
+        toggleModal(item);
       }}
     >
       <Text>{item.text}</Text>
@@ -704,7 +708,7 @@ const App = () => {
                 setModalVisible(false);
               }}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Nice</Text>
             </TouchableHighlight>
           </View>
         </View>
@@ -760,10 +764,10 @@ const styles = StyleSheet.create({
   item: {
     justifyContent: "space-around",
     width: 300,
-    height: 30,
+    height: 40,
     padding: 10,
     margin: 5,
-    fontSize: 5,
+    fontSize: 10,
     textAlign: "justify",
   },
   margin: {
