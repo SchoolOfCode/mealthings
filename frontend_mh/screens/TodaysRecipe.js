@@ -219,8 +219,8 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 5,
     alignSelf: "center",
-    alignItems: "center",
-    top: 5
+    top: 5,
+    textAlign: "center"
   },
   image: {
     width: "90%",

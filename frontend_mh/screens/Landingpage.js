@@ -108,13 +108,13 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   note: {
-    width: 140,
-    height: 140,
+    width: 150,
+    height: 150,
     backgroundColor: COLS.C_BG,
     margin: 10,
     alignSelf: "center",
     alignItems: "center",
-    left: 30,
+    left: 20,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -131,13 +131,13 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   note2: {
-    width: 140,
-    height: 140,
+    width: 150,
+    height: 150,
     backgroundColor: COLS.C_BG,
     margin: 10,
     alignSelf: "center",
     alignItems: "center",
-    left: 30,
+    left: 20,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -173,8 +173,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
-    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
-    padding: FORMAT_navButtonText.F_navButtonText_padding,
+    textAlign: "center",
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
     fontWeight: "bold",
     fontSize: 18
