@@ -181,7 +181,6 @@ export default function TodaysRecipe({ navigation }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -199,7 +198,6 @@ const styles = StyleSheet.create({
   formatting: {
     marginTop: 10
   },
-
   pageTitle: {
     fontSize: 25,
     fontWeight: "bold",
