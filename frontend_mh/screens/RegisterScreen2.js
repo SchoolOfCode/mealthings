@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../App.js";
 
 import {
   StyleSheet,
@@ -44,6 +45,7 @@ export default function Registerscreen2({ navigation, route }) {
   const { data } = route.params;
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
+  const { register } = useContext(AuthContext);
 
   function usernameHandler(enteredText) {
     setUsername(enteredText);
@@ -55,44 +57,35 @@ export default function Registerscreen2({ navigation, route }) {
   async function SubmitHandler() {
     console.log(username, password);
     const dataPlus = { ...data, username, password };
-
-    // Call sign in function
-    // That sign in function should call dispatch to change the state when it has finished.
+    register(dataPlus);
   }
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.headerC}>
-          <Image source={require("../assets/images/arrow.png")} />
-        </Text>
-        <View>
-          <TextInput
-            style={styles.inputField}
-            onChangeText={usernameHandler}
-            placeholder="Username"
-            placeholderTextColor="black"
-            maxLength={12}
-          />
-          <TextInput
-            style={styles.inputField}
-            placeholder="Password"
-            keyboardType="password"
-            onChangeText={passwordHandler}
-            placeholderTextColor="black"
-          />
-        </View>
-        <View style={styles.buttonFlex}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={styles.buttonText}
-          >
-            <Text style={styles.TextStyle}>Back</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
-            <Text style={styles.TextStyle}>Next</Text>
-          </TouchableOpacity>
-        </View>
+      <TextInput
+        style={styles.inputField}
+        onChangeText={usernameHandler}
+        placeholder="Username"
+        placeholderTextColor="black"
+        maxLength={12}
+      />
+      <TextInput
+        style={styles.inputField}
+        placeholder="Password"
+        keyboardType="password"
+        onChangeText={passwordHandler}
+        placeholderTextColor="black"
+      />
+      <View style={styles.buttonFlex}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.buttonText}
+        >
+          <Text style={styles.TextStyle}>Back</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
+          <Text style={styles.TextStyle}>Next</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

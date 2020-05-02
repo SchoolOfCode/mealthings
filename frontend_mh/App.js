@@ -27,7 +27,7 @@ import SplashScreenExerciseQuick from "./screens/SplashScreenExerciseQuick";
 import LandingPage from "./screens/Landingpage";
 import mealplanner from "./screens/Mealplanner";
 const Stack = createStackNavigator();
-const AuthContext = React.createContext();
+export const AuthContext = React.createContext();
 
 async function storeItem(key, item) {
   try {

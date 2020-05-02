@@ -11,14 +11,14 @@ import {
   Dimensions,
   Alert,
   Button,
-  Image
+  Image,
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -28,7 +28,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -37,7 +37,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -54,7 +54,6 @@ export default function Registerscreen({ navigation }) {
   const [female, setFemale] = useState(false);
   const [gender, setGender] = useState(null);
   const [confirm, setConfirm] = useState();
-  const [display, setDisplay] = useState();
 
   function nameInput(enteredText) {
     setName(enteredText);
@@ -118,6 +117,7 @@ export default function Registerscreen({ navigation }) {
     }
   }
   function confirmChoices() {
+    console.log(gender, name, email, DOB, DOB2, DOB3);
     if (other == true) {
       setGender("Other");
     } else if (female == true) {
@@ -125,30 +125,37 @@ export default function Registerscreen({ navigation }) {
     } else {
       setGender("Male");
     }
-    if (email == /^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/) {
+    if (/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/.test(email)) {
       setEmail(email);
     } else if (email == "" || null) {
       Alert.alert("enter a correct email address");
     }
-    if ((gender, name, email, DOB, DOB2, DOB3 == null)) {
+    if (
+      gender == null ||
+      name == null ||
+      email == null ||
+      DOB == null ||
+      DOB2 == null ||
+      DOB3 == null
+    ) {
       setConfirm(false);
-      console.log(gender, name, email, DOB, DOB2, DOB3);
+      console.log("log1", gender, name, email, DOB, DOB2, DOB3);
     } else {
       setConfirm(true);
-      console.log((gender, name, email, DOB, DOB2, DOB3));
+      console.log("log2", gender, name, email, DOB, DOB2, DOB3);
     }
   }
 
-  function SubmitHandler() {
+  function submitHandler() {
+    console.log("submitted!");
     if (confirm == true) {
-      setDisplay("Submitted");
       const birthday = DOB + "-" + DOB2 + "-" + DOB3;
       console.log("Submitted:", {
         name,
         email,
         birthday,
         gender,
-        mother
+        mother,
       });
 
       const data = {
@@ -156,7 +163,7 @@ export default function Registerscreen({ navigation }) {
         email_address: email,
         birthday,
         mother,
-        gender
+        gender,
       };
       console.log(data);
       navigation.navigate("Register2", { data });
@@ -295,12 +302,13 @@ export default function Registerscreen({ navigation }) {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonText}>
-            <Button title="" onPress={confirmChoices} />
             <TouchableOpacity
               style={styles.directionNext}
-              onPress={SubmitHandler}
+              onPress={submitHandler}
             >
-              <Text style={styles.buttonText}>Next</Text>
+              <Text onPress={submitHandler} style={styles.buttonText}>
+                Next
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -313,22 +321,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: screenWidth,
-    backgroundColor: COLS.C_BG
+    backgroundColor: COLS.C_BG,
   },
   row: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   mover: {
-    left: 110
+    left: 110,
   },
   margin: {
-    marginTop: 30
+    marginTop: 30,
   },
   arrow: {
     width: 40,
     height: 20,
     marginHorizontal: 10,
-    marginVertical: 20
+    marginVertical: 20,
   },
   tick: {
     width: 20,
@@ -336,7 +344,7 @@ const styles = StyleSheet.create({
     left: 180,
     bottom: 15,
     borderWidth: 3,
-    borderColor: COLS.C6_WHITE_TEXT
+    borderColor: COLS.C6_WHITE_TEXT,
   },
   inputField: {
     marginVertical: 5,
@@ -350,13 +358,13 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
 
     elevation: 5,
-    color: COLS.C6_WHITE_TEXT
+    color: COLS.C6_WHITE_TEXT,
   },
   buttonflex: {
     alignSelf: "center",
@@ -364,7 +372,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginVertical: 10,
-    padding: 10
+    padding: 10,
   },
   directionBack: {
     backgroundColor: COLS.C_BG,
@@ -373,18 +381,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    top: -30,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-
-    elevation: 5
   },
   directionNext: {
     backgroundColor: COLS.C_BG,
@@ -393,21 +391,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    top: -61,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-
-    elevation: 5
   },
   row: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   box: {
     width: 45,
@@ -423,23 +411,23 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
 
-    elevation: 5
+    elevation: 5,
   },
   position: {
     flexDirection: "row",
     top: 40,
-    marginTop: 30
+    marginTop: 30,
   },
   motherText: {
     top: 20,
     left: 100,
     color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   title: {
     left: 10,
@@ -447,29 +435,29 @@ const styles = StyleSheet.create({
     color: COLS.C6_WHITE_TEXT,
     fontSize: 24,
     padding: 10,
-    top: -10
+    top: -10,
   },
   female: {
     top: 19,
     left: 120,
     color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   male: {
     top: 19,
     left: 130,
     color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   other: {
     top: 19,
     left: 125,
     color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
