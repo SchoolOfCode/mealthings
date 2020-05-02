@@ -53,7 +53,6 @@ export default function Registerscreen({ navigation }) {
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
   const [gender, setGender] = useState(null);
-  const [confirm, setConfirm] = useState();
 
   function nameInput(enteredText) {
     setName(enteredText);
@@ -71,104 +70,86 @@ export default function Registerscreen({ navigation }) {
   // {2,4} indicates the minimum and maximum number of characters. This will allow domain names with 2, 3 and 4 characters e.g.; us, tx, org, com, net, wxyz).
 
   function DOBinput(enteredText) {
-    setDOB(enteredText);
+    if (enteredText >= 1 && enteredText <= 31) setDOB(Math.floor(enteredText));
   }
   function DOBinput2(enteredText) {
-    setDOB2(enteredText);
+    if (enteredText >= 1 && enteredText <= 12) setDOB2(Math.floor(enteredText));
   }
   function DOBinput3(enteredText) {
-    setDOB3(enteredText);
+    if (enteredText >= 1900 && enteredText <= new Date().getFullYear())
+      setDOB3(Math.floor(enteredText));
   }
 
   function motherInput() {
     if (mother === false) {
       setMother(true);
-    } else if (mother === true) {
+    } else {
       setMother(false);
     }
   }
 
   function otherHandler() {
-    if (other == false) {
+    if (other === false) {
       setOther(true);
       setMale(false);
       setFemale(false);
+      setGender("Other");
     } else if (other == true) {
       setOther(false);
     }
   }
 
   function maleHandler() {
-    if (male == false) {
+    if (male === false) {
       setMale(true);
       setOther(false);
       setFemale(false);
-    } else if (male == false) {
+      setGender("Male");
+    } else {
       setMale(false);
     }
   }
+
   function femaleHandler() {
     if (female == false) {
       setFemale(true);
       setOther(false);
       setMale(false);
-    } else if (female == true) {
-      setFemale(false);
-    }
-  }
-  function confirmChoices() {
-    console.log(gender, name, email, DOB, DOB2, DOB3);
-    if (other == true) {
-      setGender("Other");
-    } else if (female == true) {
       setGender("female");
     } else {
-      setGender("Male");
-    }
-    if (/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/.test(email)) {
-      setEmail(email);
-    } else if (email == "" || null) {
-      Alert.alert("enter a correct email address");
-    }
-    if (
-      gender == null ||
-      name == null ||
-      email == null ||
-      DOB == null ||
-      DOB2 == null ||
-      DOB3 == null
-    ) {
-      setConfirm(false);
-      console.log("log1", gender, name, email, DOB, DOB2, DOB3);
-    } else {
-      setConfirm(true);
-      console.log("log2", gender, name, email, DOB, DOB2, DOB3);
+      setFemale(false);
     }
   }
 
   function submitHandler() {
-    console.log("submitted!");
-    if (confirm == true) {
+    if (
+      !/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/.test(email) ||
+      email == "" ||
+      email == null
+    ) {
+      Alert.alert("please check email is correct and resubmit");
+      return;
+    }
+    if (
+      gender == null ||
+      name == null ||
+      DOB == null ||
+      DOB2 == null ||
+      DOB3 == null
+    ) {
+      Alert.alert("Please ensure all data fields are complete.");
+      return;
+    } else {
       const birthday = DOB + "-" + DOB2 + "-" + DOB3;
-      console.log("Submitted:", {
-        name,
-        email,
-        birthday,
-        gender,
-        mother,
-      });
-
       const data = {
         name,
-        email_address: email,
         birthday,
-        mother,
         gender,
+        mother,
+        email_address: email,
       };
-      console.log(data);
+      console.log("Submitted data:", data);
       navigation.navigate("Register2", { data });
-    } else {
-      Alert.alert("ensure all data fields are complete");
     }
   }
 
@@ -220,7 +201,7 @@ export default function Registerscreen({ navigation }) {
         </View>
 
         <View styles={styles.position}>
-          <Text style={styles.motherText}>New Mother? </Text>
+          <Text style={styles.motherText}>Are you a new mother? </Text>
           <CheckBox
             checkedIcon={
               <Image
