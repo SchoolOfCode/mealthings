@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../App.js";
 import {
   StyleSheet,
   Text,
@@ -7,6 +8,7 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -39,35 +41,20 @@ import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 const screenWidth = Dimensions.get("window").width;
 
-export default function Loginpage({ navigation }) {
-  const [name, setName] = useState();
+export default function Loginpage() {
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  function tracked(enteredText) {
-    setName(enteredText);
+  const { login } = useContext(AuthContext);
+
+  function handleEmailChange(enteredText) {
+    setEmail(enteredText);
   }
-  function tracker(enteredText) {
+  function handlePasswordChange(enteredText) {
     setPassword(enteredText);
   }
+
   function handleSubmit() {
-    // TODO - This should not be a POST, but should do a get request with the username (use the query string route), and check if the password the user entered matches the password that the user entered. If the password is wrong the user should get an error message and another change to enter their password. If the password is correct they should be routed to the Landing Page screen.
-    // const options = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-    //   body: JSON.stringify(data),
-    // };
-    // fetch(
-    //   "http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users",
-    //   options
-    // )
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("this is", data);
-    //   });
+    login(email, password);
   }
 
   return (
@@ -81,16 +68,16 @@ export default function Loginpage({ navigation }) {
         </View>
         <TextInput
           style={styles.inputField}
-          placeholder=" enter username"
+          placeholder=" enter email address"
           value={name}
-          onChangeText={tracked}
+          onChangeText={handleEmailChange}
           placeholderTextColor="#FDFFF7"
         />
         <TextInput
           style={styles.inputField}
           placeholder=" enter password"
           value={password}
-          onChangeText={tracker}
+          onChangeText={handlePasswordChange}
           placeholderTextColor="white"
         />
         <TouchableOpacity style={styles.button} onPress={handleSubmit}>

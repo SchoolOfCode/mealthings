@@ -6,7 +6,6 @@ import {
   Text,
   View,
   TextInput,
-  Image,
   TouchableOpacity,
   Dimensions,
   Alert,
@@ -43,20 +42,21 @@ const screenWidth = Dimensions.get("screen").width;
 
 export default function Registerscreen2({ navigation, route }) {
   const { data } = route.params;
-  const [username, setUsername] = useState();
+  const [emailAddress, setEmailAddress] = useState();
   const [password, setPassword] = useState();
   const { register } = useContext(AuthContext);
 
-  function usernameHandler(enteredText) {
-    setUsername(enteredText);
+  function emailChangeHandler(enteredText) {
+    setEmailAddress(enteredText);
   }
+
   function passwordHandler(enteredText) {
     setPassword(enteredText);
   }
 
   async function SubmitHandler() {
-    console.log(username, password);
-    const dataPlus = { ...data, username, password };
+    console.log(emailAddress, password);
+    const dataPlus = { ...data, password, email_address: emailAddress };
     register(dataPlus);
   }
 
@@ -64,10 +64,9 @@ export default function Registerscreen2({ navigation, route }) {
     <View style={styles.container}>
       <TextInput
         style={styles.inputField}
-        onChangeText={usernameHandler}
-        placeholder="Username"
+        onChangeText={emailChangeHandler}
+        placeholder="Email address"
         placeholderTextColor="black"
-        maxLength={12}
       />
       <TextInput
         style={styles.inputField}

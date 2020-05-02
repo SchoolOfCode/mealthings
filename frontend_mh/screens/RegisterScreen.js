@@ -1,5 +1,4 @@
 import React, { useState, Component } from "react";
-
 import { CheckBox } from "react-native-elements";
 import {
   StyleSheet,
@@ -7,10 +6,8 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Modal,
-  Dimensions,
   Alert,
-  Button,
+  Dimensions,
   Image,
 } from "react-native";
 import { COLS } from "./COLS";
@@ -42,6 +39,7 @@ import {
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 const screenWidth = Dimensions.get("screen").width;
+
 export default function Registerscreen({ navigation }) {
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -49,9 +47,9 @@ export default function Registerscreen({ navigation }) {
   const [DOB2, setDOB2] = useState();
   const [DOB3, setDOB3] = useState();
   const [mother, setMother] = useState(false);
-  const [other, setOther] = useState(false);
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
+  const [other, setOther] = useState(false);
   const [gender, setGender] = useState(null);
 
   function nameInput(enteredText) {
