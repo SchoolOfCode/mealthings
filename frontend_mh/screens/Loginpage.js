@@ -66,7 +66,7 @@ export default function Loginpage({ navigation }) {
     //   });
     navigation.navigate("LandingPage");
   }
-  console.log("Hi from login page! ");
+
   return (
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
     marginBottom: 60,
-    fontSize: FORMAT_tagLine.F_tagLine_fontSize
+    fontSize: FORMAT_tagLine.F_tagLine_fontSize,
   },
   inputField: {
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    top: 13
+    top: 13,
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,

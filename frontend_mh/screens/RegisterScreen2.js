@@ -8,7 +8,7 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  Alert
+  Alert,
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -52,46 +52,12 @@ export default function Registerscreen2({ navigation, route }) {
     setPassword(enteredText);
   }
 
-  async function storeItem(key, item){
-    try {
-    await AsyncStorage.setItem(key, item);
-    return true;
-    } catch (err){
-    console.log("Error in storeItem:", err);
-    return false;
-    }
-  }
-
   async function SubmitHandler() {
     console.log(username, password);
     const dataPlus = { ...data, username, password };
-    console.log("dataPlus in register 2:", dataPlus);
-    const postResponse = await fetch(`.......:5000/users/`, {
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json',
-      },
-      body: {...dataPlus}
-      });
-      if(!postResponse.success){
-        Alert.alert(
-        `Error! Status code ${postResponse.status}`,
-        postResponse.message,
-        [
-        { text: 'Dismiss', onPress: () => console.log('OK Pressed') },
-        ],
-        { cancelable: false }
-        );
-        } else {
-        // If success, save JWT to AsyncLocalStorage, set Login to be true. Redirect to next page (Allergies).
-        const didStoreItem = storeItem("token", postResponse.token);
-        if(didStoreItem){
-        setLoggedIn(true); // should be in Context
-        navigation.navigate("Allergies");
-        }
-      
-        }
-    navigation.navigate("Goals", { dataPlus });
+
+    // Call sign in function
+    // That sign in function should call dispatch to change the state when it has finished.
   }
 
   return (

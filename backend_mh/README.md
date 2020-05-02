@@ -299,10 +299,10 @@
       </>
       )
 
-* Register screen (equivalent of RegisterScreen.js)
+* Register screen (equivalent of RegisterScreen.js)✅
 * Send POST request with details in the body (As currently being done, potentially nothing to change)
-* Wait for server response.
-  const postResponse = await fetch(`.......:5000/users/`, {
+* Wait for server response.✅
+  const postResponse = await fetch(`.......:5000/users/`, {✅
   method: 'POST',
   headers: {
   'Content-Type': 'application/json',
@@ -311,8 +311,8 @@
   })
 
   //If get a message of email already in use, alert them // NOTE possibly needs state and conditionally render this alert.
-  if(!postResponse.success){
-  Alert.alert(
+  if(!postResponse.success){✅
+  Alert.alert(✅
   `Error! Status code ${postResponse.status}`,
   postResponse.message,
   [
@@ -320,38 +320,38 @@
   ],
   { cancelable: false }
   );
-  } else {
+  } else {✅
   // If success, save JWT to AsyncLocalStorage, set Login to be true. Redirect to next page (Allergies).
 
-  async function storeItem(key, item){
-  try {
+  async function storeItem(key, item){✅
+  try {✅
   await AsyncStorage.setItem(key, item);
   return true;
-  } catch (err){
+  } catch (err){✅
   console.log("Error in storeItem:", err);
   return false;
   }
 
-  const didStoreItem = storeItem("token", postResponse.token);
-  if(didStoreItem){
+  const didStoreItem = storeItem("token", postResponse.token);✅
+  if(didStoreItem){✅
   setLoggedIn(true); // should be in Context
-  navigation.navigate("Allergies");
+  navigation.navigate("Allergies");❌ - questionable
   }
 
   }
 
 - Login screen (equivalent of LoginPage)
 
-* Send POST request with email and password, and wait for server response
-  const loginResponse = await fetch(`.......:5000/users/login`, {
-  method: 'POST',
-  headers: {
-  'Content-Type': 'application/json'
-  },
-  body: {username, password},
-  })
+// Send POST request with email and password, and wait for server response
+const loginResponse = await fetch(`.......:5000/users/login`, {
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: {username, password},
+})
 
-* If server returns true and with JWT
+- If server returns true and with JWT
   if(loginResponse.success){
   - Save JWT to local AsyncStorage
     async function storeItem(key, item){
@@ -368,7 +368,7 @@
   - Redirect to Landing Page
     navigation.navigate("HomeScreen");
     } else {
-* If server return false
+- If server return false
   - Tell user incorrect password
     Alert.alert(
     `Error!`,
@@ -385,14 +385,14 @@
     - Make link on Login screen to reset password
     - Make screen for reset password -->
 
-- Password reset screen (2 screens)
-- Screen 1: Ask for emailed temp password
+* Password reset screen (2 screens)
+* Screen 1: Ask for emailed temp password
   - Send POST request with email and temp password to check against the database
     - If enter correct temp password, got to screen 2
     - If incorrect, say incorrect temp password. Option to enter again or to go back so can request another temp password or try to log in again.
-- Screen 2: Write out password twice
+* Screen 2: Write out password twice
 
   - Send PATCH request to database with new password, and redirect to the landing page screen.
 
-- deal with Errors, try / catch, and redirects
-- Make logout screen remove JWT
+* deal with Errors, try / catch, and redirects
+* Make logout screen remove JWT
