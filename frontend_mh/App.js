@@ -1,8 +1,13 @@
 import React, { useEffect, useReducer, useMemo } from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  View,
+  AsyncStorage,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import AsyncStorage from "@react-native-community/async-storage";
 
 import LoginPage from "./screens/Loginpage";
 import RegisterScreen from "./screens/RegisterScreen";

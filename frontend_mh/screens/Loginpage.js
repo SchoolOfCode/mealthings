@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   Image,
+  Dimensions,
   TouchableOpacity,
 } from "react-native";
 import { COLS } from "./COLS";
@@ -35,6 +36,9 @@ import {
   FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+
+const screenWidth = Dimensions.get("window").width;
+
 export default function Loginpage({ navigation }) {
   const [name, setName] = useState();
   const [password, setPassword] = useState();
@@ -64,7 +68,6 @@ export default function Loginpage({ navigation }) {
     //   .then((data) => {
     //     console.log("this is", data);
     //   });
-    navigation.navigate("LandingPage");
   }
 
   return (
@@ -116,10 +119,8 @@ const styles = StyleSheet.create({
     // alignItems: FORMAT_logo.F_logo_alignItems,
     // margin: FORMAT_logo.F_logo_margin,
     // justifyContent: FORMAT_logo.F_logo_justifyContent,
-    height: 300,
-    width: 300,
-    left: 55,
-    bottom: 60,
+    height: screenWidth * 0.8,
+    width: screenWidth * 0.8,
   },
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,

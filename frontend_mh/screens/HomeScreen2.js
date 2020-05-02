@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 import { COLS } from "./COLS";
 import {
   FORMAT_navButtonBackground,
@@ -8,6 +15,8 @@ import {
 import { FORMAT_logo } from "./FORMAT_logo";
 import { FORMAT_welcomeContainer } from "./FORMAT_containers";
 import { FORMAT_tagLine } from "./FORMAT_extraComponents";
+
+const screenWidth = Dimensions.get("window").width;
 
 export default function HomeScreen2({ navigation }) {
   return (
@@ -56,8 +65,8 @@ const styles = StyleSheet.create({
     alignItems: FORMAT_logo.F_logo_alignItems,
     margin: FORMAT_logo.F_logo_margin,
     justifyContent: FORMAT_logo.F_logo_justifyContent,
-    width: 400,
-    height: 400,
+    width: screenWidth * 0.8,
+    height: screenWidth * 0.8,
   },
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
