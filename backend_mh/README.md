@@ -245,17 +245,17 @@
   const [loggedIn, setLoggedIn] = useState(false);✅
   const [finishedCheckingServer, setFinishedCheckingServer] = useState(false);✅
   -Check if JWT present.
-  let token;
+  let token;✅
   // Try to get from AsyncStorage
-  try{
-  token = await AsyncStorage.getItem("token");
-  } catch(err){
-  console.log("No JWT found,");
-  setFinishedCheckingServer(true);
-  }
+  try{✅
+  token = await AsyncStorage.getItem("token");✅
+  } catch(err){✅
+  console.log("No JWT found,");✅
+  setFinishedCheckingServer(true);✅
+  }✅
   // If JWT is found, ask server if JWT is verified
-  if(token){
-  const reply = await fetch(`.......:5000/users/login`, {
+  if(token){✅
+  const reply = await fetch(`.......:5000/users/login`, {✅
   method: 'POST',
   headers: {
   'Content-Type': 'application/json',
@@ -263,29 +263,29 @@
   },
   body: {},
   })
-  if(reply.success){
+  if(reply.success){✅
   // If yes, auto go through to LandingPage. Set loggedIn state to true. Possibly useContext for it.
-  setFinishedCheckingServer(true);
-  setLoggedIn(true);
-  navigation.navigate("LandingPage"); // Possibly unneeded?
-  } else {
+  setFinishedCheckingServer(true);✅
+  setLoggedIn(true);✅
+  navigation.navigate("LandingPage"); // Possibly unneeded?❌
+  } else {✅
   // If JWT is not verified, stay on Hello screen. Delete incorrect JWT. STRETCH GOAL show small popup saying you are not logged in.
-  AsyncStorage.removeItem('token', (err) => console.log('userId', err));
-  setFinishedCheckingServer(true);
-  navigation.navigate("HomeScreen"); // Send to where user can choose to login or register.
-  }
+  AsyncStorage.removeItem('token', (err) => console.log('userId', err));✅
+  setFinishedCheckingServer(true);✅
+  navigation.navigate("HomeScreen"); // Send to where user can choose to login or register.❌
+  }✅
   else {
-  setFinishedCheckingServer(true);
-  }
+  setFinishedCheckingServer(true);✅
+  }✅
 
-  - Create SplashScreenLoad (new SplashScreenLoad)
-    TODO
-  - Call splash screen
-    if(!finishedCheckingServer){
-    return <SplashScreenLoad />
+  - Create SplashScreenLoad (new SplashScreenLoad)❌
+    TODO❌
+  - Call splash screen❌
+    if(!finishedCheckingServer){✅
+    return <SplashScreenLoad />❌
     }
 
-    - Set up navigation structure
+    - Set up navigation structure✅
       loggedIn ? (
       <>
       <Stack.Screen name="Home" component={HomeScreen} />
