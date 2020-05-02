@@ -343,32 +343,33 @@
 - Login screen (equivalent of LoginPage)
 
 // Send POST request with email and password, and wait for server response
-const loginResponse = await fetch(`.......:5000/users/login`, {
+const loginResponse = await fetch(`http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/login`, {✅
 method: 'POST',
 headers: {
 'Content-Type': 'application/json'
 },
-body: {username, password},
+body: {email_address, password},
 })
 
-- If server returns true and with JWT
-  if(loginResponse.success){
-  - Save JWT to local AsyncStorage
-    async function storeItem(key, item){
-    try {
-    await AsyncStorage.setItem(key, item);
-    return true;
-    } catch (err){
-    console.log("Error in storeItem:", err);
-    return false;
-    }
-    const itemWasStored = storeItem("token", loginResponse.token)
-  - Set logged in to true
-    // Alter the context?
-  - Redirect to Landing Page
-    navigation.navigate("HomeScreen");
-    } else {
-- If server return false
+// If server returns true and with JWT✅
+if(loginResponse.success){✅
+// Save JWT to local AsyncStorage✅
+async function storeItem(key, item){
+try {
+await AsyncStorage.setItem(key, item);
+return true;
+} catch (err){
+console.log("Error in storeItem:", err);
+return false;
+}
+const itemWasStored = storeItem("token", loginResponse.token)
+
+- Set logged in to true✅
+  // Alter the context?
+- Redirect to Landing Page
+  navigation.navigate("HomeScreen");
+  } else {❌- not required, Homescreen default route
+- If server return false✅
   - Tell user incorrect password
     Alert.alert(
     `Error!`,
