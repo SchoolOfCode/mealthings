@@ -344,7 +344,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-
     elevation: 5,
     color: COLS.C6_WHITE_TEXT,
   },
@@ -402,7 +401,6 @@ const styles = StyleSheet.create({
   },
   position: {
     flexDirection: "row",
-    top: 40,
     marginTop: 30,
   },
   motherText: {

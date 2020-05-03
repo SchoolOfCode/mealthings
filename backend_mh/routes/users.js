@@ -125,8 +125,8 @@ router.post("/login", async (req, res) => {
   if (authorization) {
     const token = authorization.split(" ")[1];
     const verifyResponse = await verifyJwt(token);
-    if (verifyResponse) {
-      res.status(200).json({
+    if (verifyResponse.length >= 1) {
+      return res.status(200).json({
         success: true,
         message: "Welcome back!",
         email_address: verifyResponse[0].email_address,
