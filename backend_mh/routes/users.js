@@ -91,13 +91,14 @@ router.post("/", async (req, res) => {
   try {
     const data = await saveNewUser(body);
     if (data.rows) {
-      const token = await getToken(body);
+      const tokenResponse = await getToken(body);
       return res.status(201).json({
         message: "Inserted new user",
         success: true,
         email_address: data.rows[0].email_address,
         userID: data.rows[0].user_id,
-        token,
+        token: tokenResponse.token,
+        userID: tokenResponse.userID,
       });
     }
     console.warn("Failed to insert new user. Request body:", body);
