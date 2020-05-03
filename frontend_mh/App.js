@@ -74,6 +74,12 @@ export default function App() {
             finishedCheckingServer: true,
           };
         case "SIGN_OUT":
+          try {
+            AsyncStorage.removeItem("token");
+            console.log("Removed JWT on signout");
+          } catch (err) {
+            console.log(err);
+          }
           return {
             ...prevState,
             isSignout: true,
@@ -110,10 +116,10 @@ export default function App() {
               "Content-Type": "application/json",
               Authorization: "Bearer" + " " + token,
             },
-            body: {},
           }
         );
-        if (reply.success) {
+        const replyJson = await reply.json();
+        if (replyJson.success || (reply.status > 199 && reply.status < 250)) {
           // If yes, auto go through to LandingPage. Set loggedIn state to true. Possibly useContext for it.
           dispatch({ type: "RESTORE_TOKEN_SUCCESS", token: token });
           // navigation.navigate("LandingPage"); // Possibly unneeded?
@@ -141,13 +147,19 @@ export default function App() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: { email_address, password },
+            body: JSON.stringify({ email_address, password }),
           }
         );
+        const loginResponseJson = await loginResponse.json();
+        console.log(
+          "fetch response in logIn:",
+          JSON.stringify(loginResponse),
+          loginResponseJson
+        );
         // If server returns true and with JWT
-        if (loginResponse.success) {
+        if (loginResponseJson.success || loginResponse.status == 200) {
           // Save JWT to local AsyncStorage
-          const itemWasStored = storeItem("token", loginResponse.token);
+          const itemWasStored = storeItem("token", loginResponseJson.token);
           if (!itemWasStored) {
             console.log("AsyncLocalstorage failed.");
           }
@@ -156,7 +168,6 @@ export default function App() {
         } else {
           // If server return false
           // Tell user incorrect password
-          console.log("the error:", itemWasStored);
           Alert.alert(
             `Oops!`,
             "Could not verify email and password.",
@@ -178,10 +189,11 @@ export default function App() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: { ...dataPlus },
+            body: JSON.stringify({ ...dataPlus }),
           }
         );
-        if (!postResponse.success) {
+        const postResponseJson = await postResponse.json();
+        if (!postResponseJson.success) {
           console.log("postResponse", postResponse);
           Alert.alert(
             `Error! Status code ${postResponse.status}`,
