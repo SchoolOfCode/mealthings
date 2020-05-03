@@ -80,6 +80,7 @@ async function addUser(body) {
     goals,
     gender
   );
+  console.log("hi");
   const res = await query(
     `INSERT INTO users(
         name,
@@ -124,6 +125,7 @@ async function addUser(body) {
       gender,
     ]
   );
+  console.log("db res:", res);
   return res;
 }
 

@@ -397,3 +397,14 @@ const itemWasStored = storeItem("token", loginResponse.token)
 
 * deal with Errors, try / catch, and redirects
 * Make logout screen remove JWT
+
+// Pass userID into context
+// Get userID out of context where required
+// Change GetRecipes calls
+// Put recipes into state
+// Get recipes out of state where required
+// Get recipe URLs working on relevant screens (look at Josh's code if required, remember uri)
+// Fix recipe cards into 2 columns not one
+// Get search Icon into the centre of red circle on recipe cards
+// Enable button on recipe cards so the selected recipe shows
+//

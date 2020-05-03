@@ -33,6 +33,7 @@ export const AuthContext = React.createContext();
 async function storeItem(key, item) {
   try {
     await AsyncStorage.setItem(key, item);
+    console.log("Stored item", item, "in Asyncstorage!");
     return true;
   } catch (err) {
     console.log("Error in storeItem:", err);
@@ -40,7 +41,7 @@ async function storeItem(key, item) {
   }
 }
 
-export default function App() {
+export default function App({ navigation }) {
   const [state, dispatch] = useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -122,12 +123,10 @@ export default function App() {
         if (replyJson.success || (reply.status > 199 && reply.status < 250)) {
           // If yes, auto go through to LandingPage. Set loggedIn state to true. Possibly useContext for it.
           dispatch({ type: "RESTORE_TOKEN_SUCCESS", token: token });
-          // navigation.navigate("LandingPage"); // Possibly unneeded?
         } else {
           // If JWT is not verified, stay on Hello screen. Delete incorrect JWT. STRETCH GOAL show small popup saying you are not logged in.
           AsyncStorage.removeItem("token", (err) => console.log("userId", err));
           dispatch({ type: "RESTORE_TOKEN_FAILURE" });
-          // navigation.navigate("HomeScreen"); // Send to where user can choose to login or register.
         }
       } else {
         dispatch({ type: "RESTORE_TOKEN_FAILURE" });
@@ -194,7 +193,11 @@ export default function App() {
         );
         const postResponseJson = await postResponse.json();
         if (!postResponseJson.success) {
-          console.log("postResponse", postResponse);
+          console.log(
+            "postResponse",
+            JSON.stringify(postResponse),
+            postResponseJson
+          );
           Alert.alert(
             `Error! Status code ${postResponse.status}`,
             postResponse.message,
@@ -209,7 +212,6 @@ export default function App() {
             navigation.navigate("Allergies");
           }
         }
-        // navigation.navigate("Goals", { dataPlus });
       },
     }),
     []
