@@ -153,7 +153,7 @@ const multipleRecipes = [
 ];
 
 function recipeCard(recipeObject) {
-  const { userID } = useContext(AuthContext);
+  const { userID, recipeList } = useContext(AuthContext);
   return (
     <View key={recipeObject.name} style={styles.recipeCardContainer}>
       <TouchableOpacity>

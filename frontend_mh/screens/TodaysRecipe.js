@@ -103,7 +103,7 @@ function cleanString(string) {
 }
 
 export default function TodaysRecipe({ navigation }) {
-  const { userID } = useContext(AuthContext);
+  const { userID, recipeList } = useContext(AuthContext);
   const [showIngredients, setShowIngredients] = useState(false);
   const [showMethod, setShowMethod] = useState(false);
   const allRecipes = useContext(RecipeContext);

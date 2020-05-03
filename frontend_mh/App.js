@@ -53,6 +53,7 @@ export default function App({ navigation }) {
             loggedIn: true,
             finishedCheckingServer: true,
             userID: action.userID,
+            recipeList: null,
           };
         case "RESTORE_TOKEN_FAILURE":
           return {
@@ -62,6 +63,7 @@ export default function App({ navigation }) {
             loggedIn: false,
             finishedCheckingServer: true,
             userID: null,
+            recipes: null,
           };
         case "LOGIN_FAILURE":
           return {
@@ -71,6 +73,7 @@ export default function App({ navigation }) {
             loggedIn: false,
             finishedCheckingServer: true,
             userID: null,
+            recipeList: null,
           };
         case "SIGN_IN":
           return {
@@ -80,6 +83,7 @@ export default function App({ navigation }) {
             token: action.token,
             finishedCheckingServer: true,
             userID: action.userID,
+            recipeList: null,
           };
         case "SIGN_OUT":
           try {
@@ -95,6 +99,12 @@ export default function App({ navigation }) {
             loggedIn: false,
             finishedCheckingServer: true,
             userID: null,
+            recipeList: null,
+          };
+        case "SET_RECIPES":
+          return {
+            ...prevState,
+            recipeList: action.recipes,
           };
       }
     },
@@ -104,6 +114,7 @@ export default function App({ navigation }) {
       loggedIn: false,
       finishedCheckingServer: false,
       userID: null,
+      recipeList: null,
     }
   );
 
@@ -202,6 +213,9 @@ export default function App({ navigation }) {
       },
 
       logOut: () => dispatch({ type: "SIGN_OUT" }),
+
+      setRecipeList: (recipes) =>
+        dispatch({ type: "SET_RECIPES", recipes: recipes }),
 
       register: async (dataPlus) => {
         console.log("dataPlus in register function:", dataPlus);

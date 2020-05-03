@@ -1,13 +1,6 @@
 import React from "react";
 import { AuthContext } from "../App.js";
-import {
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  ScrollView,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, View, ScrollView } from "react-native";
 
 // import FlatList from "react-native-drag-flatlist";
 import MealPlanner from "../components/MealPlanner";
