@@ -156,8 +156,9 @@ export default function App() {
         } else {
           // If server return false
           // Tell user incorrect password
+          console.log("the error:", itemWasStored);
           Alert.alert(
-            `Error!`,
+            `Oops!`,
             "Could not verify email and password.",
             [{ text: "Dismiss", onPress: () => console.log("OK Pressed") }],
             { cancelable: false }

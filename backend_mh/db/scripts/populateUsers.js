@@ -1,5 +1,5 @@
 const { query } = require("../index");
-
+const bcrypt = require("bcryptjs");
 const fs = require("fs");
 const { promisify } = require("util");
 const path = require("path");
@@ -27,6 +27,8 @@ async function populateUsers() {
         gender,
         last_date_meals_requested,
       }) => {
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(password, salt);
         const res = await query(
           `INSERT INTO users (
             name,
@@ -68,7 +70,7 @@ async function populateUsers() {
             email_address,
             username,
             weight,
-            password,
+            hash,
             new_mum,
             food_prefs_inc,
             food_prefs_exc,

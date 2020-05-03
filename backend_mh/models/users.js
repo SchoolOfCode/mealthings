@@ -145,11 +145,13 @@ async function getPassword(email_address) {
 }
 
 async function saveTempPassword(email_address, randomTempPassword) {
+  var salt = bcrypt.genSaltSync(10);
+  var hashedRandomTempPassword = bcrypt.hashSync(randomTempPassword, salt);
   const res = await query(
     "UPDATE users SET password = $1 WHERE email_address = $2 RETURNING email_address",
-    [randomTempPassword, email_address]
+    [hashedRandomTempPassword, email_address]
   );
-  return res; // res.rows? res.rows[0] ?
+  return res;
 }
 
 async function sendTempPasswordEmail(email_address, randomTempPassword) {

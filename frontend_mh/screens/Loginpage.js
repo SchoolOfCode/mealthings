@@ -44,7 +44,7 @@ const screenWidth = Dimensions.get("window").width;
 export default function Loginpage() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const { login } = useContext(AuthContext);
+  const { logIn } = useContext(AuthContext);
 
   function handleEmailChange(enteredText) {
     setEmail(enteredText);
@@ -54,7 +54,7 @@ export default function Loginpage() {
   }
 
   function handleSubmit() {
-    login(email, password);
+    logIn(email, password);
   }
 
   return (
@@ -69,7 +69,7 @@ export default function Loginpage() {
         <TextInput
           style={styles.inputField}
           placeholder=" enter email address"
-          value={name}
+          value={email}
           onChangeText={handleEmailChange}
           placeholderTextColor="#FDFFF7"
         />
@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    // height: FORMAT_containers.F_containerHeaders_height,
     justifyContent: "center",
+    alignItems: "center",
   },
   welcomeContainer: {
     // alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
