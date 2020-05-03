@@ -131,7 +131,7 @@ async function addUser(body) {
 
 async function getToken(body) {
   const userIDResponse = await query(
-    "SELELCT user_id FROM users WHERE email_address = $1",
+    "SELECT user_id FROM users WHERE email_address = $1",
     [body.email_address]
   );
   const token = await jwt.sign(

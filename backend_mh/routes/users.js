@@ -150,7 +150,7 @@ router.post("/login", async (req, res) => {
       const bcryptResult = bcrypt.compareSync(password, hashedPassword);
       if (bcryptResult) {
         const tokenResponse = await getToken(body);
-        if (token) {
+        if (tokenResponse) {
           return res.status(200).json({
             success: true,
             message: "Welcome back!",
