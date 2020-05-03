@@ -130,12 +130,15 @@ async function addUser(body) {
 }
 
 async function getToken(body) {
-  //Note to selves - toDo - ensure we can pull the user id not only email - work out how to do this. Also think carefully as to whether we actually NEED to do this...?
+  const userIDResponse = await query(
+    "SELELCT user_id FROM users WHERE email_address = $1",
+    [body.email_address]
+  );
   const token = await jwt.sign(
     { email_address: body.email_address },
     JWT_SECRET
   );
-  return token;
+  return { token, userID: userIDResponse.rows[0].user_id };
 }
 
 async function getPassword(email_address) {
