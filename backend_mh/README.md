@@ -242,20 +242,20 @@
     --> in from routes: res.status(200).json({etc, userID})✅
 - In HomeScreen.js itself
 - Set state for logged in or not and for whether finished checking server on not.
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [finishedCheckingServer, setFinishedCheckingServer] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);✅
+  const [finishedCheckingServer, setFinishedCheckingServer] = useState(false);✅
   -Check if JWT present.
-  let token;
+  let token;✅
   // Try to get from AsyncStorage
-  try{
-  token = await AsyncStorage.getItem("token");
-  } catch(err){
-  console.log("No JWT found,");
-  setFinishedCheckingServer(true);
-  }
+  try{✅
+  token = await AsyncStorage.getItem("token");✅
+  } catch(err){✅
+  console.log("No JWT found,");✅
+  setFinishedCheckingServer(true);✅
+  }✅
   // If JWT is found, ask server if JWT is verified
-  if(token){
-  const reply = await fetch(`.......:5000/users/login`, {
+  if(token){✅
+  const reply = await fetch(`.......:5000/users/login`, {✅
   method: 'POST',
   headers: {
   'Content-Type': 'application/json',
@@ -263,29 +263,29 @@
   },
   body: {},
   })
-  if(reply.success){
+  if(reply.success){✅
   // If yes, auto go through to LandingPage. Set loggedIn state to true. Possibly useContext for it.
-  setFinishedCheckingServer(true);
-  setLoggedIn(true);
-  navigation.navigate("LandingPage"); // Possibly unneeded?
-  } else {
+  setFinishedCheckingServer(true);✅
+  setLoggedIn(true);✅
+  navigation.navigate("LandingPage"); // Possibly unneeded?❌
+  } else {✅
   // If JWT is not verified, stay on Hello screen. Delete incorrect JWT. STRETCH GOAL show small popup saying you are not logged in.
-  AsyncStorage.removeItem('token', (err) => console.log('userId', err));
-  setFinishedCheckingServer(true);
-  navigation.navigate("HomeScreen"); // Send to where user can choose to login or register.
-  }
+  AsyncStorage.removeItem('token', (err) => console.log('userId', err));✅
+  setFinishedCheckingServer(true);✅
+  navigation.navigate("HomeScreen"); // Send to where user can choose to login or register.❌
+  }✅
   else {
-  setFinishedCheckingServer(true);
-  }
+  setFinishedCheckingServer(true);✅
+  }✅
 
-  - Create SplashScreenLoad (new SplashScreenLoad)
-    TODO
-  - Call splash screen
-    if(!finishedCheckingServer){
-    return <SplashScreenLoad />
+  - Create SplashScreenLoad (new SplashScreenLoad)❌
+    TODO❌
+  - Call splash screen❌
+    if(!finishedCheckingServer){✅
+    return <SplashScreenLoad />❌
     }
 
-    - Set up navigation structure
+    - Set up navigation structure✅
       loggedIn ? (
       <>
       <Stack.Screen name="Home" component={HomeScreen} />
@@ -299,10 +299,10 @@
       </>
       )
 
-* Register screen (equivalent of RegisterScreen.js)
+* Register screen (equivalent of RegisterScreen.js)✅
 * Send POST request with details in the body (As currently being done, potentially nothing to change)
-* Wait for server response.
-  const postResponse = await fetch(`.......:5000/users/`, {
+* Wait for server response.✅
+  const postResponse = await fetch(`.......:5000/users/`, {✅
   method: 'POST',
   headers: {
   'Content-Type': 'application/json',
@@ -311,8 +311,8 @@
   })
 
   //If get a message of email already in use, alert them // NOTE possibly needs state and conditionally render this alert.
-  if(!postResponse.success){
-  Alert.alert(
+  if(!postResponse.success){✅
+  Alert.alert(✅
   `Error! Status code ${postResponse.status}`,
   postResponse.message,
   [
@@ -320,55 +320,56 @@
   ],
   { cancelable: false }
   );
-  } else {
+  } else {✅
   // If success, save JWT to AsyncLocalStorage, set Login to be true. Redirect to next page (Allergies).
 
-  async function storeItem(key, item){
-  try {
+  async function storeItem(key, item){✅
+  try {✅
   await AsyncStorage.setItem(key, item);
   return true;
-  } catch (err){
+  } catch (err){✅
   console.log("Error in storeItem:", err);
   return false;
   }
 
-  const didStoreItem = storeItem("token", postResponse.token);
-  if(didStoreItem){
+  const didStoreItem = storeItem("token", postResponse.token);✅
+  if(didStoreItem){✅
   setLoggedIn(true); // should be in Context
-  navigation.navigate("Allergies");
+  navigation.navigate("Allergies");❌ - questionable
   }
 
   }
 
 - Login screen (equivalent of LoginPage)
 
-* Send POST request with email and password, and wait for server response
-  const loginResponse = await fetch(`.......:5000/users/login`, {
-  method: 'POST',
-  headers: {
-  'Content-Type': 'application/json'
-  },
-  body: {username, password},
-  })
+// Send POST request with email and password, and wait for server response
+const loginResponse = await fetch(`http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/login`, {✅
+method: 'POST',
+headers: {
+'Content-Type': 'application/json'
+},
+body: {email_address, password},
+})
 
-* If server returns true and with JWT
-  if(loginResponse.success){
-  - Save JWT to local AsyncStorage
-    async function storeItem(key, item){
-    try {
-    await AsyncStorage.setItem(key, item);
-    return true;
-    } catch (err){
-    console.log("Error in storeItem:", err);
-    return false;
-    }
-    const itemWasStored = storeItem("token", loginResponse.token)
-  - Set logged in to true
-    // Alter the context?
-  - Redirect to Landing Page
-    navigation.navigate("HomeScreen");
-    } else {
-* If server return false
+// If server returns true and with JWT✅
+if(loginResponse.success){✅
+// Save JWT to local AsyncStorage✅
+async function storeItem(key, item){
+try {
+await AsyncStorage.setItem(key, item);
+return true;
+} catch (err){
+console.log("Error in storeItem:", err);
+return false;
+}
+const itemWasStored = storeItem("token", loginResponse.token)
+
+- Set logged in to true✅
+  // Alter the context?
+- Redirect to Landing Page
+  navigation.navigate("HomeScreen");
+  } else {❌- not required, Homescreen default route
+- If server return false✅
   - Tell user incorrect password
     Alert.alert(
     `Error!`,
@@ -385,14 +386,25 @@
     - Make link on Login screen to reset password
     - Make screen for reset password -->
 
-- Password reset screen (2 screens)
-- Screen 1: Ask for emailed temp password
+* Password reset screen (2 screens)
+* Screen 1: Ask for emailed temp password
   - Send POST request with email and temp password to check against the database
     - If enter correct temp password, got to screen 2
     - If incorrect, say incorrect temp password. Option to enter again or to go back so can request another temp password or try to log in again.
-- Screen 2: Write out password twice
+* Screen 2: Write out password twice
 
   - Send PATCH request to database with new password, and redirect to the landing page screen.
 
-- deal with Errors, try / catch, and redirects
-- Make logout screen remove JWT
+* deal with Errors, try / catch, and redirects
+* Make logout screen remove JWT
+
+// Pass userID into context
+// Get userID out of context where required
+// Change GetRecipes calls
+// Put recipes into state
+// Get recipes out of state where required
+// Get recipe URLs working on relevant screens (look at Josh's code if required, remember uri)
+// Fix recipe cards into 2 columns not one
+// Get search Icon into the centre of red circle on recipe cards
+// Enable button on recipe cards so the selected recipe shows
+//
