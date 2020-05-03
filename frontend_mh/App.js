@@ -182,6 +182,7 @@ export default function App() {
           }
         );
         if (!postResponse.success) {
+          console.log("postResponse", postResponse);
           Alert.alert(
             `Error! Status code ${postResponse.status}`,
             postResponse.message,

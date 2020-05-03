@@ -67,11 +67,11 @@ export default function Registerscreen2({ navigation, route }) {
         onChangeText={emailChangeHandler}
         placeholder="Email address"
         placeholderTextColor="black"
+        keyboardType="email-address"
       />
       <TextInput
         style={styles.inputField}
         placeholder="Password"
-        keyboardType="password"
         onChangeText={passwordHandler}
         placeholderTextColor="black"
       />
