@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TextInput,
+} from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -31,7 +38,7 @@ import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 const screenWidth = Dimensions.get("window").width;
 
-export default function SplashPWReset() {
+export default function SplashPWReset2() {
   return (
     <View style={styles.container}>
       <View style={styles.logoCircle}>
@@ -40,10 +47,26 @@ export default function SplashPWReset() {
           source={require("../assets/images/newLogo.png")}
         />
       </View>
+
+      <TextInput
+        style={styles.inputField}
+        placeholder="Reset Code"
+        placeholderTextColor="black"
+        keyboardType="email-address"
+      />
+      <TextInput
+        style={styles.inputField}
+        placeholder="New Password"
+        placeholderTextColor="black"
+      />
+
+      <TextInput
+        style={styles.inputField}
+        placeholder="Confirm New Password"
+        placeholderTextColor="black"
+      />
       <View style={styles.textRect}>
-        <Text style={styles.text}>
-          Click here to recieve a password reset code straight to your inbox
-        </Text>
+        <Text style={styles.text}>Reset Now</Text>
       </View>
     </View>
   );

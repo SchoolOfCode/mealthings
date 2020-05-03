@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -29,16 +29,20 @@ import {
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
+const screenWidth = Dimensions.get("window").width;
+
 export default function SplashLoad() {
   return (
     <View style={styles.container}>
-      <View style={styles.circle}>
-        <FontAwesome name="glass-whiskey" size={150} style={styles.icon} />
+      <View style={styles.logoCircle}>
+        <Image
+          style={styles.mealThingsLogo}
+          source={require("../assets/images/newLogo.png")}
+        />
       </View>
       <View style={styles.textRect}>
-        <Text>
-          Loading - we're spinning up your personalised menu so you don't have
-          to
+        <Text style={styles.text}>
+          Loading - we're spinning up your meal for you, so you don't have to!
         </Text>
       </View>
     </View>
@@ -52,6 +56,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     backgroundColor: COLS.C_BG,
     flex: 1,
+  },
+  mealThingsLogo: {
+    height: screenWidth * 0.8,
+    width: screenWidth * 0.8,
   },
   circle: {
     width: 200,
