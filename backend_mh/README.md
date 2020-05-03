@@ -397,6 +397,3 @@ const itemWasStored = storeItem("token", loginResponse.token)
 
 * deal with Errors, try / catch, and redirects
 * Make logout screen remove JWT
-
-1. In the password reset, we need to send the user the random password, but we need actually encrypt the password when we send it to the database.
-2. We also need to hash the passwords that we are sending in MOCKUSERS
