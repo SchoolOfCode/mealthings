@@ -101,14 +101,18 @@ export default function App({ navigation }) {
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const onLoad = async () => {
+      console.log("Inside useEffect!");
       let token;
       try {
+        console.log("About to look for JWT");
         token = await AsyncStorage.getItem("token");
+        console.log("Found! JWT");
       } catch (err) {
         console.log("No JWT found");
         dispatch({ type: "RESTORE_TOKEN_FAILURE" });
       }
       if (token) {
+        console.log("About to fetch...");
         const reply = await fetch(
           `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/login`,
           {
@@ -119,6 +123,7 @@ export default function App({ navigation }) {
             },
           }
         );
+        console.log("Finished fetching!");
         const replyJson = await reply.json();
         if (replyJson.success || (reply.status > 199 && reply.status < 250)) {
           // If yes, auto go through to LandingPage. Set loggedIn state to true. Possibly useContext for it.
