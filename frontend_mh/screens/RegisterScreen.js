@@ -41,8 +41,8 @@ import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 const screenWidth = Dimensions.get("screen").width;
 
 export default function Registerscreen({ navigation }) {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
   const [DOB, setDOB] = useState();
   const [DOB2, setDOB2] = useState();
   const [DOB3, setDOB3] = useState();
@@ -52,12 +52,12 @@ export default function Registerscreen({ navigation }) {
   const [other, setOther] = useState(false);
   const [gender, setGender] = useState(null);
 
-  function nameInput(enteredText) {
-    setName(enteredText);
+  function firstNameInput(enteredText) {
+    setFirstName(enteredText);
   }
 
-  function emailInput(enteredText) {
-    setEmail(enteredText);
+  function lastNameInput(enteredText) {
+    setLastName(enteredText);
   }
   //NOTES ON REGEX FOR REFERENCE
   ///^[a-zA-Z0-9._-]+:  Means that the email address must begin with alpha-numeric characters (both lowercase and uppercase characters are allowed). It may have periods,underscores and hyphens.
@@ -68,14 +68,15 @@ export default function Registerscreen({ navigation }) {
   // {2,4} indicates the minimum and maximum number of characters. This will allow domain names with 2, 3 and 4 characters e.g.; us, tx, org, com, net, wxyz).
 
   function DOBinput(enteredText) {
-    if (enteredText >= 1 && enteredText <= 31) setDOB(Math.floor(enteredText));
+    setDOB(String(enteredText));
   }
+
   function DOBinput2(enteredText) {
-    if (enteredText >= 1 && enteredText <= 12) setDOB2(Math.floor(enteredText));
+    setDOB2(String(enteredText));
   }
+
   function DOBinput3(enteredText) {
-    if (enteredText >= 1900 && enteredText <= new Date().getFullYear())
-      setDOB3(Math.floor(enteredText));
+    setDOB3(String(enteredText));
   }
 
   function motherInput() {
@@ -121,30 +122,33 @@ export default function Registerscreen({ navigation }) {
 
   function submitHandler() {
     if (
-      !/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/.test(email) ||
-      email == "" ||
-      email == null
-    ) {
-      Alert.alert("please check email is correct and resubmit");
-      return;
-    }
-    if (
       gender == null ||
-      name == null ||
+      firstName == null ||
+      lastName == null ||
       DOB == null ||
       DOB2 == null ||
       DOB3 == null
     ) {
       Alert.alert("Please ensure all data fields are complete.");
       return;
+    } else if (DOB <= 0 || DOB > 31) {
+      Alert.alert("Day (in date of birth) can only be between 1 and 31!");
+      return;
+    } else if (DOB2 < 1 || DOB2 > 12) {
+      Alert.alert("Month (in date of birth) can only be between 1 and 12!");
+      return;
+    } else if (DOB3 < 1900 || DOB3 > new Date().getFullYear()) {
+      Alert.alert(
+        `Year (in date of birth) can only be between 1900 and ${new Date().getFullYear()}!`
+      );
+      return;
     } else {
-      const birthday = DOB + "-" + DOB2 + "-" + DOB3;
+      const birthday = DOB2 + "-" + DOB + "-" + DOB3;
       const data = {
-        name,
+        name: `${firstName} ${lastName}`,
         birthday,
         gender,
         mother,
-        email_address: email,
       };
       console.log("Submitted data:", data);
       navigation.navigate("Register2", { data });
@@ -158,16 +162,15 @@ export default function Registerscreen({ navigation }) {
           <Text style={styles.title}>Create Your Account:</Text>
           <TextInput
             style={styles.inputField}
-            onChangeText={nameInput}
-            placeholder="Name"
+            onChangeText={firstNameInput}
+            placeholder="First name"
             placeholderTextColor="#FDFFF7"
             isRequired
           />
           <TextInput
             style={styles.inputField}
-            placeholder=" Email"
-            onChangeText={emailInput}
-            keyboardType="email-address"
+            placeholder=" Last name"
+            onChangeText={lastNameInput}
             placeholderTextColor="#FDFFF7"
           />
           <View style={styles.row}>
