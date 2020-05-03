@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { AuthContext } from "../App.js";
 import {
   View,
   Text,
@@ -152,6 +153,7 @@ const multipleRecipes = [
 ];
 
 function recipeCard(recipeObject) {
+  const { userID } = useContext(AuthContext);
   return (
     <View key={recipeObject.name} style={styles.recipeCardContainer}>
       <TouchableOpacity>

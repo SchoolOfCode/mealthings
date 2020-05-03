@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
   },
 
   margin: {
-    // top: 30,
     backgroundColor: COLS.C_BG,
   },
   flex: {

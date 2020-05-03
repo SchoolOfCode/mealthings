@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AuthContext } from "../App.js";
 import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
@@ -11,7 +12,7 @@ import { FORMAT_headings } from "./FORMAT_headings";
 
 export default function Allergies({ navigation, route }) {
   const { dataPlusPlus } = route.params;
-  console.log("dataplusplus at the start of Allergies", dataPlusPlus);
+  const { userID } = useContext(AuthContext);
   const [celery, setCelery] = useState(false);
   const [gluten, setGluten] = useState(false);
   const [crustaceans, setCrustaceans] = useState(false);
@@ -329,7 +330,7 @@ export default function Allergies({ navigation, route }) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    flex: 1
+    flex: 1,
   },
   container: {
     margin: FORMAT_containers.F_container_margin,
@@ -339,7 +340,7 @@ const styles = StyleSheet.create({
     padding: FORMAT_containers.F_container_padding,
     alignItems: FORMAT_containers.F_container_alignItems,
     justifyContent: FORMAT_containers.F_container_justifyContent,
-    backgroundColor: COLS.C_BG
+    backgroundColor: COLS.C_BG,
   },
   text: {
     alignSelf: FORMAT_text.F_text_alignSelf,
@@ -347,7 +348,7 @@ const styles = StyleSheet.create({
     marginTop: FORMAT_text.F_text_marginTop,
     margin: FORMAT_text.F_text_margin,
     left: FORMAT_text.F_text_left,
-    fontFamily: FORMAT_fonts.F_font_font
+    fontFamily: FORMAT_fonts.F_font_font,
   },
   heading: {
     alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
@@ -356,14 +357,14 @@ const styles = StyleSheet.create({
     fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
     bottom: FORMAT_headings.F_headingMainTitle_bottom,
     marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
-    marginTop: FORMAT_headings.F_headingMainTitle_marginTop
+    marginTop: FORMAT_headings.F_headingMainTitle_marginTop,
   },
   switch: {
     right: FORMAT_switches.F_switch_right,
-    bottom: FORMAT_switches.F_switch_bottom
+    bottom: FORMAT_switches.F_switch_bottom,
   },
   buttons_Direction: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
   buttons: {
     flexDirection: FORMAT_navButton.F_navButton_flexDirection,
@@ -373,6 +374,6 @@ const styles = StyleSheet.create({
     padding: FORMAT_navButton.F_navButton_padding,
     alignItems: FORMAT_navButton.F_navButton_alignItems,
     margin: FORMAT_navButton.F_navButton_margin,
-    borderRadius: FORMAT_navButton.F_navBitton_borderRadius
-  }
+    borderRadius: FORMAT_navButton.F_navBitton_borderRadius,
+  },
 });

@@ -48,23 +48,29 @@ export default function App({ navigation }) {
         case "RESTORE_TOKEN_SUCCESS":
           return {
             ...prevState,
+            isSignout: false,
             token: action.token,
             loggedIn: true,
             finishedCheckingServer: true,
+            userID: action.userID,
           };
         case "RESTORE_TOKEN_FAILURE":
           return {
             ...prevState,
+            isSignout: false,
             token: null,
             loggedIn: false,
             finishedCheckingServer: true,
+            userID: null,
           };
         case "LOGIN_FAILURE":
           return {
             ...prevState,
+            isSignout: false,
             token: null,
             loggedIn: false,
             finishedCheckingServer: true,
+            userID: null,
           };
         case "SIGN_IN":
           return {
@@ -73,6 +79,7 @@ export default function App({ navigation }) {
             loggedIn: true,
             token: action.token,
             finishedCheckingServer: true,
+            userID: action.userID,
           };
         case "SIGN_OUT":
           try {
@@ -87,6 +94,7 @@ export default function App({ navigation }) {
             token: null,
             loggedIn: false,
             finishedCheckingServer: true,
+            userID: null,
           };
       }
     },
@@ -95,6 +103,7 @@ export default function App({ navigation }) {
       token: null,
       loggedIn: false,
       finishedCheckingServer: false,
+      userID: null,
     }
   );
 
@@ -127,7 +136,11 @@ export default function App({ navigation }) {
         const replyJson = await reply.json();
         if (replyJson.success || (reply.status > 199 && reply.status < 250)) {
           // If yes, auto go through to LandingPage. Set loggedIn state to true. Possibly useContext for it.
-          dispatch({ type: "RESTORE_TOKEN_SUCCESS", token: token });
+          dispatch({
+            type: "RESTORE_TOKEN_SUCCESS",
+            token: token,
+            userID: replyJson.userID,
+          });
         } else {
           // If JWT is not verified, stay on Hello screen. Delete incorrect JWT. STRETCH GOAL show small popup saying you are not logged in.
           AsyncStorage.removeItem("token", (err) => console.log("userId", err));
@@ -142,6 +155,8 @@ export default function App({ navigation }) {
 
   const authContext = useMemo(
     () => ({
+      userID: state.userID,
+
       logIn: async (email_address, password) => {
         // Send POST request with email and password, and wait for server response
         const loginResponse = await fetch(
@@ -168,7 +183,11 @@ export default function App({ navigation }) {
             console.log("AsyncLocalstorage failed.");
           }
           // Set logged in to true
-          dispatch({ type: "SIGN_IN", token: loginResponse.token });
+          dispatch({
+            type: "SIGN_IN",
+            token: loginResponse.token,
+            userID: loginResponse.userID,
+          });
         } else {
           // If server return false
           // Tell user incorrect password

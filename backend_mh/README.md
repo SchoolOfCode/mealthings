@@ -398,8 +398,6 @@ const itemWasStored = storeItem("token", loginResponse.token)
 * deal with Errors, try / catch, and redirects
 * Make logout screen remove JWT
 
-// Pass userID into context
-// Get userID out of context where required
 // Change GetRecipes calls
 // Put recipes into state
 // Get recipes out of state where required
