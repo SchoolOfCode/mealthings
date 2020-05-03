@@ -34,14 +34,6 @@ export default function LandingPage({ navigation }) {
   return (
     <View style={styles.background}>
       <View style={styles.margin}>
-        <View style={styles.logoCircle}>
-          <TouchableOpacity onPress={() => navigation.navigate("Mealplanner")}>
-            <Image
-              style={styles.mealThingsLogo}
-              source={require("../assets/images/Mealthings.png")}
-            />
-          </TouchableOpacity>
-        </View>
         <View style={styles.flex}>
           <TouchableOpacity
             style={styles.note2}

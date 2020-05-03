@@ -209,7 +209,6 @@ export default function App({ navigation }) {
           const didStoreItem = storeItem("token", postResponse.token);
           if (didStoreItem) {
             dispatch({ type: "SIGN_IN", token: postResponse.token });
-            navigation.navigate("Allergies");
           }
         }
       },

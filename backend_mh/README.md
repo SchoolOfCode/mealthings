@@ -407,4 +407,4 @@ const itemWasStored = storeItem("token", loginResponse.token)
 // Fix recipe cards into 2 columns not one
 // Get search Icon into the centre of red circle on recipe cards
 // Enable button on recipe cards so the selected recipe shows
-//
+// Ensure password is > 7 characters

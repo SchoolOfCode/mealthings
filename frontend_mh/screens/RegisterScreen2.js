@@ -56,6 +56,14 @@ export default function Registerscreen2({ navigation, route }) {
 
   async function SubmitHandler() {
     console.log(emailAddress, password);
+    if (
+      !/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/.test(emailAddress) ||
+      emailAddress == "" ||
+      emailAddress == null
+    ) {
+      Alert.alert("please check email is correct and resubmit");
+      return;
+    }
     const dataPlus = { ...data, password, email_address: emailAddress };
     register(dataPlus);
   }

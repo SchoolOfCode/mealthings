@@ -70,6 +70,7 @@ export default function Loginpage() {
           style={styles.inputField}
           placeholder=" enter email address"
           value={email}
+          keyboardType="email-address"
           onChangeText={handleEmailChange}
           placeholderTextColor="#FDFFF7"
         />
