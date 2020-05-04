@@ -392,23 +392,18 @@ const itemWasStored = storeItem("token", loginResponse.token)
     - If enter correct temp password, got to screen 2
     - If incorrect, say incorrect temp password. Option to enter again or to go back so can request another temp password or try to log in again.
 * Screen 2: Write out password twice
-
   - Send PATCH request to database with new password, and redirect to the landing page screen.
 
-* deal with Errors, try / catch, and redirects
-* Make logout screen remove JWT
-
-// Get recipe URLs working on relevant screens (look at Josh's code if required, remember uri)
+// Fix shopping list
+// Add quantities to today's recipe screen
 // Replace Stats with meal planner
 // link preferences
+// Send patch request from preferences screen
 // Password reset
 // Loading spash screen
-// Fix recipe cards into 2 columns not one
-// Get search Icon into the centre of red circle on recipe cards
-// Enable button on recipe cards so the selected recipe shows
 // Ensure password is > 7 characters
 // Recipe list - duplicate item keys, and add
-// Implement some osrt of recipe counter so that it isn't just the first recipe in the list
+// Implement some sort of recipe counter so that it isn't just the first recipe in the list
 // To test - make sure female option works in the back end
 
 // Hannah
