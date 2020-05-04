@@ -291,103 +291,103 @@
 //   }
 
 //   return (
-//     // <NavigationContainer independent={true}>
-//     //   <RecipeContext.Provider value={recipeList}>
-//     //     <Stack2.Navigator initialRouteName="Home2">
-//     //       <Stack2.Screen
-//     //         name="Home2"
-//     //         component={HomeScreen2}
-//     //         options={{ title: "Home" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="LoginPage"
-//     //         component={LoginPage}
-//     //         options={{ title: "Login" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="Register1"
-//     //         component={RegisterScreen}
-//     //         options={{ title: "Sign Up" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="Register2"
-//     //         component={RegisterScreen2}
-//     //         options={{ title: "Sign Up" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="SplashSuccess"
-//     //         component={SplashSuccess}
-//     //         options={{ title: "Splash Success" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="Goals"
-//     //         component={Goals}
-//     //         options={{ title: "Goals" }}
-//     //       />
+// <NavigationContainer independent={true}>
+//   <RecipeContext.Provider value={recipeList}>
+//     <Stack2.Navigator initialRouteName="Home2">
+//       <Stack2.Screen
+//         name="Home2"
+//         component={HomeScreen2}
+//         options={{ title: "Home" }}
+//       />
+//       <Stack2.Screen
+//         name="LoginPage"
+//         component={LoginPage}
+//         options={{ title: "Login" }}
+//       />
+//       <Stack2.Screen
+//         name="Register1"
+//         component={RegisterScreen}
+//         options={{ title: "Sign Up" }}
+//       />
+//       <Stack2.Screen
+//         name="Register2"
+//         component={RegisterScreen2}
+//         options={{ title: "Sign Up" }}
+//       />
+//       <Stack2.Screen
+//         name="SplashSuccess"
+//         component={SplashSuccess}
+//         options={{ title: "Splash Success" }}
+//       />
+//       <Stack2.Screen
+//         name="Goals"
+//         component={Goals}
+//         options={{ title: "Goals" }}
+//       />
 
-//     //       <Stack2.Screen
-//     //         name="Allergies"
-//     //         component={Allergies}
-//     //         options={{ title: "Allergies" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="Preferences"
-//     //         component={Preferences}
-//     //         options={{ title: "Preferences" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="ShoppingList"
-//     //         component={ShoppingList}
-//     //         options={{ title: "Shopping List" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="NewRecipe"
-//     //         component={NewRecipe}
-//     //         options={{ title: "Add a new recipe" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="TodaysRecipe"
-//     //         component={TodaysRecipe}
-//     //         options={{ title: "Today's recipe" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="YourStats"
-//     //         component={YourStats}
-//     //         options={{ title: "Your stats" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="SplashScreenDrink"
-//     //         component={SplashScreenDrink}
-//     //         options={{ title: "Grab some water!" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="SplashScreenExerciseSlow"
-//     //         component={SplashScreenExerciseSlow}
-//     //         options={{ title: "Alert" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="SplashScreenExerciseQuick"
-//     //         component={SplashScreenExerciseQuick}
-//     //         options={{ title: "Alert" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="LandingPage"
-//     //         component={LandingPage}
-//     //         options={{ title: "Landing Page" }}
-//     //       />
-//     //       <Stack2.Screen
-//     //         name="Mealplanner"
-//     //         component={mealplanner}
-//     //         options={{ title: "Meal Planner" }}
-//     //       />
-//     //     </Stack2.Navigator>
-//     //   </RecipeContext.Provider>
-//     // </NavigationContainer>
+//       <Stack2.Screen
+//         name="Allergies"
+//         component={Allergies}
+//         options={{ title: "Allergies" }}
+//       />
+//       <Stack2.Screen
+//         name="Preferences"
+//         component={Preferences}
+//         options={{ title: "Preferences" }}
+//       />
+//       <Stack2.Screen
+//         name="ShoppingList"
+//         component={ShoppingList}
+//         options={{ title: "Shopping List" }}
+//       />
+//       <Stack2.Screen
+//         name="NewRecipe"
+//         component={NewRecipe}
+//         options={{ title: "Add a new recipe" }}
+//       />
+//       <Stack2.Screen
+//         name="TodaysRecipe"
+//         component={TodaysRecipe}
+//         options={{ title: "Today's recipe" }}
+//       />
+//       <Stack2.Screen
+//         name="YourStats"
+//         component={YourStats}
+//         options={{ title: "Your stats" }}
+//       />
+//       <Stack2.Screen
+//         name="SplashScreenDrink"
+//         component={SplashScreenDrink}
+//         options={{ title: "Grab some water!" }}
+//       />
+//       <Stack2.Screen
+//         name="SplashScreenExerciseSlow"
+//         component={SplashScreenExerciseSlow}
+//         options={{ title: "Alert" }}
+//       />
+//       <Stack2.Screen
+//         name="SplashScreenExerciseQuick"
+//         component={SplashScreenExerciseQuick}
+//         options={{ title: "Alert" }}
+//       />
+//       <Stack2.Screen
+//         name="LandingPage"
+//         component={LandingPage}
+//         options={{ title: "Landing Page" }}
+//       />
+//       <Stack2.Screen
+//         name="Mealplanner"
+//         component={mealplanner}
+//         options={{ title: "Meal Planner" }}
+//       />
+//     </Stack2.Navigator>
+//   </RecipeContext.Provider>
+// </NavigationContainer>
 //   // );
 // }
 
-// // const styles = StyleSheet.create({
-// //   background: {
-// //     backgroundColor: "black"
-// //   }
-// // });
+// const styles = StyleSheet.create({
+//   background: {
+//     backgroundColor: "black"
+//   }
+// });

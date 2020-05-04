@@ -70,7 +70,7 @@ export default function Registerscreen2({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign In Details</Text>
+      <Text style={styles.title}>Sign Up Details</Text>
       <TextInput
         style={styles.inputField}
         onChangeText={emailChangeHandler}

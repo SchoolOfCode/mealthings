@@ -319,9 +319,10 @@ const styles = StyleSheet.create({
   tick: {
     width: 20,
     height: 20,
-    alignSelf: "center",
     borderWidth: 3,
-    borderColor: COLS.C6_WHITE_TEXT
+    borderColor: COLS.C6_WHITE_TEXT,
+    alignSelf: "center",
+    left: 155
   },
   inputField: {
     marginVertical: 5,
@@ -359,7 +360,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    marginBottom: 40
+    marginBottom: 43
   },
   row: {
     justifyContent: "center",
@@ -386,8 +387,9 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   position: {
-    flexDirection: "column",
-    alignSelf: "center"
+    flexDirection: "row",
+    alignSelf: "center",
+    alignContent: "center"
   },
   optionText: {
     color: COLS.C6_WHITE_TEXT,
@@ -398,7 +400,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     fontSize: 24,
-    padding: 10
+    padding: 6
   },
   option: {
     color: COLS.C6_WHITE_TEXT,
