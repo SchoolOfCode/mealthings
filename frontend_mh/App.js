@@ -267,6 +267,11 @@ export default function App() {
             ...prevState,
             recipeList: action.recipes,
           };
+        case "SET_INGREDIENTSLIST":
+          return {
+            ...prevState,
+            ingredientsList: action.ingredientsList,
+          };
       }
     },
     {
@@ -276,6 +281,7 @@ export default function App() {
       finishedCheckingServer: false,
       userID: null,
       recipeList: null,
+      ingredientsList: null,
     }
   );
 
@@ -328,6 +334,7 @@ export default function App() {
     () => ({
       userID: state.userID,
       recipeList: state.recipeList,
+      ingredientsList: ingredientsList,
 
       logIn: async (email_address, password) => {
         // Send POST request with email and password, and wait for server response
@@ -375,8 +382,24 @@ export default function App() {
 
       logOut: () => dispatch({ type: "SIGN_OUT" }),
 
-      setRecipeList: (recipes) =>
-        dispatch({ type: "SET_RECIPES", recipes: recipes }),
+      setRecipeList: async (recipes) => {
+        const recipeIDsFetch = recipes.map((r) => r.recipe_id);
+        const ingredientsList = await fetch(
+          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/shoppinglist`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ recipeIDs: recipeIDsFetch }),
+          }
+        );
+        dispatch({
+          type: "SET_INGREDIENTSLIST",
+          ingredientsList: ingredientsList,
+        });
+        dispatch({ type: "SET_RECIPES", recipes: recipes });
+      },
 
       register: async (dataPlus) => {
         console.log("dataPlus in register function:", dataPlus);
