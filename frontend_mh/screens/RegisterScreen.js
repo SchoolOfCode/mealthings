@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
+
 import { CheckBox } from "react-native-elements";
 import {
   StyleSheet,
@@ -6,8 +7,10 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Alert,
+  Modal,
   Dimensions,
+  Alert,
+  Button,
   Image,
 } from "react-native";
 import { COLS } from "./COLS";
@@ -39,25 +42,26 @@ import {
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 const screenWidth = Dimensions.get("screen").width;
-
 export default function Registerscreen({ navigation }) {
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
   const [DOB, setDOB] = useState();
   const [DOB2, setDOB2] = useState();
   const [DOB3, setDOB3] = useState();
   const [mother, setMother] = useState(false);
+  const [other, setOther] = useState(false);
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
-  const [other, setOther] = useState(false);
   const [gender, setGender] = useState(null);
+  const [confirm, setConfirm] = useState();
+  const [display, setDisplay] = useState();
 
-  function firstNameInput(enteredText) {
-    setFirstName(enteredText);
+  function nameInput(enteredText) {
+    setName(enteredText);
   }
 
-  function lastNameInput(enteredText) {
-    setLastName(enteredText);
+  function emailInput(enteredText) {
+    setEmail(enteredText);
   }
   //NOTES ON REGEX FOR REFERENCE
   ///^[a-zA-Z0-9._-]+:  Means that the email address must begin with alpha-numeric characters (both lowercase and uppercase characters are allowed). It may have periods,underscores and hyphens.
@@ -68,90 +72,103 @@ export default function Registerscreen({ navigation }) {
   // {2,4} indicates the minimum and maximum number of characters. This will allow domain names with 2, 3 and 4 characters e.g.; us, tx, org, com, net, wxyz).
 
   function DOBinput(enteredText) {
-    setDOB(String(enteredText));
+    setDOB(enteredText);
   }
-
   function DOBinput2(enteredText) {
-    setDOB2(String(enteredText));
+    setDOB2(enteredText);
   }
-
   function DOBinput3(enteredText) {
-    setDOB3(String(enteredText));
+    setDOB3(enteredText);
   }
 
   function motherInput() {
     if (mother === false) {
       setMother(true);
-    } else {
+    } else if (mother === true) {
       setMother(false);
     }
   }
 
   function otherHandler() {
-    if (other === false) {
+    if (other == false) {
       setOther(true);
       setMale(false);
       setFemale(false);
-      setGender("Other");
     } else if (other == true) {
       setOther(false);
     }
   }
 
   function maleHandler() {
-    if (male === false) {
+    if (male == false) {
       setMale(true);
       setOther(false);
       setFemale(false);
-      setGender("Male");
-    } else {
+    } else if (male == false) {
       setMale(false);
     }
   }
-
   function femaleHandler() {
     if (female == false) {
       setFemale(true);
       setOther(false);
       setMale(false);
-      setGender("female");
-    } else {
+    } else if (female == true) {
       setFemale(false);
     }
   }
-
-  function submitHandler() {
-    if (
-      gender == null ||
-      firstName == null ||
-      lastName == null ||
-      DOB == null ||
-      DOB2 == null ||
-      DOB3 == null
-    ) {
-      Alert.alert("Please ensure all data fields are complete.");
-      return;
-    } else if (DOB <= 0 || DOB > 31) {
-      Alert.alert("Day (in date of birth) can only be between 1 and 31!");
-      return;
-    } else if (DOB2 < 1 || DOB2 > 12) {
-      Alert.alert("Month (in date of birth) can only be between 1 and 12!");
-      return;
-    } else if (DOB3 < 1900 || DOB3 > new Date().getFullYear()) {
-      Alert.alert(
-        `Year (in date of birth) can only be between 1900 and ${new Date().getFullYear()}!`
-      );
-      return;
+  function confirmChoices() {
+    if (other == true) {
+      setGender("Other");
+    } else if (female == true) {
+      setGender("female");
     } else {
-      const birthday = DOB2 + "-" + DOB + "-" + DOB3;
-      const data = {
-        name: `${firstName} ${lastName}`,
+      setGender("Male");
+    }
+    if (email == /^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/) {
+      setEmail(email);
+    } else if (email == "" || null) {
+      Alert.alert("enter a correct email address");
+    }
+    if ((gender, name, email, DOB, DOB2, DOB3 == null || "")) {
+      setConfirm(false);
+      console.log(gender, name, email, DOB, DOB2, DOB3);
+    } else if (DOB2 > 12) {
+      Alert.alert("Enter valid Month ");
+    } else {
+      setConfirm(true);
+      console.log((gender, name, email, DOB, DOB2, DOB3));
+    }
+    if (DOB > 31) {
+      Alert.alert("Enter a valid day");
+    } else if (DOB3 > 2019) {
+      Alert.alert("Enter a valid Year");
+    }
+  }
+
+  function SubmitHandler() {
+    if (confirm == true) {
+      setDisplay("Submitted");
+      const birthday = DOB + "-" + DOB2 + "-" + DOB3;
+      console.log("Submitted:", {
+        name,
+        email,
         birthday,
         gender,
         mother,
+      });
+
+      const data = {
+        name,
+        email_address: email,
+        birthday,
+        mother,
+        gender,
       };
-      console.log("Submitted data:", data);
+      console.log(data);
       navigation.navigate("Register2", { data });
+    } else {
+      Alert.alert("ensure all data fields are complete");
     }
   }
 
@@ -162,15 +179,16 @@ export default function Registerscreen({ navigation }) {
           <Text style={styles.title}>Create Your Account:</Text>
           <TextInput
             style={styles.inputField}
-            onChangeText={firstNameInput}
-            placeholder="First name"
+            onChangeText={nameInput}
+            placeholder="Name"
             placeholderTextColor="#FDFFF7"
             isRequired
           />
           <TextInput
             style={styles.inputField}
-            placeholder=" Last name"
-            onChangeText={lastNameInput}
+            placeholder=" Email"
+            onChangeText={emailInput}
+            keyboardType="email-address"
             placeholderTextColor="#FDFFF7"
           />
           <View style={styles.row}>
@@ -202,7 +220,7 @@ export default function Registerscreen({ navigation }) {
         </View>
 
         <View styles={styles.position}>
-          <Text style={styles.motherText}>Are you a new mother? </Text>
+          <Text style={styles.motherText}>New Mother? </Text>
           <CheckBox
             checkedIcon={
               <Image
@@ -284,13 +302,12 @@ export default function Registerscreen({ navigation }) {
             </TouchableOpacity>
           </View>
           <View style={styles.buttonText}>
+            <Button title="" onPress={confirmChoices} />
             <TouchableOpacity
               style={styles.directionNext}
-              onPress={submitHandler}
+              onPress={SubmitHandler}
             >
-              <Text onPress={submitHandler} style={styles.buttonText}>
-                Next
-              </Text>
+              <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -344,6 +361,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
+
     elevation: 5,
     color: COLS.C6_WHITE_TEXT,
   },
@@ -362,8 +380,18 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
+    top: -30,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+
+    elevation: 5,
   },
   directionNext: {
     backgroundColor: COLS.C_BG,
@@ -372,8 +400,18 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
+    top: -61,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+
+    elevation: 5,
   },
   row: {
     flexDirection: "row",
@@ -401,6 +439,7 @@ const styles = StyleSheet.create({
   },
   position: {
     flexDirection: "row",
+    top: 40,
     marginTop: 30,
   },
   motherText: {

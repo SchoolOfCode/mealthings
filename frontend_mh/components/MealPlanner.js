@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { AuthContext } from "../App.js";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   TouchableOpacity,
   StyleSheet,
   View,
+  SafeAreaView,
+  Button,
+  ScrollView,
+  Alert,
   Modal,
   TouchableHighlight,
+  CheckBox,
   Image,
 } from "react-native";
 
@@ -525,13 +529,15 @@ const originalData = sampleRecipes.map((item, index) => ({
   cooktime: item.cooking_time_mins,
   color: colors[index % colors.length],
   backgroundColor: "red",
+  method: item.method,
+  ingredients: item.ingredients,
 }));
 
-export default function MealPlanner() {
-  const { userID, setRecipeList, recipeList } = useContext(AuthContext);
+const App = () => {
   const [data, setData] = useState(originalData);
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible1, setModalVisible2] = useState(false);
   const [display, setDisplay] = useState();
 
   const [visual, setVisual] = useState();
@@ -541,6 +547,9 @@ export default function MealPlanner() {
   const [sugar, setSugar] = useState();
   const [saturates, setsaturates] = useState();
   const [cooking, setCooking] = useState();
+  const [method, setMethod] = useState();
+  const [ingredients, setIngredients] = useState();
+  const [visible, setVisible] = useState();
 
   // const [totalProt, setTotalProt] = useState("");
   // const [totalCarbs, setTotalCarbs] = useState("");
@@ -555,7 +564,14 @@ export default function MealPlanner() {
       style={[styles.item, { backgroundColor: item.color }]}
       onLongPress={drag}
       onPress={() => {
-        toggleModal(item, item.text, item.url, item.calories, item.fat);
+        toggleModal(
+          item,
+          item.text,
+          item.url,
+          item.calories,
+          item.ingredients,
+          item.method
+        );
         setVisual(item.url);
         setCarbs(item.carbohydrate);
         setProt(item.protein);
@@ -564,7 +580,8 @@ export default function MealPlanner() {
         setSugar(item.sugars);
         setCooking(item.cooktime);
         setDisplay(item.text);
-
+        setMethod(item.method);
+        setIngredients(item.ingredients);
         console.log(item.url);
         // console.log(item.image);
       }}
@@ -595,6 +612,7 @@ export default function MealPlanner() {
                 uri: visual,
               }}
             />
+
             <View styles={styles.textmovement}>
               <Text> Nutritional breakdown</Text>
               <Text> Carbohydrates: {carbs}g </Text>
@@ -604,21 +622,28 @@ export default function MealPlanner() {
               <Text> Preparation Time: {cooking} minutes</Text>
               <Text> Fats: {saturates}</Text>
             </View>
-          </View>
+            <ScrollView>
+              <View>
+                <Text> method: {method} </Text>
+                <Text> Ingredients: {ingredients} </Text>
+                <Text> {visible}</Text>
+              </View>
 
-          <TouchableHighlight
-            style={{
-              ...styles.openButton,
-              backgroundColor: "#2196F3",
-              marginVertical: 17,
-              bottom: 40,
-            }}
-            onPress={() => {
-              setModalVisible(false);
-            }}
-          >
-            <Text style={styles.textStyle}>Nice</Text>
-          </TouchableHighlight>
+              <TouchableHighlight
+                style={{
+                  ...styles.openButton,
+                  backgroundColor: "#2196F3",
+                  marginVertical: 17,
+                  bottom: 40,
+                }}
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              >
+                <Text style={styles.textStyle}>Nice</Text>
+              </TouchableHighlight>
+            </ScrollView>
+          </View>
         </View>
       </Modal>
 
@@ -631,7 +656,7 @@ export default function MealPlanner() {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   textmovement: {
@@ -724,3 +749,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default App;

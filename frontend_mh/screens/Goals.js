@@ -42,7 +42,7 @@ import { Row } from "react-native-drag-flatlist";
 const screenWidth = Dimensions.get("screen").width;
 
 export default function Goals({ navigation, route }) {
-  const { userID } = useContext(AuthContext);
+  // const { userID } = useContext(AuthContext);
   const { dataPlus } = route.params;
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();

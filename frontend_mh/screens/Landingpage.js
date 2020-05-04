@@ -313,14 +313,17 @@ export default function LandingPage({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.note2}
-            onPress={() => navigation.navigate("YourStats")}
+            onPress={() => navigation.navigate("Mealplanner")}
           >
-            <Text style={styles.buttonText}>Your Stats</Text>
+            <Text style={styles.buttonText}>Weekly Meal Plan</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.flex}>
-          <TouchableOpacity style={styles.note2}>
-            <Text style={styles.buttonText}>Your Preferences</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Goals")}
+            style={styles.note2}
+          >
+            <Text style={styles.buttonText}>Change Preferences</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.note}

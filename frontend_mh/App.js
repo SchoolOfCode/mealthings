@@ -30,6 +30,83 @@ import mealplanner from "./screens/Mealplanner";
 const Stack = createStackNavigator();
 export const AuthContext = React.createContext();
 
+import { notify, initnotify, getToken } from "expo-push-notification-helper";
+import { newChannel } from "expo-push-notification-helper";
+
+function tokenOperator() {
+  initnotify().then(async (data) => {
+    if (data) {
+      await getToken();
+      console.log(await getToken());
+      console.log("token is working so far");
+    } else {
+      Alert.alert("please grant this app notification permission in settings.");
+    }
+  });
+
+  async function PNotification() {
+    let userID = await getToken();
+    console.log("working so far" + (await getToken()));
+    const token = await userID;
+
+    fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "accept-encoding": "gzip, deflate",
+        host: "exp.host",
+      },
+      body: JSON.stringify({
+        to: token,
+        title: "Meal Things",
+        body: "Time to reenergise those electrolytes",
+        largeIcon: "../assets/images/newLogo.png",
+        priority: "high",
+        sound: "default",
+        channelId: "default",
+      }),
+    })
+      .then((response) => response.json())
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  setInterval(PNotification, 600000);
+
+  async function RNotification() {
+    let userID = await getToken();
+    console.log("working so far" + (await getToken()));
+    const token = await userID;
+
+    fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "accept-encoding": "gzip, deflate",
+        host: "exp.host",
+      },
+      body: JSON.stringify({
+        to: token,
+        title: "Meal Things",
+        body: "Time for a run",
+        priority: "high",
+        sound: "default",
+        channelId: "default",
+      }),
+    })
+      .then((response) => response.json())
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  setInterval(RNotification, 1800000);
+}
+tokenOperator();
+
 async function storeItem(key, item) {
   try {
     await AsyncStorage.setItem(key, item);
