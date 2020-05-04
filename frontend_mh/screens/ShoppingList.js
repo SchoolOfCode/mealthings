@@ -3,7 +3,6 @@ import { AuthContext } from "../App.js";
 import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { RecipeContext } from "./HomeScreen";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
@@ -33,10 +32,12 @@ import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 function IngredientItem({ item }) {
   const [bought, setBought] = useState(false);
+
+  const theString = `${item.quantity} ${item.unit} ${item.ingredient}`;
   return (
     <TouchableOpacity
       onPress={() => setBought(!bought)}
-      key={item
+      key={theString
         .split(" ")
         .join("")
         .replace(/,|-|\(|\)/g, "")}
@@ -44,7 +45,7 @@ function IngredientItem({ item }) {
       <View style={styles.ingredientItemContainer}>
         <View style={bought ? styles.circleChecked : styles.circle}></View>
         <Text style={bought ? styles.itemTextChecked : styles.itemText}>
-          {item}
+          {theString}
         </Text>
       </View>
     </TouchableOpacity>
@@ -56,96 +57,12 @@ function cleanString(string) {
 }
 
 export default function ShoppingList({ navigation }) {
-  const { userID, recipeList } = useContext(AuthContext);
-
-  // Make array for ingredients
-  const listOfIngredients = [];
-  // Make array for quantities
-  const quantityOfIngredients = [];
-
-  // Get ingredients and quantities in a clean format
-  recipeList.forEach((recipe) => {
-    cleanString(recipe.ingredients).forEach((item) => {
-      listOfIngredients.push(item);
-    });
-    cleanString(recipe.ingredientsquantities).forEach((item) => {
-      quantityOfIngredients.push(item);
-    });
-  });
-
-  // Remove duplicates & add quantities
-  // Make Object called finalIngredsPlusQuantities
-  const finalIngredsPlusQuantities = {};
-  // Loop over ingredients
-  listOfIngredients.forEach((ingredient, index) => {
-    if (Object.keys(finalIngredsPlusQuantities).includes(ingredient)) {
-      if (quantityOfIngredients[index].length > 1) {
-        // g
-        // e.g. 2 x 250g
-        // kg
-        // tbs
-        // tbp
-        // tbls
-        // tsp
-        // e.g. 2 heaped tsp
-        // sprig
-        // springs
-        // clove
-        // cloves
-        // handful
-        // handfuls
-        // slice
-        // slices
-        // sliced
-        // eg thin slices
-        // ml
-        // l
-        // litre
-        // litres
-        // head
-        // pinch
-        // pinches
-        // fillet
-        // xyz g fillet
-        // fillets
-        // xyz g fillets
-        // piece
-        // pieces
-        // bulb
-        // bulbs
-        // just the number
-        // just the approx number (1 - 2 or 1-2)
-        // mug
-        // mugs
-        // cup
-        // cups
-        // scoop
-        // scoops
-        // stick
-        // sticks
-        // e.g. sticks of
-        // bunch
-        // bunches
-      } else {
-        finalIngredsPlusQuantities[ingredient] += quantityOfIngredients[index];
-      }
-    } else {
-      finalIngredsPlusQuantities[ingredient] = quantityOfIngredients[index];
-    }
-  });
-
-  //     //combine ingredients and quantities by index (zip functionality in Python)
-  // const comboIngredientQuantities = (listOfIngredients, quantityOfIngredients) => listOfIngredients.map((item, i) => [item, quantityOfIngredients[i]]);
-
-  // console.log(comboIngredientQuantities(listOfIngredients, quantityOfIngredients))
-
-  // });
-  //   });
+  const { userID, recipeList, ingredientsList } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <ScrollView>
-        {listOfIngredients.sort().map((item) => (
+        {ingredientsList.sort().map((item) => (
           <IngredientItem item={item} />
         ))}
       </ScrollView>

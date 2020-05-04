@@ -395,6 +395,7 @@ const itemWasStored = storeItem("token", loginResponse.token)
   - Send PATCH request to database with new password, and redirect to the landing page screen.
 
 // Fix shopping list
+// Fix regex for email
 // Add quantities to today's recipe screen
 // Replace Stats with meal planner
 // link preferences
@@ -405,6 +406,7 @@ const itemWasStored = storeItem("token", loginResponse.token)
 // Recipe list - duplicate item keys, and add
 // Implement some sort of recipe counter so that it isn't just the first recipe in the list
 // To test - make sure female option works in the back end
+// Get it up on TestFlight
 
 // Hannah
 Docker
