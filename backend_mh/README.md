@@ -398,6 +398,7 @@ const itemWasStored = storeItem("token", loginResponse.token)
 * deal with Errors, try / catch, and redirects
 * Make logout screen remove JWT
 
+///////// Breaking for the day ///////// - Getting a bug on load, can't find "app". Not sure what screen though. Probably a function that I've renamed in one of Joshe's screens.
 // Change GetRecipes calls
 // Put recipes into state
 // Get recipes out of state where required

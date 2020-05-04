@@ -41,7 +41,7 @@ async function storeItem(key, item) {
   }
 }
 
-export default function App({ navigation }) {
+export default function App() {
   const [state, dispatch] = useReducer(
     (prevState, action) => {
       switch (action.type) {
@@ -143,7 +143,6 @@ export default function App({ navigation }) {
             },
           }
         );
-        console.log("Finished fetching!");
         const replyJson = await reply.json();
         if (replyJson.success || (reply.status > 199 && reply.status < 250)) {
           // If yes, auto go through to LandingPage. Set loggedIn state to true. Possibly useContext for it.
@@ -167,6 +166,7 @@ export default function App({ navigation }) {
   const authContext = useMemo(
     () => ({
       userID: state.userID,
+      recipeList: state.recipeList,
 
       logIn: async (email_address, password) => {
         // Send POST request with email and password, and wait for server response
@@ -251,7 +251,7 @@ export default function App({ navigation }) {
         }
       },
     }),
-    []
+    [state]
   );
 
   return state.finishedCheckingServer ? (

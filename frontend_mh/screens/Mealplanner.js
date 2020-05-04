@@ -8,7 +8,7 @@ import Days from "../components/Days";
 const colors = ["#d3f261", "#7cb305", "#5b8c00", "#3f6600", "#254000"];
 import { COLS } from "./COLS";
 
-function Mealplanner() {
+export default function Mealplanner() {
   const { userID } = useContext(AuthContext);
   return (
     <ScrollView horizontal={true}>
@@ -25,4 +25,3 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
   },
 });
-export default App;

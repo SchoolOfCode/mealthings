@@ -32,8 +32,8 @@ import {
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 function IngredientItem({ item }) {
-  const { userID } = useContext(AuthContext);
   const [bought, setBought] = useState(false);
+
   return (
     <TouchableOpacity
       onPress={() => setBought(!bought)}
@@ -57,10 +57,10 @@ function cleanString(string) {
 }
 
 export default function ShoppingList({ navigation }) {
-  const allRecipes = useContext(RecipeContext);
+  const { userID, recipeList } = useContext(AuthContext);
 
   const listOfIngredients = [];
-  allRecipes.forEach((recipe) => {
+  recipeList.forEach((recipe) => {
     cleanString(recipe.ingredients).forEach((item) => {
       listOfIngredients.push(item);
     });

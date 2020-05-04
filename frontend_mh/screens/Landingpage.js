@@ -1,6 +1,12 @@
-import React, { useContext, useEffect, createContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../App.js";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  AsyncStorage,
+} from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
@@ -107,7 +113,7 @@ export default function LandingPage({ navigation }) {
   useEffect(() => {
     console.log("Starting useEffect in HomeScreen");
     async function runGetRecipes() {
-      if (recipeList.length < 14) {
+      if (!recipeList || recipeList.length < 14) {
         console.log("Recipe list is less than 1 in length");
         // Try to get of last recipes from local storage
         const last_date_meals_requested_temp = await _retrieveData(
@@ -154,7 +160,7 @@ export default function LandingPage({ navigation }) {
       }
     }
     runGetRecipes();
-  }, [userID]);
+  }, []);
 
   // Get new recipes and load into state
   async function getNewRecipes(userID2) {
