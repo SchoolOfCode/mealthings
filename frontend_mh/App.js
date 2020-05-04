@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useMemo } from "react";
+import React, { useState, useEffect, useReducer, useMemo } from "react";
 import {
   Platform,
   StatusBar,
@@ -7,6 +7,9 @@ import {
   AsyncStorage,
   Alert,
 } from "react-native";
+import { SplashScreen } from "expo";
+import * as Font from "expo-font";
+import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -26,7 +29,88 @@ import SplashScreenDrink from "./screens/SplashScreenDrink";
 import SplashScreenExerciseSlow from "./screens/SplashScreenExerciseSlow";
 import SplashScreenExerciseQuick from "./screens/SplashScreenExerciseQuick";
 import LandingPage from "./screens/Landingpage";
-import mealplanner from "./screens/Mealplanner";
+import Mealplanner from "./screens/Mealplanner";
+
+import RegisteredContextProvider from "./contexts/RegisterContext";
+
+import { notify, initnotify, getToken } from "expo-push-notification-helper";
+import { newChannel } from "expo-push-notification-helper";
+
+function tokenOperator() {
+  initnotify().then(async (data) => {
+    if (data) {
+      await getToken();
+      console.log(await getToken());
+      console.log("token is working so far");
+    } else {
+      Alert.alert("please grant this app notification permission in settings.");
+    }
+  });
+
+  async function PNotification() {
+    let userID = await getToken();
+    console.log("working so far" + (await getToken()));
+    const token = await userID;
+
+    fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "accept-encoding": "gzip, deflate",
+        host: "exp.host",
+      },
+      body: JSON.stringify({
+        to: token,
+        title: "Meal Things",
+        body: "Time to reenergise those electrolytes",
+        largeIcon: "../assets/images/newLogo.png",
+        priority: "high",
+        sound: "default",
+        channelId: "default",
+      }),
+    })
+      .then((response) => response.json())
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  setInterval(PNotification, 30000);
+
+  async function RNotification() {
+    let userID = await getToken();
+    console.log("working so far" + (await getToken()));
+    const token = await userID;
+
+    fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "accept-encoding": "gzip, deflate",
+        host: "exp.host",
+      },
+      body: JSON.stringify({
+        to: token,
+        title: "Meal Things",
+        body: "Time for a run",
+        priority: "high",
+        sound: "default",
+        channelId: "default",
+      }),
+    })
+      .then((response) => response.json())
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  setInterval(RNotification, 1200000);
+}
+tokenOperator();
+
+
 const Stack = createStackNavigator();
 export const AuthContext = React.createContext();
 
@@ -396,7 +480,7 @@ export default function App() {
                 />
                 <Stack.Screen
                   name="Mealplanner"
-                  component={mealplanner}
+                  component={Mealplanner}
                   options={{ title: "Meal Planner" }}
                 />
               </>

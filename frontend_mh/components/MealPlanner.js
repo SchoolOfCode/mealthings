@@ -585,6 +585,7 @@ const App = () => {
         console.log(item.url);
         // console.log(item.image);
       }}
+      delay={-400}
     >
       <Text>{item.text}</Text>
     </TouchableOpacity>

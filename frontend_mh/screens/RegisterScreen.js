@@ -7,11 +7,10 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Modal,
-  Dimensions,
   Alert,
   Button,
-  Image,
+  Dimensions,
+  Image
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -144,6 +143,11 @@ export default function Registerscreen({ navigation }) {
     } else if (DOB3 > 2019) {
       Alert.alert("Enter a valid Year");
     }
+    if (DOB > 31) {
+      Alert.alert("Enter a valid day");
+    } else if (DOB3 > 2019) {
+      Alert.alert("Enter a valid Year");
+    }
   }
 
   function SubmitHandler() {
@@ -155,15 +159,7 @@ export default function Registerscreen({ navigation }) {
         email,
         birthday,
         gender,
-        mother,
-      });
-
-      const data = {
-        name,
-        email_address: email,
-        birthday,
-        mother,
-        gender,
+        mother
       };
       console.log(data);
       navigation.navigate("Register2", { data });
@@ -176,51 +172,52 @@ export default function Registerscreen({ navigation }) {
     <View style={styles.container}>
       <View>
         <View style={styles.margin}>
-          <Text style={styles.title}>Create Your Account:</Text>
-          <TextInput
-            style={styles.inputField}
-            onChangeText={nameInput}
-            placeholder="Name"
-            placeholderTextColor="#FDFFF7"
-            isRequired
-          />
-          <TextInput
-            style={styles.inputField}
-            placeholder=" Email"
-            onChangeText={emailInput}
-            keyboardType="email-address"
-            placeholderTextColor="#FDFFF7"
-          />
-          <View style={styles.row}>
+          <View style={styles.contain}>
+            <Text style={styles.title}>Create Your Account:</Text>
             <TextInput
-              style={styles.box}
-              placeholder="DD"
-              onChangeText={DOBinput}
+              style={styles.inputField}
+              onChangeText={firstNameInput}
+              placeholder="First name"
               placeholderTextColor="#FDFFF7"
-              keyboardType="numeric"
-              maxLength={2}
+              isRequired
             />
             <TextInput
-              style={styles.box}
-              placeholder="MM"
-              onChangeText={DOBinput2}
+              style={styles.inputField}
+              placeholder=" Last name"
+              onChangeText={lastNameInput}
               placeholderTextColor="#FDFFF7"
-              keyboardType="numeric"
-              maxLength={2}
             />
-            <TextInput
-              style={styles.box}
-              placeholder="YYYY"
-              onChangeText={DOBinput3}
-              placeholderTextColor="#FDFFF7"
-              keyboardType="numeric"
-              maxLength={4}
-            />
+            <View style={styles.row}>
+              <TextInput
+                style={styles.box}
+                placeholder="DD"
+                onChangeText={DOBinput}
+                placeholderTextColor="#FDFFF7"
+                keyboardType="numeric"
+                maxLength={2}
+              />
+              <TextInput
+                style={styles.box}
+                placeholder="MM"
+                onChangeText={DOBinput2}
+                placeholderTextColor="#FDFFF7"
+                keyboardType="numeric"
+                maxLength={2}
+              />
+              <TextInput
+                style={styles.box}
+                placeholder="YYYY"
+                onChangeText={DOBinput3}
+                placeholderTextColor="#FDFFF7"
+                keyboardType="numeric"
+                maxLength={4}
+              />
+            </View>
           </View>
         </View>
 
         <View styles={styles.position}>
-          <Text style={styles.motherText}>New Mother? </Text>
+          <Text style={styles.optionText}>Are you a new mother? </Text>
           <CheckBox
             checkedIcon={
               <Image
@@ -239,7 +236,7 @@ export default function Registerscreen({ navigation }) {
           />
           <Text style={styles.title}>Select Gender: </Text>
           <View>
-            <Text style={styles.female}>Female </Text>
+            <Text style={styles.option}>Female </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -256,7 +253,7 @@ export default function Registerscreen({ navigation }) {
               checked={female}
               onPress={femaleHandler}
             />
-            <Text style={styles.male}>Male </Text>
+            <Text style={styles.option}>Male </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -273,7 +270,7 @@ export default function Registerscreen({ navigation }) {
               checked={male}
               onPress={maleHandler}
             />
-            <Text style={styles.other}> Other </Text>
+            <Text style={styles.option}> Other </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -295,19 +292,17 @@ export default function Registerscreen({ navigation }) {
         <View style={styles.buttonflex}>
           <View>
             <TouchableOpacity
-              style={styles.directionBack}
+              style={styles.direction}
               onPress={() => navigation.goBack()}
             >
               <Text style={styles.buttonText}>Back</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonText}>
-            <Button title="" onPress={confirmChoices} />
-            <TouchableOpacity
-              style={styles.directionNext}
-              onPress={SubmitHandler}
-            >
-              <Text style={styles.buttonText}>Next</Text>
+            <TouchableOpacity style={styles.direction} onPress={submitHandler}>
+              <Text onPress={submitHandler} style={styles.buttonText}>
+                Next
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -319,17 +314,14 @@ export default function Registerscreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: screenWidth,
     backgroundColor: COLS.C_BG,
+    justifyContent: "center"
   },
-  row: {
-    flexDirection: "row",
-  },
-  mover: {
-    left: 110,
+  contain: {
+    marginTop: 30
   },
   margin: {
-    marginTop: 30,
+    marginTop: 25
   },
   arrow: {
     width: 40,
@@ -340,10 +332,10 @@ const styles = StyleSheet.create({
   tick: {
     width: 20,
     height: 20,
-    left: 180,
-    bottom: 15,
     borderWidth: 3,
     borderColor: COLS.C6_WHITE_TEXT,
+    alignSelf: "center",
+    left: 155
   },
   inputField: {
     marginVertical: 5,
@@ -373,27 +365,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 10,
   },
-  directionBack: {
-    backgroundColor: COLS.C_BG,
-    width: 80,
-    height: 30,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-    top: -30,
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-
-    elevation: 5,
-  },
-  directionNext: {
+  direction: {
     backgroundColor: COLS.C_BG,
     width: 80,
     height: 30,
@@ -403,27 +375,18 @@ const styles = StyleSheet.create({
     top: -61,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-
-    elevation: 5,
+    marginBottom: 43
   },
   row: {
-    flexDirection: "row",
+    justifyContent: "center",
+    flexDirection: "row"
   },
   box: {
     width: 45,
     height: 25,
     backgroundColor: COLS.C_BG,
     margin: 10,
-    left: 85,
     borderRadius: 5,
-    alignSelf: "center",
     color: COLS.C6_WHITE_TEXT,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
@@ -436,44 +399,32 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
 
     elevation: 5,
+    flexDirection: "row"
   },
   position: {
     flexDirection: "row",
-    top: 40,
-    marginTop: 30,
+    alignSelf: "center",
+    alignContent: "center"
   },
-  motherText: {
-    top: 20,
-    left: 100,
+  optionText: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
+    alignSelf: "center"
   },
   title: {
-    left: 10,
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     fontSize: 24,
-    padding: 10,
-    top: -10,
+    padding: 6
   },
-  female: {
-    top: 19,
-    left: 120,
+  option: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
+    alignSelf: "center",
+    marginTop: 10,
+    alignItems: "center"
   },
-  male: {
-    top: 19,
-    left: 130,
-    color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold",
-  },
-  other: {
-    top: 19,
-    left: 125,
-    color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold",
-  },
+
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
