@@ -6,14 +6,14 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  FlatList,
+  FlatList
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
+  FORMAT_moreChoicesContainer
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -23,7 +23,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe,
+  FORMAT_mainRecipe
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -32,7 +32,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
+  FORMAT_navButtonBackground
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -45,7 +45,7 @@ function Item({ title }) {
 }
 
 function cleanString(string) {
-  return string.split('","').map((x) => x.replace(/"|{|}|\\|\//g, ""));
+  return string.split('","').map(x => x.replace(/"|{|}|\\|\//g, ""));
 }
 
 export default function TodaysRecipe({ navigation }) {
@@ -74,7 +74,7 @@ export default function TodaysRecipe({ navigation }) {
           style={styles.ingredientsAndMethod}
           data={ingredients}
           renderItem={({ item }) => <Item title={`\u2022 ${item}`} />}
-          keyExtractor={(item) => item}
+          keyExtractor={item => item}
         />
       </View>
     </View>
@@ -89,7 +89,7 @@ export default function TodaysRecipe({ navigation }) {
           renderItem={({ item, index }) => (
             <Item title={`${index + 1}. ${item}`} />
           )}
-          keyExtractor={(item) => item}
+          keyExtractor={item => item}
         />
       </View>
     </View>
@@ -129,18 +129,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    alignItems: "center",
+    alignItems: "center"
   },
   positioning: {
     right: 170,
-    top: 20,
+    top: 20
   },
   arrow: {
     height: 20,
-    width: 20,
+    width: 20
   },
   formatting: {
-    marginTop: 10,
+    marginTop: 10
   },
   pageTitle: {
     fontSize: 25,
@@ -155,14 +155,14 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
     alignSelf: "center",
     top: 5,
-    textAlign: "center",
+    textAlign: "center"
   },
   image: {
     width: "90%",
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 15,
     left: 15,
-    bottom: 10,
+    bottom: 10
   },
   buttonView: {
     flexDirection: "row",
@@ -186,26 +186,26 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-    elevation: 5,
+    elevation: 5
   },
   buttonText: {
     alignSelf: "center",
     fontSize: 20,
     padding: 12,
     fontWeight: "bold",
-    color: COLS.C6_WHITE_TEXT,
+    color: COLS.C6_WHITE_TEXT
   },
   methodIngredientsButton: {
     backgroundColor: COLS.C_BG,
-    width: "50%",
+    width: "50%"
   },
   selectedMethodIngredientsButton: {
     backgroundColor: COLS.C_RED,
-    width: "50%",
+    width: "50%"
   },
   boxTitle: {
     textAlign: "center",
@@ -219,21 +219,21 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    height: 30,
+    height: 30
   },
   ingredientsAndMethodContainer: {
     width: "100%",
-    height: "100%",
+    height: "100%"
   },
   ingredientsAndMethodView: {
     height: "100%",
     width: "90%",
-    alignSelf: "center",
+    alignSelf: "center"
   },
   ingredientsAndMethod: {
     height: "100%",
@@ -248,6 +248,6 @@ const styles = StyleSheet.create({
     borderColor: COLS.C4_DARK_TEXT,
     borderStyle: "solid",
     backgroundColor: COLS.C6_WHITE_TEXT,
-    fontSize: 16,
-  },
+    fontSize: 16
+  }
 });
