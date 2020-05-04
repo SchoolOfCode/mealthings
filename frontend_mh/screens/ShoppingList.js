@@ -60,10 +60,57 @@ export default function ShoppingList({ navigation }) {
   const { userID, recipeList } = useContext(AuthContext);
 
   const listOfIngredients = [];
-  recipeList.forEach((recipe) => {
-    cleanString(recipe.ingredients).forEach((item) => {
+
+  
+  //pull all ingredients from objects in array 
+  const listOfIngredients = [];
+  //pull all quantities from objects in array 
+  const quantityOfIngredients =[];
+  
+  //return ingredients in clean format 
+  allRecipes.forEach(recipe => {
+    cleanString(recipe.ingredients).forEach(item => {
       listOfIngredients.push(item);
-    });
+
+  //return ingredient quantities in clean format
+  allRecipes.forEach(recipe => {
+    cleanString(recipe.ingredientsQuantities).forEach(item => {
+      quantityOfIngredients.push(item);
+
+  //Dummy Data Test
+  // const listOfIngredients = ['apples', 'pears','bananas', "flour"]
+  // const quantityOfIngredients = ['1','2','3', "250 g"]
+
+
+//remove duplicates & add quantities
+//if item is not duplicated add it to the list with subsequent quantity
+//if item is duplicated add the quantity only to the current quantity of the item on the list  
+  
+
+// Make Object called finalIngredsPlusQuantities
+const finalIngredsPlusQuantities = {apples:3, pears:1, orange:5}; 
+// Loop over ingredients 
+listOfIngredients.forEach((ingredient, index) => {
+    if(Object.keys(finalIngredsPlusQuantities).includes(ingredient)){
+      if(quantityOfIngredients[index].length > 1){
+        // g 
+        // kg 
+
+      } else {
+        finalIngredsPlusQuantities[ingredient] += quantityOfIngredients[index];
+      }
+    } else {
+      finalIngredsPlusQuantities[ingredient] = quantityOfIngredients[index];
+    }
+  })
+
+    //combine ingredients and quantities by index (zip functionality in Python)
+const comboIngredientQuantities = (listOfIngredients, quantityOfIngredients) => listOfIngredients.map((item, i) => [item, quantityOfIngredients[i]]);
+
+console.log(comboIngredientQuantities(listOfIngredients, quantityOfIngredients))
+
+
+});
   });
 
   return (
