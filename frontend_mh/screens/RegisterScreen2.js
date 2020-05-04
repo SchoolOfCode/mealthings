@@ -8,14 +8,14 @@ import {
   TextInput,
   TouchableOpacity,
   Dimensions,
-  Alert,
+  Alert
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
+  FORMAT_moreChoicesContainer
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -25,7 +25,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe,
+  FORMAT_mainRecipe
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -34,7 +34,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
+  FORMAT_navButtonBackground
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -62,7 +62,6 @@ export default function Registerscreen2({ navigation, route }) {
       emailAddress == null
     ) {
       Alert.alert("please check email is correct and resubmit");
-      return;
     }
     const dataPlus = { ...data, password, email_address: emailAddress };
     register(dataPlus);
@@ -70,28 +69,29 @@ export default function Registerscreen2({ navigation, route }) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Sign Up Details</Text>
       <TextInput
         style={styles.inputField}
         onChangeText={emailChangeHandler}
         placeholder="Email address"
-        placeholderTextColor="black"
+        placeholderTextColor="white"
         keyboardType="email-address"
       />
       <TextInput
         style={styles.inputField}
         placeholder="Password"
         onChangeText={passwordHandler}
-        placeholderTextColor="black"
+        placeholderTextColor="white"
       />
       <View style={styles.buttonFlex}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={styles.buttonText}
         >
-          <Text style={styles.TextStyle}>Back</Text>
+          <Text style={styles.textStyle}>Back</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
-          <Text style={styles.TextStyle}>Next</Text>
+          <Text style={styles.textStyle}>Next</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -100,45 +100,63 @@ export default function Registerscreen2({ navigation, route }) {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: COLS.C_BG,
-    height: 1000,
+    justifyContent: "center"
+  },
+  title: {
+    fontWeight: "bold",
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: 24,
+    padding: 10,
+    alignSelf: "center"
   },
   inputField: {
-    marginVertical: 15,
-    backgroundColor: COLS.C5_LIGHT_TEXT,
+    marginVertical: 5,
+    backgroundColor: COLS.C_BG,
     width: 200,
     alignSelf: "center",
     height: 50,
     borderRadius: 5,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+    color: COLS.C6_WHITE_TEXT
   },
   headerC: {
-    marginTop: 30,
+    marginTop: 30
   },
   formatting: {
-    alignSelf: "center",
+    alignSelf: "center"
   },
   buttonFlex: {
-    flexDirection: "row",
-    width: screenWidth * 0.5,
-    alignItems: "center",
     alignSelf: "center",
-    justifyContent: "space-between",
+    width: screenWidth * 0.7,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginVertical: 10,
+    padding: 10
   },
   buttonText: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    padding: 5,
-    justifyContent: "center",
+    backgroundColor: COLS.C_BG,
+    width: 80,
+    height: 30,
+    borderRadius: 5,
     alignItems: "center",
-    borderRadius: 5,
-    marginVertical: 3,
-    width: 80,
+    justifyContent: "center",
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT
   },
-  buttonFormat: {
-    flexDirection: "row",
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 80,
-    alignSelf: "center",
-    borderRadius: 5,
-    justifyContent: "space-between",
-  },
+  textStyle: {
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold"
+  }
 });

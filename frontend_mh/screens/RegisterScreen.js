@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
+
 import { CheckBox } from "react-native-elements";
 import {
   StyleSheet,
@@ -7,8 +8,9 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  Button,
   Dimensions,
-  Image,
+  Image
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -39,25 +41,26 @@ import {
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 const screenWidth = Dimensions.get("screen").width;
-
 export default function Registerscreen({ navigation }) {
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
   const [DOB, setDOB] = useState();
   const [DOB2, setDOB2] = useState();
   const [DOB3, setDOB3] = useState();
   const [mother, setMother] = useState(false);
+  const [other, setOther] = useState(false);
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
-  const [other, setOther] = useState(false);
   const [gender, setGender] = useState(null);
+  const [confirm, setConfirm] = useState();
+  const [display, setDisplay] = useState();
 
-  function firstNameInput(enteredText) {
-    setFirstName(enteredText);
+  function nameInput(enteredText) {
+    setName(enteredText);
   }
 
-  function lastNameInput(enteredText) {
-    setLastName(enteredText);
+  function emailInput(enteredText) {
+    setEmail(enteredText);
   }
   //NOTES ON REGEX FOR REFERENCE
   ///^[a-zA-Z0-9._-]+:  Means that the email address must begin with alpha-numeric characters (both lowercase and uppercase characters are allowed). It may have periods,underscores and hyphens.
@@ -68,90 +71,100 @@ export default function Registerscreen({ navigation }) {
   // {2,4} indicates the minimum and maximum number of characters. This will allow domain names with 2, 3 and 4 characters e.g.; us, tx, org, com, net, wxyz).
 
   function DOBinput(enteredText) {
-    setDOB(String(enteredText));
+    setDOB(enteredText);
   }
-
   function DOBinput2(enteredText) {
-    setDOB2(String(enteredText));
+    setDOB2(enteredText);
   }
-
   function DOBinput3(enteredText) {
-    setDOB3(String(enteredText));
+    setDOB3(enteredText);
   }
 
   function motherInput() {
     if (mother === false) {
       setMother(true);
-    } else {
+    } else if (mother === true) {
       setMother(false);
     }
   }
 
   function otherHandler() {
-    if (other === false) {
+    if (other == false) {
       setOther(true);
       setMale(false);
       setFemale(false);
-      setGender("Other");
     } else if (other == true) {
       setOther(false);
     }
   }
 
   function maleHandler() {
-    if (male === false) {
+    if (male == false) {
       setMale(true);
       setOther(false);
       setFemale(false);
-      setGender("Male");
-    } else {
+    } else if (male == false) {
       setMale(false);
     }
   }
-
   function femaleHandler() {
     if (female == false) {
       setFemale(true);
       setOther(false);
       setMale(false);
-      setGender("female");
-    } else {
+    } else if (female == true) {
       setFemale(false);
     }
   }
-
-  function submitHandler() {
-    if (
-      gender == null ||
-      firstName == null ||
-      lastName == null ||
-      DOB == null ||
-      DOB2 == null ||
-      DOB3 == null
-    ) {
-      Alert.alert("Please ensure all data fields are complete.");
-      return;
-    } else if (DOB <= 0 || DOB > 31) {
-      Alert.alert("Day (in date of birth) can only be between 1 and 31!");
-      return;
-    } else if (DOB2 < 1 || DOB2 > 12) {
-      Alert.alert("Month (in date of birth) can only be between 1 and 12!");
-      return;
-    } else if (DOB3 < 1900 || DOB3 > new Date().getFullYear()) {
-      Alert.alert(
-        `Year (in date of birth) can only be between 1900 and ${new Date().getFullYear()}!`
-      );
-      return;
+  function confirmChoices() {
+    if (other == true) {
+      setGender("Other");
+    } else if (female == true) {
+      setGender("female");
     } else {
-      const birthday = DOB2 + "-" + DOB + "-" + DOB3;
-      const data = {
-        name: `${firstName} ${lastName}`,
+      setGender("Male");
+    }
+    if (email == /^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/) {
+      setEmail(email);
+    } else if (email == "" || null) {
+      Alert.alert("enter a correct email address");
+    }
+    if ((gender, name, email, DOB, DOB2, DOB3 == null || "")) {
+      setConfirm(false);
+      console.log(gender, name, email, DOB, DOB2, DOB3);
+    } else if (DOB2 > 12) {
+      Alert.alert("Enter valid Month ");
+    } else {
+      setConfirm(true);
+      console.log((gender, name, email, DOB, DOB2, DOB3));
+    }
+    if (DOB > 31) {
+      Alert.alert("Enter a valid day");
+    } else if (DOB3 > 2019) {
+      Alert.alert("Enter a valid Year");
+    }
+    if (DOB > 31) {
+      Alert.alert("Enter a valid day");
+    } else if (DOB3 > 2019) {
+      Alert.alert("Enter a valid Year");
+    }
+  }
+
+  function SubmitHandler() {
+    if (confirm == true) {
+      setDisplay("Submitted");
+      const birthday = DOB + "-" + DOB2 + "-" + DOB3;
+      console.log("Submitted:", {
+        name,
+        email,
         birthday,
         gender,
-        mother,
+        mother
       };
-      console.log("Submitted data:", data);
+      console.log(data);
       navigation.navigate("Register2", { data });
+    } else {
+      Alert.alert("ensure all data fields are complete");
     }
   }
 
@@ -159,50 +172,52 @@ export default function Registerscreen({ navigation }) {
     <View style={styles.container}>
       <View>
         <View style={styles.margin}>
-          <Text style={styles.title}>Create Your Account:</Text>
-          <TextInput
-            style={styles.inputField}
-            onChangeText={firstNameInput}
-            placeholder="First name"
-            placeholderTextColor="#FDFFF7"
-            isRequired
-          />
-          <TextInput
-            style={styles.inputField}
-            placeholder=" Last name"
-            onChangeText={lastNameInput}
-            placeholderTextColor="#FDFFF7"
-          />
-          <View style={styles.row}>
+          <View style={styles.contain}>
+            <Text style={styles.title}>Create Your Account:</Text>
             <TextInput
-              style={styles.box}
-              placeholder="DD"
-              onChangeText={DOBinput}
+              style={styles.inputField}
+              onChangeText={firstNameInput}
+              placeholder="First name"
               placeholderTextColor="#FDFFF7"
-              keyboardType="numeric"
-              maxLength={2}
+              isRequired
             />
             <TextInput
-              style={styles.box}
-              placeholder="MM"
-              onChangeText={DOBinput2}
+              style={styles.inputField}
+              placeholder=" Last name"
+              onChangeText={lastNameInput}
               placeholderTextColor="#FDFFF7"
-              keyboardType="numeric"
-              maxLength={2}
             />
-            <TextInput
-              style={styles.box}
-              placeholder="YYYY"
-              onChangeText={DOBinput3}
-              placeholderTextColor="#FDFFF7"
-              keyboardType="numeric"
-              maxLength={4}
-            />
+            <View style={styles.row}>
+              <TextInput
+                style={styles.box}
+                placeholder="DD"
+                onChangeText={DOBinput}
+                placeholderTextColor="#FDFFF7"
+                keyboardType="numeric"
+                maxLength={2}
+              />
+              <TextInput
+                style={styles.box}
+                placeholder="MM"
+                onChangeText={DOBinput2}
+                placeholderTextColor="#FDFFF7"
+                keyboardType="numeric"
+                maxLength={2}
+              />
+              <TextInput
+                style={styles.box}
+                placeholder="YYYY"
+                onChangeText={DOBinput3}
+                placeholderTextColor="#FDFFF7"
+                keyboardType="numeric"
+                maxLength={4}
+              />
+            </View>
           </View>
         </View>
 
         <View styles={styles.position}>
-          <Text style={styles.motherText}>Are you a new mother? </Text>
+          <Text style={styles.optionText}>Are you a new mother? </Text>
           <CheckBox
             checkedIcon={
               <Image
@@ -221,7 +236,7 @@ export default function Registerscreen({ navigation }) {
           />
           <Text style={styles.title}>Select Gender: </Text>
           <View>
-            <Text style={styles.female}>Female </Text>
+            <Text style={styles.option}>Female </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -238,7 +253,7 @@ export default function Registerscreen({ navigation }) {
               checked={female}
               onPress={femaleHandler}
             />
-            <Text style={styles.male}>Male </Text>
+            <Text style={styles.option}>Male </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -255,7 +270,7 @@ export default function Registerscreen({ navigation }) {
               checked={male}
               onPress={maleHandler}
             />
-            <Text style={styles.other}> Other </Text>
+            <Text style={styles.option}> Other </Text>
             <CheckBox
               checkedIcon={
                 <Image
@@ -277,17 +292,14 @@ export default function Registerscreen({ navigation }) {
         <View style={styles.buttonflex}>
           <View>
             <TouchableOpacity
-              style={styles.directionBack}
+              style={styles.direction}
               onPress={() => navigation.goBack()}
             >
               <Text style={styles.buttonText}>Back</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.buttonText}>
-            <TouchableOpacity
-              style={styles.directionNext}
-              onPress={submitHandler}
-            >
+            <TouchableOpacity style={styles.direction} onPress={submitHandler}>
               <Text onPress={submitHandler} style={styles.buttonText}>
                 Next
               </Text>
@@ -302,17 +314,14 @@ export default function Registerscreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: screenWidth,
     backgroundColor: COLS.C_BG,
+    justifyContent: "center"
   },
-  row: {
-    flexDirection: "row",
-  },
-  mover: {
-    left: 110,
+  contain: {
+    marginTop: 30
   },
   margin: {
-    marginTop: 30,
+    marginTop: 25
   },
   arrow: {
     width: 40,
@@ -323,10 +332,10 @@ const styles = StyleSheet.create({
   tick: {
     width: 20,
     height: 20,
-    left: 180,
-    bottom: 15,
     borderWidth: 3,
     borderColor: COLS.C6_WHITE_TEXT,
+    alignSelf: "center",
+    left: 155
   },
   inputField: {
     marginVertical: 5,
@@ -344,6 +353,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
+
     elevation: 5,
     color: COLS.C6_WHITE_TEXT,
   },
@@ -355,37 +365,28 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     padding: 10,
   },
-  directionBack: {
+  direction: {
     backgroundColor: COLS.C_BG,
     width: 80,
     height: 30,
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
+    top: -61,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-  },
-  directionNext: {
-    backgroundColor: COLS.C_BG,
-    width: 80,
-    height: 30,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
+    marginBottom: 43
   },
   row: {
-    flexDirection: "row",
+    justifyContent: "center",
+    flexDirection: "row"
   },
   box: {
     width: 45,
     height: 25,
     backgroundColor: COLS.C_BG,
     margin: 10,
-    left: 85,
     borderRadius: 5,
-    alignSelf: "center",
     color: COLS.C6_WHITE_TEXT,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
@@ -398,43 +399,32 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
 
     elevation: 5,
+    flexDirection: "row"
   },
   position: {
     flexDirection: "row",
-    marginTop: 30,
+    alignSelf: "center",
+    alignContent: "center"
   },
-  motherText: {
-    top: 20,
-    left: 100,
+  optionText: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
+    alignSelf: "center"
   },
   title: {
-    left: 10,
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     fontSize: 24,
-    padding: 10,
-    top: -10,
+    padding: 6
   },
-  female: {
-    top: 19,
-    left: 120,
+  option: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
+    alignSelf: "center",
+    marginTop: 10,
+    alignItems: "center"
   },
-  male: {
-    top: 19,
-    left: 130,
-    color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold",
-  },
-  other: {
-    top: 19,
-    left: 125,
-    color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold",
-  },
+
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
