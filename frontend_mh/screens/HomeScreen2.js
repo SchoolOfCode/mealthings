@@ -1,4 +1,3 @@
-import React from "react";
 import {
   View,
   Text,
@@ -7,6 +6,7 @@ import {
   StyleSheet,
   Dimensions
 } from "react-native";
+
 import { COLS } from "./COLS";
 import {
   FORMAT_navButtonBackground,
@@ -22,6 +22,12 @@ import { FORMAT_tagLine } from "./FORMAT_extraComponents";
 const screenWidth = Dimensions.get("window").width;
 
 export default function HomeScreen2({ navigation }) {
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     console.log("This will run every second!");
+  //   }, 5000);
+  // }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>

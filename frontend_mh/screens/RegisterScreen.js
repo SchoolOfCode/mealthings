@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
+  Button,
   Dimensions,
   Image
 } from "react-native";
@@ -15,7 +16,7 @@ import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -25,7 +26,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -34,7 +35,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -117,6 +118,11 @@ export default function Registerscreen({ navigation }) {
       setGender("female");
     } else {
       setFemale(false);
+    }
+    if (DOB > 31) {
+      Alert.alert("Enter a valid day");
+    } else if (DOB3 > 2019) {
+      Alert.alert("Enter a valid Year");
     }
   }
 
@@ -314,7 +320,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 20,
     marginHorizontal: 10,
-    marginVertical: 20
+    marginVertical: 20,
   },
   tick: {
     width: 20,
@@ -336,12 +342,12 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    color: COLS.C6_WHITE_TEXT
+    color: COLS.C6_WHITE_TEXT,
   },
   buttonflex: {
     alignSelf: "center",
@@ -349,7 +355,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginVertical: 10,
-    padding: 10
+    padding: 10,
   },
   direction: {
     backgroundColor: COLS.C_BG,
@@ -378,7 +384,7 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
@@ -413,6 +419,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
