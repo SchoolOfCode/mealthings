@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { AuthContext } from "../App.js";
 import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
@@ -55,14 +56,145 @@ function cleanString(string) {
 }
 
 export default function ShoppingList({ navigation }) {
-  const allRecipes = useContext(RecipeContext);
 
+  // const { userID, recipeList } = useContext(AuthContext);
+
+  return null;
+
+  //   const listOfIngredients = [];
+
+  //   //pull all ingredients from objects in array
+  //   const listOfIngredients = [];
+  //   //pull all quantities from objects in array
+  //   const quantityOfIngredients =[];
+
+  //   //return ingredients in clean format
+  //   allRecipes.forEach(recipe => {
+  //     cleanString(recipe.ingredients).forEach(item => {
+  //       listOfIngredients.push(item);
+
+  //   //return ingredient quantities in clean format
+  //   allRecipes.forEach(recipe => {
+  //     cleanString(recipe.ingredientsQuantities).forEach(item => {
+  //       quantityOfIngredients.push(item);
+
+  //   //Dummy Data Test
+  //   // const listOfIngredients = ['apples', 'pears','bananas', "flour"]
+  //   // const quantityOfIngredients = ['1','2','3', "250 g"]
+
+  // //remove duplicates & add quantities
+  // //if item is not duplicated add it to the list with subsequent quantity
+  // //if item is duplicated add the quantity only to the current quantity of the item on the list
+
+  // // Make Object called finalIngredsPlusQuantities
+  // const finalIngredsPlusQuantities = {apples:3, pears:1, orange:5};
+  // // Loop over ingredients
+  // listOfIngredients.forEach((ingredient, index) => {
+  //     if(Object.keys(finalIngredsPlusQuantities).includes(ingredient)){
+  //       if(quantityOfIngredients[index].length > 1){
+  //         // g
+  //         // kg
+
+  //       } else {
+  //         finalIngredsPlusQuantities[ingredient] += quantityOfIngredients[index];
+  //       }
+  //     } else {
+  //       finalIngredsPlusQuantities[ingredient] = quantityOfIngredients[index];
+  //     }
+  //   })
+
+  //     //combine ingredients and quantities by index (zip functionality in Python)
+  // const comboIngredientQuantities = (listOfIngredients, quantityOfIngredients) => listOfIngredients.map((item, i) => [item, quantityOfIngredients[i]]);
+
+  // console.log(comboIngredientQuantities(listOfIngredients, quantityOfIngredients))
+
+=======
+  const { userID, recipeList } = useContext(AuthContext);
+
+  // Make array for ingredients
   const listOfIngredients = [];
-  allRecipes.forEach(recipe => {
-    cleanString(recipe.ingredients).forEach(item => {
+  // Make array for quantities
+  const quantityOfIngredients = [];
+
+  // Get ingredients and quantities in a clean format
+  recipeList.forEach((recipe) => {
+    cleanString(recipe.ingredients).forEach((item) => {
       listOfIngredients.push(item);
     });
+    cleanString(recipe.ingredientsquantities).forEach((item) => {
+      quantityOfIngredients.push(item);
+    });
   });
+
+  // Remove duplicates & add quantities
+  // Make Object called finalIngredsPlusQuantities
+  const finalIngredsPlusQuantities = {};
+  // Loop over ingredients
+  listOfIngredients.forEach((ingredient, index) => {
+    if (Object.keys(finalIngredsPlusQuantities).includes(ingredient)) {
+      if (quantityOfIngredients[index].length > 1) {
+        // g
+        // e.g. 2 x 250g
+        // kg
+        // tbs
+        // tbp
+        // tbls
+        // tsp
+        // e.g. 2 heaped tsp
+        // sprig
+        // springs
+        // clove
+        // cloves
+        // handful
+        // handfuls
+        // slice
+        // slices
+        // sliced
+        // eg thin slices
+        // ml
+        // l
+        // litre
+        // litres
+        // head
+        // pinch
+        // pinches
+        // fillet
+        // xyz g fillet
+        // fillets
+        // xyz g fillets
+        // piece
+        // pieces
+        // bulb
+        // bulbs
+        // just the number
+        // just the approx number (1 - 2 or 1-2)
+        // mug
+        // mugs
+        // cup
+        // cups
+        // scoop
+        // scoops
+        // stick
+        // sticks
+        // e.g. sticks of
+        // bunch
+        // bunches
+      } else {
+        finalIngredsPlusQuantities[ingredient] += quantityOfIngredients[index];
+      }
+    } else {
+      finalIngredsPlusQuantities[ingredient] = quantityOfIngredients[index];
+    }
+  });
+
+  //     //combine ingredients and quantities by index (zip functionality in Python)
+  // const comboIngredientQuantities = (listOfIngredients, quantityOfIngredients) => listOfIngredients.map((item, i) => [item, quantityOfIngredients[i]]);
+
+  // console.log(comboIngredientQuantities(listOfIngredients, quantityOfIngredients))
+
+
+  // });
+  //   });
 
   return (
     <View style={styles.container}>

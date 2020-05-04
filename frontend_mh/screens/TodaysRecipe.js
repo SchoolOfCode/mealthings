@@ -1,19 +1,19 @@
 import React, { useState, useContext } from "react";
+import { AuthContext } from "../App.js";
 import {
   View,
   Text,
   Image,
   TouchableOpacity,
   StyleSheet,
-  FlatList
+  FlatList,
 } from "react-native";
 import { COLS } from "./COLS";
-import { RecipeContext } from "./HomeScreen";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -23,7 +23,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -32,62 +32,9 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
-
-// const todaysRecipe = {
-//   recipe_id: "2",
-//   name: "Really Delicious BLT",
-//   ingredients: [
-//     "Free range streaky bacon",
-//     "Lettuce",
-//     "Beef tomato",
-//     "Wholemeal bread",
-//     "Freshly churned butter",
-//     "Mayonaise"
-//   ],
-//   ingredientsQuantities: [
-//     "2 rashers",
-//     "Several leaves",
-//     "1",
-//     "2 slices",
-//     "",
-//     ""
-//   ],
-//   calories: "286",
-//   protein: "20",
-//   carbohydrates: "160",
-//   fat: "15",
-//   cooking_difficulty: "1",
-//   cooking_time_mins: "25",
-//   method: [
-//     "Slice the bread thickly",
-//     "Spread the freshly churned butter on one slice of bread.",
-//     "Spread mayonaise on the second slice of bread",
-//     "Slice the tomato thinly",
-//     "Fry the bacon until crispy",
-//     "Tear the lettuce roughly by hand",
-//     "layer the tomato slices, lettuce and bacon on the bread and serve as a sandwhich."
-//   ]
-// };
-
-/* const todaysRecipe = {
-  "calories": "579",
-  "carbohydrates": "60.7",
-  "cooking_difficulty": "1",
-  "cooking_time_mins": 16,
-  "fat": "18.7",
-  "fibre": "4.3",
-  "ingredients": "{\"unsalted peanuts      \",\"free-range skinless chicken breasts\",\"black bean sauce\",\"medium free-range egg\",\"tenderstem broccoli\"}",
-  "method": "{\"Place a large non-stick frying pan on a medium heat and toast the peanuts as it heats up, tossing regularly, then remove and set aside, leaving the pan on the heat.\",\"Meanwhile, score the chicken lengthways at 1cm intervals, going about halfway through.\",\"In a bowl, toss the chicken with 1 tablespoon each of olive oil, red wine vinegar and black bean sauce to coat. Cook in the hot pan for 3 minutes on each side, or until dark, gnarly and cooked through.\",\"Cook the noodles in a large pan of boiling salted water according to the packet instructions.\",\"Trim the broccoli (halving any thick stalks lengthways) and add to the water for the last 2 minutes.\",\"Remove the chicken to a board. Use tongs to carefully drag the just-cooked noodles and broccoli with a bit of their water straight into the frying pan.\",\"Pound half the peanuts in a pestle and mortar until fine, toss into the pan with the remaining black bean sauce until well mixed, then divide between your plates.",\"Slice the chicken and place on top, scatter over the remaining peanuts, drizzle with a little extra virgin olive oil, and dig in.\"}",
-  "name": "Chicken noodle stir-fry",
-  "protein": "45.5",
-  "recipe_id": 1,
-  "salt": "1.4",
-  "saturates": "3.4",
-  "sugars": "5.5",
-} */
 
 function Item({ title }) {
   return (
@@ -98,15 +45,15 @@ function Item({ title }) {
 }
 
 function cleanString(string) {
-  return string.split('","').map(x => x.replace(/"|{|}|\\|\//g, ""));
+  return string.split('","').map((x) => x.replace(/"|{|}|\\|\//g, ""));
 }
 
 export default function TodaysRecipe({ navigation }) {
+  const { userID, recipeList } = useContext(AuthContext);
   const [showIngredients, setShowIngredients] = useState(false);
   const [showMethod, setShowMethod] = useState(false);
-  const allRecipes = useContext(RecipeContext);
   const recipeIndex = 0; // TODO make this increment depending on the number of days since last recipe request
-  const todaysRecipe = allRecipes[recipeIndex];
+  const todaysRecipe = recipeList[recipeIndex];
   const ingredients = cleanString(todaysRecipe.ingredients);
   const method = cleanString(todaysRecipe.method);
 
@@ -127,7 +74,7 @@ export default function TodaysRecipe({ navigation }) {
           style={styles.ingredientsAndMethod}
           data={ingredients}
           renderItem={({ item }) => <Item title={`\u2022 ${item}`} />}
-          keyExtractor={item => item}
+          keyExtractor={(item) => item}
         />
       </View>
     </View>
@@ -142,7 +89,7 @@ export default function TodaysRecipe({ navigation }) {
           renderItem={({ item, index }) => (
             <Item title={`${index + 1}. ${item}`} />
           )}
-          keyExtractor={item => item}
+          keyExtractor={(item) => item}
         />
       </View>
     </View>
@@ -151,10 +98,7 @@ export default function TodaysRecipe({ navigation }) {
   return (
     <View contentContainerStyle={styles.container}>
       <Text style={styles.pageTitle}>{todaysRecipe.name}</Text>
-      <Image
-        style={styles.image}
-        source={require("../assets/images/posh-blt.jpg")}
-      />
+      <Image style={styles.image} source={{ uri: todaysRecipe.url }} />
       <View style={styles.buttonView}>
         <TouchableOpacity
           style={
@@ -185,18 +129,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    alignItems: "center"
+    alignItems: "center",
   },
   positioning: {
     right: 170,
-    top: 20
+    top: 20,
   },
   arrow: {
     height: 20,
-    width: 20
+    width: 20,
   },
   formatting: {
-    marginTop: 10
+    marginTop: 10,
   },
   pageTitle: {
     fontSize: 25,
@@ -211,14 +155,14 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
     alignSelf: "center",
     top: 5,
-    textAlign: "center"
+    textAlign: "center",
   },
   image: {
     width: "90%",
@@ -229,7 +173,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 15,
     left: 15,
-    bottom: 10
+    bottom: 10,
   },
   buttonView: {
     flexDirection: "row",
@@ -242,26 +186,26 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-    elevation: 5
+    elevation: 5,
   },
   buttonText: {
     alignSelf: "center",
     fontSize: 20,
     padding: 12,
     fontWeight: "bold",
-    color: COLS.C6_WHITE_TEXT
+    color: COLS.C6_WHITE_TEXT,
   },
   methodIngredientsButton: {
     backgroundColor: COLS.C_BG,
-    width: "50%"
+    width: "50%",
   },
   selectedMethodIngredientsButton: {
     backgroundColor: COLS.C_RED,
-    width: "50%"
+    width: "50%",
   },
   boxTitle: {
     textAlign: "center",
@@ -275,21 +219,21 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    height: 30
+    height: 30,
   },
   ingredientsAndMethodContainer: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   ingredientsAndMethodView: {
     height: "100%",
     width: "90%",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   ingredientsAndMethod: {
     height: "100%",
@@ -304,6 +248,6 @@ const styles = StyleSheet.create({
     borderColor: COLS.C4_DARK_TEXT,
     borderStyle: "solid",
     backgroundColor: COLS.C6_WHITE_TEXT,
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });

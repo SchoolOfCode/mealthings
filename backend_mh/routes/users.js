@@ -91,13 +91,14 @@ router.post("/", async (req, res) => {
   try {
     const data = await saveNewUser(body);
     if (data.rows) {
-      const token = await getToken(body);
+      const tokenResponse = await getToken(body);
       return res.status(201).json({
         message: "Inserted new user",
         success: true,
         email_address: data.rows[0].email_address,
         userID: data.rows[0].user_id,
-        token,
+        token: tokenResponse.token,
+        userID: tokenResponse.userID,
       });
     }
     console.warn("Failed to insert new user. Request body:", body);
@@ -124,8 +125,8 @@ router.post("/login", async (req, res) => {
   if (authorization) {
     const token = authorization.split(" ")[1];
     const verifyResponse = await verifyJwt(token);
-    if (verifyResponse) {
-      res.status(200).json({
+    if (verifyResponse.length >= 1) {
+      return res.status(200).json({
         success: true,
         message: "Welcome back!",
         email_address: verifyResponse[0].email_address,
@@ -149,11 +150,15 @@ router.post("/login", async (req, res) => {
       }
       const bcryptResult = bcrypt.compareSync(password, hashedPassword);
       if (bcryptResult) {
-        const token = await getToken(body);
-        if (token) {
-          return res
-            .status(200)
-            .json({ success: true, message: "Welcome back!", token });
+        const tokenResponse = await getToken(body);
+        if (tokenResponse) {
+          return res.status(200).json({
+            success: true,
+            message: "Welcome back!",
+            token: tokenResponse.token,
+            email_address: body.email_address,
+            userID: tokenResponse.userID,
+          });
         } else {
           return res.status(500).json({
             success: false,

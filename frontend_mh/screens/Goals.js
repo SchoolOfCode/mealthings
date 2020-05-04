@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AuthContext } from "../App.js";
 import {
   Image,
   StyleSheet,
@@ -41,6 +42,7 @@ import { Row } from "react-native-drag-flatlist";
 const screenWidth = Dimensions.get("screen").width;
 
 export default function Goals({ navigation, route }) {
+  const { userID } = useContext(AuthContext);
   const { dataPlus } = route.params;
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
@@ -49,7 +51,6 @@ export default function Goals({ navigation, route }) {
   const [diet, setDiet] = useState(false);
   const [time, setTime] = useState(false);
   const [cook, setCook] = useState(false);
-  const [display, setDisplay] = useState();
 
   function Track(enteredText) {
     setWeight(enteredText);
@@ -59,7 +60,6 @@ export default function Goals({ navigation, route }) {
   }
 
   function handleSubmit() {
-    setDisplay("success");
     var goals = "";
     if (fatLoss) {
       goals += "Fat loss,";
@@ -131,7 +131,6 @@ export default function Goals({ navigation, route }) {
   }
 
   function HandleSubmit() {
-    setDisplay("success");
     console.log({ weight, height, fatLoss, muscle, diet, time, cook });
     var goals = "";
     if (fatLoss) {
@@ -161,7 +160,6 @@ export default function Goals({ navigation, route }) {
           <Text style={styles.padding}> (Kg)</Text>
           <Text style={styles.padding}> (cm)</Text>
         </View>
-
         <Text style={styles.Goals}>Goals</Text>
         <View style={styles.margin}>
           <TextInput
