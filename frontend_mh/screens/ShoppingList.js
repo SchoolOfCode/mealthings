@@ -33,7 +33,6 @@ import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 function IngredientItem({ item }) {
   const [bought, setBought] = useState(false);
-
   return (
     <TouchableOpacity
       onPress={() => setBought(!bought)}
@@ -57,6 +56,7 @@ function cleanString(string) {
 }
 
 export default function ShoppingList({ navigation }) {
+
   // const { userID, recipeList } = useContext(AuthContext);
 
   return null;
@@ -107,6 +107,91 @@ export default function ShoppingList({ navigation }) {
   // const comboIngredientQuantities = (listOfIngredients, quantityOfIngredients) => listOfIngredients.map((item, i) => [item, quantityOfIngredients[i]]);
 
   // console.log(comboIngredientQuantities(listOfIngredients, quantityOfIngredients))
+
+=======
+  const { userID, recipeList } = useContext(AuthContext);
+
+  // Make array for ingredients
+  const listOfIngredients = [];
+  // Make array for quantities
+  const quantityOfIngredients = [];
+
+  // Get ingredients and quantities in a clean format
+  recipeList.forEach((recipe) => {
+    cleanString(recipe.ingredients).forEach((item) => {
+      listOfIngredients.push(item);
+    });
+    cleanString(recipe.ingredientsquantities).forEach((item) => {
+      quantityOfIngredients.push(item);
+    });
+  });
+
+  // Remove duplicates & add quantities
+  // Make Object called finalIngredsPlusQuantities
+  const finalIngredsPlusQuantities = {};
+  // Loop over ingredients
+  listOfIngredients.forEach((ingredient, index) => {
+    if (Object.keys(finalIngredsPlusQuantities).includes(ingredient)) {
+      if (quantityOfIngredients[index].length > 1) {
+        // g
+        // e.g. 2 x 250g
+        // kg
+        // tbs
+        // tbp
+        // tbls
+        // tsp
+        // e.g. 2 heaped tsp
+        // sprig
+        // springs
+        // clove
+        // cloves
+        // handful
+        // handfuls
+        // slice
+        // slices
+        // sliced
+        // eg thin slices
+        // ml
+        // l
+        // litre
+        // litres
+        // head
+        // pinch
+        // pinches
+        // fillet
+        // xyz g fillet
+        // fillets
+        // xyz g fillets
+        // piece
+        // pieces
+        // bulb
+        // bulbs
+        // just the number
+        // just the approx number (1 - 2 or 1-2)
+        // mug
+        // mugs
+        // cup
+        // cups
+        // scoop
+        // scoops
+        // stick
+        // sticks
+        // e.g. sticks of
+        // bunch
+        // bunches
+      } else {
+        finalIngredsPlusQuantities[ingredient] += quantityOfIngredients[index];
+      }
+    } else {
+      finalIngredsPlusQuantities[ingredient] = quantityOfIngredients[index];
+    }
+  });
+
+  //     //combine ingredients and quantities by index (zip functionality in Python)
+  // const comboIngredientQuantities = (listOfIngredients, quantityOfIngredients) => listOfIngredients.map((item, i) => [item, quantityOfIngredients[i]]);
+
+  // console.log(comboIngredientQuantities(listOfIngredients, quantityOfIngredients))
+
 
   // });
   //   });
