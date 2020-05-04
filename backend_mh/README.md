@@ -399,8 +399,27 @@ const itemWasStored = storeItem("token", loginResponse.token)
 * Make logout screen remove JWT
 
 // Get recipe URLs working on relevant screens (look at Josh's code if required, remember uri)
+// Replace Stats with meal planner
+// link preferences
+// Password reset
+// Loading spash screen
 // Fix recipe cards into 2 columns not one
 // Get search Icon into the centre of red circle on recipe cards
 // Enable button on recipe cards so the selected recipe shows
 // Ensure password is > 7 characters
+// Recipe list - duplicate item keys, and add
 // Implement some osrt of recipe counter so that it isn't just the first recipe in the list
+// To test - make sure female option works in the back end
+
+// Hannah
+Docker
+Tests
+
+// Josh
+Preferences
+Push notifications
+Draggable list
+
+// Murray
+Shopping list
+Make goals / prefs / diet send PATCH
