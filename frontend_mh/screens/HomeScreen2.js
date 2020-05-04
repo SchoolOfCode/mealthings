@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { COLS } from "./COLS";
 import {
@@ -10,6 +10,12 @@ import { FORMAT_welcomeContainer } from "./FORMAT_containers";
 import { FORMAT_tagLine } from "./FORMAT_extraComponents";
 
 export default function HomeScreen2({ navigation }) {
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     console.log("This will run every second!");
+  //   }, 5000);
+  // }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.welcomeContainer}>

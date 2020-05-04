@@ -1,5 +1,5 @@
-import * as React from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Platform, StatusBar, StyleSheet, View, Alert } from "react-native";
 import { SplashScreen } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
@@ -12,6 +12,82 @@ import LandingPage from "./screens/Landingpage";
 
 import RegisteredContextProvider from "./contexts/RegisterContext";
 
+import { notify, initnotify, getToken } from "expo-push-notification-helper";
+import { newChannel } from "expo-push-notification-helper";
+
+function tokenOperator() {
+  initnotify().then(async (data) => {
+    if (data) {
+      await getToken();
+      console.log(await getToken());
+      console.log("token is working so far");
+    } else {
+      Alert.alert("please grant this app notification permission in settings.");
+    }
+  });
+
+  async function PNotification() {
+    let userID = await getToken();
+    console.log("working so far" + (await getToken()));
+    const token = await userID;
+
+    fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "accept-encoding": "gzip, deflate",
+        host: "exp.host",
+      },
+      body: JSON.stringify({
+        to: token,
+        title: "Meal Things",
+        body: "Time to reenergise those electrolytes",
+        largeIcon: "../assets/images/newLogo.png",
+        priority: "high",
+        sound: "default",
+        channelId: "default",
+      }),
+    })
+      .then((response) => response.json())
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  setInterval(PNotification, 30000);
+
+  async function RNotification() {
+    let userID = await getToken();
+    console.log("working so far" + (await getToken()));
+    const token = await userID;
+
+    fetch("https://exp.host/--/api/v2/push/send", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "accept-encoding": "gzip, deflate",
+        host: "exp.host",
+      },
+      body: JSON.stringify({
+        to: token,
+        title: "Meal Things",
+        body: "Time for a run",
+        priority: "high",
+        sound: "default",
+        channelId: "default",
+      }),
+    })
+      .then((response) => response.json())
+
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  setInterval(RNotification, 1200000);
+}
+tokenOperator();
 const Stack = createStackNavigator();
 
 export default function App(props) {

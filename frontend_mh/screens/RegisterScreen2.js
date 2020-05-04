@@ -63,9 +63,6 @@ export default function Registerscreen2({ navigation, route }) {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.headerC}>
-          <Image source={require("../assets/images/arrow.png")} />
-        </Text>
         <View>
           <TextInput
             style={styles.inputField}
