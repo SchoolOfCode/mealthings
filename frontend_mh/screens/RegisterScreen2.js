@@ -62,7 +62,6 @@ export default function Registerscreen2({ navigation, route }) {
       emailAddress == null
     ) {
       Alert.alert("please check email is correct and resubmit");
-      return;
     }
     const dataPlus = { ...data, password, email_address: emailAddress };
     register(dataPlus);

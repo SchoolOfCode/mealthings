@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { AuthContext } from "../App.js";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   TouchableOpacity,
   StyleSheet,
   View,
+  SafeAreaView,
+  Button,
+  ScrollView,
+  Alert,
   Modal,
   TouchableHighlight,
+  CheckBox,
   Image,
 } from "react-native";
 
@@ -529,8 +533,7 @@ const originalData = sampleRecipes.map((item, index) => ({
   ingredients: item.ingredients,
 }));
 
-export default function MealPlanner() {
-  const { userID, setRecipeList, recipeList } = useContext(AuthContext);
+const App = () => {
   const [data, setData] = useState(originalData);
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -654,7 +657,7 @@ export default function MealPlanner() {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   textmovement: {
@@ -747,3 +750,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default App;
