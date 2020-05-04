@@ -1,16 +1,9 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 import React from "react";
 import { COLS } from "../screens/COLS";
 
-export default function app() {
+export default function Days() {
   return (
     <View style={styles.row}>
       <Text style={styles.spacing}> Monday</Text>

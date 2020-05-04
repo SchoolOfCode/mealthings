@@ -1,4 +1,4 @@
-import React, { useState, Component } from "react";
+import React, { useState } from "react";
 import { CheckBox } from "react-native-elements";
 import {
   StyleSheet,
