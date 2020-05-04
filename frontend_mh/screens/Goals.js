@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { AuthContext } from "../App.js";
 import {
   Image,
   StyleSheet,
@@ -6,7 +7,7 @@ import {
   TouchableOpacity,
   View,
   TextInput,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
@@ -14,7 +15,7 @@ import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -24,7 +25,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -33,7 +34,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 import { Row } from "react-native-drag-flatlist";
@@ -41,6 +42,7 @@ import { Row } from "react-native-drag-flatlist";
 const screenWidth = Dimensions.get("screen").width;
 
 export default function Goals({ navigation, route }) {
+  const { userID } = useContext(AuthContext);
   const { dataPlus } = route.params;
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
@@ -49,7 +51,6 @@ export default function Goals({ navigation, route }) {
   const [diet, setDiet] = useState(false);
   const [time, setTime] = useState(false);
   const [cook, setCook] = useState(false);
-  const [display, setDisplay] = useState();
 
   function Track(enteredText) {
     setWeight(enteredText);
@@ -59,7 +60,6 @@ export default function Goals({ navigation, route }) {
   }
 
   function handleSubmit() {
-    setDisplay("success");
     var goals = "";
     if (fatLoss) {
       goals += "Fat loss,";
@@ -131,7 +131,6 @@ export default function Goals({ navigation, route }) {
   }
 
   function HandleSubmit() {
-    setDisplay("success");
     console.log({ weight, height, fatLoss, muscle, diet, time, cook });
     var goals = "";
     if (fatLoss) {
@@ -161,13 +160,6 @@ export default function Goals({ navigation, route }) {
           <Text style={styles.padding}> (Kg)</Text>
           <Text style={styles.padding}> (cm)</Text>
         </View>
-        <TouchableOpacity>
-          <Image
-            style={styles.arrow}
-            source={require("../assets/images/goback.png")}
-          ></Image>
-        </TouchableOpacity>
-
         <Text style={styles.Goals}>Goals</Text>
         <View style={styles.margin}>
           <TextInput
@@ -256,7 +248,7 @@ export default function Goals({ navigation, route }) {
 }
 const styles = StyleSheet.create({
   margin: {
-    marginVertical: FORMAT_inputField.F_inputField_marginVertical
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
   },
   inputField: {
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
@@ -264,11 +256,11 @@ const styles = StyleSheet.create({
     width: FORMAT_inputField.F_inputField_width,
     alignSelf: FORMAT_inputField.F_inputField_alignSelf,
     height: FORMAT_inputField.F_inputField_height,
-    borderRadius: FORMAT_inputField.F_inputField_borderRadius
+    borderRadius: FORMAT_inputField.F_inputField_borderRadius,
   },
   flex: {
     flexDirection: FORMAT_navButton.F_navButton_flexDirection,
-    marginVertical: FORMAT_navButton.F_navButton_marginVertical
+    marginVertical: FORMAT_navButton.F_navButton_marginVertical,
   },
   flex2: { flexDirection: FORMAT_navButton.F_navButton_flexDirection },
   img: {
@@ -276,23 +268,23 @@ const styles = StyleSheet.create({
     height: FORMAT_images.F_image_height,
     alignSelf: FORMAT_images.F_image_alignSelf,
     left: FORMAT_images.F_image_left,
-    marginHorizontal: FORMAT_images.F_image_marginHorizontal
+    marginHorizontal: FORMAT_images.F_image_marginHorizontal,
   },
   img2: {
     width: FORMAT_images.F_image_width,
     height: FORMAT_images.F_image_height,
     alignSelf: FORMAT_images.F_image_alignSelf,
-    marginHorizontal: FORMAT_images.F_image_marginHorizontal
+    marginHorizontal: FORMAT_images.F_image_marginHorizontal,
   },
   text: {
     alignSelf: FORMAT_text.F_text_alignSelf,
     left: 50 / 2,
-    marginVertical: 10
+    marginVertical: 10,
   },
   text2: { alignSelf: FORMAT_text.F_text_alignSelf },
   buttonFlex: {
     flexDirection: FORMAT_navButton.F_navButton_flexDirection,
-    justifyContent: FORMAT_navButton.F_navButton_justifyContent
+    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
   },
   buttonText: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
@@ -302,6 +294,6 @@ const styles = StyleSheet.create({
     padding: FORMAT_navButton.F_navButtonText_padding,
     width: FORMAT_navButton.F_navButtonText_width,
     borderRadius: FORMAT_navButton.F_navButtonText_borderRadius,
-    marginVertical: FORMAT_navButton.F_navButtonText_marginVertical
-  }
+    marginVertical: FORMAT_navButton.F_navButtonText_marginVertical,
+  },
 });

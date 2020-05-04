@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../App.js";
 
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
-  Image,
   TouchableOpacity,
   Dimensions,
+  Alert,
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -41,58 +42,57 @@ const screenWidth = Dimensions.get("screen").width;
 
 export default function Registerscreen2({ navigation, route }) {
   const { data } = route.params;
-  const [username, setUsername] = useState();
+  const [emailAddress, setEmailAddress] = useState();
   const [password, setPassword] = useState();
-  const [display, setDisplay] = useState();
+  const { register } = useContext(AuthContext);
 
-  function usernameHandler(enteredText) {
-    setUsername(enteredText);
+  function emailChangeHandler(enteredText) {
+    setEmailAddress(enteredText);
   }
+
   function passwordHandler(enteredText) {
     setPassword(enteredText);
   }
 
-  function SubmitHandler() {
-    setDisplay("Submitted");
-    console.log(username, password);
-    const dataPlus = { ...data, username, password };
-    console.log("dataPlus in register 2:", dataPlus);
-    navigation.navigate("Goals", { dataPlus });
+  async function SubmitHandler() {
+    console.log(emailAddress, password);
+    if (
+      !/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/.test(emailAddress) ||
+      emailAddress == "" ||
+      emailAddress == null
+    ) {
+      Alert.alert("please check email is correct and resubmit");
+      return;
+    }
+    const dataPlus = { ...data, password, email_address: emailAddress };
+    register(dataPlus);
   }
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.headerC}>
-          <Image source={require("../assets/images/arrow.png")} />
-        </Text>
-        <View>
-          <TextInput
-            style={styles.inputField}
-            onChangeText={usernameHandler}
-            placeholder="Username"
-            placeholderTextColor="black"
-            maxLength={12}
-          />
-          <TextInput
-            style={styles.inputField}
-            placeholder="Password"
-            keyboardType="password"
-            onChangeText={passwordHandler}
-            placeholderTextColor="black"
-          />
-        </View>
-        <View style={styles.buttonFlex}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={styles.buttonText}
-          >
-            <Text style={styles.TextStyle}>Back</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
-            <Text style={styles.TextStyle}>Next</Text>
-          </TouchableOpacity>
-        </View>
+      <TextInput
+        style={styles.inputField}
+        onChangeText={emailChangeHandler}
+        placeholder="Email address"
+        placeholderTextColor="black"
+        keyboardType="email-address"
+      />
+      <TextInput
+        style={styles.inputField}
+        placeholder="Password"
+        onChangeText={passwordHandler}
+        placeholderTextColor="black"
+      />
+      <View style={styles.buttonFlex}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.buttonText}
+        >
+          <Text style={styles.TextStyle}>Back</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
+          <Text style={styles.TextStyle}>Next</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
