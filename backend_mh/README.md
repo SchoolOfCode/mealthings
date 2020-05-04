@@ -398,12 +398,9 @@ const itemWasStored = storeItem("token", loginResponse.token)
 * deal with Errors, try / catch, and redirects
 * Make logout screen remove JWT
 
-///////// Breaking for the day ///////// - Getting a bug on load, can't find "app". Not sure what screen though. Probably a function that I've renamed in one of Joshe's screens.
-// Change GetRecipes calls
-// Put recipes into state
-// Get recipes out of state where required
 // Get recipe URLs working on relevant screens (look at Josh's code if required, remember uri)
 // Fix recipe cards into 2 columns not one
 // Get search Icon into the centre of red circle on recipe cards
 // Enable button on recipe cards so the selected recipe shows
 // Ensure password is > 7 characters
+// Implement some osrt of recipe counter so that it isn't just the first recipe in the list
