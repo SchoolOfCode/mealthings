@@ -126,8 +126,8 @@ console.log(comboIngredientQuantities(listOfIngredients, quantityOfIngredients))
         </TouchableOpacity>
       </View>
     </View>
-  );
-}
+  )
+    })
 
 const styles = StyleSheet.create({
   container: {
@@ -184,4 +184,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT
   }
-});
+})
