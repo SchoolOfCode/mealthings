@@ -22,6 +22,6 @@ export default function Mealplanner() {
 const styles = StyleSheet.create({
   rows: {
     flexDirection: "row",
-    backgroundColor: COLS.C_BG,
-  },
+    backgroundColor: COLS.C_BG
+  }
 });

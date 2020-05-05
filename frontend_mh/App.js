@@ -5,7 +5,7 @@ import {
   StyleSheet,
   View,
   AsyncStorage,
-  Alert,
+  Alert
 } from "react-native";
 import { SplashScreen } from "expo";
 import * as Font from "expo-font";
@@ -37,7 +37,7 @@ import { notify, initnotify, getToken } from "expo-push-notification-helper";
 import { newChannel } from "expo-push-notification-helper";
 
 function tokenOperator() {
-  initnotify().then(async (data) => {
+  initnotify().then(async data => {
     if (data) {
       await getToken();
       console.log(await getToken());
@@ -58,7 +58,7 @@ function tokenOperator() {
         Accept: "application/json",
         "Content-Type": "application/json",
         "accept-encoding": "gzip, deflate",
-        host: "exp.host",
+        host: "exp.host"
       },
       body: JSON.stringify({
         to: token,
@@ -67,12 +67,12 @@ function tokenOperator() {
         largeIcon: "../assets/images/newLogo.png",
         priority: "high",
         sound: "default",
-        channelId: "default",
-      }),
+        channelId: "default"
+      })
     })
-      .then((response) => response.json())
+      .then(response => response.json())
 
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -89,7 +89,7 @@ function tokenOperator() {
         Accept: "application/json",
         "Content-Type": "application/json",
         "accept-encoding": "gzip, deflate",
-        host: "exp.host",
+        host: "exp.host"
       },
       body: JSON.stringify({
         to: token,
@@ -97,19 +97,18 @@ function tokenOperator() {
         body: "Time for a run",
         priority: "high",
         sound: "default",
-        channelId: "default",
-      }),
+        channelId: "default"
+      })
     })
-      .then((response) => response.json())
+      .then(response => response.json())
 
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
   setInterval(RNotification, 1200000);
 }
 tokenOperator();
-
 
 const Stack = createStackNavigator();
 export const AuthContext = React.createContext();
@@ -118,7 +117,7 @@ import { notify, initnotify, getToken } from "expo-push-notification-helper";
 import { newChannel } from "expo-push-notification-helper";
 
 function tokenOperator() {
-  initnotify().then(async (data) => {
+  initnotify().then(async data => {
     if (data) {
       await getToken();
       console.log(await getToken());
@@ -139,7 +138,7 @@ function tokenOperator() {
         Accept: "application/json",
         "Content-Type": "application/json",
         "accept-encoding": "gzip, deflate",
-        host: "exp.host",
+        host: "exp.host"
       },
       body: JSON.stringify({
         to: token,
@@ -148,12 +147,12 @@ function tokenOperator() {
         largeIcon: "../assets/images/newLogo.png",
         priority: "high",
         sound: "default",
-        channelId: "default",
-      }),
+        channelId: "default"
+      })
     })
-      .then((response) => response.json())
+      .then(response => response.json())
 
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -170,7 +169,7 @@ function tokenOperator() {
         Accept: "application/json",
         "Content-Type": "application/json",
         "accept-encoding": "gzip, deflate",
-        host: "exp.host",
+        host: "exp.host"
       },
       body: JSON.stringify({
         to: token,
@@ -178,12 +177,12 @@ function tokenOperator() {
         body: "Time for a run",
         priority: "high",
         sound: "default",
-        channelId: "default",
-      }),
+        channelId: "default"
+      })
     })
-      .then((response) => response.json())
+      .then(response => response.json())
 
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
@@ -214,7 +213,7 @@ export default function App() {
             loggedIn: true,
             finishedCheckingServer: true,
             userID: action.userID,
-            recipeList: null,
+            recipeList: null
           };
         case "RESTORE_TOKEN_FAILURE":
           return {
@@ -224,7 +223,7 @@ export default function App() {
             loggedIn: false,
             finishedCheckingServer: true,
             userID: null,
-            recipes: null,
+            recipes: null
           };
         case "LOGIN_FAILURE":
           return {
@@ -234,7 +233,7 @@ export default function App() {
             loggedIn: false,
             finishedCheckingServer: true,
             userID: null,
-            recipeList: null,
+            recipeList: null
           };
         case "SIGN_IN":
           return {
@@ -244,7 +243,7 @@ export default function App() {
             token: action.token,
             finishedCheckingServer: true,
             userID: action.userID,
-            recipeList: null,
+            recipeList: null
           };
         case "SIGN_OUT":
           try {
@@ -260,17 +259,17 @@ export default function App() {
             loggedIn: false,
             finishedCheckingServer: true,
             userID: null,
-            recipeList: null,
+            recipeList: null
           };
         case "SET_RECIPES":
           return {
             ...prevState,
-            recipeList: action.recipes,
+            recipeList: action.recipes
           };
         case "SET_INGREDIENTSLIST":
           return {
             ...prevState,
-            ingredientsList: action.ingredientsList,
+            ingredientsList: action.ingredientsList
           };
       }
     },
@@ -281,7 +280,7 @@ export default function App() {
       finishedCheckingServer: false,
       userID: null,
       recipeList: null,
-      ingredientsList: null,
+      ingredientsList: null
     }
   );
 
@@ -306,8 +305,8 @@ export default function App() {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: "Bearer" + " " + token,
-            },
+              Authorization: "Bearer" + " " + token
+            }
           }
         );
         const replyJson = await reply.json();
@@ -316,11 +315,11 @@ export default function App() {
           dispatch({
             type: "RESTORE_TOKEN_SUCCESS",
             token: token,
-            userID: replyJson.userID,
+            userID: replyJson.userID
           });
         } else {
           // If JWT is not verified, stay on Hello screen. Delete incorrect JWT. STRETCH GOAL show small popup saying you are not logged in.
-          AsyncStorage.removeItem("token", (err) => console.log("userId", err));
+          AsyncStorage.removeItem("token", err => console.log("userId", err));
           dispatch({ type: "RESTORE_TOKEN_FAILURE" });
         }
       } else {
@@ -343,9 +342,9 @@ export default function App() {
           {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/json"
             },
-            body: JSON.stringify({ email_address, password }),
+            body: JSON.stringify({ email_address, password })
           }
         );
         const loginResponseJson = await loginResponse.json();
@@ -365,7 +364,7 @@ export default function App() {
           dispatch({
             type: "SIGN_IN",
             token: loginResponse.token,
-            userID: loginResponse.userID,
+            userID: loginResponse.userID
           });
         } else {
           // If server return false
@@ -382,35 +381,35 @@ export default function App() {
 
       logOut: () => dispatch({ type: "SIGN_OUT" }),
 
-      setRecipeList: async (recipes) => {
-        const recipeIDsFetch = recipes.map((r) => r.recipe_id);
+      setRecipeList: async recipes => {
+        const recipeIDsFetch = recipes.map(r => r.recipe_id);
         const ingredientsList = await fetch(
           `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/shoppinglist`,
           {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/json"
             },
-            body: JSON.stringify({ recipeIDs: recipeIDsFetch }),
+            body: JSON.stringify({ recipeIDs: recipeIDsFetch })
           }
         );
         dispatch({
           type: "SET_INGREDIENTSLIST",
-          ingredientsList: ingredientsList,
+          ingredientsList: ingredientsList
         });
         dispatch({ type: "SET_RECIPES", recipes: recipes });
       },
 
-      register: async (dataPlus) => {
+      register: async dataPlus => {
         console.log("dataPlus in register function:", dataPlus);
         const postResponse = await fetch(
           `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/`,
           {
             method: "POST",
             headers: {
-              "Content-Type": "application/json",
+              "Content-Type": "application/json"
             },
-            body: JSON.stringify({ ...dataPlus }),
+            body: JSON.stringify({ ...dataPlus })
           }
         );
         const postResponseJson = await postResponse.json();
@@ -433,7 +432,7 @@ export default function App() {
             dispatch({ type: "SIGN_IN", token: postResponse.token });
           }
         }
-      },
+      }
     }),
     [state]
   );
@@ -546,6 +545,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-  },
+    backgroundColor: "#fff"
+  }
 });
