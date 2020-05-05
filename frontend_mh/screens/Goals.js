@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AuthContext } from "../App.js";
 import {
   Image,
   StyleSheet,
@@ -41,9 +40,7 @@ import { Row } from "react-native-drag-flatlist";
 
 const screenWidth = Dimensions.get("screen").width;
 
-export default function Goals({ navigation, route }) {
-  // const { userID } = useContext(AuthContext);
-  const { dataPlus } = route.params;
+export default function Goals({ navigation }) {
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
   const [fatLoss, setFatLoss] = useState(false);
@@ -76,9 +73,9 @@ export default function Goals({ navigation, route }) {
     if (cook) {
       goals += ",Learn to cook";
     }
-    const dataPlusPlus = { ...dataPlus, height, weight, goals };
-    console.log("dataPlusPlus in goals", dataPlusPlus);
-    navigation.navigate("SplashSuccess", { dataPlusPlus });
+    const data = { height, weight, goals };
+    console.log("data in goals", data);
+    navigation.navigate("Allergies", { data });
   }
 
   function fatHandler() {
@@ -128,29 +125,6 @@ export default function Goals({ navigation, route }) {
     } else if (cook === true) {
       setCook(false);
     }
-  }
-
-  function HandleSubmit() {
-    console.log({ weight, height, fatLoss, muscle, diet, time, cook });
-    var goals = "";
-    if (fatLoss) {
-      goals += "Fat loss,";
-    }
-    if (muscle) {
-      goals += ",Muscle gain";
-    }
-    if (diet) {
-      goals += ",No diet";
-    }
-    if (time) {
-      goals += ",Save time";
-    }
-    if (cook) {
-      goals += ",Learn to cook";
-    }
-    const dataPlusPlus = { ...dataPlus, goals };
-    console.log(dataPlusPlus);
-    navigation.navigate("SplashSuccess", { dataPlusPlus });
   }
 
   return (

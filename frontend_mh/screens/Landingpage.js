@@ -323,7 +323,7 @@ export default function LandingPage({ navigation }) {
             onPress={() => navigation.navigate("Goals")}
             style={styles.note2}
           >
-            <Text style={styles.buttonText}>Change Preferences</Text>
+            <Text style={styles.buttonText}>Diet and Goals</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.note}
