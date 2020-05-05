@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
+import { AuthContext } from "../App.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -10,6 +11,7 @@ import { FORMAT_navButton } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 export default function Preferences({ navigation, route }) {
+  const { userID } = useContext(AuthContext);
   const { data } = route.params;
   const [noRequirement, setNoRequirement] = useState(false);
   const [vegetarian, setVegetarian] = useState(false);
@@ -29,10 +31,6 @@ export default function Preferences({ navigation, route }) {
       setOvovegetarian(false);
       setlactoVegetarian(false);
       setVegan(false);
-      // setCheese(false);
-      // setOrange(false);
-      // setChocolate(false);
-      // setBeetroot(false);
     } else if (noRequirement === true) {
       setNoRequirement(false);
     }
@@ -126,30 +124,30 @@ export default function Preferences({ navigation, route }) {
     } else if (beetroot) {
       food_prefs_inc += ",beetroot,";
     }
-    const dataPlus = { ...data, food_prefs_inc };
+    data[food_prefs_inc] = food_prefs_inc;
     const options = {
-      method: "POST",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify(dataPlus),
+      body: JSON.stringify(data),
     };
     fetch(
-      "http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users",
+      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`,
       options
     )
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log("Return from RegisterScreen:", data);
+        console.log("Return from DietaryPreferences:", data);
       })
       .catch((err) => {
         console.warn(err);
       });
-    console.log("final dataplus in dietary prefs", dataPlus);
-    navigation.navigate("LandingPage", dataPlus);
+    console.log("final data in dietary prefs", data);
+    navigation.navigate("LandingPage");
   }
 
   return (

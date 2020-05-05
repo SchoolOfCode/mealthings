@@ -53,11 +53,11 @@ export default function Registerscreen({ navigation }) {
   const [gender, setGender] = useState(null);
 
   function firstNameInput(enteredText) {
-    setName(enteredText);
+    setFirstName(enteredText);
   }
 
   function lastNameInput(enteredText) {
-    setEmail(enteredText);
+    setLastName(enteredText);
   }
   //NOTES ON REGEX FOR REFERENCE
   ///^[a-zA-Z0-9._-]+:  Means that the email address must begin with alpha-numeric characters (both lowercase and uppercase characters are allowed). It may have periods,underscores and hyphens.
