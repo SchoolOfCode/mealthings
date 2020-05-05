@@ -5,14 +5,14 @@ import {
   Text,
   View,
   TouchableOpacity,
-  AsyncStorage,
+  AsyncStorage
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
+  FORMAT_moreChoicesContainer
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -22,7 +22,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe,
+  FORMAT_mainRecipe
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -31,11 +31,11 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
+  FORMAT_navButtonBackground
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
-const _storeRecipes = async (recipeArray) => {
+const _storeRecipes = async recipeArray => {
   try {
     const now = new Date();
     const jsonRecipeArray = await JSON.stringify(recipeArray);
@@ -48,7 +48,7 @@ const _storeRecipes = async (recipeArray) => {
   }
 };
 
-const _retrieveData = async (key) => {
+const _retrieveData = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
@@ -179,16 +179,14 @@ export default function LandingPage({ navigation }) {
     last_week_food = data.payload[0].this_weeks_meals
       .replace(/"|{|}/g, "")
       .split(",")
-      .map((x) => +x);
+      .map(x => +x);
     // Get total number of recipes
     const totalNumRecipes = (await getTotalNoRecipes()) || 50;
     console.log("totalNumber of recipes", totalNumRecipes);
     // Get 14 random numbers with no duplicates of last weeks meals
-    const tempNumbers = [...Array(totalNumRecipes).keys()].map(
-      (num) => num + 1
-    );
+    const tempNumbers = [...Array(totalNumRecipes).keys()].map(num => num + 1);
     // Check that none of the recipes were in last weeks recipes by getting from database and checking
-    last_week_food.forEach((x) => {
+    last_week_food.forEach(x => {
       const index = tempNumbers.indexOf(x);
       if (index > -1) {
         tempNumbers.splice(index, 1);
@@ -198,23 +196,23 @@ export default function LandingPage({ navigation }) {
     const randNums = tempNumbers.slice(0, 14);
     // Get the recipes from the database
     console.log("here3");
-    const fetchData = (URI) => {
+    const fetchData = URI => {
       return fetch(URI)
-        .then((response) => response.json())
-        .then((data) => {
+        .then(response => response.json())
+        .then(data => {
           console.log("here7", data);
           return data.payload[0];
         });
     };
     const requests = [];
-    randNums.forEach((num) => {
+    randNums.forEach(num => {
       requests.push(
         fetchData(
           `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
         )
       );
     });
-    Promise.all(requests).then((arrayWithData) => {
+    Promise.all(requests).then(arrayWithData => {
       console.log("All promises resolved. Setting state...");
       setRecipeList(arrayWithData);
       // Save recipes to local storage
@@ -226,7 +224,7 @@ export default function LandingPage({ navigation }) {
       JSON.stringify({
         last_weeks_meals: last_week_food,
         this_weeks_meals: randNums,
-        last_date_meals_requested: new Date().toISOString(),
+        last_date_meals_requested: new Date().toISOString()
       })
     );
     const patchResponse = await fetch(
@@ -235,13 +233,13 @@ export default function LandingPage({ navigation }) {
         method: "PATCH",
         mode: "no-cors",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           last_weeks_meals: last_week_food,
           this_weeks_meals: randNums,
-          last_date_meals_requested: new Date().toISOString(),
-        }),
+          last_date_meals_requested: new Date().toISOString()
+        })
       }
     );
     console.log("patchResponse:", patchResponse);
@@ -260,26 +258,26 @@ export default function LandingPage({ navigation }) {
     const this_week_food = data.payload[0].this_weeks_meals
       .replace(/"|{|}/g, "")
       .split(",")
-      .map((x) => +x);
+      .map(x => +x);
     console.log("This weeks food:", this_week_food);
     // Get the recipes from the database
-    const fetchData = (URI) => {
+    const fetchData = URI => {
       return fetch(URI)
-        .then((response) => response.json())
-        .then((data) => {
+        .then(response => response.json())
+        .then(data => {
           console.log("here5", data);
           return data.payload[0];
         });
     };
     const requests = [];
-    this_week_food.forEach((num) => {
+    this_week_food.forEach(num => {
       requests.push(
         fetchData(
           `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
         )
       );
     });
-    Promise.all(requests).then((arrayWithData) => {
+    Promise.all(requests).then(arrayWithData => {
       console.log("Resolved all promises for re-requested recipes");
       setRecipeList(arrayWithData);
       // Save recipes to local storage
@@ -289,7 +287,7 @@ export default function LandingPage({ navigation }) {
 
   return (
     <View style={styles.background}>
-      <View style={styles.margin}>
+      <View style={styles.justify}>
         <View style={styles.flex}>
           <TouchableOpacity
             style={styles.note2}
@@ -347,19 +345,17 @@ export default function LandingPage({ navigation }) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    height: 1000,
+    height: 1000
   },
-  mealThingsLogo: {
-    width: 60,
-    height: 20,
-    alignSelf: "center",
+  justify: {
+    alignItems: "center",
+    marginTop: "7%"
   },
-
   margin: {
-    backgroundColor: COLS.C_BG,
+    backgroundColor: COLS.C_BG
   },
   flex: {
-    flexDirection: "row",
+    flexDirection: "row"
   },
   note: {
     width: 150,
@@ -368,13 +364,12 @@ const styles = StyleSheet.create({
     margin: 10,
     alignSelf: "center",
     alignItems: "center",
-    left: 20,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
@@ -382,7 +377,7 @@ const styles = StyleSheet.create({
     elevation: 5,
     padding: 10,
     paddingVertical: 50,
-    fontSize: 20,
+    fontSize: 20
   },
   note2: {
     width: 150,
@@ -391,23 +386,21 @@ const styles = StyleSheet.create({
     margin: 10,
     alignSelf: "center",
     alignItems: "center",
-    left: 20,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
     paddingVertical: 50,
     padding: 10,
-    fontSize: 20,
+    fontSize: 20
   },
   todaysMeal: {
-    top: 10,
     width: 200,
     padding: 10,
     backgroundColor: COLS.C_RED,
@@ -419,17 +412,17 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-    elevation: 5,
+    elevation: 5
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     textAlign: "center",
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
     fontWeight: "bold",
-    fontSize: 18,
-  },
+    fontSize: 18
+  }
 });
