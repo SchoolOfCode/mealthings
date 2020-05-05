@@ -54,7 +54,7 @@ export default function Registerscreen2({ navigation, route }) {
     setPassword(enteredText);
   }
 
-  async function SubmitHandler() {
+  async function submitHandler() {
     console.log(emailAddress, password);
     if (
       !/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/.test(emailAddress) ||
@@ -90,7 +90,7 @@ export default function Registerscreen2({ navigation, route }) {
         >
           <Text style={styles.textStyle}>Back</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
+        <TouchableOpacity onPress={submitHandler} style={styles.buttonText}>
           <Text style={styles.textStyle}>Next</Text>
         </TouchableOpacity>
       </View>
