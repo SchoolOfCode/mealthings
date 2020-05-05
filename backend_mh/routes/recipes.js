@@ -10,7 +10,7 @@ const router = express.Router();
 router.post("/shoppinglist", async (req, res) => {
   console.log("Recieved POST request for shopping list");
   const { body } = req;
-  const list = await getShoppingList(body[0].recipeIDs);
+  const list = await getShoppingList(body.recipeIDs);
   if (list && list.length > 0) {
     return res.status(200).json({
       success: true,

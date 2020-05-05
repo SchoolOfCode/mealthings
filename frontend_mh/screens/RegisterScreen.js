@@ -54,11 +54,11 @@ export default function Registerscreen({ navigation }) {
   const [gender, setGender] = useState(null);
   const [confirm, setConfirm] = useState();
 
-  function nameInput(enteredText) {
+  function firstNameInput(enteredText) {
     setName(enteredText);
   }
 
-  function emailInput(enteredText) {
+  function lastNameInput(enteredText) {
     setEmail(enteredText);
   }
   //NOTES ON REGEX FOR REFERENCE
