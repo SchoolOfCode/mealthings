@@ -4,18 +4,18 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  Dimensions
-} from "react-native";
-
+  Dimensions,
+} from "react-native"; //
+import React from "react";
 import { COLS } from "./COLS";
 import {
   FORMAT_navButtonBackground,
-  FORMAT_navButtonText
+  FORMAT_navButtonText,
 } from "./FORMAT_navButton";
 import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_welcomeContainer,
-  FORMAT_containers
+  FORMAT_containers,
 } from "./FORMAT_containers";
 import { FORMAT_tagLine } from "./FORMAT_extraComponents";
 
@@ -57,32 +57,32 @@ export default function HomeScreen2({ navigation }) {
 }
 
 HomeScreen2.navigationOptions = {
-  header: null
+  header: null,
 };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
     justifyContent: "center",
-    alignItems: FORMAT_containers.F_container_alignItems
+    alignItems: FORMAT_containers.F_container_alignItems,
   },
   welcomeContainer: {
     marginTop: 10,
-    marginBottom: -40
+    marginBottom: -40,
   },
   mealThingsLogo: {
     alignItems: FORMAT_logo.F_logo_alignItems,
     margin: FORMAT_logo.F_logo_margin,
     justifyContent: FORMAT_logo.F_logo_justifyContent,
     width: screenWidth * 0.8,
-    height: screenWidth * 0.8
+    height: screenWidth * 0.8,
   },
   tagLine: {
     color: COLS.C5_LIGHT_TEXT,
-    fontSize: FORMAT_tagLine.F_tagLine_fontSize
+    fontSize: FORMAT_tagLine.F_tagLine_fontSize,
   },
   buttonContainer: {
-    marginTop: "20%"
+    marginTop: "20%",
   },
   buttonBackground: {
     backgroundColor: COLS.C_BG,
@@ -95,17 +95,17 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-    elevation: 5
+    elevation: 5,
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     padding: FORMAT_navButtonText.F_navButtonText_padding,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });

@@ -6,13 +6,17 @@ import { COLS } from "../screens/COLS";
 export default function Days() {
   return (
     <View style={styles.row}>
-      <Text style={styles.spacing}> Monday</Text>
-      <Text style={styles.spacing}> Tuesday</Text>
-      <Text style={styles.spacing}> Wednesday </Text>
-      <Text style={styles.spacing}> Thursday</Text>
-      <Text style={styles.spacing}> Friday </Text>
-      <Text style={styles.spacing}> Saturday</Text>
-      <Text style={styles.spacing}> Sunday </Text>
+      <View style={styles.row}>
+        <Text style={styles.spacing}> Monday</Text>
+        <Text style={styles.spacing}> Tuesday</Text>
+        <Text style={styles.spacing}> Wednesday </Text>
+        <Text style={styles.spacing}> Thursday</Text>
+      </View>
+      <View style={styles.align}>
+        <Text style={styles.spacing}> Friday </Text>
+        <Text style={styles.spacing}> Saturday</Text>
+        <Text style={styles.spacing}> Sunday </Text>
+      </View>
     </View>
   );
 }
@@ -24,14 +28,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 4,
   },
   spacing: {
-    marginVertical: 34,
-    top: 75,
-    borderBottomColor: "white",
+    marginVertical: 37,
+    bottom: "2%",
+    borderTopColor: "white",
     color: "white",
-    borderBottomWidth: 4,
-    borderRadius: 5,
-    shadowOffset: { width: 30, height: 10 },
-    shadowColor: "white",
-    shadowOpacity: 7.0,
+    borderTopWidth: 2,
   },
 });

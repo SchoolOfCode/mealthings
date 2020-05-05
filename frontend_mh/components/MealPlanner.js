@@ -515,7 +515,7 @@ const sampleRecipes = [
       "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/89080977.jpg?tr=w-330",
   },
 ];
-const colors = ["#FFC9D9", "#FFF4BA", "#65676F", "#C4C4C4", "#FFF4BA"]; // CORRECT THIS TO COLOR SCHEME
+const colors = ["#A6E6AB"]; // CORRECT THIS TO COLOR SCHEME
 
 const originalData = sampleRecipes.map((item, index) => ({
   text: "☰" + item.name,
@@ -682,10 +682,12 @@ const styles = StyleSheet.create({
     paddingLeft: 50,
     margin: 5,
     fontSize: 10,
-
-    borderRadius: 5,
+    borderWidth: 5,
+    borderColor: "white",
+    borderRadius: 2,
     alignContent: "center",
     alignSelf: "center",
+    color: "white",
   },
   margin: {
     marginTop: 20,
@@ -724,7 +726,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "red",
     borderRadius: 20,
     padding: 10,
     elevation: 2,
@@ -745,9 +747,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     justifyContent: "center",
-    backgroundColor: "red",
+    backgroundColor: "#2196F3",
     justifyContent: "space-around",
     fontWeight: "bold",
+    color: "white",
   },
 });
 
