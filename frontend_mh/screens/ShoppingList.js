@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
+import { AuthContext } from "../App.js";
 import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { RecipeContext } from "./HomeScreen";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
@@ -32,10 +32,12 @@ import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 function IngredientItem({ item }) {
   const [bought, setBought] = useState(false);
+
+  const theString = `${item.quantity} ${item.unit} ${item.ingredient}`;
   return (
     <TouchableOpacity
       onPress={() => setBought(!bought)}
-      key={item
+      key={theString
         .split(" ")
         .join("")
         .replace(/,|-|\(|\)/g, "")}
@@ -43,7 +45,7 @@ function IngredientItem({ item }) {
       <View style={styles.ingredientItemContainer}>
         <View style={bought ? styles.circleChecked : styles.circle}></View>
         <Text style={bought ? styles.itemTextChecked : styles.itemText}>
-          {item}
+          {theString}
         </Text>
       </View>
     </TouchableOpacity>
@@ -55,64 +57,12 @@ function cleanString(string) {
 }
 
 export default function ShoppingList({ navigation }) {
-  
-  //create a list of all recipes
-  const allRecipes = useContext(RecipeContext);
-  //pull all ingredients from objects in array 
-  const listOfIngredients = [];
-  //pull all quantities from objects in array 
-  const quantityOfIngredients =[];
-  
-  //return ingredients in clean format 
-  allRecipes.forEach(recipe => {
-    cleanString(recipe.ingredients).forEach(item => {
-      listOfIngredients.push(item);
-
-  //return ingredient quantities in clean format
-  allRecipes.forEach(recipe => {
-    cleanString(recipe.ingredientsQuantities).forEach(item => {
-      quantityOfIngredients.push(item);
-
-  //Dummy Data Test
-  // const listOfIngredients = ['apples', 'pears','bananas', "flour"]
-  // const quantityOfIngredients = ['1','2','3', "250 g"]
-
-
-//remove duplicates & add quantities
-//if item is not duplicated add it to the list with subsequent quantity
-//if item is duplicated add the quantity only to the current quantity of the item on the list  
-  
-
-// Make Object called finalIngredsPlusQuantities
-const finalIngredsPlusQuantities = {apples:3, pears:1, orange:5}; 
-// Loop over ingredients 
-listOfIngredients.forEach((ingredient, index) => {
-    if(Object.keys(finalIngredsPlusQuantities).includes(ingredient)){
-      if(quantityOfIngredients[index].length > 1){
-        // g 
-        // kg 
-
-      } else {
-        finalIngredsPlusQuantities[ingredient] += quantityOfIngredients[index];
-      }
-    } else {
-      finalIngredsPlusQuantities[ingredient] = quantityOfIngredients[index];
-    }
-  })
-
-    //combine ingredients and quantities by index (zip functionality in Python)
-const comboIngredientQuantities = (listOfIngredients, quantityOfIngredients) => listOfIngredients.map((item, i) => [item, quantityOfIngredients[i]]);
-
-console.log(comboIngredientQuantities(listOfIngredients, quantityOfIngredients))
-
-
-});
-  });
+  const { userID, recipeList, ingredientsList } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
       <ScrollView>
-        {listOfIngredients.sort().map(item => (
+        {ingredientsList.sort().map((item) => (
           <IngredientItem item={item} />
         ))}
       </ScrollView>

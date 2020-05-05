@@ -1,7 +1,28 @@
 const express = require("express");
-const { getRecipes, getRecipeById } = require("../models/recipes");
+const {
+  getRecipes,
+  getRecipeById,
+  getShoppingList,
+} = require("../models/recipes");
 const { getRecipeCount } = require("../models/getNumerOfRecipes");
 const router = express.Router();
+
+router.post("/shoppinglist", async (req, res) => {
+  console.log("Recieved POST request for shopping list");
+  const { body } = req;
+  const list = await getShoppingList(body[0].recipeIDs);
+  if (list && list.length > 0) {
+    return res.status(200).json({
+      success: true,
+      payload: list,
+      message: "Shopping list enclosed.",
+    });
+  } else {
+    return res
+      .status(400)
+      .json({ success: false, message: "Failed to get shopping list." });
+  }
+});
 
 router.get("/:recipeId", async (req, res) => {
   // Get recipeId from http query

@@ -5,7 +5,7 @@
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/newLogo.png",
+    "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "splash": {
       "image": "./assets/images/splash.png",
