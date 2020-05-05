@@ -11,7 +11,7 @@ import { COLS } from "./COLS";
 export default function Mealplanner() {
   // const { userID } = useContext(AuthContext);
   return (
-    <ScrollView horizontal={true}>
+    <ScrollView style={styles.color} horizontal={true}>
       <View style={styles.rows}>
         <Days />
         <MealPlanner />
@@ -22,6 +22,9 @@ export default function Mealplanner() {
 const styles = StyleSheet.create({
   rows: {
     flexDirection: "row",
-    backgroundColor: COLS.C_BG,
+    backgroundColor: "#A6E6AB",
+  },
+  color: {
+    backgroundColor: "#A6E6AB",
   },
 });

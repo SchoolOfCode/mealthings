@@ -8,14 +8,14 @@ import {
   TextInput,
   TouchableOpacity,
   Dimensions,
-  Alert
+  Alert,
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -25,7 +25,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -34,7 +34,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -102,14 +102,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   title: {
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     fontSize: 24,
     padding: 10,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   inputField: {
     marginVertical: 5,
@@ -123,18 +123,18 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    color: COLS.C6_WHITE_TEXT
+    color: COLS.C6_WHITE_TEXT,
   },
   headerC: {
-    marginTop: 30
+    marginTop: 30,
   },
   formatting: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
   buttonFlex: {
     alignSelf: "center",
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginVertical: 10,
-    padding: 10
+    padding: 10,
   },
   buttonText: {
     backgroundColor: COLS.C_BG,
@@ -152,11 +152,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT
+    borderColor: COLS.C6_WHITE_TEXT,
   },
   textStyle: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });
