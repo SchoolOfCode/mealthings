@@ -10,7 +10,7 @@ import {
   Alert,
   Button,
   Dimensions,
-  Image
+  Image,
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -53,7 +53,6 @@ export default function Registerscreen({ navigation }) {
   const [female, setFemale] = useState(false);
   const [gender, setGender] = useState(null);
   const [confirm, setConfirm] = useState();
-  const [display, setDisplay] = useState();
 
   function nameInput(enteredText) {
     setName(enteredText);
@@ -152,14 +151,14 @@ export default function Registerscreen({ navigation }) {
 
   function SubmitHandler() {
     if (confirm == true) {
-      setDisplay("Submitted");
       const birthday = DOB + "-" + DOB2 + "-" + DOB3;
-      console.log("Submitted:", {
+      console.log("Submitted:", name, email, birthday, gender, mother);
+      const data = {
         name,
         email,
         birthday,
         gender,
-        mother
+        mother,
       };
       console.log(data);
       navigation.navigate("Register2", { data });
@@ -315,13 +314,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   contain: {
-    marginTop: 30
+    marginTop: 30,
   },
   margin: {
-    marginTop: 25
+    marginTop: 25,
   },
   arrow: {
     width: 40,
@@ -335,7 +334,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: COLS.C6_WHITE_TEXT,
     alignSelf: "center",
-    left: 155
+    left: 155,
   },
   inputField: {
     marginVertical: 5,
@@ -375,11 +374,11 @@ const styles = StyleSheet.create({
     top: -61,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    marginBottom: 43
+    marginBottom: 43,
   },
   row: {
     justifyContent: "center",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   box: {
     width: 45,
@@ -399,30 +398,30 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
 
     elevation: 5,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   position: {
     flexDirection: "row",
     alignSelf: "center",
-    alignContent: "center"
+    alignContent: "center",
   },
   optionText: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   title: {
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     fontSize: 24,
-    padding: 6
+    padding: 6,
   },
   option: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
     alignSelf: "center",
     marginTop: 10,
-    alignItems: "center"
+    alignItems: "center",
   },
 
   buttonText: {
