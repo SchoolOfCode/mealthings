@@ -1,5 +1,4 @@
-import React, { useState, Component } from "react";
-
+import React, { useState } from "react";
 import { CheckBox } from "react-native-elements";
 import {
   StyleSheet,
@@ -8,7 +7,6 @@ import {
   TextInput,
   TouchableOpacity,
   Alert,
-  Button,
   Dimensions,
   Image,
 } from "react-native";
@@ -41,18 +39,18 @@ import {
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 const screenWidth = Dimensions.get("screen").width;
+
 export default function Registerscreen({ navigation }) {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
   const [DOB, setDOB] = useState();
   const [DOB2, setDOB2] = useState();
   const [DOB3, setDOB3] = useState();
   const [mother, setMother] = useState(false);
-  const [other, setOther] = useState(false);
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
+  const [other, setOther] = useState(false);
   const [gender, setGender] = useState(null);
-  const [confirm, setConfirm] = useState();
 
   function firstNameInput(enteredText) {
     setName(enteredText);
@@ -70,103 +68,92 @@ export default function Registerscreen({ navigation }) {
   // {2,4} indicates the minimum and maximum number of characters. This will allow domain names with 2, 3 and 4 characters e.g.; us, tx, org, com, net, wxyz).
 
   function DOBinput(enteredText) {
-    setDOB(enteredText);
+    setDOB(String(enteredText));
   }
+
   function DOBinput2(enteredText) {
-    setDOB2(enteredText);
+    setDOB2(String(enteredText));
   }
+
   function DOBinput3(enteredText) {
-    setDOB3(enteredText);
+    setDOB3(String(enteredText));
   }
 
   function motherInput() {
     if (mother === false) {
       setMother(true);
-    } else if (mother === true) {
+    } else {
       setMother(false);
     }
   }
 
   function otherHandler() {
-    if (other == false) {
+    if (other === false) {
       setOther(true);
       setMale(false);
       setFemale(false);
+      setGender("Other");
     } else if (other == true) {
       setOther(false);
     }
   }
 
   function maleHandler() {
-    if (male == false) {
+    if (male === false) {
       setMale(true);
       setOther(false);
       setFemale(false);
-    } else if (male == false) {
+      setGender("Male");
+    } else {
       setMale(false);
     }
   }
+
   function femaleHandler() {
     if (female == false) {
       setFemale(true);
       setOther(false);
       setMale(false);
-    } else if (female == true) {
+      setGender("female");
+    } else {
       setFemale(false);
     }
   }
-  function confirmChoices() {
-    if (other == true) {
-      setGender("Other");
-    } else if (female == true) {
-      setGender("female");
-    } else {
-      setGender("Male");
-    }
-    if (email == /^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/) {
-      setEmail(email);
-    } else if (email == "" || null) {
-      Alert.alert("enter a correct email address");
-    }
-    if ((gender, name, email, DOB, DOB2, DOB3 == null || "")) {
-      setConfirm(false);
-      console.log(gender, name, email, DOB, DOB2, DOB3);
-    } else if (DOB2 > 12) {
-      Alert.alert("Enter valid Month ");
-    } else {
-      setConfirm(true);
-      console.log((gender, name, email, DOB, DOB2, DOB3));
-    }
-    if (DOB > 31) {
-      Alert.alert("Enter a valid day");
-    } else if (DOB3 > 2019) {
-      Alert.alert("Enter a valid Year");
-    }
-    if (DOB > 31) {
-      Alert.alert("Enter a valid day");
-    } else if (DOB3 > 2019) {
-      Alert.alert("Enter a valid Year");
-    }
-  }
 
-  function SubmitHandler() {
-    if (confirm == true) {
-      const birthday = DOB + "-" + DOB2 + "-" + DOB3;
-      console.log("Submitted:", name, email, birthday, gender, mother);
+  function submitHandler() {
+    if (
+      gender == null ||
+      firstName == null ||
+      lastName == null ||
+      DOB == null ||
+      DOB2 == null ||
+      DOB3 == null
+    ) {
+      Alert.alert("Please ensure all data fields are complete.");
+      return;
+    } else if (DOB <= 0 || DOB > 31) {
+      Alert.alert("Day (in date of birth) can only be between 1 and 31!");
+      return;
+    } else if (DOB2 < 1 || DOB2 > 12) {
+      Alert.alert("Month (in date of birth) can only be between 1 and 12!");
+      return;
+    } else if (DOB3 < 1900 || DOB3 > new Date().getFullYear()) {
+      Alert.alert(
+        `Year (in date of birth) can only be between 1900 and ${new Date().getFullYear()}!`
+      );
+      return;
+    } else {
+      const birthday = DOB2 + "-" + DOB + "-" + DOB3;
       const data = {
-        name,
-        email,
+        name: `${firstName} ${lastName}`,
         birthday,
         gender,
         mother,
       };
-      console.log(data);
+      console.log("Submitted data:", data);
       navigation.navigate("Register2", { data });
-    } else {
-      Alert.alert("ensure all data fields are complete");
     }
   }
-
   return (
     <View style={styles.container}>
       <View>
@@ -214,78 +201,85 @@ export default function Registerscreen({ navigation }) {
             </View>
           </View>
         </View>
-
         <View styles={styles.position}>
           <Text style={styles.optionText}>Are you a new mother? </Text>
-          <CheckBox
-            checkedIcon={
-              <Image
-                style={styles.tick}
-                source={require("../assets/images/check-box.png")}
-              />
-            }
-            uncheckedIcon={
-              <Image
-                style={styles.tick}
-                source={require("../assets/images/blank-square.png")}
-              />
-            }
-            checked={mother}
-            onPress={motherInput}
-          />
+          <View style={styles.horizontal}>
+            <CheckBox
+              checkedIcon={
+                <Image
+                  style={styles.tick}
+                  source={require("../assets/images/check-box.png")}
+                />
+              }
+              uncheckedIcon={
+                <Image
+                  style={styles.tick}
+                  source={require("../assets/images/blank-square.png")}
+                />
+              }
+              checked={mother}
+              onPress={motherInput}
+            />
+          </View>
           <Text style={styles.title}>Select Gender: </Text>
-          <View>
-            <Text style={styles.option}>Female </Text>
-            <CheckBox
-              checkedIcon={
-                <Image
-                  style={styles.tick}
-                  source={require("../assets/images/check-box.png")}
-                />
-              }
-              uncheckedIcon={
-                <Image
-                  style={styles.tick}
-                  source={require("../assets/images/blank-square.png")}
-                />
-              }
-              checked={female}
-              onPress={femaleHandler}
-            />
-            <Text style={styles.option}>Male </Text>
-            <CheckBox
-              checkedIcon={
-                <Image
-                  style={styles.tick}
-                  source={require("../assets/images/check-box.png")}
-                />
-              }
-              uncheckedIcon={
-                <Image
-                  style={styles.tick}
-                  source={require("../assets/images/blank-square.png")}
-                />
-              }
-              checked={male}
-              onPress={maleHandler}
-            />
-            <Text style={styles.option}> Other </Text>
-            <CheckBox
-              checkedIcon={
-                <Image
-                  style={styles.tick}
-                  source={require("../assets/images/check-box.png")}
-                />
-              }
-              uncheckedIcon={
-                <Image
-                  style={styles.tick}
-                  source={require("../assets/images/blank-square.png")}
-                />
-              }
-              checked={other}
-              onPress={otherHandler}
-            />
+          <View style={styles.horizontal}>
+            <View>
+              <Text style={styles.option}>Female </Text>
+              <CheckBox
+                checkedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/check-box.png")}
+                  />
+                }
+                uncheckedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/blank-square.png")}
+                  />
+                }
+                checked={female}
+                onPress={femaleHandler}
+              />
+            </View>
+            <View style={styles.align}>
+              <Text style={styles.option}>Male </Text>
+              <CheckBox
+                checkedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/check-box.png")}
+                  />
+                }
+                uncheckedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/blank-square.png")}
+                  />
+                }
+                checked={male}
+                onPress={maleHandler}
+              />
+            </View>
+            <View>
+              <Text style={styles.option}> Other </Text>
+              <CheckBox
+                checkedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/check-box.png")}
+                  />
+                }
+                uncheckedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/blank-square.png")}
+                  />
+                }
+                checked={other}
+                onPress={otherHandler}
+              />
+            </View>
           </View>
         </View>
         <View style={styles.buttonflex}>
@@ -309,8 +303,11 @@ export default function Registerscreen({ navigation }) {
     </View>
   );
 }
-
 const styles = StyleSheet.create({
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
@@ -333,8 +330,6 @@ const styles = StyleSheet.create({
     height: 20,
     borderWidth: 3,
     borderColor: COLS.C6_WHITE_TEXT,
-    alignSelf: "center",
-    left: 155,
   },
   inputField: {
     marginVertical: 5,
@@ -352,7 +347,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-
     elevation: 5,
     color: COLS.C6_WHITE_TEXT,
   },
@@ -371,10 +365,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    top: -61,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    marginBottom: 43,
+    marginBottom: 50,
   },
   row: {
     justifyContent: "center",
@@ -396,7 +389,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-
     elevation: 5,
     flexDirection: "row",
   },
@@ -414,16 +406,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     fontSize: 24,
-    padding: 6,
+    alignSelf: "center",
+    padding: 15,
   },
   option: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
-    alignSelf: "center",
     marginTop: 10,
-    alignItems: "center",
+    marginLeft: 10,
   },
-
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,

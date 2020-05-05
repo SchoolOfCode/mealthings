@@ -289,7 +289,7 @@ export default function LandingPage({ navigation }) {
 
   return (
     <View style={styles.background}>
-      <View style={styles.margin}>
+      <View style={styles.justify}>
         <View style={styles.flex}>
           <TouchableOpacity
             style={styles.note2}
@@ -349,12 +349,11 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     height: 1000,
   },
-  mealThingsLogo: {
-    width: 60,
-    height: 20,
-    alignSelf: "center",
+  justify: {
+    alignItems: "center",
+    padding: 10,
+    marginTop: "7%",
   },
-
   margin: {
     backgroundColor: COLS.C_BG,
   },
@@ -368,7 +367,6 @@ const styles = StyleSheet.create({
     margin: 10,
     alignSelf: "center",
     alignItems: "center",
-    left: 20,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -378,7 +376,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-
     elevation: 5,
     padding: 10,
     paddingVertical: 50,
@@ -391,7 +388,6 @@ const styles = StyleSheet.create({
     margin: 10,
     alignSelf: "center",
     alignItems: "center",
-    left: 20,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -407,7 +403,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   todaysMeal: {
-    top: 10,
     width: 200,
     padding: 10,
     backgroundColor: COLS.C_RED,
