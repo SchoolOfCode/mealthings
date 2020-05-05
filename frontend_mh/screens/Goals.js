@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
@@ -39,6 +40,8 @@ import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 import { Row } from "react-native-drag-flatlist";
 
 const screenWidth = Dimensions.get("screen").width;
+const iconSize = screenWidth * (1 / 4);
+const iconColour = COLS.C4_DARK_TEXT;
 
 export default function Goals({ navigation }) {
   const [weight, setWeight] = useState();
@@ -156,29 +159,30 @@ export default function Goals({ navigation }) {
         <View style={styles.flex}>
           <View>
             <TouchableOpacity onPress={fatHandler}>
-              <Image
-                style={styles.img}
-                source={require("../assets/images/calories.png")}
+              <MaterialCommunityIcons
+                name="fire"
+                size={iconSize}
+                color={iconColour}
               />
-
               <Text style={styles.text}>Fatloss</Text>
             </TouchableOpacity>
           </View>
-
           <View>
             <TouchableOpacity onPress={muscleHandler}>
-              <Image
-                style={styles.img}
-                source={require("../assets/images/woman.png")}
+              <FontAwesome5
+                name="weight-hanging"
+                size={iconSize * 0.9}
+                color={iconColour}
               />
               <Text style={styles.text}>Gaining Muscle</Text>
             </TouchableOpacity>
           </View>
           <View>
             <TouchableOpacity onPress={dietHandler}>
-              <Image
-                style={styles.img}
-                source={require("../assets/images/eat.png")}
+              <MaterialCommunityIcons
+                name="food-croissant"
+                size={iconSize}
+                color={iconColour}
               />
               <Text style={styles.text}>No Diet</Text>
             </TouchableOpacity>
@@ -187,18 +191,20 @@ export default function Goals({ navigation }) {
         <View style={styles.flex2}>
           <View style={styles.positioning}>
             <TouchableOpacity onPress={timeHandler}>
-              <Image
-                style={styles.img2}
-                source={require("../assets/images/time.png")}
+              <MaterialCommunityIcons
+                name="clock"
+                size={iconSize}
+                color={iconColour}
               />
               <Text style={styles.text2}>Saving Time</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.positioning}>
             <TouchableOpacity onPress={cookHandler}>
-              <Image
-                style={styles.img2}
-                source={require("../assets/images/Cooking.png")}
+              <MaterialCommunityIcons
+                name="chef-hat"
+                size={iconSize}
+                color={iconColour}
               />
               <Text style={styles.text2}>Learning to Cook</Text>
             </TouchableOpacity>
