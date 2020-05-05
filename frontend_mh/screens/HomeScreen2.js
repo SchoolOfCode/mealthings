@@ -1,3 +1,4 @@
+import React from "react";
 import {
   View,
   Text,
@@ -5,8 +6,9 @@ import {
   Image,
   StyleSheet,
   Dimensions,
-} from "react-native"; //
-import React from "react";
+} from "react-native";
+
+
 import { COLS } from "./COLS";
 import {
   FORMAT_navButtonBackground,
