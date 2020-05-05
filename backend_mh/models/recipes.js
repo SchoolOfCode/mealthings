@@ -17,44 +17,49 @@ async function getRecipeById(recipe_id) {
 
 // Get shopping list
 async function getShoppingList(arrayOfRecipeIDs) {
-  const recipeArray = [];
-  for (id of arrayOfRecipeIDs) {
-    const recipe = await getRecipeById(id);
-    recipeArray.push(recipe[0]);
-  }
-  const standardizedIngredients = [];
-  recipeArray.forEach((recipe) => {
-    recipe.ingredients
-      .replace(/\s+/g, " ")
-      .replace(/{|}/g, "")
-      .split('","')
-      .forEach((ingred, index) => {
-        standardizedIngredients.push(
-          parse(
-            `${recipe.ingredientsquantities
-              .replace(/{|}|/g, "")
-              .replace(/\s+/g, " ")
-              .split('","')
-              [index].replace(/"/g, "")} ${ingred
-              .replace(/"/g, "")
-              .replace(/\s+/g, " ")}`
-          )
-        );
-      });
-  });
-  const listOfIngredients = combine(standardizedIngredients);
-  const finalIngredientStrings = [];
-  for (obj of listOfIngredients) {
-    finalIngredientStrings.push(
-      `${obj.quantity ? obj.quantity : ""} ${obj.unit ? obj.unit : ""} ${
-        obj.ingredient
-      }`
-        .replace(", ,", "")
-        .replace(/^\s+|\s+$/g, "")
+  try {
+    const recipeArray = [];
+    for (id of arrayOfRecipeIDs) {
+      const recipe = await getRecipeById(id);
+      recipeArray.push(recipe[0]);
+    }
+    const standardizedIngredients = [];
+    recipeArray.forEach((recipe) => {
+      recipe.ingredients
         .replace(/\s+/g, " ")
-    );
+        .replace(/{|}/g, "")
+        .split('","')
+        .forEach((ingred, index) => {
+          standardizedIngredients.push(
+            parse(
+              `${recipe.ingredientsquantities
+                .replace(/{|}|/g, "")
+                .replace(/\s+/g, " ")
+                .split('","')
+                [index].replace(/"/g, "")} ${ingred
+                .replace(/"/g, "")
+                .replace(/\s+/g, " ")}`
+            )
+          );
+        });
+    });
+    const listOfIngredients = combine(standardizedIngredients);
+    const finalIngredientStrings = [];
+    for (obj of listOfIngredients) {
+      finalIngredientStrings.push(
+        `${obj.quantity ? obj.quantity : ""} ${obj.unit ? obj.unit : ""} ${
+          obj.ingredient
+        }`
+          .replace(", ,", "")
+          .replace(/^\s+|\s+$/g, "")
+          .replace(/\s+/g, " ")
+      );
+    }
+    return finalIngredientStrings;
+  } catch (err) {
+    console.log(err);
+    return null;
   }
-  return finalIngredientStrings;
 }
 
 module.exports = { getRecipes, getRecipeById, getShoppingList };
