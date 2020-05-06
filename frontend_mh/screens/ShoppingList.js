@@ -46,23 +46,26 @@ function IngredientItem({ item, index }) {
 
 export default function ShoppingList({ navigation }) {
   const { ingredientsList } = useContext(AuthContext);
+  console.log("ingredientsList", ingredientsList);
   return (
     <View style={styles.container}>
       <ScrollView>
-        {ingredientsList.sort().map((item, index) => (
-          <IngredientItem
-            item={item}
-            index={index}
-            key={
-              item
-                .split(" ")
-                .join("")
-                .replace(/,|-|\(|\)/g, "") +
-              "" +
-              index
-            }
-          />
-        ))}
+        {ingredientsList
+          ? ingredientsList.sort().map((item, index) => (
+              <IngredientItem
+                item={item}
+                index={index}
+                key={
+                  "a" +
+                  item
+                    .split(" ")
+                    .join("")
+                    .replace(/,|-|\(|\)/g, "") +
+                  index
+                }
+              />
+            ))
+          : null}
       </ScrollView>
       <View>
         <TouchableOpacity

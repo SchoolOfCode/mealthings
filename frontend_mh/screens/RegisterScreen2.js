@@ -63,10 +63,13 @@ export default function Registerscreen2({ navigation, route }) {
       emailAddress == "" ||
       emailAddress == null
     ) {
-      Alert.alert("please check email is correct and resubmit");
+      Alert.alert("Please check email is correct and resubmit");
+    } else if (!password || password.length < 2) {
+      Alert.alert("Password must be longer than 2 characters long!");
+    } else {
+      const dataPlus = { ...data, password, email_address: emailAddress };
+      register(dataPlus);
     }
-    const dataPlus = { ...data, password, email_address: emailAddress };
-    register(dataPlus);
   }
 
   return (

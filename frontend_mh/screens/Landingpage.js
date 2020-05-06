@@ -35,7 +35,7 @@ import {
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
-const _storeRecipes = async (recipeArray) => {
+const storeRecipes = async (recipeArray) => {
   try {
     const now = new Date();
     const jsonRecipeArray = await JSON.stringify(recipeArray);
@@ -48,7 +48,7 @@ const _storeRecipes = async (recipeArray) => {
   }
 };
 
-const _retrieveData = async (key) => {
+const retrieveData = async (key) => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
@@ -76,7 +76,14 @@ const _retrieveData = async (key) => {
 };
 
 export default function LandingPage({ navigation }) {
-  const { logOut, userID, setRecipeList, recipeList } = useContext(AuthContext);
+  const {
+    logOut,
+    userID,
+    setRecipeList,
+    recipeList,
+    fetchShoppingList,
+    setShoppingList,
+  } = useContext(AuthContext);
 
   async function getLastRecipeDate() {
     console.log(
@@ -116,7 +123,7 @@ export default function LandingPage({ navigation }) {
       if (!recipeList || recipeList.length < 14) {
         console.log("Recipe list is less than 1 in length");
         // Try to get of last recipes from local storage
-        const last_date_meals_requested_temp = await _retrieveData(
+        const last_date_meals_requested_temp = await retrieveData(
           "recipeSetDate"
         );
         let last_date_meals_requested;
@@ -145,7 +152,7 @@ export default function LandingPage({ navigation }) {
           getNewRecipes(userID);
         } else {
           // If don't need new recipes, try to get them from local storage
-          const localCopyOfRecipes = await _retrieveData("userRecipes");
+          const localCopyOfRecipes = await retrieveData("userRecipes");
           // If not in local storage, get from database
           if (!localCopyOfRecipes || localCopyOfRecipes.length < 1) {
             console.log(
@@ -161,6 +168,27 @@ export default function LandingPage({ navigation }) {
     }
     runGetRecipes();
   }, []);
+
+  useEffect(() => {
+    if (recipeList && recipeList.length > 6) {
+      async function runLocalRecipes() {
+        // Try to get shoppinglist from local storage
+        const localCopyOfShoppinglist = await retrieveData("ingredientsList");
+        // If not in local storage, get from database
+        if (!localCopyOfShoppinglist || localCopyOfShoppinglist.length < 1) {
+          console.log(
+            "localCopyOfShoppinglist not found or length shorter than 1. Re-requesting from remote server..."
+          );
+          const recipeIDs = recipeList.map((r) => r.recipe_id);
+          fetchShoppingList(recipeIDs);
+        } else {
+          console.log("Found local copy of recipes. Setting state...");
+          setShoppingList(localCopyOfShoppinglist);
+        }
+      }
+      runLocalRecipes();
+    }
+  }, [recipeList]);
 
   // Get new recipes and load into state
   async function getNewRecipes(userID2) {
@@ -218,7 +246,9 @@ export default function LandingPage({ navigation }) {
       console.log("All promises resolved. Setting state...");
       setRecipeList(arrayWithData);
       // Save recipes to local storage
-      _storeRecipes(arrayWithData);
+      storeRecipes(arrayWithData);
+      const recipeIDsToFetch = arrayWithData.map((r) => r.recipe_id);
+      fetchShoppingList(recipeIDsToFetch);
     });
     // Send PATCH to set last_weeks_recipes to the current this_weeks_recipes and this_weeks_recipes to the newly generated recipes (currently in variable randNums), and lastRecipeFetchDate to be today
     console.log(
@@ -283,7 +313,9 @@ export default function LandingPage({ navigation }) {
       console.log("Resolved all promises for re-requested recipes");
       setRecipeList(arrayWithData);
       // Save recipes to local storage
-      _storeRecipes(arrayWithData);
+      storeRecipes(arrayWithData);
+      const recipeIDsToFetch = arrayWithData.map((r) => r.recipe_id);
+      fetchShoppingList(recipeIDsToFetch);
     });
   }
 

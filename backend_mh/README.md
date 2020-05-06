@@ -418,7 +418,6 @@ Push notifications
 Draggable list
 
 // Murray
-Login screen tapping outside the keyboard should close the keyboard
 Are we caching (AsyncStorage) the recipe shopping list?
 Implement counter for today's recipe so a different set of recipes show
 add padding to today's recipe title and remove white border
@@ -430,3 +429,4 @@ Make a lower resolution image for logo
 spacing on placeholder text in forms
 Add button to stop hiding password in password fields
 Add padding above title on random recipe screen
+Make urls into process.env.VAR || localhost:5000
