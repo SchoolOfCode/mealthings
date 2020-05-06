@@ -7,36 +7,10 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
-  Dimensions,
+  Dimensions
 } from "react-native";
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe,
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
 // const todaysRecipe = {
 //   recipe_id: "1",
@@ -225,15 +199,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    alignItems: "center",
+    alignItems: "center"
   },
   positioning: {
     right: 170,
-    top: 20,
+    top: 20
   },
   arrow: {
     height: 20,
-    width: 20,
+    width: 20
   },
 
   mainTitle: {
@@ -241,12 +215,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     bottom: 8,
-    marginBottom: 10,
+    marginBottom: 10
   },
   mainImage: {
     marginTop: 10,
     width: screenWidth * 0.8,
-    height: screenWidth * 0.4,
+    height: screenWidth * 0.4
   },
   mainRecipeInfo: {
     width: screenWidth,
@@ -256,10 +230,10 @@ const styles = StyleSheet.create({
     paddingTop: 0,
     paddingLeft: screenWidth * 0.1,
     paddingRight: screenWidth * 0.1,
-    paddingBottom: 5,
+    paddingBottom: 5
   },
   infoTextLine: {
-    marginTop: 5,
+    marginTop: 5
   },
   swipeForMoreBar: {
     flexDirection: "row",
@@ -267,14 +241,14 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_LOGO_BG,
     width: screenWidth,
     paddingLeft: screenWidth * 0.1,
-    paddingRight: screenWidth * 0.1,
+    paddingRight: screenWidth * 0.1
   },
   moreChoicesContainer: {
     flexWrap: "wrap",
     width: screenWidth * 0.9,
     backgroundColor: COLS.C_BG,
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-between"
   },
   recipeCardContainer: {
     width: 150,
@@ -286,35 +260,35 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 200, height: 20 },
     shadowOpacity: 2,
     shadowRadius: 40,
-    elevation: 7,
+    elevation: 7
   },
   recipeCardImage: {
     width: "100%",
-    height: 100,
+    height: 100
   },
   recipeCardTextContainer: {
     width: "100%",
     marginTop: 5,
-    padding: 5,
+    padding: 5
   },
   recipeCardTitle: {
     fontSize: 12,
     textAlign: "center",
     alignSelf: "center",
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   recipeCardCookingTime: {
     fontSize: 12,
     alignItems: "center",
-    alignSelf: "center",
+    alignSelf: "center"
   },
   recipeCardDifficulty: {
     fontSize: 12,
     alignItems: "center",
     marginTop: 5,
-    alignSelf: "center",
+    alignSelf: "center"
   },
   icons: {
-    alignSelf: "flex-end",
-  },
+    alignSelf: "flex-end"
+  }
 });
