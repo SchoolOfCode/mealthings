@@ -102,7 +102,7 @@ export default function Goals({ navigation }) {
   }
 
   function dietHandler() {
-    if (diet === true) {
+    if (diet === false) {
       setDiet(true);
     } else if (diet === true) {
       setDiet(false);
@@ -160,7 +160,7 @@ export default function Goals({ navigation }) {
               <MaterialCommunityIcons
                 name="fire"
                 size={iconSize}
-                color={iconColour}
+                color={fatLoss ? "#FB4B3D" : "#FDFFF7"}
               />
               <Text style={styles.text}>Fat Loss</Text>
             </TouchableOpacity>
@@ -170,7 +170,7 @@ export default function Goals({ navigation }) {
               <FontAwesome5
                 name="weight-hanging"
                 size={iconSize}
-                color={iconColour}
+                color={muscle ? "#FB4B3D" : "#FDFFF7"}
               />
               <Text style={styles.text}>Gaining Muscle</Text>
             </TouchableOpacity>
@@ -180,7 +180,7 @@ export default function Goals({ navigation }) {
               <MaterialCommunityIcons
                 name="food-croissant"
                 size={iconSize}
-                color={iconColour}
+                color={diet ? "#FB4B3D" : "#FDFFF7"}
               />
               <Text style={styles.text}>No Diet</Text>
             </TouchableOpacity>
@@ -194,7 +194,7 @@ export default function Goals({ navigation }) {
                   <MaterialCommunityIcons
                     name="clock"
                     size={iconSize}
-                    color={iconColour}
+                    color={time ? "#FB4B3D" : "#FDFFF7"}
                   />
                   <Text style={styles.text}>Saving Time</Text>
                 </TouchableOpacity>
@@ -206,7 +206,7 @@ export default function Goals({ navigation }) {
                   <MaterialCommunityIcons
                     name="chef-hat"
                     size={iconSize}
-                    color={iconColour}
+                    color={cook ? "#FB4B3D" : "#FDFFF7"}
                   />
                   <Text style={styles.text}>Learning to Cook</Text>
                 </TouchableOpacity>
