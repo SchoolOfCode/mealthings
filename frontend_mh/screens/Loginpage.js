@@ -9,6 +9,8 @@ import {
   Dimensions,
   TouchableOpacity,
   Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -58,37 +60,39 @@ export default function Loginpage() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.welcomeContainer}>
-        <View>
-          <Image
-            style={styles.mealThingsLogo}
-            source={require("../assets/images/newLogo.png")}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <View style={styles.welcomeContainer}>
+          <View>
+            <Image
+              style={styles.mealThingsLogo}
+              source={require("../assets/images/newLogo.png")}
+            />
+          </View>
+          <TextInput
+            style={styles.inputField}
+            placeholder=" enter email address"
+            value={email}
+            autoCompleteType={"email"}
+            keyboardType="email-address"
+            onChangeText={handleEmailChange}
+            placeholderTextColor="#FDFFF7"
           />
+          <TextInput
+            style={styles.inputField}
+            placeholder=" enter password"
+            value={password}
+            autoCompleteType={"password"}
+            secureTextEntry={true}
+            onChangeText={handlePasswordChange}
+            placeholderTextColor="white"
+          />
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
         </View>
-        <TextInput
-          style={styles.inputField}
-          placeholder=" enter email address"
-          value={email}
-          autoCompleteType={"email"}
-          keyboardType="email-address"
-          onChangeText={handleEmailChange}
-          placeholderTextColor="#FDFFF7"
-        />
-        <TextInput
-          style={styles.inputField}
-          placeholder=" enter password"
-          value={password}
-          autoCompleteType={"password"}
-          secureTextEntry={true}
-          onChangeText={handlePasswordChange}
-          placeholderTextColor="white"
-        />
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 const styles = StyleSheet.create({

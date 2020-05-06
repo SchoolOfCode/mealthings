@@ -7,6 +7,8 @@ import {
   View,
   TextInput,
   Dimensions,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
@@ -131,99 +133,101 @@ export default function Goals({ navigation }) {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.header}>
-        <View style={styles.column}>
-          <Text style={styles.padding}> (Kg)</Text>
-          <Text style={styles.padding}> (cm)</Text>
-        </View>
-        <Text style={styles.Goals}>Goals</Text>
-        <View style={styles.margin}>
-          <TextInput
-            type="number"
-            style={styles.inputField}
-            placeholder="Weight"
-            placeholderTextColor="white"
-            onChangeText={Track}
-            maxLength={3}
-          ></TextInput>
-          <TextInput
-            style={styles.inputField}
-            placeholder="Height"
-            placeholderTextColor="white"
-            type="number"
-            onChangeText={Tracked}
-            maxLength={3}
-          ></TextInput>
-        </View>
-        <View style={styles.flex}>
-          <View>
-            <TouchableOpacity onPress={fatHandler}>
-              <MaterialCommunityIcons
-                name="fire"
-                size={iconSize}
-                color={iconColour}
-              />
-              <Text style={styles.text}>Fatloss</Text>
-            </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <ScrollView>
+        <View style={styles.header}>
+          <View style={styles.column}>
+            <Text style={styles.padding}> (Kg)</Text>
+            <Text style={styles.padding}> (cm)</Text>
           </View>
-          <View>
-            <TouchableOpacity onPress={muscleHandler}>
-              <FontAwesome5
-                name="weight-hanging"
-                size={iconSize * 0.9}
-                color={iconColour}
-              />
-              <Text style={styles.text}>Gaining Muscle</Text>
-            </TouchableOpacity>
+          <Text style={styles.Goals}>Goals</Text>
+          <View style={styles.margin}>
+            <TextInput
+              type="number"
+              style={styles.inputField}
+              placeholder="Weight"
+              placeholderTextColor="white"
+              onChangeText={Track}
+              maxLength={3}
+            ></TextInput>
+            <TextInput
+              style={styles.inputField}
+              placeholder="Height"
+              placeholderTextColor="white"
+              type="number"
+              onChangeText={Tracked}
+              maxLength={3}
+            ></TextInput>
           </View>
-          <View>
-            <TouchableOpacity onPress={dietHandler}>
-              <MaterialCommunityIcons
-                name="food-croissant"
-                size={iconSize}
-                color={iconColour}
-              />
-              <Text style={styles.text}>No Diet</Text>
-            </TouchableOpacity>
+          <View style={styles.flex}>
+            <View>
+              <TouchableOpacity onPress={fatHandler}>
+                <MaterialCommunityIcons
+                  name="fire"
+                  size={iconSize}
+                  color={iconColour}
+                />
+                <Text style={styles.text}>Fatloss</Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity onPress={muscleHandler}>
+                <FontAwesome5
+                  name="weight-hanging"
+                  size={iconSize * 0.9}
+                  color={iconColour}
+                />
+                <Text style={styles.text}>Gaining Muscle</Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity onPress={dietHandler}>
+                <MaterialCommunityIcons
+                  name="food-croissant"
+                  size={iconSize}
+                  color={iconColour}
+                />
+                <Text style={styles.text}>No Diet</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <View style={styles.flex2}>
-          <View style={styles.positioning}>
-            <TouchableOpacity onPress={timeHandler}>
-              <MaterialCommunityIcons
-                name="clock"
-                size={iconSize}
-                color={iconColour}
-              />
-              <Text style={styles.text2}>Saving Time</Text>
-            </TouchableOpacity>
+          <View style={styles.flex2}>
+            <View style={styles.positioning}>
+              <TouchableOpacity onPress={timeHandler}>
+                <MaterialCommunityIcons
+                  name="clock"
+                  size={iconSize}
+                  color={iconColour}
+                />
+                <Text style={styles.text2}>Saving Time</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.positioning}>
+              <TouchableOpacity onPress={cookHandler}>
+                <MaterialCommunityIcons
+                  name="chef-hat"
+                  size={iconSize}
+                  color={iconColour}
+                />
+                <Text style={styles.text2}>Learning to Cook</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={styles.positioning}>
-            <TouchableOpacity onPress={cookHandler}>
-              <MaterialCommunityIcons
-                name="chef-hat"
-                size={iconSize}
-                color={iconColour}
-              />
-              <Text style={styles.text2}>Learning to Cook</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
 
-        <View style={styles.buttonFlex}>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={styles.buttonText}
-          >
-            <Text style={styles.TextStyle}>Back</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleSubmit} style={styles.buttonText}>
-            <Text style={styles.TextStyle}>Next</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonFlex}>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
+              style={styles.buttonText}
+            >
+              <Text style={styles.TextStyle}>Back</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleSubmit} style={styles.buttonText}>
+              <Text style={styles.TextStyle}>Next</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </TouchableWithoutFeedback>
   );
 }
 const styles = StyleSheet.create({
