@@ -26,6 +26,7 @@ import SplashScreenExerciseSlow from "./screens/SplashScreenExerciseSlow";
 import SplashScreenExerciseQuick from "./screens/SplashScreenExerciseQuick";
 import LandingPage from "./screens/Landingpage";
 import Mealplanner from "./screens/Mealplanner";
+import { AWS_PATH } from "./config/index";
 
 import { notify, initnotify, getToken } from "expo-push-notification-helper";
 import { newChannel } from "expo-push-notification-helper";
@@ -197,16 +198,13 @@ export default function App() {
 
   async function logIn(email_address, password) {
     // Send POST request with email and password, and wait for server response
-    const loginResponse = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email_address, password }),
-      }
-    );
+    const loginResponse = await fetch(`${AWS_PATH}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email_address, password }),
+    });
     const loginResponseJson = await loginResponse.json();
     console.log(
       "fetch response in logIn:",
@@ -261,16 +259,13 @@ export default function App() {
 
   async function fetchShoppingList(recipeIDsFetch) {
     console.log("Got recipe ids:", recipeIDsFetch);
-    const ingredientsList = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/shoppinglist`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ recipeIDs: recipeIDsFetch }),
-      }
-    );
+    const ingredientsList = await fetch(`${AWS_PATH}/recipes/shoppinglist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ recipeIDs: recipeIDsFetch }),
+    });
     const ingredientsListProcessed = await ingredientsList.json();
     console.log("ingreds:", ingredientsListProcessed.payload);
     setShoppingList(ingredientsListProcessed.payload);
@@ -284,16 +279,13 @@ export default function App() {
 
   async function register(dataPlus) {
     console.log("dataPlus in register function:", dataPlus);
-    const postResponse = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...dataPlus }),
-      }
-    );
+    const postResponse = await fetch(`${AWS_PATH}/users/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...dataPlus }),
+    });
     const postResponseJson = await postResponse.json();
     if (!postResponseJson.success) {
       console.log(
@@ -331,16 +323,13 @@ export default function App() {
       }
       if (token) {
         console.log("About to fetch...");
-        const reply = await fetch(
-          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/login`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer" + " " + token,
-            },
-          }
-        );
+        const reply = await fetch(`${AWS_PATH}/users/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer" + " " + token,
+          },
+        });
         const replyJson = await reply.json();
         if (replyJson.success || (reply.status > 199 && reply.status < 250)) {
           // If yes, auto go through to LandingPage. Set loggedIn state to true. Possibly useContext for it.

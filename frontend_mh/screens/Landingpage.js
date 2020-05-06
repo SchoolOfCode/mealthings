@@ -34,6 +34,7 @@ import {
   FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { AWS_PATH } from "../config/index";
 
 const storeRecipes = async (recipeArray) => {
   try {
@@ -91,9 +92,7 @@ export default function LandingPage({ navigation }) {
       userID
     );
     try {
-      const res = await fetch(
-        `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
-      );
+      const res = await fetch(`${AWS_PATH}/users/${userID}`);
       const data = await res.json();
       return data.payload[0].last_date_meals_requested;
     } catch (err) {
@@ -105,9 +104,7 @@ export default function LandingPage({ navigation }) {
   async function getTotalNoRecipes() {
     console.log("Fetching total number of recipes from remote server");
     try {
-      const res = await fetch(
-        `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes?countOnly=true`
-      );
+      const res = await fetch(`${AWS_PATH}/recipes?countOnly=true`);
       const data = await res.json();
       console.log("Recieved from total number of recipes:", data);
       return parseInt(data.payload.count);
@@ -195,9 +192,7 @@ export default function LandingPage({ navigation }) {
     const uID = userID || userID2 || 2;
     console.log("getNewRecipes triggered. userID2:", uID);
     let last_week_food = [];
-    const res = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${uID}`
-    );
+    const res = await fetch(`${AWS_PATH}/users/${uID}`);
     const data = await res.json();
     console.log("here2");
     console.log(
@@ -236,11 +231,7 @@ export default function LandingPage({ navigation }) {
     };
     const requests = [];
     randNums.forEach((num) => {
-      requests.push(
-        fetchData(
-          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
-        )
-      );
+      requests.push(fetchData(`${AWS_PATH}/recipes/${num}`));
     });
     Promise.all(requests).then((arrayWithData) => {
       console.log("All promises resolved. Setting state...");
@@ -259,21 +250,18 @@ export default function LandingPage({ navigation }) {
         last_date_meals_requested: new Date().toISOString(),
       })
     );
-    const patchResponse = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`,
-      {
-        method: "PATCH",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          last_weeks_meals: last_week_food,
-          this_weeks_meals: randNums,
-          last_date_meals_requested: new Date().toISOString(),
-        }),
-      }
-    );
+    const patchResponse = await fetch(`${AWS_PATH}/users/${userID}`, {
+      method: "PATCH",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        last_weeks_meals: last_week_food,
+        this_weeks_meals: randNums,
+        last_date_meals_requested: new Date().toISOString(),
+      }),
+    });
     console.log("patchResponse:", patchResponse);
   }
 
@@ -281,9 +269,7 @@ export default function LandingPage({ navigation }) {
   async function reRequestRecipes(userIDNotState) {
     console.log("reRequestRecipes triggered...");
     console.log("userID:", userIDNotState);
-    const res = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userIDNotState}`
-    );
+    const res = await fetch(`${AWS_PATH}/users/${userIDNotState}`);
     const data = await res.json();
     console.log("reRequested data arrived:", data);
     console.log("here4");
@@ -303,11 +289,7 @@ export default function LandingPage({ navigation }) {
     };
     const requests = [];
     this_week_food.forEach((num) => {
-      requests.push(
-        fetchData(
-          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
-        )
-      );
+      requests.push(fetchData(`${AWS_PATH}/recipes/${num}`));
     });
     Promise.all(requests).then((arrayWithData) => {
       console.log("Resolved all promises for re-requested recipes");
