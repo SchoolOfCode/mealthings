@@ -418,9 +418,11 @@ Push notifications
 Draggable list
 
 // Murray
-Make goals / prefs / diet send PATCH
+Refresh server
 key prop isn't unique in shopping list - just add a counter on the end.
 today's recipe screen needs ingredient quantities
 today's recipe screen needs scroll view for method and ingredients
 today's recipe screen potato rostis with beetrool horseradish image isn't showing
 add padding to today's recipe title and remove white border
+Change icon color if selected
+burger menu spacing
