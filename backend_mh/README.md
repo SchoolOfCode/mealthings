@@ -418,7 +418,6 @@ Push notifications
 Draggable list
 
 // Murray
-Get all recipe images showing
 today's recipe screen needs ingredient quantities
 today's recipe screen needs scroll view for method and ingredients
 today's recipe screen potato rostis with beetrool horseradish image isn't showing
@@ -428,3 +427,8 @@ burger menu spacing
 Loading spash screen
 Are we caching (AsyncStorage) the recipe shopping list?
 Request recipes that dont fight preferances / allergies.
+Make a lower resolution image for logo
+spacing on placeholder text in forms
+Add button to stop hiding password in password fields
+Login screen tapping outside the keyboard should close the keyboard
+Add padding above title on random recipe screen
