@@ -8,36 +8,15 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
-  Alert,
+  Alert
 } from "react-native";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe,
-  FORMAT_tagLine,
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
+
+import { FORMAT_welcomeContainer } from "./FORMAT_containers";
+
 import { FORMAT_inputField } from "./FORMAT_inputField";
 import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_navButton, FORMAT_navButtonText } from "./FORMAT_navButton";
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -96,12 +75,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLS.C_BG,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   welcomeContainer: {
     alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
     marginTop: FORMAT_welcomeContainer.F_welcomeContainer_marginTop,
-    marginBottom: -40,
+    marginBottom: -40
   },
   mealThingsLogo: {
     alignItems: FORMAT_logo.F_logo_alignItems,
@@ -109,7 +88,7 @@ const styles = StyleSheet.create({
     justifyContent: FORMAT_logo.F_logo_justifyContent,
     width: screenWidth * 0.8,
     height: screenWidth * 0.8,
-    marginBottom: 20,
+    marginBottom: 20
   },
 
   inputField: {
@@ -126,12 +105,12 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    fontSize: 16,
+    fontSize: 16
   },
   button: {
     alignSelf: FORMAT_navButton.F_navButton_alignSelf,
@@ -144,17 +123,17 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-    elevation: 5,
+    elevation: 5
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     padding: FORMAT_navButtonText.F_navButtonText_padding,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold",
-  },
+    fontWeight: "bold"
+  }
 });

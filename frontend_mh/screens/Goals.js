@@ -11,38 +11,15 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+
 import { FORMAT_images } from "./FORMAT_images";
 import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
-import { Row } from "react-native-drag-flatlist";
+
+import { FORMAT_navButton, FORMAT_navButtonText } from "./FORMAT_navButton";
 
 const screenWidth = Dimensions.get("screen").width;
 const iconSize = screenWidth * (1 / 4);
 const iconColour = COLS.C4_DARK_TEXT;
-
 export default function Goals({ navigation }) {
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
@@ -51,14 +28,12 @@ export default function Goals({ navigation }) {
   const [diet, setDiet] = useState(false);
   const [time, setTime] = useState(false);
   const [cook, setCook] = useState(false);
-
   function Track(enteredText) {
     setWeight(enteredText);
   }
   function Tracked(enteredText) {
     setHeight(enteredText);
   }
-
   function handleSubmit() {
     var goals = "";
     if (fatLoss) {
@@ -80,17 +55,15 @@ export default function Goals({ navigation }) {
     console.log("data in goals", data);
     navigation.navigate("Allergies", { data });
   }
-
   function fatHandler() {
     if (diet === true) {
-      setTime(false);
+      setFatLoss(false);
     } else if (fatLoss === false) {
       setFatLoss(true);
     } else if (fatLoss === true) {
       setFatLoss(false);
     }
   }
-
   function muscleHandler() {
     if (diet === true) {
       setMuscle(false);
@@ -100,36 +73,30 @@ export default function Goals({ navigation }) {
       setMuscle(false);
     }
   }
-
   function dietHandler() {
     if (diet === false) {
       setDiet(true);
+      setFatLoss(false);
+      muscleHandler(false);
     } else if (diet === true) {
       setDiet(false);
     }
   }
-
   function timeHandler() {
-    if (diet === true) {
-      setTime(false);
-    } else if (time === false) {
+    if (time === false) {
       setTime(true);
     } else if (time === true) {
       setTime(false);
     }
   }
-
   function cookHandler() {
-    if (diet === true) {
-      setCook(false);
-      <Image source={require("../assets/images/cookingConfirmed.png")} />;
-    } else if (cook === false) {
+    if (cook === false) {
       setCook(true);
     } else if (cook === true) {
       setCook(false);
     }
   }
-
+  console.log(cook, time, diet, muscle, fatLoss);
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -214,7 +181,6 @@ export default function Goals({ navigation }) {
             </View>
           </View>
         </View>
-
         <View style={styles.buttonPosition}>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -233,7 +199,6 @@ export default function Goals({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLS.C_BG,
-    height: 1000,
     padding: 20
   },
   positioning: {
@@ -291,7 +256,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "bold"
   },
-
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,

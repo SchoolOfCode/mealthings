@@ -6,7 +6,6 @@ import { StyleSheet, View, ScrollView } from "react-native";
 import MealPlanner from "../components/MealPlanner";
 import Days from "../components/Days";
 const colors = ["#d3f261", "#7cb305", "#5b8c00", "#3f6600", "#254000"];
-import { COLS } from "./COLS";
 
 export default function Mealplanner() {
   // const { userID } = useContext(AuthContext);
@@ -22,9 +21,9 @@ export default function Mealplanner() {
 const styles = StyleSheet.create({
   rows: {
     flexDirection: "row",
-    backgroundColor: "#A6E6AB",
+    backgroundColor: "#A6E6AB"
   },
   color: {
-    backgroundColor: "#A6E6AB",
-  },
+    backgroundColor: "#A6E6AB"
+  }
 });

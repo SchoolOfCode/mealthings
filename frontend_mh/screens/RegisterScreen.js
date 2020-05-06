@@ -8,35 +8,11 @@ import {
   TouchableOpacity,
   Alert,
   Dimensions,
-  Image,
+  Image
 } from "react-native";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe,
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+
+import { FORMAT_navButtonText } from "./FORMAT_navButton";
 
 const screenWidth = Dimensions.get("screen").width;
 
@@ -148,7 +124,7 @@ export default function Registerscreen({ navigation }) {
         name: `${firstName} ${lastName}`,
         birthday,
         gender,
-        mother,
+        mother
       };
       console.log("Submitted data:", data);
       navigation.navigate("Register2", { data });
@@ -306,30 +282,30 @@ export default function Registerscreen({ navigation }) {
 const styles = StyleSheet.create({
   horizontal: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center",
+    justifyContent: "center"
   },
   contain: {
-    marginTop: 30,
+    marginTop: 30
   },
   margin: {
-    marginTop: 25,
+    marginTop: 25
   },
   arrow: {
     width: 40,
     height: 20,
     marginHorizontal: 10,
-    marginVertical: 20,
+    marginVertical: 20
   },
   tick: {
     width: 20,
     height: 20,
     borderWidth: 3,
-    borderColor: COLS.C6_WHITE_TEXT,
+    borderColor: COLS.C6_WHITE_TEXT
   },
   inputField: {
     marginVertical: 5,
@@ -343,12 +319,12 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    color: COLS.C6_WHITE_TEXT,
+    color: COLS.C6_WHITE_TEXT
   },
   buttonflex: {
     alignSelf: "center",
@@ -356,7 +332,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginVertical: 10,
-    padding: 10,
+    padding: 10
   },
   direction: {
     backgroundColor: COLS.C_BG,
@@ -367,11 +343,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    marginBottom: 50,
+    marginBottom: 50
   },
   row: {
     justifyContent: "center",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   box: {
     width: 45,
@@ -385,39 +361,39 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    flexDirection: "row",
+    flexDirection: "row"
   },
   position: {
     flexDirection: "row",
     alignSelf: "center",
-    alignContent: "center",
+    alignContent: "center"
   },
   optionText: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
-    alignSelf: "center",
+    alignSelf: "center"
   },
   title: {
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     fontSize: 24,
     alignSelf: "center",
-    padding: 15,
+    padding: 15
   },
   option: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
     marginTop: 10,
-    marginLeft: 10,
+    marginLeft: 10
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold",
-  },
+    fontWeight: "bold"
+  }
 });

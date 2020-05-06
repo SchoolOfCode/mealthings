@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
+
 import { FORMAT_containers } from "./FORMAT_containers";
-import { FORMAT_switches } from "./FORMAT_extraComponents";
-import { FORMAT_navButton } from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
-import { FORMAT_headings } from "./FORMAT_headings";
+
+import { FORMAT_navButton, FORMAT_navButtonText } from "./FORMAT_navButton";
 
 export default function Allergies({ navigation, route }) {
   const { data } = route.params;
@@ -177,146 +175,148 @@ export default function Allergies({ navigation, route }) {
 
   return (
     <ScrollView style={styles.background}>
-      <Text style={styles.heading}> Allergies</Text>
       <View style={styles.container}>
-        <Text style={styles.text}> Celery</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={celery ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={celeryHandler}
-          value={celery}
-        />
-        <Text style={styles.text}> Crustaceans</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={crustaceans ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={crustaceansHandler}
-          value={crustaceans}
-        />
-        <Text style={styles.text}> Eggs </Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={eggs ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={eggHandler}
-          value={eggs}
-        />
-        <Text style={styles.text}> Fish</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={fish ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={fishHandler}
-          value={fish}
-        />
+        <Text style={styles.heading}> Allergies</Text>
+        <View style={styles.position}>
+          <Text style={styles.text}> Celery</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={celery ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={celeryHandler}
+            value={celery}
+          />
+          <Text style={styles.text}> Crustaceans</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={crustaceans ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={crustaceansHandler}
+            value={crustaceans}
+          />
+          <Text style={styles.text}> Eggs </Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={eggs ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={eggHandler}
+            value={eggs}
+          />
+          <Text style={styles.text}> Fish</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={fish ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={fishHandler}
+            value={fish}
+          />
 
-        <Text style={styles.text}> Gluten</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={gluten ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={glutenHandler}
-          value={gluten}
-        />
-        <Text style={styles.text}> Lupin</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={lupin ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={lupinHandler}
-          value={lupin}
-        />
-        <Text style={styles.text}> Milk</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={milk ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={milkHandler}
-          value={milk}
-        />
-        <Text style={styles.text}> Molluscs</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={molluscs ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={molluscsHandler}
-          value={molluscs}
-        />
-        <Text style={styles.text}> Mustard</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={mustard ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={mustardHandler}
-          value={mustard}
-        />
+          <Text style={styles.text}> Gluten</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={gluten ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={glutenHandler}
+            value={gluten}
+          />
+          <Text style={styles.text}> Lupin</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={lupin ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={lupinHandler}
+            value={lupin}
+          />
+          <Text style={styles.text}> Milk</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={milk ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={milkHandler}
+            value={milk}
+          />
+          <Text style={styles.text}> Molluscs</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={molluscs ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={molluscsHandler}
+            value={molluscs}
+          />
+          <Text style={styles.text}> Mustard</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={mustard ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={mustardHandler}
+            value={mustard}
+          />
 
-        <Text style={styles.text}> Peanuts</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={peanuts ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={peanutsHandler}
-          value={peanuts}
-        />
-        <Text style={styles.text}> Seasame Seeds</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={sesame_Seeds ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={seasame_SeedsHandler}
-          value={sesame_Seeds}
-        />
-        <Text style={styles.text}> Soybeans</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={soybeans ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={soybeanHandler}
-          value={soybeans}
-        />
-        <Text style={styles.text}> Suphur Dioxide</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={dioxide ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={dioxideHandler}
-          value={dioxide}
-        />
-        <Text style={styles.text}> Tree nuts</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={treeNuts ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={treeNutsHandler}
-          value={treeNuts}
-        />
+          <Text style={styles.text}> Peanuts</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={peanuts ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={peanutsHandler}
+            value={peanuts}
+          />
+          <Text style={styles.text}> Seasame Seeds</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={sesame_Seeds ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={seasame_SeedsHandler}
+            value={sesame_Seeds}
+          />
+          <Text style={styles.text}> Soybeans</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={soybeans ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={soybeanHandler}
+            value={soybeans}
+          />
+          <Text style={styles.text}> Suphur Dioxide</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={dioxide ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={dioxideHandler}
+            value={dioxide}
+          />
+          <Text style={styles.text}> Tree nuts</Text>
+          <Switch
+            style={styles.switch}
+            trackColor={{ false: "#767577", true: "#81b0ff" }}
+            thumbColor={treeNuts ? "#f5dd4b" : "#f4f3f4"}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={treeNutsHandler}
+            value={treeNuts}
+          />
+        </View>
 
-        <View style={styles.buttons_Direction}>
+        <View style={styles.buttonPosition}>
           <TouchableOpacity
             style={styles.buttons}
             onPress={() => navigation.goBack()}
           >
-            <Text>Back</Text>
+            <Text style={styles.buttonText}>Back</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.buttons} onPress={postHandler}>
-            <Text>Next</Text>
+            <Text style={styles.buttonText}>Next</Text>
           </TouchableOpacity>
         </View>
         <Text> {post}</Text>
@@ -328,50 +328,62 @@ export default function Allergies({ navigation, route }) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    flex: 1,
+    flex: 1
   },
   container: {
-    margin: FORMAT_containers.F_container_margin,
     backgroundColor: COLS.C_BG,
-    margin: FORMAT_containers.F_container_margin,
-    marginVertical: FORMAT_containers.F_container_marginVertical,
-    padding: FORMAT_containers.F_container_padding,
+    padding: 20,
     alignItems: FORMAT_containers.F_container_alignItems,
     justifyContent: FORMAT_containers.F_container_justifyContent,
-    backgroundColor: COLS.C_BG,
+    backgroundColor: COLS.C_BG
+  },
+  position: {
+    justifyContent: "center"
   },
   text: {
-    alignSelf: FORMAT_text.F_text_alignSelf,
-    marginBottom: FORMAT_text.F_text_marginBottom,
-    marginTop: FORMAT_text.F_text_marginTop,
-    margin: FORMAT_text.F_text_margin,
-    left: FORMAT_text.F_text_left,
-    fontFamily: FORMAT_fonts.F_font_font,
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+    top: 29
   },
   heading: {
-    alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
-    left: FORMAT_headings.F_headingMainTitle_left,
-    fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
-    fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
-    bottom: FORMAT_headings.F_headingMainTitle_bottom,
-    marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
-    marginTop: FORMAT_headings.F_headingMainTitle_marginTop,
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    fontSize: 28,
+    fontWeight: "bold",
+    paddingTop: 30,
+    padding: 20
   },
   switch: {
-    right: FORMAT_switches.F_switch_right,
-    bottom: FORMAT_switches.F_switch_bottom,
+    flexDirection: "column",
+    padding: 10,
+    marginLeft: 160
   },
-  buttons_Direction: {
-    flexDirection: "row",
+
+  buttonText: {
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+    textAlign: "center"
   },
   buttons: {
-    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
-    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: FORMAT_navButton.F_navButton_width,
+    backgroundColor: COLS.C_BG,
+    borderRadius: 5,
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
     padding: FORMAT_navButton.F_navButton_padding,
-    alignItems: FORMAT_navButton.F_navButton_alignItems,
-    margin: FORMAT_navButton.F_navButton_margin,
-    borderRadius: FORMAT_navButton.F_navBitton_borderRadius,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5
   },
+  buttonPosition: {
+    flexDirection: "row",
+    padding: 15
+  }
 });
