@@ -37,20 +37,14 @@ import {
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
+
 const screenWidth = Dimensions.get("window").width;
 
 function IngredientItem({ item }) {
-  const [bought, setBought] = useState(false);
 
-  // const theString = `${item.quantity} ${item.unit} ${item.ingredient}`;
+  const [bought, setBought] = useState(false);
   return (
-    <TouchableOpacity
-      onPress={() => setBought(!bought)}
-      key={item
-        .split(" ")
-        .join("")
-        .replace(/,|-|\(|\)/g, "")}
-    >
+    <TouchableOpacity onPress={() => setBought(!bought)}>
       <View style={styles.ingredientItemContainer}>
         <View style={bought ? styles.circleChecked : styles.circle}></View>
         <Text style={bought ? styles.itemTextChecked : styles.itemText}>
@@ -61,27 +55,37 @@ function IngredientItem({ item }) {
   );
 }
 
-function cleanString(string) {
-  return string.split('","').map(x => x.replace(/"|{|}|\\|\//g, ""));
-}
 
 export default function ShoppingList({ navigation }) {
-  const { userID, recipeList, ingredientsList } = useContext(AuthContext);
-
+  const { ingredientsList } = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <ScrollView>
-        {ingredientsList.sort().map(item => (
-          <IngredientItem item={item} />
+
+        {ingredientsList.sort().map((item, index) => (
+          <IngredientItem
+            item={item}
+            index={index}
+            key={
+              item
+                .split(" ")
+                .join("")
+                .replace(/,|-|\(|\)/g, "") +
+              "" +
+              index
+            }
+          />
+
         ))}
       </ScrollView>
-
       <View>
         <TouchableOpacity
           style={styles.formatting}
           onPress={() => navigation.navigate("TodaysRecipe")}
         >
-          <Text style={styles.buttonText}> Start Cooking </Text>
+
+          <Text style={styles.buttonText}> Start Cooking! </Text>
+
         </TouchableOpacity>
       </View>
     </View>

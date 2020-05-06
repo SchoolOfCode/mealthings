@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../App.js";
 import {
   View,
+  ScrollView,
   Text,
   Image,
   TouchableOpacity,
@@ -36,10 +37,13 @@ import {
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
-function Item({ title }) {
+function Item({ ingredient, quantity, leadingChar = "\u2022" }) {
   return (
     <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>
+        {<Text style={{ fontWeight: "bold" }}>{`${leadingChar} `}</Text>}
+        {`${quantity} ${ingredient || ""}\n`}
+      </Text>
     </View>
   );
 }
@@ -48,13 +52,14 @@ function cleanString(string) {
   return string.split('","').map(x => x.replace(/"|{|}|\\|\//g, ""));
 }
 
-export default function TodaysRecipe({ navigation }) {
-  const { userID, recipeList } = useContext(AuthContext);
+export default function TodaysRecipe() {
+  const { recipeList } = useContext(AuthContext);
   const [showIngredients, setShowIngredients] = useState(false);
   const [showMethod, setShowMethod] = useState(false);
   const recipeIndex = 0; // TODO make this increment depending on the number of days since last recipe request
   const todaysRecipe = recipeList[recipeIndex];
   const ingredients = cleanString(todaysRecipe.ingredients);
+  const quantities = cleanString(todaysRecipe.ingredientsquantities);
   const method = cleanString(todaysRecipe.method);
 
   function changeButtonColour() {
@@ -69,30 +74,48 @@ export default function TodaysRecipe({ navigation }) {
 
   const ingredientsContainer = (
     <View style={styles.ingredientsAndMethodContainer}>
-      <View style={styles.ingredientsAndMethodView}>
-        <FlatList
-          style={styles.ingredientsAndMethod}
-          data={ingredients}
-          renderItem={({ item }) => <Item title={`\u2022 ${item}`} />}
-          keyExtractor={item => item}
-        />
-      </View>
+
+      <ScrollView style={styles.ingredientsAndMethodView}>
+        {ingredients.map((item, index) => (
+          <Item
+            ingredient={item}
+            quantity={quantities[index]}
+            key={
+              item
+                .split(" ")
+                .join("")
+                .replace(/,|-|\(|\)/g, "") +
+              "" +
+              index
+            }
+          />
+        ))}
+      </ScrollView>
+
     </View>
   );
 
   const methodContainer = (
-    <View style={styles.ingredientsAndMethodContainer}>
-      <View style={styles.ingredientsAndMethodView}>
-        <FlatList
-          style={styles.ingredientsAndMethod}
-          data={method}
-          renderItem={({ item, index }) => (
-            <Item title={`${index + 1}. ${item}`} />
-          )}
-          keyExtractor={item => item}
-        />
+
+    <ScrollView style={styles.ingredientsAndMethodView}>
+      <View style={styles.ingredientsAndMethodContainer}>
+        {method.map((item, index) => (
+          <Item
+            quantity={item}
+            leadingChar={"Step " + (index + 1)}
+            key={
+              item
+                .split(" ")
+                .join("")
+                .replace(/,|-|\(|\)/g, "") +
+              "" +
+              index
+            }
+          />
+        ))}
+
       </View>
-    </View>
+    </ScrollView>
   );
 
   return (
@@ -135,10 +158,7 @@ const styles = StyleSheet.create({
     right: 170,
     top: 20
   },
-  arrow: {
-    height: 20,
-    width: 20
-  },
+
   formatting: {
     marginTop: 10
   },

@@ -297,7 +297,10 @@ export default function App() {
         }
       },
 
-      logOut: () => dispatch({ type: "SIGN_OUT" }),
+      logOut: () => {
+        AsyncStorage.clear();
+        dispatch({ type: "SIGN_OUT" });
+      },
 
       setRecipeList: async (recipes) => {
         console.log("Inside setRecipeList");
