@@ -80,6 +80,8 @@ export default function Registerscreen2({ navigation, route }) {
       <TextInput
         style={styles.inputField}
         placeholder="Password"
+        autoCompleteType={"password"}
+        secureTextEntry={true}
         onChangeText={passwordHandler}
         placeholderTextColor="white"
       />

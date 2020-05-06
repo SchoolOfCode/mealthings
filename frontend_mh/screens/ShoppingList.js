@@ -30,18 +30,10 @@ import {
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
-function IngredientItem({ item }) {
+function IngredientItem({ item, index }) {
   const [bought, setBought] = useState(false);
-
-  // const theString = `${item.quantity} ${item.unit} ${item.ingredient}`;
   return (
-    <TouchableOpacity
-      onPress={() => setBought(!bought)}
-      key={item
-        .split(" ")
-        .join("")
-        .replace(/,|-|\(|\)/g, "")}
-    >
+    <TouchableOpacity onPress={() => setBought(!bought)}>
       <View style={styles.ingredientItemContainer}>
         <View style={bought ? styles.circleChecked : styles.circle}></View>
         <Text style={bought ? styles.itemTextChecked : styles.itemText}>
@@ -52,27 +44,32 @@ function IngredientItem({ item }) {
   );
 }
 
-function cleanString(string) {
-  return string.split('","').map((x) => x.replace(/"|{|}|\\|\//g, ""));
-}
-
 export default function ShoppingList({ navigation }) {
-  const { userID, recipeList, ingredientsList } = useContext(AuthContext);
-
+  const { ingredientsList } = useContext(AuthContext);
   return (
     <View style={styles.container}>
       <ScrollView>
-        {ingredientsList.sort().map((item) => (
-          <IngredientItem item={item} />
+        {ingredientsList.sort().map((item, index) => (
+          <IngredientItem
+            item={item}
+            index={index}
+            key={
+              item
+                .split(" ")
+                .join("")
+                .replace(/,|-|\(|\)/g, "") +
+              "" +
+              index
+            }
+          />
         ))}
       </ScrollView>
-
       <View>
         <TouchableOpacity
           style={styles.formatting}
           onPress={() => navigation.navigate("TodaysRecipe")}
         >
-          <Text> Start Cooking </Text>
+          <Text> Start Cooking!</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -85,7 +82,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     padding: 5,
   },
-
   arrow: {
     height: 30,
     width: 30,
