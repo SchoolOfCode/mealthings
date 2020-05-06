@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AuthContext } from "../App.js";
 import {
   Image,
   StyleSheet,
@@ -10,6 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
@@ -40,10 +40,10 @@ import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 import { Row } from "react-native-drag-flatlist";
 
 const screenWidth = Dimensions.get("screen").width;
+const iconSize = screenWidth * (1 / 4);
+const iconColour = COLS.C4_DARK_TEXT;
 
-export default function Goals({ navigation, route }) {
-  // const { userID } = useContext(AuthContext);
-  const { dataPlus } = route.params;
+export default function Goals({ navigation }) {
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
   const [fatLoss, setFatLoss] = useState(false);
@@ -76,9 +76,9 @@ export default function Goals({ navigation, route }) {
     if (cook) {
       goals += ",Learn to cook";
     }
-    const dataPlusPlus = { ...dataPlus, height, weight, goals };
-    console.log("dataPlusPlus in goals", dataPlusPlus);
-    navigation.navigate("SplashSuccess", { dataPlusPlus });
+    const data = { height, weight, goals };
+    console.log("data in goals", data);
+    navigation.navigate("Allergies", { data });
   }
 
   function fatHandler() {
@@ -130,29 +130,6 @@ export default function Goals({ navigation, route }) {
     }
   }
 
-  function HandleSubmit() {
-    console.log({ weight, height, fatLoss, muscle, diet, time, cook });
-    var goals = "";
-    if (fatLoss) {
-      goals += "Fat loss,";
-    }
-    if (muscle) {
-      goals += ",Muscle gain";
-    }
-    if (diet) {
-      goals += ",No diet";
-    }
-    if (time) {
-      goals += ",Save time";
-    }
-    if (cook) {
-      goals += ",Learn to cook";
-    }
-    const dataPlusPlus = { ...dataPlus, goals };
-    console.log(dataPlusPlus);
-    navigation.navigate("SplashSuccess", { dataPlusPlus });
-  }
-
   return (
     <ScrollView>
       <View style={styles.header}>
@@ -182,29 +159,30 @@ export default function Goals({ navigation, route }) {
         <View style={styles.flex}>
           <View>
             <TouchableOpacity onPress={fatHandler}>
-              <Image
-                style={styles.img}
-                source={require("../assets/images/calories.png")}
+              <MaterialCommunityIcons
+                name="fire"
+                size={iconSize}
+                color={iconColour}
               />
-
               <Text style={styles.text}>Fatloss</Text>
             </TouchableOpacity>
           </View>
-
           <View>
             <TouchableOpacity onPress={muscleHandler}>
-              <Image
-                style={styles.img}
-                source={require("../assets/images/woman.png")}
+              <FontAwesome5
+                name="weight-hanging"
+                size={iconSize * 0.9}
+                color={iconColour}
               />
               <Text style={styles.text}>Gaining Muscle</Text>
             </TouchableOpacity>
           </View>
           <View>
             <TouchableOpacity onPress={dietHandler}>
-              <Image
-                style={styles.img}
-                source={require("../assets/images/eat.png")}
+              <MaterialCommunityIcons
+                name="food-croissant"
+                size={iconSize}
+                color={iconColour}
               />
               <Text style={styles.text}>No Diet</Text>
             </TouchableOpacity>
@@ -213,18 +191,20 @@ export default function Goals({ navigation, route }) {
         <View style={styles.flex2}>
           <View style={styles.positioning}>
             <TouchableOpacity onPress={timeHandler}>
-              <Image
-                style={styles.img2}
-                source={require("../assets/images/time.png")}
+              <MaterialCommunityIcons
+                name="clock"
+                size={iconSize}
+                color={iconColour}
               />
               <Text style={styles.text2}>Saving Time</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.positioning}>
             <TouchableOpacity onPress={cookHandler}>
-              <Image
-                style={styles.img2}
-                source={require("../assets/images/Cooking.png")}
+              <MaterialCommunityIcons
+                name="chef-hat"
+                size={iconSize}
+                color={iconColour}
               />
               <Text style={styles.text2}>Learning to Cook</Text>
             </TouchableOpacity>

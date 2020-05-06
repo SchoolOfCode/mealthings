@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AuthContext } from "../App.js";
 import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
@@ -11,8 +10,7 @@ import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 import { FORMAT_headings } from "./FORMAT_headings";
 
 export default function Allergies({ navigation, route }) {
-  const { dataPlusPlus } = route.params;
-  const { userID } = useContext(AuthContext);
+  const { data } = route.params;
   const [celery, setCelery] = useState(false);
   const [gluten, setGluten] = useState(false);
   const [crustaceans, setCrustaceans] = useState(false);
@@ -172,7 +170,7 @@ export default function Allergies({ navigation, route }) {
     if (dioxide) {
       food_prefs_exc += "dioxide";
     }
-    const data = { ...dataPlusPlus, food_prefs_exc };
+    data[food_prefs_exc] = food_prefs_exc;
     console.log("data in allergies", data);
     navigation.navigate("Preferences", { data });
   }
