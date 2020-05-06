@@ -418,11 +418,13 @@ Push notifications
 Draggable list
 
 // Murray
-Refresh server
-key prop isn't unique in shopping list - just add a counter on the end.
+Get all recipe images showing
 today's recipe screen needs ingredient quantities
 today's recipe screen needs scroll view for method and ingredients
 today's recipe screen potato rostis with beetrool horseradish image isn't showing
 add padding to today's recipe title and remove white border
 Change icon color if selected
 burger menu spacing
+Loading spash screen
+Are we caching (AsyncStorage) the recipe shopping list?
+Request recipes that dont fight preferances / allergies.
