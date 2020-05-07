@@ -8,7 +8,7 @@ import {
   TextInput,
   Dimensions,
   TouchableWithoutFeedback,
-  Keyboard,
+  Keyboard
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
@@ -58,9 +58,7 @@ export default function Goals({ navigation }) {
     navigation.navigate("Allergies", { data });
   }
   function fatHandler() {
-    if (diet === true) {
-      setFatLoss(false);
-    } else if (fatLoss === false) {
+    if (fatLoss === false) {
       setFatLoss(true);
     } else if (fatLoss === true) {
       setFatLoss(false);
@@ -76,8 +74,6 @@ export default function Goals({ navigation }) {
   function dietHandler() {
     if (diet === false) {
       setDiet(true);
-      setFatLoss(false);
-      setMuscle(false);
     } else if (diet === true) {
       setDiet(false);
     }
@@ -202,17 +198,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    padding: 20,
+    padding: 20
   },
   positioning: {
     padding: 15,
     justifyContent: "center",
     flexDirection: "row",
     alignItems: "center",
-    borderRadius: 5,
+    borderRadius: 5
   },
   margin: {
-    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical
   },
   inputField: {
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
@@ -228,16 +224,16 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    fontSize: 16,
+    fontSize: 16
   },
   flex: {
     flexDirection: FORMAT_navButton.F_navButton_flexDirection,
-    marginVertical: FORMAT_navButton.F_navButton_marginVertical,
+    marginVertical: FORMAT_navButton.F_navButton_marginVertical
   },
   flex2: { flexDirection: FORMAT_navButton.F_navButton_flexDirection },
   img: {
@@ -245,25 +241,25 @@ const styles = StyleSheet.create({
     height: FORMAT_images.F_image_height,
     alignSelf: FORMAT_images.F_image_alignSelf,
     left: FORMAT_images.F_image_left,
-    marginHorizontal: FORMAT_images.F_image_marginHorizontal,
+    marginHorizontal: FORMAT_images.F_image_marginHorizontal
   },
   img2: {
     width: FORMAT_images.F_image_width,
     height: FORMAT_images.F_image_height,
     alignSelf: FORMAT_images.F_image_alignSelf,
-    marginHorizontal: FORMAT_images.F_image_marginHorizontal,
+    marginHorizontal: FORMAT_images.F_image_marginHorizontal
   },
   text: {
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     fontSize: 13,
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
     fontWeight: "bold",
-    textAlign: "center",
+    textAlign: "center"
   },
   button: {
     backgroundColor: COLS.C_BG,
@@ -275,39 +271,39 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-    elevation: 5,
+    elevation: 5
   },
   buttonPosition: {
     flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center",
+    alignItems: "center"
   },
   Goals: {
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     fontSize: 28,
     fontWeight: "bold",
-    padding: 10,
+    padding: 10
   },
   icons: {
     flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center",
+    alignItems: "center"
   },
   secondRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingBottom: 40,
+    paddingBottom: 40
   },
   lastIcon: {
-    paddingLeft: 30,
+    paddingLeft: 30
   },
   secondLastIcon: {
-    paddingLeft: 29,
-  },
+    paddingLeft: 29
+  }
 });
