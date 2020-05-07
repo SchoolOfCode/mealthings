@@ -6,7 +6,7 @@ import {
   Text,
   StyleSheet,
   Image,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
@@ -14,7 +14,7 @@ import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -24,7 +24,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -33,15 +33,13 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
-
 
 const screenWidth = Dimensions.get("window").width;
 
 function IngredientItem({ item }) {
-
   const [bought, setBought] = useState(false);
   return (
     <TouchableOpacity onPress={() => setBought(!bought)}>
@@ -55,37 +53,35 @@ function IngredientItem({ item }) {
   );
 }
 
-
 export default function ShoppingList({ navigation }) {
   const { ingredientsList } = useContext(AuthContext);
+  console.log("ingredientsList", ingredientsList);
   return (
     <View style={styles.container}>
       <ScrollView>
-
-        {ingredientsList.sort().map((item, index) => (
-          <IngredientItem
-            item={item}
-            index={index}
-            key={
-              item
-                .split(" ")
-                .join("")
-                .replace(/,|-|\(|\)/g, "") +
-              "" +
-              index
-            }
-          />
-
-        ))}
+        {ingredientsList
+          ? ingredientsList.sort().map((item, index) => (
+              <IngredientItem
+                item={item}
+                index={index}
+                key={
+                  "a" +
+                  item
+                    .split(" ")
+                    .join("")
+                    .replace(/,|-|\(|\)/g, "") +
+                  index
+                }
+              />
+            ))
+          : null}
       </ScrollView>
       <View>
         <TouchableOpacity
           style={styles.formatting}
           onPress={() => navigation.navigate("TodaysRecipe")}
         >
-
           <Text style={styles.buttonText}> Start Cooking! </Text>
-
         </TouchableOpacity>
       </View>
     </View>
@@ -96,21 +92,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    padding: 5
+    padding: 5,
   },
   buttonText: {
     textAlign: "center",
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
     fontWeight: "bold",
-    fontSize: 18
+    fontSize: 18,
   },
   arrow: {
     height: 30,
     width: 30,
     left: 10,
     top: 20,
-    marginBottom: 40
+    marginBottom: 40,
   },
   formatting: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
@@ -124,16 +120,16 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-    elevation: 5
+    elevation: 5,
   },
   ingredientItemContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    padding: 10
+    padding: 10,
   },
   circle: {
     marginRight: 10,
@@ -142,7 +138,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: COLS.C6_WHITE_TEXT,
     borderStyle: "solid",
-    borderWidth: 3
+    borderWidth: 3,
   },
   circleChecked: {
     marginRight: 10,
@@ -152,17 +148,17 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C6_WHITE_TEXT,
     borderColor: COLS.C6_WHITE_TEXT,
     borderStyle: "solid",
-    borderWidth: 3
+    borderWidth: 3,
   },
   itemTextChecked: {
     fontSize: 18,
     textDecorationLine: "line-through",
     textDecorationStyle: "solid",
-    color: COLS.C6_WHITE_TEXT
+    color: COLS.C6_WHITE_TEXT,
   },
   itemText: {
     fontSize: 18,
     fontWeight: "bold",
-    color: COLS.C6_WHITE_TEXT
-  }
+    color: COLS.C6_WHITE_TEXT,
+  },
 });

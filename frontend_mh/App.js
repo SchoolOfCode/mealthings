@@ -26,6 +26,7 @@ import SplashScreenExerciseSlow from "./screens/SplashScreenExerciseSlow";
 import SplashScreenExerciseQuick from "./screens/SplashScreenExerciseQuick";
 import LandingPage from "./screens/Landingpage";
 import Mealplanner from "./screens/Mealplanner";
+import { AWS_PATH } from "./config/index";
 
 import { notify, initnotify, getToken } from "expo-push-notification-helper";
 import { newChannel } from "expo-push-notification-helper";
@@ -163,12 +164,6 @@ export default function App() {
             recipeList: null,
           };
         case "SIGN_OUT":
-          try {
-            AsyncStorage.removeItem("token");
-            console.log("Removed JWT on signout");
-          } catch (err) {
-            console.log(err);
-          }
           return {
             ...prevState,
             isSignout: true,
@@ -179,7 +174,6 @@ export default function App() {
             recipeList: null,
           };
         case "SET_RECIPES":
-          console.log("In set recipes in dispatch");
           return {
             ...prevState,
             recipeList: action.recipes,
@@ -202,6 +196,118 @@ export default function App() {
     }
   );
 
+  async function logIn(email_address, password) {
+    // Send POST request with email and password, and wait for server response
+    const loginResponse = await fetch(`${AWS_PATH}/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email_address, password }),
+    });
+    const loginResponseJson = await loginResponse.json();
+    console.log(
+      "fetch response in logIn:",
+      JSON.stringify(loginResponse),
+      loginResponseJson
+    );
+    // If server returns true and with JWT
+    if (loginResponseJson.success || loginResponse.status == 200) {
+      // Save JWT to local AsyncStorage
+      const itemWasStored = storeItem("token", loginResponseJson.token);
+      if (!itemWasStored) {
+        console.log("AsyncLocalstorage failed.");
+      }
+      // Set logged in to true
+      dispatch({
+        type: "SIGN_IN",
+        token: loginResponse.token,
+        userID: loginResponse.userID,
+      });
+    } else {
+      // If server return false
+      // Tell user incorrect password
+      Alert.alert(
+        `Oops!`,
+        "Could not verify email and password.",
+        [{ text: "Dismiss", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+      dispatch({ type: "LOGIN_FAILURE" });
+    }
+  }
+
+  function logOut() {
+    AsyncStorage.clear();
+    dispatch({ type: "SIGN_OUT" });
+  }
+
+  async function setShoppingList(ingreds) {
+    // Save ingredients list to local storage
+    const didStoreShoppinglist = storeItem(
+      "ingredientsList",
+      JSON.stringify(ingreds)
+    );
+    if (!didStoreShoppinglist) {
+      console.log("Failed to store shoppinglist in localstorage");
+    }
+    dispatch({
+      type: "SET_INGREDIENTSLIST",
+      ingredientsList: ingreds,
+    });
+  }
+
+  async function fetchShoppingList(recipeIDsFetch) {
+    console.log("Got recipe ids:", recipeIDsFetch);
+    const ingredientsList = await fetch(`${AWS_PATH}/recipes/shoppinglist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ recipeIDs: recipeIDsFetch }),
+    });
+    const ingredientsListProcessed = await ingredientsList.json();
+    console.log("ingreds:", ingredientsListProcessed.payload);
+    setShoppingList(ingredientsListProcessed.payload);
+  }
+
+  async function setRecipeList(recipes) {
+    console.log("Inside setRecipeList");
+    // Set recipes in state
+    dispatch({ type: "SET_RECIPES", recipes: recipes });
+  }
+
+  async function register(dataPlus) {
+    console.log("dataPlus in register function:", dataPlus);
+    const postResponse = await fetch(`${AWS_PATH}/users/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...dataPlus }),
+    });
+    const postResponseJson = await postResponse.json();
+    if (!postResponseJson.success) {
+      console.log(
+        "postResponse",
+        JSON.stringify(postResponse),
+        postResponseJson
+      );
+      Alert.alert(
+        `Error! Status code ${postResponse.status}`,
+        postResponse.message,
+        [{ text: "Dismiss", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      );
+    } else {
+      // If success, save JWT to AsyncLocalStorage, set Login to be true. Redirect to next page (Allergies).
+      const didStoreItem = storeItem("token", postResponse.token);
+      if (didStoreItem) {
+        dispatch({ type: "SIGN_IN", token: postResponse.token });
+      }
+    }
+  }
+
   useEffect(() => {
     // Fetch the token from storage then navigate to our appropriate place
     const onLoad = async () => {
@@ -217,16 +323,13 @@ export default function App() {
       }
       if (token) {
         console.log("About to fetch...");
-        const reply = await fetch(
-          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/login`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: "Bearer" + " " + token,
-            },
-          }
-        );
+        const reply = await fetch(`${AWS_PATH}/users/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer" + " " + token,
+          },
+        });
         const replyJson = await reply.json();
         if (replyJson.success || (reply.status > 199 && reply.status < 250)) {
           // If yes, auto go through to LandingPage. Set loggedIn state to true. Possibly useContext for it.
@@ -252,112 +355,12 @@ export default function App() {
       userID: state.userID,
       recipeList: state.recipeList,
       ingredientsList: state.ingredientsList,
-
-      logIn: async (email_address, password) => {
-        // Send POST request with email and password, and wait for server response
-        const loginResponse = await fetch(
-          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/login`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email_address, password }),
-          }
-        );
-        const loginResponseJson = await loginResponse.json();
-        console.log(
-          "fetch response in logIn:",
-          JSON.stringify(loginResponse),
-          loginResponseJson
-        );
-        // If server returns true and with JWT
-        if (loginResponseJson.success || loginResponse.status == 200) {
-          // Save JWT to local AsyncStorage
-          const itemWasStored = storeItem("token", loginResponseJson.token);
-          if (!itemWasStored) {
-            console.log("AsyncLocalstorage failed.");
-          }
-          // Set logged in to true
-          dispatch({
-            type: "SIGN_IN",
-            token: loginResponse.token,
-            userID: loginResponse.userID,
-          });
-        } else {
-          // If server return false
-          // Tell user incorrect password
-          Alert.alert(
-            `Oops!`,
-            "Could not verify email and password.",
-            [{ text: "Dismiss", onPress: () => console.log("OK Pressed") }],
-            { cancelable: false }
-          );
-          dispatch({ type: "LOGIN_FAILURE" });
-        }
-      },
-
-      logOut: () => {
-        AsyncStorage.clear();
-        dispatch({ type: "SIGN_OUT" });
-      },
-
-      setRecipeList: async (recipes) => {
-        console.log("Inside setRecipeList");
-        const recipeIDsFetch = recipes.map((r) => r.recipe_id);
-        console.log("Got recipe ids:", recipeIDsFetch);
-        const ingredientsList = await fetch(
-          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/shoppinglist`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ recipeIDs: recipeIDsFetch }),
-          }
-        );
-        const ingredientsListProcessed = await ingredientsList.json();
-        console.log("ingreds:", ingredientsListProcessed.payload);
-        dispatch({
-          type: "SET_INGREDIENTSLIST",
-          ingredientsList: ingredientsListProcessed.payload,
-        });
-        dispatch({ type: "SET_RECIPES", recipes: recipes });
-      },
-
-      register: async (dataPlus) => {
-        console.log("dataPlus in register function:", dataPlus);
-        const postResponse = await fetch(
-          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ ...dataPlus }),
-          }
-        );
-        const postResponseJson = await postResponse.json();
-        if (!postResponseJson.success) {
-          console.log(
-            "postResponse",
-            JSON.stringify(postResponse),
-            postResponseJson
-          );
-          Alert.alert(
-            `Error! Status code ${postResponse.status}`,
-            postResponse.message,
-            [{ text: "Dismiss", onPress: () => console.log("OK Pressed") }],
-            { cancelable: false }
-          );
-        } else {
-          // If success, save JWT to AsyncLocalStorage, set Login to be true. Redirect to next page (Allergies).
-          const didStoreItem = storeItem("token", postResponse.token);
-          if (didStoreItem) {
-            dispatch({ type: "SIGN_IN", token: postResponse.token });
-          }
-        }
-      },
+      logIn,
+      logOut,
+      setShoppingList,
+      fetchShoppingList,
+      setRecipeList,
+      register,
     }),
     [state]
   );

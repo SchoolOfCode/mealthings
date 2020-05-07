@@ -8,7 +8,9 @@ import {
   TouchableOpacity,
   Alert,
   Dimensions,
-  Image
+  Image,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { COLS } from "./COLS";
 
@@ -35,13 +37,6 @@ export default function Registerscreen({ navigation }) {
   function lastNameInput(enteredText) {
     setLastName(enteredText);
   }
-  //NOTES ON REGEX FOR REFERENCE
-  ///^[a-zA-Z0-9._-]+:  Means that the email address must begin with alpha-numeric characters (both lowercase and uppercase characters are allowed). It may have periods,underscores and hyphens.
-  //@:   There must be a ‘@’ symbol after initial characters
-  //[a-zA-Z0-9.-]+: After the ‘@’ sign there must be some alpha-numeric characters. It can also contain period (‘.’) and and hyphens(‘-‘).
-  //\.: After the second group of characters there must be a period (‘.’). This is to separate domain and subdomain names.
-  //[a-zA-Z]{2,4}$/: Finally, the email address must end with two to four alphabets. Having a-z and A-Z means that both lowercase and uppercase letters are allowed
-  // {2,4} indicates the minimum and maximum number of characters. This will allow domain names with 2, 3 and 4 characters e.g.; us, tx, org, com, net, wxyz).
 
   function DOBinput(enteredText) {
     setDOB(String(enteredText));
@@ -124,188 +119,193 @@ export default function Registerscreen({ navigation }) {
         name: `${firstName} ${lastName}`,
         birthday,
         gender,
-        mother
+        mother,
       };
       console.log("Submitted data:", data);
       navigation.navigate("Register2", { data });
     }
   }
   return (
-    <View style={styles.container}>
-      <View>
-        <View style={styles.margin}>
-          <View style={styles.contain}>
-            <Text style={styles.title}>Create Your Account:</Text>
-            <TextInput
-              style={styles.inputField}
-              onChangeText={firstNameInput}
-              placeholder="First name"
-              placeholderTextColor="#FDFFF7"
-              isRequired
-            />
-            <TextInput
-              style={styles.inputField}
-              placeholder=" Last name"
-              onChangeText={lastNameInput}
-              placeholderTextColor="#FDFFF7"
-            />
-            <View style={styles.row}>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <View>
+          <View style={styles.margin}>
+            <View style={styles.contain}>
+              <Text style={styles.title}>Create Your Account:</Text>
               <TextInput
-                style={styles.box}
-                placeholder="DD"
-                onChangeText={DOBinput}
-                placeholderTextColor="#FDFFF7"
-                keyboardType="numeric"
-                maxLength={2}
+                style={styles.inputField}
+                onChangeText={firstNameInput}
+                placeholder="First name"
+                placeholderTextColor={COLS.C6_WHITE_TEXT}
+                isRequired
               />
               <TextInput
-                style={styles.box}
-                placeholder="MM"
-                onChangeText={DOBinput2}
-                placeholderTextColor="#FDFFF7"
-                keyboardType="numeric"
-                maxLength={2}
+                style={styles.inputField}
+                placeholder=" Last name"
+                onChangeText={lastNameInput}
+                placeholderTextColor={COLS.C6_WHITE_TEXT}
               />
-              <TextInput
-                style={styles.box}
-                placeholder="YYYY"
-                onChangeText={DOBinput3}
-                placeholderTextColor="#FDFFF7"
-                keyboardType="numeric"
-                maxLength={4}
-              />
-            </View>
-          </View>
-        </View>
-        <View styles={styles.position}>
-          <Text style={styles.optionText}>Are you a new mother? </Text>
-          <View style={styles.horizontal}>
-            <CheckBox
-              checkedIcon={
-                <Image
-                  style={styles.tick}
-                  source={require("../assets/images/check-box.png")}
+              <View style={styles.row}>
+                <TextInput
+                  style={styles.box}
+                  placeholder="DD"
+                  onChangeText={DOBinput}
+                  placeholderTextColor={COLS.C6_WHITE_TEXT}
+                  keyboardType="numeric"
+                  maxLength={2}
                 />
-              }
-              uncheckedIcon={
-                <Image
-                  style={styles.tick}
-                  source={require("../assets/images/blank-square.png")}
+                <TextInput
+                  style={styles.box}
+                  placeholder="MM"
+                  onChangeText={DOBinput2}
+                  placeholderTextColor={COLS.C6_WHITE_TEXT}
+                  keyboardType="numeric"
+                  maxLength={2}
                 />
-              }
-              checked={mother}
-              onPress={motherInput}
-            />
+                <TextInput
+                  style={styles.box}
+                  placeholder="YYYY"
+                  onChangeText={DOBinput3}
+                  placeholderTextColor={COLS.C6_WHITE_TEXT}
+                  keyboardType="numeric"
+                  maxLength={4}
+                />
+              </View>
+            </View>
           </View>
-          <Text style={styles.title}>Select Gender: </Text>
-          <View style={styles.horizontal}>
+          <View styles={styles.position}>
+            <Text style={styles.optionText}>Are you a new mother? </Text>
+            <View style={styles.horizontal}>
+              <CheckBox
+                checkedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/check-box.png")}
+                  />
+                }
+                uncheckedIcon={
+                  <Image
+                    style={styles.tick}
+                    source={require("../assets/images/blank-square.png")}
+                  />
+                }
+                checked={mother}
+                onPress={motherInput}
+              />
+            </View>
+            <Text style={styles.title}>Select Gender: </Text>
+            <View style={styles.horizontal}>
+              <View>
+                <Text style={styles.option}>Female </Text>
+                <CheckBox
+                  checkedIcon={
+                    <Image
+                      style={styles.tick}
+                      source={require("../assets/images/check-box.png")}
+                    />
+                  }
+                  uncheckedIcon={
+                    <Image
+                      style={styles.tick}
+                      source={require("../assets/images/blank-square.png")}
+                    />
+                  }
+                  checked={female}
+                  onPress={femaleHandler}
+                />
+              </View>
+              <View style={styles.align}>
+                <Text style={styles.option}>Male </Text>
+                <CheckBox
+                  checkedIcon={
+                    <Image
+                      style={styles.tick}
+                      source={require("../assets/images/check-box.png")}
+                    />
+                  }
+                  uncheckedIcon={
+                    <Image
+                      style={styles.tick}
+                      source={require("../assets/images/blank-square.png")}
+                    />
+                  }
+                  checked={male}
+                  onPress={maleHandler}
+                />
+              </View>
+              <View>
+                <Text style={styles.option}> Other </Text>
+                <CheckBox
+                  checkedIcon={
+                    <Image
+                      style={styles.tick}
+                      source={require("../assets/images/check-box.png")}
+                    />
+                  }
+                  uncheckedIcon={
+                    <Image
+                      style={styles.tick}
+                      source={require("../assets/images/blank-square.png")}
+                    />
+                  }
+                  checked={other}
+                  onPress={otherHandler}
+                />
+              </View>
+            </View>
+          </View>
+          <View style={styles.buttonflex}>
             <View>
-              <Text style={styles.option}>Female </Text>
-              <CheckBox
-                checkedIcon={
-                  <Image
-                    style={styles.tick}
-                    source={require("../assets/images/check-box.png")}
-                  />
-                }
-                uncheckedIcon={
-                  <Image
-                    style={styles.tick}
-                    source={require("../assets/images/blank-square.png")}
-                  />
-                }
-                checked={female}
-                onPress={femaleHandler}
-              />
+              <TouchableOpacity
+                style={styles.direction}
+                onPress={() => navigation.goBack()}
+              >
+                <Text style={styles.buttonText}>Back</Text>
+              </TouchableOpacity>
             </View>
-            <View style={styles.align}>
-              <Text style={styles.option}>Male </Text>
-              <CheckBox
-                checkedIcon={
-                  <Image
-                    style={styles.tick}
-                    source={require("../assets/images/check-box.png")}
-                  />
-                }
-                uncheckedIcon={
-                  <Image
-                    style={styles.tick}
-                    source={require("../assets/images/blank-square.png")}
-                  />
-                }
-                checked={male}
-                onPress={maleHandler}
-              />
+            <View style={styles.buttonText}>
+              <TouchableOpacity
+                style={styles.direction}
+                onPress={submitHandler}
+              >
+                <Text onPress={submitHandler} style={styles.buttonText}>
+                  Next
+                </Text>
+              </TouchableOpacity>
             </View>
-            <View>
-              <Text style={styles.option}> Other </Text>
-              <CheckBox
-                checkedIcon={
-                  <Image
-                    style={styles.tick}
-                    source={require("../assets/images/check-box.png")}
-                  />
-                }
-                uncheckedIcon={
-                  <Image
-                    style={styles.tick}
-                    source={require("../assets/images/blank-square.png")}
-                  />
-                }
-                checked={other}
-                onPress={otherHandler}
-              />
-            </View>
-          </View>
-        </View>
-        <View style={styles.buttonflex}>
-          <View>
-            <TouchableOpacity
-              style={styles.direction}
-              onPress={() => navigation.goBack()}
-            >
-              <Text style={styles.buttonText}>Back</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonText}>
-            <TouchableOpacity style={styles.direction} onPress={submitHandler}>
-              <Text onPress={submitHandler} style={styles.buttonText}>
-                Next
-              </Text>
-            </TouchableOpacity>
           </View>
         </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 const styles = StyleSheet.create({
   horizontal: {
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   contain: {
-    marginTop: 30
+    marginTop: 30,
   },
   margin: {
-    marginTop: 25
+    marginTop: 25,
   },
   arrow: {
     width: 40,
     height: 20,
     marginHorizontal: 10,
-    marginVertical: 20
+    marginVertical: 20,
   },
   tick: {
     width: 20,
     height: 20,
     borderWidth: 3,
-    borderColor: COLS.C6_WHITE_TEXT
+    borderColor: COLS.C6_WHITE_TEXT,
   },
   inputField: {
     marginVertical: 5,
@@ -319,12 +319,12 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    color: COLS.C6_WHITE_TEXT
+    color: COLS.C6_WHITE_TEXT,
   },
   buttonflex: {
     alignSelf: "center",
@@ -332,7 +332,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginVertical: 10,
-    padding: 10
+    padding: 10,
   },
   direction: {
     backgroundColor: COLS.C_BG,
@@ -343,11 +343,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    marginBottom: 50
+    marginBottom: 50,
   },
   row: {
     justifyContent: "center",
-    flexDirection: "row"
+    flexDirection: "row",
   },
   box: {
     width: 45,
@@ -361,39 +361,39 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   position: {
     flexDirection: "row",
     alignSelf: "center",
-    alignContent: "center"
+    alignContent: "center",
   },
   optionText: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   title: {
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     fontSize: 24,
     alignSelf: "center",
-    padding: 15
+    padding: 15,
   },
   option: {
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
     marginTop: 10,
-    marginLeft: 10
+    marginLeft: 10,
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });

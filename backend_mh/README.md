@@ -418,17 +418,12 @@ Push notifications
 Draggable list
 
 // Murray
-today's recipe screen needs ingredient quantities
-today's recipe screen needs scroll view for method and ingredients
-today's recipe screen potato rostis with beetrool horseradish image isn't showing
-add padding to today's recipe title and remove white border
-Change icon color if selected
+Implement counter for today's recipe so a different set of recipes show
+Add button to stop hiding password in password fields
 burger menu spacing
-Loading spash screen
-Are we caching (AsyncStorage) the recipe shopping list?
+Loading splash screen
 Request recipes that dont fight preferances / allergies.
 Make a lower resolution image for logo
 spacing on placeholder text in forms
-Add button to stop hiding password in password fields
-Login screen tapping outside the keyboard should close the keyboard
+add padding to today's recipe title and remove white border
 Add padding above title on random recipe screen
