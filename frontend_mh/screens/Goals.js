@@ -13,38 +13,15 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe,
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
+
 import { FORMAT_images } from "./FORMAT_images";
 import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
-import { Row } from "react-native-drag-flatlist";
+
+import { FORMAT_navButton, FORMAT_navButtonText } from "./FORMAT_navButton";
 
 const screenWidth = Dimensions.get("screen").width;
 const iconSize = screenWidth * (1 / 4);
 const iconColour = COLS.C4_DARK_TEXT;
-
 export default function Goals({ navigation }) {
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
@@ -53,14 +30,12 @@ export default function Goals({ navigation }) {
   const [diet, setDiet] = useState(false);
   const [time, setTime] = useState(false);
   const [cook, setCook] = useState(false);
-
   function Track(enteredText) {
     setWeight(enteredText);
   }
   function Tracked(enteredText) {
     setHeight(enteredText);
   }
-
   function handleSubmit() {
     var goals = "";
     if (fatLoss) {
@@ -82,17 +57,15 @@ export default function Goals({ navigation }) {
     console.log("data in goals", data);
     navigation.navigate("Allergies", { data });
   }
-
   function fatHandler() {
     if (diet === true) {
-      setTime(false);
+      setFatLoss(false);
     } else if (fatLoss === false) {
       setFatLoss(true);
     } else if (fatLoss === true) {
       setFatLoss(false);
     }
   }
-
   function muscleHandler() {
     if (diet === true) {
       setMuscle(false);
@@ -102,127 +75,124 @@ export default function Goals({ navigation }) {
       setMuscle(false);
     }
   }
-
   function dietHandler() {
-    if (diet === true) {
+    if (diet === false) {
       setDiet(true);
+      setFatLoss(false);
+      muscleHandler(false);
     } else if (diet === true) {
       setDiet(false);
     }
   }
-
   function timeHandler() {
-    if (diet === true) {
-      setTime(false);
-    } else if (time === false) {
+    if (time === false) {
       setTime(true);
     } else if (time === true) {
       setTime(false);
     }
   }
-
   function cookHandler() {
-    if (diet === true) {
-      setCook(false);
-      <Image source={require("../assets/images/cookingConfirmed.png")} />;
-    } else if (cook === false) {
+    if (cook === false) {
       setCook(true);
     } else if (cook === true) {
       setCook(false);
     }
   }
-
+  console.log(cook, time, diet, muscle, fatLoss);
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <ScrollView>
-        <View style={styles.header}>
-          <View style={styles.column}>
-            <Text style={styles.padding}> (Kg)</Text>
-            <Text style={styles.padding}> (cm)</Text>
-          </View>
-          <Text style={styles.Goals}>Goals</Text>
+        <View style={styles.container}>
           <View style={styles.margin}>
             <TextInput
               type="number"
               style={styles.inputField}
-              placeholder="Weight"
+              placeholder="Weight (kg)"
               placeholderTextColor="white"
               onChangeText={Track}
               maxLength={3}
             ></TextInput>
             <TextInput
               style={styles.inputField}
-              placeholder="Height"
+              placeholder="Height (cm)"
               placeholderTextColor="white"
               type="number"
               onChangeText={Tracked}
               maxLength={3}
             ></TextInput>
           </View>
-          <View style={styles.flex}>
-            <View>
+          <View>
+            <Text style={styles.Goals}>Goals</Text>
+          </View>
+          <View style={styles.icons}>
+            <View style={styles.positioning}>
               <TouchableOpacity onPress={fatHandler}>
                 <MaterialCommunityIcons
                   name="fire"
                   size={iconSize}
-                  color={iconColour}
+                  color={fatLoss ? COLS.C_RED : COLS.C6_WHITE_TEXT}
                 />
-                <Text style={styles.text}>Fatloss</Text>
+                <Text style={styles.text}>Fat Loss</Text>
               </TouchableOpacity>
             </View>
-            <View>
+            <View style={styles.positioning}>
               <TouchableOpacity onPress={muscleHandler}>
                 <FontAwesome5
                   name="weight-hanging"
-                  size={iconSize * 0.9}
-                  color={iconColour}
+                  size={iconSize}
+                  color={muscle ? COLS.C_RED : COLS.C6_WHITE_TEXT}
                 />
                 <Text style={styles.text}>Gaining Muscle</Text>
               </TouchableOpacity>
             </View>
-            <View>
+            <View style={styles.positioning}>
               <TouchableOpacity onPress={dietHandler}>
                 <MaterialCommunityIcons
                   name="food-croissant"
                   size={iconSize}
-                  color={iconColour}
+                  color={diet ? COLS.C_RED : COLS.C6_WHITE_TEXT}
                 />
                 <Text style={styles.text}>No Diet</Text>
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.flex2}>
-            <View style={styles.positioning}>
-              <TouchableOpacity onPress={timeHandler}>
-                <MaterialCommunityIcons
-                  name="clock"
-                  size={iconSize}
-                  color={iconColour}
-                />
-                <Text style={styles.text2}>Saving Time</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.positioning}>
-              <TouchableOpacity onPress={cookHandler}>
-                <MaterialCommunityIcons
-                  name="chef-hat"
-                  size={iconSize}
-                  color={iconColour}
-                />
-                <Text style={styles.text2}>Learning to Cook</Text>
-              </TouchableOpacity>
+            <View style={styles.secondRow}>
+              <View style={styles.secondLastIcon}>
+                <View style={styles.positioning}>
+                  <TouchableOpacity onPress={timeHandler}>
+                    <MaterialCommunityIcons
+                      name="clock"
+                      size={iconSize}
+                      color={time ? COLS.C_RED : COLS.C6_WHITE_TEXT}
+                    />
+                    <Text style={styles.text}>Saving Time</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.lastIcon}>
+                <View style={styles.positioning}>
+                  <TouchableOpacity onPress={cookHandler}>
+                    <MaterialCommunityIcons
+                      name="chef-hat"
+                      size={iconSize}
+                      color={cook ? COLS.C_RED : COLS.C6_WHITE_TEXT}
+                    />
+                    <Text style={styles.text}>Learning to Cook</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           </View>
-
-          <View style={styles.buttonFlex}>
+          <View style={styles.buttonPosition}>
             <TouchableOpacity
               onPress={() => navigation.goBack()}
-              style={styles.buttonText}
+              style={styles.button}
             >
-              <Text style={styles.TextStyle}>Back</Text>
+              <Text style={styles.buttonText}>Back</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={handleSubmit} style={styles.buttonText}>
-              <Text style={styles.TextStyle}>Next</Text>
+            <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+              <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -231,16 +201,40 @@ export default function Goals({ navigation }) {
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: COLS.C_BG,
+    padding: 20,
+  },
+  positioning: {
+    padding: 15,
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 5,
+  },
   margin: {
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
   },
   inputField: {
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
-    backgroundColor: COLS.C5_LIGHT_TEXT,
+    backgroundColor: COLS.C_BG,
     width: FORMAT_inputField.F_inputField_width,
     alignSelf: FORMAT_inputField.F_inputField_alignSelf,
+    alignItems: FORMAT_inputField.F_inputField_alignItems,
     height: FORMAT_inputField.F_inputField_height,
     borderRadius: FORMAT_inputField.F_inputField_borderRadius,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    color: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+    fontSize: 16,
   },
   flex: {
     flexDirection: FORMAT_navButton.F_navButton_flexDirection,
@@ -261,23 +255,60 @@ const styles = StyleSheet.create({
     marginHorizontal: FORMAT_images.F_image_marginHorizontal,
   },
   text: {
-    alignSelf: FORMAT_text.F_text_alignSelf,
-    left: 50 / 2,
-    marginVertical: 10,
-  },
-  text2: { alignSelf: FORMAT_text.F_text_alignSelf },
-  buttonFlex: {
-    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
-    justifyContent: FORMAT_navButton.F_navButton_justifyContent,
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    fontSize: 13,
+    fontWeight: "bold",
   },
   buttonText: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    color: COLS.C_BG,
-    justifyContent: FORMAT_navButton.F_navButtonText_justifyContent,
-    alignItems: FORMAT_navButton.F_navButtonText_alignItems,
-    padding: FORMAT_navButton.F_navButtonText_padding,
-    width: FORMAT_navButton.F_navButtonText_width,
-    borderRadius: FORMAT_navButton.F_navButtonText_borderRadius,
-    marginVertical: FORMAT_navButton.F_navButtonText_marginVertical,
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: COLS.C_BG,
+    borderRadius: 5,
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
+    padding: FORMAT_navButton.F_navButton_padding,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  buttonPosition: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  Goals: {
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    fontSize: 28,
+    fontWeight: "bold",
+    padding: 10,
+  },
+  icons: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  secondRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingBottom: 40,
+  },
+  lastIcon: {
+    paddingLeft: 30,
+  },
+  secondLastIcon: {
+    paddingLeft: 29,
   },
 });

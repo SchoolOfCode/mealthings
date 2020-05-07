@@ -8,32 +8,7 @@ import {
   AsyncStorage,
 } from "react-native";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe,
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_navButtonText } from "./FORMAT_navButton";
 import { AWS_PATH } from "../config/index";
 
 const storeRecipes = async (recipeArray) => {
@@ -418,7 +393,7 @@ const styles = StyleSheet.create({
   },
   todaysMeal: {
     width: 200,
-    padding: 10,
+    padding: 7,
     backgroundColor: COLS.C_RED,
     justifyContent: "flex-end",
     alignSelf: "center",
