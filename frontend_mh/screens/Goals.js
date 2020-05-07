@@ -199,7 +199,8 @@ export default function Goals({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: COLS.C_BG,
-    padding: 20
+    padding: 20,
+    flex: 1
   },
   positioning: {
     padding: 15,
