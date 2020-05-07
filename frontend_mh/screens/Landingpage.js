@@ -8,34 +8,10 @@ import {
   AsyncStorage,
 } from "react-native";
 import { COLS } from "./COLS";
-import { FORMAT_background } from "./FORMAT_background";
-import {
-  FORMAT_containers,
-  FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
-} from "./FORMAT_containers";
-import {
-  FORMAT_switches,
-  FORMAT_notes,
-  FORMAT_todaysMeal,
-  FORMAT_foodOptions,
-  FORMAT_swipeBar,
-  FORMAT_arrow,
-  FORMAT_icons,
-  FORMAT_mainRecipe,
-} from "./FORMAT_extraComponents";
-import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
-import { FORMAT_images } from "./FORMAT_images";
-import { FORMAT_inputField } from "./FORMAT_inputField";
-import { FORMAT_logo } from "./FORMAT_logo";
-import {
-  FORMAT_navButton,
-  FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
-} from "./FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_navButtonText } from "./FORMAT_navButton";
+import { AWS_PATH } from "../config/index";
 
-const _storeRecipes = async (recipeArray) => {
+const storeRecipes = async (recipeArray) => {
   try {
     const now = new Date();
     const jsonRecipeArray = await JSON.stringify(recipeArray);
@@ -48,7 +24,7 @@ const _storeRecipes = async (recipeArray) => {
   }
 };
 
-const _retrieveData = async (key) => {
+const retrieveData = async (key) => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {
@@ -76,7 +52,14 @@ const _retrieveData = async (key) => {
 };
 
 export default function LandingPage({ navigation }) {
-  const { logOut, userID, setRecipeList, recipeList } = useContext(AuthContext);
+  const {
+    logOut,
+    userID,
+    setRecipeList,
+    recipeList,
+    fetchShoppingList,
+    setShoppingList,
+  } = useContext(AuthContext);
 
   async function getLastRecipeDate() {
     console.log(
@@ -84,9 +67,7 @@ export default function LandingPage({ navigation }) {
       userID
     );
     try {
-      const res = await fetch(
-        `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`
-      );
+      const res = await fetch(`${AWS_PATH}/users/${userID}`);
       const data = await res.json();
       return data.payload[0].last_date_meals_requested;
     } catch (err) {
@@ -98,9 +79,7 @@ export default function LandingPage({ navigation }) {
   async function getTotalNoRecipes() {
     console.log("Fetching total number of recipes from remote server");
     try {
-      const res = await fetch(
-        `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes?countOnly=true`
-      );
+      const res = await fetch(`${AWS_PATH}/recipes?countOnly=true`);
       const data = await res.json();
       console.log("Recieved from total number of recipes:", data);
       return parseInt(data.payload.count);
@@ -116,7 +95,7 @@ export default function LandingPage({ navigation }) {
       if (!recipeList || recipeList.length < 14) {
         console.log("Recipe list is less than 1 in length");
         // Try to get of last recipes from local storage
-        const last_date_meals_requested_temp = await _retrieveData(
+        const last_date_meals_requested_temp = await retrieveData(
           "recipeSetDate"
         );
         let last_date_meals_requested;
@@ -145,7 +124,7 @@ export default function LandingPage({ navigation }) {
           getNewRecipes(userID);
         } else {
           // If don't need new recipes, try to get them from local storage
-          const localCopyOfRecipes = await _retrieveData("userRecipes");
+          const localCopyOfRecipes = await retrieveData("userRecipes");
           // If not in local storage, get from database
           if (!localCopyOfRecipes || localCopyOfRecipes.length < 1) {
             console.log(
@@ -162,14 +141,33 @@ export default function LandingPage({ navigation }) {
     runGetRecipes();
   }, []);
 
+  useEffect(() => {
+    if (recipeList && recipeList.length > 6) {
+      async function runLocalRecipes() {
+        // Try to get shoppinglist from local storage
+        const localCopyOfShoppinglist = await retrieveData("ingredientsList");
+        // If not in local storage, get from database
+        if (!localCopyOfShoppinglist || localCopyOfShoppinglist.length < 1) {
+          console.log(
+            "localCopyOfShoppinglist not found or length shorter than 1. Re-requesting from remote server..."
+          );
+          const recipeIDs = recipeList.map((r) => r.recipe_id);
+          fetchShoppingList(recipeIDs);
+        } else {
+          console.log("Found local copy of recipes. Setting state...");
+          setShoppingList(localCopyOfShoppinglist);
+        }
+      }
+      runLocalRecipes();
+    }
+  }, [recipeList]);
+
   // Get new recipes and load into state
   async function getNewRecipes(userID2) {
     const uID = userID || userID2 || 2;
     console.log("getNewRecipes triggered. userID2:", uID);
     let last_week_food = [];
-    const res = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${uID}`
-    );
+    const res = await fetch(`${AWS_PATH}/users/${uID}`);
     const data = await res.json();
     console.log("here2");
     console.log(
@@ -208,17 +206,15 @@ export default function LandingPage({ navigation }) {
     };
     const requests = [];
     randNums.forEach((num) => {
-      requests.push(
-        fetchData(
-          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
-        )
-      );
+      requests.push(fetchData(`${AWS_PATH}/recipes/${num}`));
     });
     Promise.all(requests).then((arrayWithData) => {
       console.log("All promises resolved. Setting state...");
       setRecipeList(arrayWithData);
       // Save recipes to local storage
-      _storeRecipes(arrayWithData);
+      storeRecipes(arrayWithData);
+      const recipeIDsToFetch = arrayWithData.map((r) => r.recipe_id);
+      fetchShoppingList(recipeIDsToFetch);
     });
     // Send PATCH to set last_weeks_recipes to the current this_weeks_recipes and this_weeks_recipes to the newly generated recipes (currently in variable randNums), and lastRecipeFetchDate to be today
     console.log(
@@ -229,21 +225,18 @@ export default function LandingPage({ navigation }) {
         last_date_meals_requested: new Date().toISOString(),
       })
     );
-    const patchResponse = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`,
-      {
-        method: "PATCH",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          last_weeks_meals: last_week_food,
-          this_weeks_meals: randNums,
-          last_date_meals_requested: new Date().toISOString(),
-        }),
-      }
-    );
+    const patchResponse = await fetch(`${AWS_PATH}/users/${userID}`, {
+      method: "PATCH",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        last_weeks_meals: last_week_food,
+        this_weeks_meals: randNums,
+        last_date_meals_requested: new Date().toISOString(),
+      }),
+    });
     console.log("patchResponse:", patchResponse);
   }
 
@@ -251,9 +244,7 @@ export default function LandingPage({ navigation }) {
   async function reRequestRecipes(userIDNotState) {
     console.log("reRequestRecipes triggered...");
     console.log("userID:", userIDNotState);
-    const res = await fetch(
-      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userIDNotState}`
-    );
+    const res = await fetch(`${AWS_PATH}/users/${userIDNotState}`);
     const data = await res.json();
     console.log("reRequested data arrived:", data);
     console.log("here4");
@@ -273,17 +264,15 @@ export default function LandingPage({ navigation }) {
     };
     const requests = [];
     this_week_food.forEach((num) => {
-      requests.push(
-        fetchData(
-          `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/recipes/${num}`
-        )
-      );
+      requests.push(fetchData(`${AWS_PATH}/recipes/${num}`));
     });
     Promise.all(requests).then((arrayWithData) => {
       console.log("Resolved all promises for re-requested recipes");
       setRecipeList(arrayWithData);
       // Save recipes to local storage
-      _storeRecipes(arrayWithData);
+      storeRecipes(arrayWithData);
+      const recipeIDsToFetch = arrayWithData.map((r) => r.recipe_id);
+      fetchShoppingList(recipeIDsToFetch);
     });
   }
 
@@ -404,7 +393,7 @@ const styles = StyleSheet.create({
   },
   todaysMeal: {
     width: 200,
-    padding: 10,
+    padding: 7,
     backgroundColor: COLS.C_RED,
     justifyContent: "flex-end",
     alignSelf: "center",

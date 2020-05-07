@@ -1,6 +1,13 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../App.js";
-import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  ScrollView,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -30,18 +37,12 @@ import {
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
+const screenWidth = Dimensions.get("window").width;
+
 function IngredientItem({ item }) {
   const [bought, setBought] = useState(false);
-
-  // const theString = `${item.quantity} ${item.unit} ${item.ingredient}`;
   return (
-    <TouchableOpacity
-      onPress={() => setBought(!bought)}
-      key={item
-        .split(" ")
-        .join("")
-        .replace(/,|-|\(|\)/g, "")}
-    >
+    <TouchableOpacity onPress={() => setBought(!bought)}>
       <View style={styles.ingredientItemContainer}>
         <View style={bought ? styles.circleChecked : styles.circle}></View>
         <Text style={bought ? styles.itemTextChecked : styles.itemText}>
@@ -52,27 +53,35 @@ function IngredientItem({ item }) {
   );
 }
 
-function cleanString(string) {
-  return string.split('","').map((x) => x.replace(/"|{|}|\\|\//g, ""));
-}
-
 export default function ShoppingList({ navigation }) {
-  const { userID, recipeList, ingredientsList } = useContext(AuthContext);
-
+  const { ingredientsList } = useContext(AuthContext);
+  console.log("ingredientsList", ingredientsList);
   return (
     <View style={styles.container}>
       <ScrollView>
-        {ingredientsList.sort().map((item) => (
-          <IngredientItem item={item} />
-        ))}
+        {ingredientsList
+          ? ingredientsList.sort().map((item, index) => (
+              <IngredientItem
+                item={item}
+                index={index}
+                key={
+                  "a" +
+                  item
+                    .split(" ")
+                    .join("")
+                    .replace(/,|-|\(|\)/g, "") +
+                  index
+                }
+              />
+            ))
+          : null}
       </ScrollView>
-
       <View>
         <TouchableOpacity
           style={styles.formatting}
           onPress={() => navigation.navigate("TodaysRecipe")}
         >
-          <Text> Start Cooking </Text>
+          <Text style={styles.buttonText}> Start Cooking! </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -85,7 +94,13 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     padding: 5,
   },
-
+  buttonText: {
+    textAlign: "center",
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+    fontSize: 18,
+  },
   arrow: {
     height: 30,
     width: 30,
@@ -97,7 +112,19 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C5_LIGHT_TEXT,
     marginBottom: 20,
     padding: 20,
-    alignItems: "center",
+    alignSelf: "center",
+    backgroundColor: COLS.C_RED,
+    width: screenWidth * 0.9,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
   },
   ingredientItemContainer: {
     flexDirection: "row",

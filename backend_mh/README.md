@@ -418,9 +418,12 @@ Push notifications
 Draggable list
 
 // Murray
-Make goals / prefs / diet send PATCH
-key prop isn't unique in shopping list - just add a counter on the end.
-today's recipe screen needs ingredient quantities
-today's recipe screen needs scroll view for method and ingredients
-today's recipe screen potato rostis with beetrool horseradish image isn't showing
+Implement counter for today's recipe so a different set of recipes show
+Add button to stop hiding password in password fields
+burger menu spacing
+Loading splash screen
+Request recipes that dont fight preferances / allergies.
+Make a lower resolution image for logo
+spacing on placeholder text in forms
 add padding to today's recipe title and remove white border
+Add padding above title on random recipe screen

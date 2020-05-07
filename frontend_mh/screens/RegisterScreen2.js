@@ -9,6 +9,8 @@ import {
   TouchableOpacity,
   Dimensions,
   Alert,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
@@ -61,40 +63,47 @@ export default function Registerscreen2({ navigation, route }) {
       emailAddress == "" ||
       emailAddress == null
     ) {
-      Alert.alert("please check email is correct and resubmit");
+      Alert.alert("Please check email is correct and resubmit");
+    } else if (!password || password.length < 2) {
+      Alert.alert("Password must be longer than 2 characters long!");
+    } else {
+      const dataPlus = { ...data, password, email_address: emailAddress };
+      register(dataPlus);
     }
-    const dataPlus = { ...data, password, email_address: emailAddress };
-    register(dataPlus);
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Sign Up Details</Text>
-      <TextInput
-        style={styles.inputField}
-        onChangeText={emailChangeHandler}
-        placeholder="Email address"
-        placeholderTextColor="white"
-        keyboardType="email-address"
-      />
-      <TextInput
-        style={styles.inputField}
-        placeholder="Password"
-        onChangeText={passwordHandler}
-        placeholderTextColor="white"
-      />
-      <View style={styles.buttonFlex}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.buttonText}
-        >
-          <Text style={styles.textStyle}>Back</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
-          <Text style={styles.textStyle}>Next</Text>
-        </TouchableOpacity>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Sign Up Details</Text>
+        <TextInput
+          style={styles.inputField}
+          onChangeText={emailChangeHandler}
+          placeholder="Email address"
+          placeholderTextColor="white"
+          keyboardType="email-address"
+        />
+        <TextInput
+          style={styles.inputField}
+          placeholder="Password"
+          autoCompleteType={"password"}
+          secureTextEntry={true}
+          onChangeText={passwordHandler}
+          placeholderTextColor="white"
+        />
+        <View style={styles.buttonFlex}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.buttonText}
+          >
+            <Text style={styles.textStyle}>Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={SubmitHandler} style={styles.buttonText}>
+            <Text style={styles.textStyle}>Next</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 
