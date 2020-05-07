@@ -67,9 +67,7 @@ export default function Goals({ navigation }) {
     }
   }
   function muscleHandler() {
-    if (diet === true) {
-      setMuscle(false);
-    } else if (muscle === false) {
+    if (muscle === false) {
       setMuscle(true);
     } else if (muscle === true) {
       setMuscle(false);
@@ -79,7 +77,7 @@ export default function Goals({ navigation }) {
     if (diet === false) {
       setDiet(true);
       setFatLoss(false);
-      muscleHandler(false);
+      setMuscle(false);
     } else if (diet === true) {
       setDiet(false);
     }
@@ -98,11 +96,11 @@ export default function Goals({ navigation }) {
       setCook(false);
     }
   }
-  console.log(cook, time, diet, muscle, fatLoss);
+
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <ScrollView>
-        <View style={styles.container}>
+      <ScrollView style={styles.container}>
+        <View>
           <View style={styles.margin}>
             <TextInput
               type="number"
@@ -139,7 +137,7 @@ export default function Goals({ navigation }) {
               <TouchableOpacity onPress={muscleHandler}>
                 <FontAwesome5
                   name="weight-hanging"
-                  size={iconSize}
+                  size={iconSize * 0.9}
                   color={muscle ? COLS.C_RED : COLS.C6_WHITE_TEXT}
                 />
                 <Text style={styles.text}>Gaining Muscle</Text>
@@ -202,6 +200,7 @@ export default function Goals({ navigation }) {
 }
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: COLS.C_BG,
     padding: 20,
   },
