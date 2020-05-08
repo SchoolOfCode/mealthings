@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { AuthContext } from "../App.js";
 import {
   StyleSheet,
   Text,
@@ -7,9 +6,14 @@ import {
   TouchableOpacity,
   AsyncStorage,
 } from "react-native";
-import { COLS } from "./COLS";
+
+import { AuthContext } from "../App.js";
+import { AWS_PATH } from "../config";
+
 import { FORMAT_navButtonText } from "./FORMAT_navButton";
-import { AWS_PATH } from "../config/index";
+import { COLS } from "./COLS";
+
+const MIN_NUM_RECIPIES = 6;
 
 const storeRecipes = async (recipeArray) => {
   try {
@@ -142,7 +146,7 @@ export default function LandingPage({ navigation }) {
   }, []);
 
   useEffect(() => {
-    if (recipeList && recipeList.length > 6) {
+    if (recipeList && recipeList.length > MIN_NUM_RECIPIES) {
       async function runLocalRecipes() {
         // Try to get shoppinglist from local storage
         const localCopyOfShoppinglist = await retrieveData("ingredientsList");
