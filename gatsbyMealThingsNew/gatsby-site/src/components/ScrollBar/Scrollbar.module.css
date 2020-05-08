@@ -1,0 +1,9 @@
+.scrollBarText {
+  text-transform: uppercase;
+  letter-spacing: 1rem;
+  font-size: 2.2rem;
+  font-weight: 400;
+  text-align: center;
+  opacity: 0.5;
+  font-family: "Playfair Display", serif;
+}
