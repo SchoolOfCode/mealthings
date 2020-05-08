@@ -604,37 +604,47 @@ const App = () => {
             <Text style={styles.headingText}>{display}</Text>
             <Image
               style={{
-                width: 250,
+                width: 260,
                 height: 150,
-
-                resizeMode: "contain",
+                borderRadius: 5,
               }}
               source={{
                 uri: visual,
               }}
             />
 
-            <View styles={styles.textmovement}>
-              <Text> Nutritional breakdown</Text>
-              <Text> Carbohydrates: {carbs}g </Text>
-              <Text> Protein: {prot}g</Text>
-              <Text> Calories:{cals} /Kcals</Text>
-              <Text> Sugars: {sugar}g </Text>
-              <Text> Preparation Time: {cooking} minutes</Text>
-              <Text> Fats: {saturates}</Text>
+            <View style={styles.textmovement}>
+              <Text style={styles.Heading}> Nutritional breakdown</Text>
+              <Text style={styles.nutritionbreakdown}>
+                {" "}
+                Carbohydrates: {carbs}g{" "}
+              </Text>
+              <Text style={styles.nutritionbreakdown}> Protein: {prot}g</Text>
+              <Text style={styles.nutritionbreakdown}>
+                {" "}
+                Calories:{cals} /Kcals
+              </Text>
+              <Text style={styles.nutritionbreakdown}> Sugars: {sugar}g </Text>
+              <Text style={styles.nutritionbreakdown}>
+                {" "}
+                Preparation Time: {cooking} minutes
+              </Text>
+              <Text style={styles.nutritionbreakdown}> Fats: {saturates}</Text>
             </View>
             <ScrollView>
-              <View>
-                <Text> method: {method} </Text>
-                <Text> Ingredients: {ingredients} </Text>
+              <View style={styles.methodIngredient}>
+                <Text style={styles.Heading}> Method: </Text>
+                <Text style={styles.methodIngredient}>{method} </Text>
+                <Text style={styles.Heading}> Ingredients</Text>
+                <Text style={styles.methodIngredient}>{ingredients} </Text>
                 <Text> {visible}</Text>
               </View>
 
               <TouchableHighlight
                 style={{
                   ...styles.openButton,
-                  backgroundColor: "#2196F3",
-                  marginVertical: 17,
+                  backgroundColor: "#FB4B3D",
+                  marginVertical: 35,
                   bottom: 40,
                 }}
                 onPress={() => {
@@ -649,11 +659,11 @@ const App = () => {
       </Modal>
 
       <FlatList
-        style={styles.BG}
         data={data}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
         onMoveEnd={setData}
+        style={styles.color}
       />
     </View>
   );
@@ -665,14 +675,27 @@ const styles = StyleSheet.create({
     fontSize: 20,
     right: 10,
   },
-  BG: {
-    backgroundColor: "black",
+  nutritionbreakdown: {
+    textAlign: "auto",
+    alignSelf: "flex-start",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingLeft: "20%",
+    color: "#FDFFF7",
+    fontSize: 15,
   },
   mainTitle: {
     fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
     fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
     marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
     alignSelf: FORMAT_headings.F_heading_alignSelf,
+  },
+  Heading: {
+    color: "white",
+    fontSize: 20,
+    textAlign: "center",
+    marginVertical: 5,
+    marginBottom: 5,
   },
   item: {
     justifyContent: "space-around",
@@ -687,7 +710,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     alignContent: "center",
     alignSelf: "center",
-    color: "white",
+    color: "#FDFFF7",
   },
   margin: {
     marginTop: 20,
@@ -712,22 +735,24 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: "#A6E6AB",
     borderRadius: 20,
+    borderColor: "white",
+    borderWidth: 5,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
+    shadowColor: "black",
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 7,
+      height: 12,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 6.25,
     shadowRadius: 3.84,
     elevation: 5,
   },
   openButton: {
     backgroundColor: "red",
-    borderRadius: 20,
+    borderRadius: 5,
     padding: 10,
     elevation: 2,
   },
@@ -736,21 +761,25 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-  },
+
   headingText: {
     marginBottom: 15,
-    borderRadius: 4,
-    textAlign: "center",
+    borderRadius: 5,
+    textAlign: "auto",
     alignItems: "center",
     alignSelf: "center",
     justifyContent: "center",
-    backgroundColor: "#2196F3",
+    backgroundColor: "#FB4B3D",
+    padding: 10,
+    paddingHorizontal: "12%",
     justifyContent: "space-around",
     fontWeight: "bold",
     color: "white",
+  },
+  methodIngredient: {
+    marginVertical: "2%",
+    color: "#FDFFF7",
+    fontSize: 15,
   },
 });
 
