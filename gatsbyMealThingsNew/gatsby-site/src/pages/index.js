@@ -14,12 +14,6 @@ import SimpleRating from "../components/Rating/index.js"
 import NodeMailer from "../components/NodeMailer/index"
 import Vision from "../components/Vision/index"
 
-function timer() {
-  setTimeout(function() {
-    alert("Time to take a break!")
-  }, 15)
-}
-
 function IndexPage() {
   return (
     <>
