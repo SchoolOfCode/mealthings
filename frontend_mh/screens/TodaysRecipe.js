@@ -151,15 +151,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   pageTitle: {
-    fontSize: 20,
+    fontSize: 15,
     borderRadius: 5,
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     marginTop: 5,
+    bottom: 20,
     marginBottom: 15,
     backgroundColor: COLS.C_RED,
     width: "75%",
-    textAlign: "auto",
+    textAlign: "center",
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -177,10 +178,10 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: "30%",
-    marginBottom: 15,
-    marginTop: 15,
-    bottom: 10,
+    height: "50%",
+    marginBottom: -39,
+
+    bottom: 50,
   },
   buttonView: {
     flexDirection: "row",
@@ -188,7 +189,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     top: -10,
-    borderWidth: 2,
+
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
     shadowOffset: {
