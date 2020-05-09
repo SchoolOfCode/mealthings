@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import css from "./module.NodeMailer.css"
 
 function NodeMailer(formSubmission) {
   const [subject, setSubject] = useState("")
@@ -48,7 +49,7 @@ function NodeMailer(formSubmission) {
         <input
           type="text"
           value={subject}
-          placeholder="subject"
+          placeholder="name"
           name="subject"
           onChange={handleSubjectChange}
         ></input>
@@ -62,7 +63,7 @@ function NodeMailer(formSubmission) {
         <input
           type="text"
           value={text}
-          placeholder="text"
+          placeholder="message of interest"
           name="text"
           onChange={handleTextChange}
         ></input>
