@@ -13,12 +13,7 @@ import ScrollBar from "../components/ScrollBar/index"
 import SimpleRating from "../components/Rating/index.js"
 import NodeMailer from "../components/NodeMailer/index"
 import Vision from "../components/Vision/index"
-
-function timer() {
-  setTimeout(function() {
-    alert("Time to take a break!")
-  }, 15)
-}
+import Impact from "../components/Impact/impact"
 
 function IndexPage() {
   return (
@@ -67,6 +62,7 @@ function IndexPage() {
             <a href="/#sectionAboutUs" title="AboutUs">
               About Us
             </a>
+            <Impact />
           </div>
 
           <div className={scss.sectionReviews}>
