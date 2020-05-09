@@ -14,6 +14,7 @@ import SimpleRating from "../components/Rating/index.js"
 import NodeMailer from "../components/NodeMailer/index"
 import Vision from "../components/Vision/index"
 import Impact from "../components/Impact/impact"
+import Download from "../components/Download"
 
 function IndexPage() {
   return (
@@ -30,6 +31,12 @@ function IndexPage() {
             <br></br>
             <br></br>
 
+            <div className={scss.sectionDownload} id="download-id">
+              <br></br>
+            </div>
+            <Popover />
+            <Download />
+
             <br></br>
             <div className={scss.sectionVision} id="vision-id">
               <Vision />
@@ -37,17 +44,17 @@ function IndexPage() {
           </div>
           <br></br>
 
-          <div className={scss.sectionDownload} id="download-id">
-            <br></br>
-          </div>
-          <Popover />
-
           <div className={scss.sectionSetup} id="setup-id">
             <br></br>
           </div>
           <CustomizedSteppers />
 
           <div className={scss.sectionAboutUs} id="about-us-id">
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+
             <Impact />
           </div>
 
