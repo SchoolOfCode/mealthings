@@ -95,7 +95,7 @@ export default function BackToTop(props) {
               className={css.anchorLinks}
               onClick={() => handleLink("about-us-id")}
             >
-              About us
+              Impact
             </p>
             |
             <p
