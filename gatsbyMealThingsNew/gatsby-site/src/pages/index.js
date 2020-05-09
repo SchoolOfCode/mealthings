@@ -14,6 +14,7 @@ import SimpleRating from "../components/Rating/index.js"
 import NodeMailer from "../components/NodeMailer/index"
 import Vision from "../components/Vision/index"
 import Impact from "../components/Impact/impact"
+import Reviews from "../components/Reviews/index"
 
 function IndexPage() {
   return (
@@ -69,6 +70,7 @@ function IndexPage() {
             <a href="/#sectionReviews" title="Reviews">
               Reviews
             </a>
+            <Reviews />
             <SimpleRating />
           </div>
           <br></br>
