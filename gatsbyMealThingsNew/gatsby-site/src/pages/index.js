@@ -70,6 +70,8 @@ function IndexPage() {
           <br></br>
 
           <div className={scss.sectionContact} id="contact-id">
+            <br></br>
+
             <NodeMailer />
           </div>
           <br></br>
