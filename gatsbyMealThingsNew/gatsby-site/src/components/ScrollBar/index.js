@@ -16,6 +16,14 @@ import { AnchorLink } from "gatsby-plugin-anchor-links"
 
 // import { HashLink as Link } from 'react-router-hash-link';
 
+const handleLink = linkID => {
+  const anchor = document.querySelector("#" + linkID)
+  console.log("handle link called,", anchor)
+  if (anchor) {
+    anchor.scrollIntoView({ behavior: "smooth", block: "center" })
+  }
+}
+
 const useStyles = makeStyles(theme => ({
   root: {
     position: "fixed",
@@ -40,7 +48,6 @@ function ScrollTop(props) {
     const anchor = (event.target.ownerDocument || document).querySelector(
       "#back-to-top-anchor"
     )
-
     if (anchor) {
       anchor.scrollIntoView({ behavior: "smooth", block: "center" })
     }
@@ -70,11 +77,40 @@ export default function BackToTop(props) {
       <AppBar style={{ background: "#FB4B3D" }}>
         <Toolbar>
           <div className={css.scrollBarText}>
-            <AnchorLink to="/#sectionDownload" title="Download" /> |
-            <AnchorLink to="/#sectionSetup" title="Setup" /> | |
-            <AnchorLink to="/#sectionAboutUs" title="About" /> |
-            <AnchorLink to="/#sectionReviews" title="Reviews" /> |
-            <AnchorLink to="/#contact" title="Contact" /> |
+            <p
+              className={css.anchorLinks}
+              onClick={() => handleLink("download-id")}
+            >
+              Download
+            </p>
+            |
+            <p
+              className={css.anchorLinks}
+              onClick={() => handleLink("setup-id")}
+            >
+              Set up
+            </p>
+            |
+            <p
+              className={css.anchorLinks}
+              onClick={() => handleLink("about-us-id")}
+            >
+              About us
+            </p>
+            |
+            <p
+              className={css.anchorLinks}
+              onClick={() => handleLink("reviews-id")}
+            >
+              Reviews
+            </p>
+            |
+            <p
+              className={css.anchorLinks}
+              onClick={() => handleLink("contact-id")}
+            >
+              Register interest
+            </p>
           </div>
         </Toolbar>
       </AppBar>

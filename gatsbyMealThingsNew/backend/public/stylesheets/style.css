@@ -4,5 +4,29 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #00b7ff;
+}
+
+.scrollBarText {
+  width: 100%;
+  display: "flex";
+  justify-content: "space-around";
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-family: "Playfair Display", serif;
+  letter-spacing: 0.5rem;
+  color: "green";
+}
+
+.anchorLinks {
+  display: inline;
+  color: "green";
+  padding-left: "20px";
+  padding-right: "20px";
+}
+
+.anchorLinks:hover {
+  display: inline;
+  color: "purple";
 }
