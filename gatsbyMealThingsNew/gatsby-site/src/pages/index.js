@@ -59,6 +59,7 @@ function IndexPage() {
             <Impact />
           </div>
 
+
           <div className={scss.sectionReviews} id="reviews-id">
             <br></br>
             <br></br>

@@ -15,6 +15,7 @@ import {
 import { COLS } from "./COLS";
 
 import { FORMAT_navButtonText } from "./FORMAT_navButton";
+import { FORMAT_inputField } from "./FORMAT_inputField";
 
 const screenWidth = Dimensions.get("screen").width;
 
@@ -92,14 +93,7 @@ export default function Registerscreen({ navigation }) {
   }
 
   function submitHandler() {
-    if (
-      gender == null ||
-      firstName == null ||
-      lastName == null ||
-      DOB == null ||
-      DOB2 == null ||
-      DOB3 == null
-    ) {
+    if (!gender || !firstName || !lastName || !DOB || !DOB2 || !DOB3) {
       Alert.alert("Please ensure all data fields are complete.");
       return;
     } else if (DOB <= 0 || DOB > 31) {
@@ -121,7 +115,7 @@ export default function Registerscreen({ navigation }) {
         gender,
         mother,
       };
-      console.log("Submitted data:", data);
+      console.log("Submitted data:", data, "ln:", lastName.length, !lastName);
       navigation.navigate("Register2", { data });
     }
   }
@@ -295,12 +289,6 @@ const styles = StyleSheet.create({
   margin: {
     marginTop: 25,
   },
-  arrow: {
-    width: 40,
-    height: 20,
-    marginHorizontal: 10,
-    marginVertical: 20,
-  },
   tick: {
     width: 20,
     height: 20,
@@ -308,6 +296,8 @@ const styles = StyleSheet.create({
     borderColor: COLS.C6_WHITE_TEXT,
   },
   inputField: {
+    fontSize: 16,
+    padding: FORMAT_inputField.F_inputField_padding,
     marginVertical: 5,
     backgroundColor: COLS.C_BG,
     width: 200,
@@ -344,14 +334,18 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     marginBottom: 50,
+    fontSize: 16,
+    padding: 10,
   },
   row: {
     justifyContent: "center",
     flexDirection: "row",
   },
   box: {
-    width: 45,
-    height: 25,
+    fontSize: 16,
+    textAlign: "center",
+    width: 53,
+    height: 50,
     backgroundColor: COLS.C_BG,
     margin: 10,
     borderRadius: 5,
@@ -377,6 +371,7 @@ const styles = StyleSheet.create({
     color: COLS.C6_WHITE_TEXT,
     fontWeight: "bold",
     alignSelf: "center",
+    fontSize: 16,
   },
   title: {
     fontWeight: "bold",
@@ -390,6 +385,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     marginLeft: 10,
+    fontSize: 16,
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,

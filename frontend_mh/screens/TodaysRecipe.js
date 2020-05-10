@@ -116,7 +116,9 @@ export default function TodaysRecipe() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.pageTitle}>{todaysRecipe.name}</Text>
+      <Text style={styles.pageTitle}>
+        {todaysRecipe.name.replace(/\s+/g, " ")}
+      </Text>
       <Image style={styles.image} source={{ uri: todaysRecipe.url }} />
       <View style={styles.buttonView}>
         <TouchableOpacity
@@ -151,15 +153,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   pageTitle: {
-    fontSize: 20,
+    position: "absolute",
+    padding: 5,
+    textAlign: "center",
+    fontSize: 24,
     borderRadius: 5,
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     marginTop: 5,
-    marginBottom: 15,
     backgroundColor: COLS.C_RED,
-    width: "75%",
-    textAlign: "auto",
+    width: "80%",
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -170,34 +173,19 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    alignSelf: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    top: 5,
   },
   image: {
     width: "100%",
-    height: "30%",
-    marginBottom: 15,
-    marginTop: 15,
-    bottom: 10,
+    height: "45%",
   },
   buttonView: {
     flexDirection: "row",
-    height: 50,
     justifyContent: "center",
     alignItems: "center",
-    top: -10,
+    borderBottomColor: COLS.C4_DARK_TEXT,
+    borderTopColor: COLS.C4_DARK_TEXT,
     borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
+    borderStyle: "solid",
   },
   buttonText: {
     alignSelf: "center",
