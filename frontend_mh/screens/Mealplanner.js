@@ -20,7 +20,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: COLS.C_BG,
   },
-  color: {
-    backgroundColor: COLS.C_BG,
-  },
+  color: { width: 500 },
 });

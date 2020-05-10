@@ -10,6 +10,7 @@ import { FORMAT_headings } from "./FORMAT_headings";
 import { FORMAT_navButton } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 import { FORMAT_navButtonText } from "./FORMAT_navButton";
+
 export default function Preferences({ navigation, route }) {
   const { userID } = useContext(AuthContext);
   const { data } = route.params;
@@ -18,88 +19,68 @@ export default function Preferences({ navigation, route }) {
   const [ovovegetarian, setOvovegetarian] = useState(false);
   const [lactoVegetarian, setlactoVegetarian] = useState(false);
   const [vegan, setVegan] = useState(false);
-  const [cheese, setCheese] = useState(false);
-  const [orange, setOrange] = useState(false);
-  const [chocolate, setChocolate] = useState(false);
-  const [beetroot, setBeetroot] = useState(false);
-  const [post, setPost] = useState();
+
   function noRequirementHandler() {
-    if (noRequirement === false) {
+    if (noRequirement === true) {
+      setNoRequirement(false);
+    } else {
       setNoRequirement(true);
       setVegetarian(false);
       setOvovegetarian(false);
       setlactoVegetarian(false);
       setVegan(false);
-    } else if (noRequirement === true) {
-      setNoRequirement(false);
     }
   }
+
   function vegetarianHandler() {
-    if (noRequirement === true) {
+    if (vegetarian === true) {
       setVegetarian(false);
-    } else if (vegetarian === false) {
+    } else {
+      setNoRequirement(false);
       setVegetarian(true);
-    } else if (vegetarian === true) {
-      setVegetarian(false);
+      setOvovegetarian(false);
+      setlactoVegetarian(false);
+      setVegan(false);
     }
   }
+
   function ovovegetarianHandler() {
-    if (noRequirement === true) {
+    if (ovovegetarian === true) {
       setOvovegetarian(false);
-    } else if (ovovegetarian === false) {
+    } else {
+      setNoRequirement(false);
+      setVegetarian(false);
       setOvovegetarian(true);
-    } else if (ovovegetarian === true) {
-      setOvovegetarian(false);
+      setlactoVegetarian(false);
+      setVegan(false);
     }
   }
+
   function lactoHander() {
-    if (noRequirement === true) {
+    if (lactoVegetarian === true) {
       setlactoVegetarian(false);
-    } else if (lactoVegetarian === false) {
+    } else {
+      setNoRequirement(false);
+      setVegetarian(false);
+      setOvovegetarian(false);
       setlactoVegetarian(true);
-    } else if (lactoVegetarian === true) {
-      setlactoVegetarian(false);
+      setVegan(false);
     }
   }
+
   function veganHandler() {
-    if (noRequirement === true) {
+    if (vegan === true) {
       setVegan(false);
-    } else if (vegan === false) {
+    } else {
+      setNoRequirement(false);
+      setVegetarian(false);
+      setOvovegetarian(false);
+      setlactoVegetarian(false);
       setVegan(true);
-    } else if (vegan === true) {
-      setVegan(false);
     }
   }
-  function cheeseHandler() {
-    if (cheese === false) {
-      setCheese(true);
-    } else if (cheese === true) {
-      setCheese(false);
-    }
-  }
-  function orangeHandler() {
-    if (orange === false) {
-      setOrange(true);
-    } else if (orange === true) {
-      setOrange(false);
-    }
-  }
-  function chocolateHandler() {
-    if (chocolate === false) {
-      setChocolate(true);
-    } else if (chocolate === true) {
-      setChocolate(false);
-    }
-  }
-  function beetrootHandler() {
-    if (beetroot === false) {
-      setBeetroot(true);
-    } else if (beetroot === true) {
-      setBeetroot(false);
-    }
-  }
+
   function postHandler() {
-    setPost("submitted");
     var food_prefs_inc = "";
     if (vegetarian) {
       food_prefs_inc = "vegetarian";
@@ -112,40 +93,32 @@ export default function Preferences({ navigation, route }) {
     } else {
       food_prefs_inc = "noRequirement";
     }
-    if (cheese) {
-      food_prefs_inc += ",cheese,";
-    } else if (orange) {
-      food_prefs_inc += ",orange,";
-    } else if (chocolate) {
-      food_prefs_inc += ",chocolate,";
-    } else if (beetroot) {
-      food_prefs_inc += ",beetroot,";
-    }
-    data[food_prefs_inc] = food_prefs_inc;
+    data["food_prefs_inc"] = food_prefs_inc;
     const options = {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     };
     fetch(
       `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`,
       options
     )
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(data => {
+      .then((data) => {
         console.log("Return from DietaryPreferences:", data);
       })
-      .catch(err => {
+      .catch((err) => {
         console.warn(err);
       });
     console.log("final data in dietary prefs", data);
     navigation.navigate("LandingPage");
   }
+
   return (
     <ScrollView style={styles.background}>
       <Text style={styles.header}> Diet Preferences</Text>
@@ -154,9 +127,9 @@ export default function Preferences({ navigation, route }) {
         <Text style={styles.subheading}> I have no dietary Requirements.</Text>
         <Switch
           style={styles.switch}
-          trackColor={{ false: "#767577", true: "#FB4B3D" }}
-          thumbColor={noRequirement ? "#F4F3F4" : "#F4F3F4"}
-          ios_backgroundColor="#3E3E3E"
+          trackColor={{ false: COLS.C5_LIGHT_TEXT, true: COLS.C_RED }}
+          thumbColor={COLS.C6_WHITE_TEXT}
+          ios_backgroundColor={COLS.C4_DARK_TEXT}
           onValueChange={noRequirementHandler}
           value={noRequirement}
         />
@@ -166,9 +139,9 @@ export default function Preferences({ navigation, route }) {
         </Text>
         <Switch
           style={styles.switch}
-          trackColor={{ false: "#767577", true: "#FB4B3D" }}
-          thumbColor={vegetarian ? "#F4F3F4" : "#F4F3F4"}
-          ios_backgroundColor="#3E3E3E"
+          trackColor={{ false: COLS.C5_LIGHT_TEXT, true: COLS.C_RED }}
+          thumbColor={COLS.C6_WHITE_TEXT}
+          ios_backgroundColor={COLS.C4_DARK_TEXT}
           onValueChange={vegetarianHandler}
           value={vegetarian}
         />
@@ -177,9 +150,9 @@ export default function Preferences({ navigation, route }) {
         <Text style={styles.subheading}> poultry nor fish.</Text>
         <Switch
           style={styles.switch}
-          trackColor={{ false: "#767577", true: "#FB4B3D" }}
-          thumbColor={ovovegetarian ? "#F4F3F4" : "#F4F3F4"}
-          ios_backgroundColor="#3E3E3E"
+          trackColor={{ false: COLS.C5_LIGHT_TEXT, true: COLS.C_RED }}
+          thumbColor={COLS.C6_WHITE_TEXT}
+          ios_backgroundColor={COLS.C4_DARK_TEXT}
           onValueChange={ovovegetarianHandler}
           value={ovovegetarian}
         />
@@ -188,9 +161,9 @@ export default function Preferences({ navigation, route }) {
         <Text style={styles.subheading}> poultry nor fish.</Text>
         <Switch
           style={styles.switch}
-          trackColor={{ false: "#767577", true: "#FB4B3D" }}
-          thumbColor={lactoVegetarian ? "#F4F3F4" : "#F4F3F4"}
-          ios_backgroundColor="#3E3E3E"
+          trackColor={{ false: COLS.C5_LIGHT_TEXT, true: COLS.C_RED }}
+          thumbColor={COLS.C6_WHITE_TEXT}
+          ios_backgroundColor={COLS.C4_DARK_TEXT}
           onValueChange={lactoHander}
           value={lactoVegetarian}
         />
@@ -199,48 +172,11 @@ export default function Preferences({ navigation, route }) {
         <Text style={styles.subheading}>fish nor animal products.</Text>
         <Switch
           style={styles.switch}
-          trackColor={{ false: "#767577", true: "#FB4B3D" }}
-          thumbColor={vegan ? "#F4F3F4" : "#F4F3F4"}
-          ios_backgroundColor="#3E3E3E"
+          trackColor={{ false: COLS.C5_LIGHT_TEXT, true: COLS.C_RED }}
+          thumbColor={COLS.C6_WHITE_TEXT}
+          ios_backgroundColor={COLS.C4_DARK_TEXT}
           onValueChange={veganHandler}
           value={vegan}
-        />
-        <Text style={styles.subheader}>Preferences</Text>
-        <Text style={styles.text}> Cheese</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#FB4B3D" }}
-          thumbColor={cheese ? "#F4F3F4" : "#F4F3F4"}
-          ios_backgroundColor="#3E3E3E"
-          onValueChange={cheeseHandler}
-          value={cheese}
-        />
-        <Text style={styles.text}> Orange</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#FB4B3D" }}
-          thumbColor={orange ? "#F4F3F4" : "#F4F3F4"}
-          ios_backgroundColor="#3E3E3E"
-          onValueChange={orangeHandler}
-          value={orange}
-        />
-        <Text style={styles.text}> Chocolate</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#FB4B3D" }}
-          thumbColor={chocolate ? "#F4F3F4" : "#F4F3F4"}
-          ios_backgroundColor="#3E3E3E"
-          onValueChange={chocolateHandler}
-          value={chocolate}
-        />
-        <Text style={styles.text}> Beetroot</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#FB4B3D" }}
-          thumbColor={beetroot ? "#F4F3F4" : "#F4F3F4"}
-          ios_backgroundColor="#3E3E3E"
-          onValueChange={beetrootHandler}
-          value={beetroot}
         />
         <View style={styles.button_Direction}>
           <TouchableOpacity
@@ -253,7 +189,6 @@ export default function Preferences({ navigation, route }) {
             <Text style={styles.buttontext}>Finish</Text>
           </TouchableOpacity>
         </View>
-        <Text> {post}</Text>
       </View>
     </ScrollView>
   );
@@ -261,18 +196,17 @@ export default function Preferences({ navigation, route }) {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: COLS.C_BG,
-    flex: 1
+    flex: 1,
   },
   container: {
     margin: FORMAT_containers.F_container_margin,
     backgroundColor: COLS.C_BG,
-    margin: FORMAT_containers.F_container_margin,
-    marginVertical: FORMAT_containers.F_container_marginVertical,
+    marginVertical: 10,
     padding: FORMAT_containers.F_container_padding,
     alignItems: FORMAT_containers.F_container_alignItems,
     justifyContent: FORMAT_containers.F_container_justifyContent,
     flex: FORMAT_containers.F_container_flex,
-    backgroundColor: COLS.C_BG
+    backgroundColor: COLS.C_BG,
   },
   text: {
     alignSelf: FORMAT_text.F_text_alignSelf,
@@ -283,14 +217,14 @@ const styles = StyleSheet.create({
     fontWeight: FORMAT_fonts.F_font_fontWeight,
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   switch: {
     right: FORMAT_switches.F_switch_right,
-    bottom: FORMAT_switches.F_switch_bottom
+    bottom: FORMAT_switches.F_switch_bottom,
   },
   button_Direction: {
-    flexDirection: FORMAT_navButton.F_navButton_flexDirection
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
   },
   buttons: {
     alignSelf: FORMAT_navButton.F_navButton_alignSelf,
@@ -298,18 +232,17 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     borderRadius: FORMAT_navButton.F_navButton_borderRadius,
     margin: 20,
-    padding: 15,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 1,
-      color: COLS.C6_WHITE_TEXT
+      color: COLS.C6_WHITE_TEXT,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-    elevation: 5
+    elevation: 5,
   },
   heading: {
     alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
@@ -319,13 +252,13 @@ const styles = StyleSheet.create({
     bottom: FORMAT_headings.F_headingMainTitle_bottom,
     marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
     marginTop: FORMAT_headings.F_headingMainTitle_marginTop,
-    color: COLS.C6_WHITE_TEXT
+    color: COLS.C6_WHITE_TEXT,
   },
   buttontext: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
   },
   subheading: {
     fontSize: FORMAT_headings.F_subHeading_fontSize,
@@ -337,19 +270,13 @@ const styles = StyleSheet.create({
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     fontSize: 11,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   header: {
     marginTop: 20,
     color: COLS.C6_WHITE_TEXT,
     textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
     fontSize: 28,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
-  subheader: {
-    color: COLS.C6_WHITE_TEXT,
-    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
-    fontSize: 22,
-    fontWeight: "bold"
-  }
 });

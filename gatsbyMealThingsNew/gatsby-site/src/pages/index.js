@@ -32,53 +32,37 @@ function IndexPage() {
             <br></br>
 
             <br></br>
-            <div className={scss.sectionVision}>
-              <a href="/#sectionVision" title="Download">
-                Vision
-              </a>{" "}
+            <div className={scss.sectionVision} id="vision-id">
               <Vision />
             </div>
           </div>
           <br></br>
 
-          <div className={scss.sectionDownload}>
-            <br></br>
-            <a href="/#sectionDownload" title="Download">
-              Download
-            </a>{" "}
+          <div className={scss.sectionDownload} id="download-id">
             <br></br>
           </div>
           <Popover />
 
-          <div className={scss.sectionSetup}>
+          <div className={scss.sectionSetup} id="setup-id">
             <br></br>
-
-            <a href="/#sectionSetup" title="Setup">
-              Setup
-            </a>
           </div>
           <CustomizedSteppers />
 
-          <div className={scss.sectionAboutUs}>
-            <a href="/#sectionAboutUs" title="AboutUs">
-              About Us
-            </a>
+          <div className={scss.sectionAboutUs} id="about-us-id">
             <Impact />
           </div>
 
-          <div className={scss.sectionReviews}>
-            <a href="/#sectionReviews" title="Reviews">
-              Reviews
-            </a>
-            <Reviews />
+//           <div className={scss.sectionReviews}>
+//             <a href="/#sectionReviews" title="Reviews">
+//               Reviews
+//             </a>
+//             <Reviews />
+          <div className={scss.sectionReviews} id="reviews-id">
             <SimpleRating />
           </div>
           <br></br>
 
-          <div className={scss.sectionContact}>
-            <a href="/#sectionContact" title="Contact">
-              Contact
-            </a>
+          <div className={scss.sectionContact} id="contact-id">
             <NodeMailer />
           </div>
           <br></br>

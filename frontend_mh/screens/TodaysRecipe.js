@@ -7,14 +7,14 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  FlatList
+  FlatList,
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer
+  FORMAT_moreChoicesContainer,
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -24,7 +24,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe
+  FORMAT_mainRecipe,
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -33,7 +33,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground
+  FORMAT_navButtonBackground,
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -42,14 +42,14 @@ function Item({ ingredient, quantity, leadingChar = "\u2022" }) {
     <View style={styles.item}>
       <Text style={styles.title}>
         {<Text style={{ fontWeight: "bold" }}>{`${leadingChar} `}</Text>}
-        {`${quantity} ${ingredient || ""}\n`}
+        {`${quantity.replace(/\s+/g, " ")} ${ingredient || ""}\n`}
       </Text>
     </View>
   );
 }
 
 function cleanString(string) {
-  return string.split('","').map(x => x.replace(/"|{|}|\\|\//g, ""));
+  return string.split('","').map((x) => x.replace(/"|{|}|\\|\//g, ""));
 }
 
 export default function TodaysRecipe() {
@@ -74,7 +74,6 @@ export default function TodaysRecipe() {
 
   const ingredientsContainer = (
     <View style={styles.ingredientsAndMethodContainer}>
-
       <ScrollView style={styles.ingredientsAndMethodView}>
         {ingredients.map((item, index) => (
           <Item
@@ -91,12 +90,10 @@ export default function TodaysRecipe() {
           />
         ))}
       </ScrollView>
-
     </View>
   );
 
   const methodContainer = (
-
     <ScrollView style={styles.ingredientsAndMethodView}>
       <View style={styles.ingredientsAndMethodContainer}>
         {method.map((item, index) => (
@@ -113,14 +110,15 @@ export default function TodaysRecipe() {
             }
           />
         ))}
-
       </View>
     </ScrollView>
   );
 
   return (
-    <View contentContainerStyle={styles.container}>
-      <Text style={styles.pageTitle}>{todaysRecipe.name}</Text>
+    <View style={styles.container}>
+      <Text style={styles.pageTitle}>
+        {todaysRecipe.name.replace(/\s+/g, " ")}
+      </Text>
       <Image style={styles.image} source={{ uri: todaysRecipe.url }} />
       <View style={styles.buttonView}>
         <TouchableOpacity
@@ -152,48 +150,40 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    alignItems: "center"
+    alignItems: "center",
   },
-  positioning: {
-    right: 170,
-    top: 20
-  },
-
-  formatting: {
-    marginTop: 10
-  },
-  pageTitle: {
-    fontSize: 25,
+    padding: 5,
+    textAlign: "center",
+    fontSize: 20,
+    borderRadius: 5,
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     marginTop: 5,
+    bottom: 20,
     marginBottom: 15,
-    backgroundColor: COLS.C_BG,
-    width: 300,
+    backgroundColor: COLS.C_RED,
+    width: "75%",
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
     alignSelf: "center",
+    justifyContent: "center",
+    alignItems: "center",
     top: 5,
-    textAlign: "center"
   },
   image: {
-    width: "90%",
-    height: "30%",
-    margin: 5,
-    marginBottom: 15,
-    marginTop: 15,
-    borderWidth: 2,
-    borderRadius: 15,
-    left: 15,
-    bottom: 10
+    width: "100%",
+    height: "50%",
+    marginBottom: -39,
+
+    bottom: 50,
   },
   buttonView: {
     flexDirection: "row",
@@ -201,31 +191,32 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     top: -10,
-    borderWidth: 2,
+
     borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 2,
+    // elevation: 5,
   },
   buttonText: {
     alignSelf: "center",
     fontSize: 20,
     padding: 12,
     fontWeight: "bold",
-    color: COLS.C6_WHITE_TEXT
+    color: COLS.C6_WHITE_TEXT,
+    borderRadius: 5,
   },
   methodIngredientsButton: {
     backgroundColor: COLS.C_BG,
-    width: "50%"
+    width: "50%",
   },
   selectedMethodIngredientsButton: {
     backgroundColor: COLS.C_RED,
-    width: "50%"
+    width: "50%",
   },
   boxTitle: {
     textAlign: "center",
@@ -236,27 +227,31 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
-    height: 30
+    // shadowColor: "#000",
+    // // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 2,
+    // elevation: 5,
+    // height: 30,
   },
   ingredientsAndMethodContainer: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   ingredientsAndMethodView: {
     height: "100%",
     width: "90%",
-    alignSelf: "center"
+    alignSelf: "center",
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 5,
   },
   ingredientsAndMethod: {
     height: "100%",
+    backgroundColor: "C6_WHITE_TEXT",
     margin: 15,
     marginTop: 5,
     padding: 10,
@@ -268,6 +263,6 @@ const styles = StyleSheet.create({
     borderColor: COLS.C4_DARK_TEXT,
     borderStyle: "solid",
     backgroundColor: COLS.C6_WHITE_TEXT,
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });

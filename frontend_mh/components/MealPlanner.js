@@ -12,6 +12,7 @@ import {
   TouchableHighlight,
   CheckBox,
   Image,
+  ImageBackground,
 } from "react-native";
 
 import FlatList from "react-native-drag-flatlist";
@@ -518,7 +519,7 @@ const sampleRecipes = [
 const colors = ["#A6E6AB"]; // CORRECT THIS TO COLOR SCHEME
 
 const originalData = sampleRecipes.map((item, index) => ({
-  text: "☰" + item.name,
+  text: item.name,
   url: item.url,
   fat: item.fat,
   carbohydrate: item.carbohydrates,
@@ -587,7 +588,7 @@ const App = () => {
       }}
       delay={-400}
     >
-      <Text>{item.text}</Text>
+      <Text> ☰ {item.text}</Text>
     </TouchableOpacity>
   );
 
@@ -601,41 +602,50 @@ const App = () => {
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.headingText}>{display}</Text>
+            <Text style={styles.headingText}> ☰ {display}</Text>
             <Image
               style={{
-                width: 250,
+                width: 260,
                 height: 150,
-
-                resizeMode: "contain",
+                borderRadius: 5,
+                marginBottom: 10,
               }}
               source={{
                 uri: visual,
               }}
             />
 
-            <View styles={styles.textmovement}>
-              <Text> Nutritional breakdown</Text>
-              <Text> Carbohydrates: {carbs}g </Text>
-              <Text> Protein: {prot}g</Text>
-              <Text> Calories:{cals} /Kcals</Text>
-              <Text> Sugars: {sugar}g </Text>
-              <Text> Preparation Time: {cooking} minutes</Text>
-              <Text> Fats: {saturates}</Text>
+            <View style={styles.textmovement}>
+              <Text style={styles.Heading}> Nutritional breakdown</Text>
+              <Text style={styles.nutritionbreakdown}>
+                {" "}
+                Carbohydrates: {carbs}g{" "}
+              </Text>
+              <Text style={styles.nutritionbreakdown}> Protein: {prot}g</Text>
+              <Text style={styles.nutritionbreakdown}>
+                {" "}
+                Calories:{cals} /Kcals
+              </Text>
+              <Text style={styles.nutritionbreakdown}> Sugars: {sugar}g </Text>
+
+              <Text style={styles.nutritionbreakdown}> Fats: {saturates}</Text>
+              <Text style={styles.nutritionbreakdown}>
+                {" "}
+                Preparation Time: {cooking} mins
+              </Text>
             </View>
             <ScrollView>
-              <View>
-                <Text> method: {method} </Text>
-                <Text> Ingredients: {ingredients} </Text>
+              <View style={styles.methodIngredient}>
+                {/* <Text style={styles.Heading}> Method: </Text>
+                <Text style={styles.methodIngredient}>{method} </Text> */}
+                <Text style={styles.Heading}> Ingredients</Text>
+                <Text style={styles.ingredientText}>{ingredients} </Text>
                 <Text> {visible}</Text>
               </View>
 
               <TouchableHighlight
                 style={{
                   ...styles.openButton,
-                  backgroundColor: "#2196F3",
-                  marginVertical: 17,
-                  bottom: 40,
                 }}
                 onPress={() => {
                   setModalVisible(false);
@@ -647,32 +657,60 @@ const App = () => {
           </View>
         </View>
       </Modal>
-
-      <FlatList
-        style={styles.BG}
-        data={data}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-        onMoveEnd={setData}
-      />
+      <ImageBackground
+        source={require("../assets/images/Trial.png")}
+        style={{ width: "100%", height: "100%", opacity: 0.9 }}
+      >
+        <FlatList
+          data={data}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          onMoveEnd={setData}
+          style={styles.color}
+        />
+      </ImageBackground>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   textmovement: {
-    alignSelf: "flex-start",
-    fontSize: 20,
-    right: 10,
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignSelf: "center",
+    top: 10,
+    height: 200,
+    fontWeight: "900",
+    marginBottom: 5,
+    width: 260,
   },
-  BG: {
-    backgroundColor: "black",
+  nutritionbreakdown: {
+    textAlign: "auto",
+    alignSelf: "flex-start",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: "10%",
+    color: "black",
+    fontSize: 15,
+    paddingVertical: 1,
   },
   mainTitle: {
     fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
     fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
     marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
     alignSelf: FORMAT_headings.F_heading_alignSelf,
+  },
+  Heading: {
+    color: "grey",
+    fontSize: 20,
+    textAlign: "center",
+    justifyContent: "center",
+    alignSelf: "center",
+    marginVertical: 5,
+    marginBottom: 5,
+    width: 260,
   },
   item: {
     justifyContent: "space-around",
@@ -687,21 +725,13 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     alignContent: "center",
     alignSelf: "center",
-    color: "white",
+    color: "#FDFFF7",
   },
   margin: {
-    marginTop: 20,
     backgroundColor: COLS.C_BG,
     borderBottomColor: "black",
   },
-  border: {
-    borderRightColor: "black",
-    borderColor: "black",
-    backgroundColor: "white",
-    bottom: 10,
-    height: 120,
-    width: 300,
-  },
+
   centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -712,22 +742,24 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "white",
+    backgroundColor: "#A6E6AB",
     borderRadius: 20,
+    borderColor: "white",
+    borderWidth: 5,
     padding: 35,
     alignItems: "center",
-    shadowColor: "#000",
+    shadowColor: "black",
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 7,
+      height: 12,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 6.25,
     shadowRadius: 3.84,
     elevation: 5,
   },
   openButton: {
     backgroundColor: "red",
-    borderRadius: 20,
+    borderRadius: 5,
     padding: 10,
     elevation: 2,
   },
@@ -736,21 +768,32 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-  },
+
   headingText: {
     marginBottom: 15,
-    borderRadius: 4,
-    textAlign: "center",
+    borderRadius: 5,
+    textAlign: "auto",
     alignItems: "center",
     alignSelf: "center",
     justifyContent: "center",
-    backgroundColor: "#2196F3",
+    backgroundColor: "#FB4B3D",
+    padding: 10,
+    paddingHorizontal: "12%",
     justifyContent: "space-around",
     fontWeight: "bold",
     color: "white",
+    width: 270,
+  },
+  methodIngredient: {
+    marginVertical: "2%",
+    color: "black",
+    fontSize: 15,
+    width: 260,
+    backgroundColor: "white",
+    width: 260,
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 5,
   },
 });
 

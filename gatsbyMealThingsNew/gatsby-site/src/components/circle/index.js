@@ -5,7 +5,7 @@ import Image from "../../components/image"
 function Circle() {
   return (
     <>
-      <div class="ellipses-container">
+      <div className="ellipses-container">
         <div style={{ maxWidth: `500px`, marginBottom: `1.45rem` }}>
           <Image />
         </div>

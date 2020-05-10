@@ -3,6 +3,7 @@ import { Dimensions } from "react-native";
 const screenWidth = Dimensions.get("screen").width;
 
 const FORMAT_inputField = {
+  F_inputField_padding: 10,
   F_inputField_height: 50,
   F_inputField_width: 200,
   F_inputField_marginVertical: 5,

@@ -103,7 +103,7 @@ export default function Goals({ navigation }) {
         <View>
           <View style={styles.margin}>
             <TextInput
-              type="number"
+              keyboardType="number-pad"
               style={styles.inputField}
               placeholder="Weight (kg)"
               placeholderTextColor="white"
@@ -111,6 +111,7 @@ export default function Goals({ navigation }) {
               maxLength={3}
             ></TextInput>
             <TextInput
+              keyboardType="number-pad"
               style={styles.inputField}
               placeholder="Height (cm)"
               placeholderTextColor="white"
@@ -215,6 +216,7 @@ const styles = StyleSheet.create({
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
   },
   inputField: {
+    padding: FORMAT_inputField.F_inputField_padding,
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
     backgroundColor: COLS.C_BG,
     width: FORMAT_inputField.F_inputField_width,
