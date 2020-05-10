@@ -42,7 +42,7 @@ function Item({ ingredient, quantity, leadingChar = "\u2022" }) {
     <View style={styles.item}>
       <Text style={styles.title}>
         {<Text style={{ fontWeight: "bold" }}>{`${leadingChar} `}</Text>}
-        {`${quantity.replace(/\s+/g, " ")} ${ingredient || ""}\n`}
+        {`${quantity} ${ingredient || ""}\n`}
       </Text>
     </View>
   );
@@ -116,9 +116,7 @@ export default function TodaysRecipe() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.pageTitle}>
-        {todaysRecipe.name.replace(/\s+/g, " ")}
-      </Text>
+      <Text style={styles.pageTitle}>{todaysRecipe.name}</Text>
       <Image style={styles.image} source={{ uri: todaysRecipe.url }} />
       <View style={styles.buttonView}>
         <TouchableOpacity
@@ -152,17 +150,17 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     alignItems: "center",
   },
+  pageTitle: {
+    position: "absolute",
     padding: 5,
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 24,
     borderRadius: 5,
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
     marginTop: 5,
-    bottom: 20,
-    marginBottom: 15,
     backgroundColor: COLS.C_RED,
-    width: "75%",
+    width: "80%",
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -173,17 +171,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
-    alignSelf: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    top: 5,
   },
   image: {
     width: "100%",
-    height: "50%",
-    marginBottom: -39,
-
-    bottom: 50,
+    height: "45%",
   },
   buttonView: {
     flexDirection: "row",
@@ -191,16 +182,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     top: -10,
-
+    borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 1,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 2,
-    // elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
   },
   buttonText: {
     alignSelf: "center",
@@ -235,7 +226,7 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.25,
     // shadowRadius: 2,
     // elevation: 5,
-    // height: 30,
+    height: 30,
   },
   ingredientsAndMethodContainer: {
     width: "100%",
