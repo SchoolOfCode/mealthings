@@ -14,6 +14,7 @@ import SimpleRating from "../components/Rating/index.js"
 import NodeMailer from "../components/NodeMailer/index"
 import Vision from "../components/Vision/index"
 import Impact from "../components/Impact/impact"
+import Reviews from "../components/Reviews/index"
 
 function IndexPage() {
   return (
@@ -51,6 +52,11 @@ function IndexPage() {
             <Impact />
           </div>
 
+//           <div className={scss.sectionReviews}>
+//             <a href="/#sectionReviews" title="Reviews">
+//               Reviews
+//             </a>
+//             <Reviews />
           <div className={scss.sectionReviews} id="reviews-id">
             <SimpleRating />
           </div>

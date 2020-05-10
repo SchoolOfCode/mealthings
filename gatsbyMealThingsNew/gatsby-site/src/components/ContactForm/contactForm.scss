@@ -1,0 +1,153 @@
+//import font from google
+// @import url(
+//   https://fonts.googleapis.com/css?family=Roboto:400,
+//   300,
+//   100,
+//   500,
+//   700,
+//   900
+// );
+
+//import compass
+@import "compass";
+
+//colors
+$primary-color: #a6e6ab;
+$secondary-color: #333;
+$form-bg: #fff;
+
+//contact form
+.contact-form {
+  margin-top: 30px;
+  .input-block {
+    background-color: rgba(white, 0.8);
+    border: solid 1px $primary-color;
+    width: 100%;
+    height: 60px;
+    padding: 25px;
+    position: relative;
+    margin-bottom: 20px;
+    @include transition(all 0.3s ease-out);
+    &.focus {
+      background-color: $form-bg;
+      border: solid 1px darken($primary-color, 10%);
+    }
+    &.textarea {
+      height: auto;
+      .form-control {
+        height: auto;
+        resize: none;
+      }
+    }
+    label {
+      position: absolute;
+      left: 25px;
+      top: 25px;
+      display: block;
+      margin: 0;
+      font-weight: 300;
+      z-index: 1;
+      color: $secondary-color;
+      font-size: 18px;
+      line-height: 10px;
+    }
+    .form-control {
+      background-color: transparent;
+      padding: 0;
+      border: none;
+      @include border-radius(0);
+      @include box-shadow(none);
+      height: auto;
+      position: relative;
+      z-index: 2;
+      font-size: 18px;
+      color: $secondary-color;
+    }
+    .form-control:focus {
+      label {
+        top: 0;
+      }
+    }
+  }
+  .square-button {
+    background-color: rgba(white, 0.8);
+    color: darken($primary-color, 10%);
+    font-size: 26px;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: center;
+    @include border-radius(2px);
+    @include transition(all 0.3s ease);
+    padding: 0 60px;
+    height: 60px;
+    border: none;
+    width: 100%;
+    &:hover,
+    &:focus {
+      background-color: white;
+    }
+  }
+}
+
+//tablet and above devices
+@media (min-width: 768px) {
+  .contact-wrap {
+    width: 60%;
+    margin: auto;
+  }
+}
+
+//////////////////////////
+/*----page styles---*/
+//////////////////////////
+body {
+  @include background-image(linear-gradient(to right, $primary-color, #dd2476));
+  font-family: "Roboto", sans-serif;
+}
+.contact-wrap {
+  padding: 15px;
+}
+
+h1 {
+  background-color: white;
+  color: lighten($primary-color, 10%);
+  padding: 40px;
+  margin: 0 0 50px;
+  font-size: 30px;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  small {
+    font-size: 18px;
+    display: block;
+    text-transform: none;
+    font-weight: 300;
+    margin-top: 10px;
+    color: lighten($primary-color, 10%);
+  }
+}
+
+//follow me template
+.made-with-love {
+  margin-top: 40px;
+  padding: 10px;
+  clear: left;
+  text-align: center;
+  font-size: 10px;
+  font-family: arial;
+  color: #fff;
+  i {
+    font-style: normal;
+    color: #f50057;
+    font-size: 14px;
+    position: relative;
+    top: 2px;
+  }
+  a {
+    color: #fff;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
