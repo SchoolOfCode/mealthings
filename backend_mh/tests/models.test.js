@@ -23,17 +23,18 @@ function isJsonString(str) {
   return true;
 }
 
-let user2;
+let allUsers, user2;
 
 beforeAll(async () => {
   user2 = await getUserById(2);
+  allUsers = await getUsers();
 });
 
 describe("User models ", () => {
   test("query all, should have at least 3 items in database", async () => {
-    const allUsers = await getUsers();
     expect(allUsers.length).toBeGreaterThanOrEqual(3);
   });
+  test("");
 });
 
 describe.each([
@@ -51,7 +52,6 @@ describe.each([
   ["gender", "Female"],
 ])("User 2", (key, expected) => {
   test(`${key} should be ${expected}`, () => {
-    // console.log(user2);
     expect(user2[0][key]).toBe(expected);
   });
 });
@@ -61,14 +61,9 @@ test("User 2 password should be hashed, so should not be password", () => {
 });
 
 /* 
-Query all users, first line should equal first line of dummy data  // But check this incase they come in a random order!
 Query all users, somewhere within should be all 3 names in dummy 
 Query all users, somewhere within should be all 3 email address
 
-Query user 2 specifically, should contain correct name
-Query user 2 specifically, should contain correct gender
-Query user 2 specifically, should contain correct email
-Query user 2 specifically, should contain correct 🇩🇿 
 
 Query user 999999, should return correct error message 
 Query user with string, should return correct error 
