@@ -60,8 +60,7 @@ export default function Registerscreen2({ navigation, route }) {
     console.log(emailAddress, password);
     if (
       !/^[a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z]/.test(emailAddress) ||
-      emailAddress == "" ||
-      emailAddress == null
+      !emailAddress
     ) {
       Alert.alert("Please check email is correct and resubmit");
     } else if (!password || password.length < 2) {
@@ -121,6 +120,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   inputField: {
+    padding: 10,
+    fontSize: 16,
     marginVertical: 5,
     backgroundColor: COLS.C_BG,
     width: 200,
@@ -150,13 +151,13 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.7,
     flexDirection: "row",
     justifyContent: "space-around",
-    marginVertical: 10,
+    marginVertical: 0,
     padding: 10,
   },
   buttonText: {
     backgroundColor: COLS.C_BG,
     width: 80,
-    height: 30,
+    height: 50,
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
