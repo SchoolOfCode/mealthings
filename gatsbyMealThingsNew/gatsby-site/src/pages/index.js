@@ -6,7 +6,7 @@ import Image from "../components/image"
 import SEO from "../components/seo"
 import Circle from "../components/circle/index"
 import BackToTop from "../../src/components/ScrollBar/index"
-import CustomizedSteppers from "../CustomizedSteppers/index"
+import CustomizedSteppers from "../components/CustomizedSteppers/index"
 import Popover from "../components/Popover/index"
 import scss from "../components/layout.scss"
 import ScrollBar from "../components/ScrollBar/index"
@@ -36,6 +36,7 @@ function IndexPage() {
               <br></br>
             </div>
             <Popover />
+            <br></br>
             <Download />
 
             <br></br>
@@ -72,7 +73,7 @@ function IndexPage() {
 
           <div className={scss.sectionContact} id="contact-id">
             <br></br>
-
+            <br></br>
             <NodeMailer />
           </div>
           <br></br>

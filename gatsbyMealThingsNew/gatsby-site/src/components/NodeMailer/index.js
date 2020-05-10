@@ -141,7 +141,8 @@ function NodeMailer(formSubmission) {
           placeholder="message of interest"
           name="text"
           onChange={handleTextChange}
-        ></input> */}
+        ></input>
+        <button onClick={postNewEmail}>Submit</button> */}
       </form>
     </div>
   )

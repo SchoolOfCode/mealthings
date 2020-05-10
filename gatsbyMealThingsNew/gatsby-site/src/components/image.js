@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import Img from "./mealThings.png"
+import mealThings from "./mealThings.png"
 
 /*
  * This component is built using `gatsby-image` to automatically serve optimized
@@ -14,7 +14,7 @@ import Img from "./mealThings.png"
  */
 
 const Image = () => {
-  return <img src={Img} />
+  return <img src={mealThings} />
 }
 
 export default Image
