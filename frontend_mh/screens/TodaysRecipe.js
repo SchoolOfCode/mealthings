@@ -116,7 +116,9 @@ export default function TodaysRecipe() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.pageTitle}>{todaysRecipe.name}</Text>
+      <Text style={styles.pageTitle}>
+        {todaysRecipe.name.replace(/\s+/g, " ")}
+      </Text>
       <Image style={styles.image} source={{ uri: todaysRecipe.url }} />
       <View style={styles.buttonView}>
         <TouchableOpacity
