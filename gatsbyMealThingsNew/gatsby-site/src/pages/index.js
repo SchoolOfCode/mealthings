@@ -36,6 +36,7 @@ function IndexPage() {
               <br></br>
             </div>
             <Popover />
+            <br></br>
             <Download />
 
             <br></br>
@@ -71,7 +72,7 @@ function IndexPage() {
 
           <div className={scss.sectionContact} id="contact-id">
             <br></br>
-
+            <br></br>
             <NodeMailer />
           </div>
           <br></br>
