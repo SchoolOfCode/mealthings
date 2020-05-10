@@ -3,10 +3,12 @@ import { makeStyles } from "@material-ui/core/styles"
 import Popover from "@material-ui/core/Popover"
 import Typography from "@material-ui/core/Typography"
 import Button from "@material-ui/core/Button"
+import { sizing } from "@material-ui/system"
+import css from "./module.Popover.css"
 
 const useStyles = makeStyles(theme => ({
   typography: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(2.5),
   },
 }))
 
@@ -28,6 +30,7 @@ export default function SimplePopover() {
   return (
     <div>
       <Button
+        class="button"
         aria-describedby={id}
         variant="contained"
         onClick={handleClick}
