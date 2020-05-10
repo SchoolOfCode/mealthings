@@ -376,7 +376,7 @@ export default function App() {
                 <Stack.Screen
                   name="LandingPage"
                   component={LandingPage}
-                  options={{ title: "LandingPage" }}
+                  options={{ title: "Home" }}
                 />
                 <Stack.Screen
                   name="Goals"
@@ -421,12 +421,12 @@ export default function App() {
                 <Stack.Screen
                   name="SplashScreenExerciseSlow"
                   component={SplashScreenExerciseSlow}
-                  options={{ title: "Alert" }}
+                  options={{ title: "Time to exercise!" }}
                 />
                 <Stack.Screen
                   name="SplashScreenExerciseQuick"
                   component={SplashScreenExerciseQuick}
-                  options={{ title: "Alert" }}
+                  options={{ title: "Time to exercise!" }}
                 />
                 <Stack.Screen
                   name="Mealplanner"
@@ -459,7 +459,7 @@ export default function App() {
                 <Stack.Screen
                   name="SplashSuccess"
                   component={SplashSuccess}
-                  options={{ title: "Splash Success" }}
+                  options={{ title: "You've sucessfully registered!" }}
                 />
               </>
             )}

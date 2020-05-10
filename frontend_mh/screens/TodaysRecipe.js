@@ -42,7 +42,7 @@ function Item({ ingredient, quantity, leadingChar = "\u2022" }) {
     <View style={styles.item}>
       <Text style={styles.title}>
         {<Text style={{ fontWeight: "bold" }}>{`${leadingChar} `}</Text>}
-        {`${quantity} ${ingredient || ""}\n`}
+        {`${quantity.replace(/\s+/g, " ")} ${ingredient || ""}\n`}
       </Text>
     </View>
   );
@@ -116,7 +116,9 @@ export default function TodaysRecipe() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.pageTitle}>{todaysRecipe.name}</Text>
+      <Text style={styles.pageTitle}>
+        {todaysRecipe.name.replace(/\s+/g, " ")}
+      </Text>
       <Image style={styles.image} source={{ uri: todaysRecipe.url }} />
       <View style={styles.buttonView}>
         <TouchableOpacity
@@ -161,7 +163,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     backgroundColor: COLS.C_RED,
     width: "75%",
-    textAlign: "auto",
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
