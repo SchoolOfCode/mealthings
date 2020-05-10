@@ -16,7 +16,8 @@
     "db:populateFoodIntake": "node -r dotenv/config ./db/scripts/populateFoodIntake.js",
     "db:reset": "npm run db:dropFoodIntake && npm run db:dropRecipes && npm run db:dropUsers && npm run db:createUsers && npm run db:createRecipes && npm run db:createFoodIntake && npm run db:populateUsers && npm run db:populateRecipes && npm run db:populateFoodIntake",
     "dev": "nodemon -r dotenv/config app.js",
-    "test": "jest"
+    "test": "jest",
+    "text:watch": "jest --watch"
   },
   "author": "",
   "license": "ISC",
@@ -32,7 +33,8 @@
     "nodemon": "^2.0.3",
     "pg": "^8.0.2",
     "postgresql": "0.0.1",
-    "psql": "0.0.1"
+    "psql": "0.0.1",
+    "recipe-ingredient-parser-v2": "^1.1.1"
   },
   "devDependencies": {
     "jest": "^25.4.0"

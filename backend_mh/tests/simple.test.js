@@ -1,24 +1,25 @@
 /* global jest expect, describe, it */
 
 /* eslint-disable no-console */
+
 function sum(a, b) {
   return a + b;
 }
 
 // 1. Sample test, not linked to our code
-test("adds 1 + 2 to equal 3", () => {
+test.skip("adds 1 + 2 to equal 3", () => {
   expect(sum(1, 2)).toBe(3);
 });
 
 // 2. Testing POST users route
-const { addUser } = require("../models/users");
-describe(`POST Endpoint for USERS`, () => {
-  it(`Creates a successful POST request for USERS`, async () => {
-    const res = await addUser({ name: "Bob" });
-    console.log("reply is: ", res);
-    expect(res.message).toEqual("Inserted new user");
-  });
-});
+// const { addUser } = require("../models/users");
+// describe(`POST Endpoint for USERS`, () => {
+//   it(`Creates a successful POST request for USERS`, async () => {
+//     const res = await addUser({ name: "Bob" });
+//     console.log("reply is: ", res);
+//     expect(res.message).toEqual("Inserted new user");
+//   });
+// });
 
 // // 3. Testing GET users route
 // const { getUsers } = require("../models/users");
