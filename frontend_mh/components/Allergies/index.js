@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     borderRadius: FORMAT_navButton.F_navButton_borderRadius,
     margin: 20,
-    padding: 15,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",

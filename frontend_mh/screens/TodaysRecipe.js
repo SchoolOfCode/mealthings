@@ -42,7 +42,7 @@ function Item({ ingredient, quantity, leadingChar = "\u2022" }) {
     <View style={styles.item}>
       <Text style={styles.title}>
         {<Text style={{ fontWeight: "bold" }}>{`${leadingChar} `}</Text>}
-        {`${quantity} ${ingredient || ""}\n`}
+        {`${quantity.replace(/\s+/g, " ")} ${ingredient || ""}\n`}
       </Text>
     </View>
   );
@@ -116,7 +116,9 @@ export default function TodaysRecipe() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.pageTitle}>{todaysRecipe.name}</Text>
+      <Text style={styles.pageTitle}>
+        {todaysRecipe.name.replace(/\s+/g, " ")}
+      </Text>
       <Image style={styles.image} source={{ uri: todaysRecipe.url }} />
       <View style={styles.buttonView}>
         <TouchableOpacity
@@ -150,8 +152,9 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     alignItems: "center",
   },
-  pageTitle: {
-    fontSize: 15,
+    padding: 5,
+    textAlign: "center",
+    fontSize: 20,
     borderRadius: 5,
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
@@ -160,7 +163,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     backgroundColor: COLS.C_RED,
     width: "75%",
-    textAlign: "center",
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
@@ -191,14 +193,14 @@ const styles = StyleSheet.create({
     top: -10,
 
     borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 2,
+    // elevation: 5,
   },
   buttonText: {
     alignSelf: "center",
@@ -233,7 +235,7 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.25,
     // shadowRadius: 2,
     // elevation: 5,
-    height: 30,
+    // height: 30,
   },
   ingredientsAndMethodContainer: {
     width: "100%",
