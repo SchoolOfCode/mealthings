@@ -178,20 +178,12 @@ const styles = StyleSheet.create({
   },
   buttonView: {
     flexDirection: "row",
-    height: 50,
     justifyContent: "center",
     alignItems: "center",
-    top: -10,
+    borderBottomColor: COLS.C4_DARK_TEXT,
+    borderTopColor: COLS.C4_DARK_TEXT,
     borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
+    borderStyle: "solid",
   },
   buttonText: {
     alignSelf: "center",
