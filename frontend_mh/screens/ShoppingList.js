@@ -1,5 +1,13 @@
 import React, { useContext } from "react";
-import { View, ScrollView, Text, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  ScrollView,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  ImageBackground,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import IngredientItem from "../components/IngredientItem";
@@ -14,7 +22,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    padding: 5,
   },
   buttonText: {
     textAlign: "center",
@@ -26,12 +33,14 @@ const styles = StyleSheet.create({
   formatting: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     marginBottom: 20,
+    bottom: 70,
     padding: 20,
     alignSelf: "center",
     backgroundColor: COLS.C_RED,
-    width: screenWidth * 0.9,
+    width: screenWidth * 0.95,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
+    borderRadius: 5,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -48,23 +57,29 @@ export default function ShoppingList({ navigation }) {
   console.log("ingredientsList", ingredientsList);
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {ingredientsList &&
-          ingredientsList.sort().map((item, index) => (
-            <IngredientItem
-              item={item}
-              index={index}
-              key={
-                "a" +
-                item
-                  .split(" ")
-                  .join("")
-                  .replace(/,|-|\(|\)/g, "") +
-                index
-              }
-            />
-          ))}
-      </ScrollView>
+      <ImageBackground
+        source={require("../assets/images/Trial.png")}
+        style={{ width: "100%", height: "100%", opacity: 0.5 }}
+      >
+        <ScrollView>
+          {ingredientsList &&
+            ingredientsList.sort().map((item, index) => (
+              <IngredientItem
+                style={{ position: "absolute" }}
+                item={item}
+                index={index}
+                key={
+                  "a" +
+                  item
+                    .split(" ")
+                    .join("")
+                    .replace(/,|-|\(|\)/g, "") +
+                  index
+                }
+              />
+            ))}
+        </ScrollView>
+      </ImageBackground>
       <View>
         <TouchableOpacity
           style={styles.formatting}

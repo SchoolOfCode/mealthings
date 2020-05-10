@@ -10,12 +10,15 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     padding: 10,
   },
+  position: {
+    width: 100,
+  },
   circle: {
     marginRight: 10,
     height: 25,
     width: 25,
     borderRadius: 25,
-    borderColor: COLS.C6_WHITE_TEXT,
+    borderColor: "black",
     borderStyle: "solid",
     borderWidth: 3,
   },
@@ -37,8 +40,8 @@ const styles = StyleSheet.create({
   },
   itemText: {
     fontSize: 18,
-    fontWeight: "bold",
-    color: COLS.C6_WHITE_TEXT,
+    fontWeight: "900",
+    color: "black",
   },
 });
 

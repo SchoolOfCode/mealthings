@@ -12,6 +12,7 @@ import {
   TouchableHighlight,
   CheckBox,
   Image,
+  ImageBackground,
 } from "react-native";
 
 import FlatList from "react-native-drag-flatlist";
@@ -518,7 +519,7 @@ const sampleRecipes = [
 const colors = ["#A6E6AB"]; // CORRECT THIS TO COLOR SCHEME
 
 const originalData = sampleRecipes.map((item, index) => ({
-  text: "☰" + item.name,
+  text: item.name,
   url: item.url,
   fat: item.fat,
   carbohydrate: item.carbohydrates,
@@ -587,7 +588,7 @@ const App = () => {
       }}
       delay={-400}
     >
-      <Text>{item.text}</Text>
+      <Text> ☰ {item.text}</Text>
     </TouchableOpacity>
   );
 
@@ -601,12 +602,13 @@ const App = () => {
       <Modal animationType="slide" transparent={true} visible={modalVisible}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.headingText}>{display}</Text>
+            <Text style={styles.headingText}> ☰ {display}</Text>
             <Image
               style={{
                 width: 260,
                 height: 150,
                 borderRadius: 5,
+                marginBottom: 10,
               }}
               source={{
                 uri: visual,
@@ -625,27 +627,25 @@ const App = () => {
                 Calories:{cals} /Kcals
               </Text>
               <Text style={styles.nutritionbreakdown}> Sugars: {sugar}g </Text>
+
+              <Text style={styles.nutritionbreakdown}> Fats: {saturates}</Text>
               <Text style={styles.nutritionbreakdown}>
                 {" "}
-                Preparation Time: {cooking} minutes
+                Preparation Time: {cooking} mins
               </Text>
-              <Text style={styles.nutritionbreakdown}> Fats: {saturates}</Text>
             </View>
             <ScrollView>
               <View style={styles.methodIngredient}>
-                <Text style={styles.Heading}> Method: </Text>
-                <Text style={styles.methodIngredient}>{method} </Text>
+                {/* <Text style={styles.Heading}> Method: </Text>
+                <Text style={styles.methodIngredient}>{method} </Text> */}
                 <Text style={styles.Heading}> Ingredients</Text>
-                <Text style={styles.methodIngredient}>{ingredients} </Text>
+                <Text style={styles.ingredientText}>{ingredients} </Text>
                 <Text> {visible}</Text>
               </View>
 
               <TouchableHighlight
                 style={{
                   ...styles.openButton,
-                  backgroundColor: "#FB4B3D",
-                  marginVertical: 35,
-                  bottom: 40,
                 }}
                 onPress={() => {
                   setModalVisible(false);
@@ -657,32 +657,44 @@ const App = () => {
           </View>
         </View>
       </Modal>
-
-      <FlatList
-        data={data}
-        keyExtractor={keyExtractor}
-        renderItem={renderItem}
-        onMoveEnd={setData}
-        style={styles.color}
-      />
+      <ImageBackground
+        source={require("../assets/images/Trial.png")}
+        style={{ width: "100%", height: "100%", opacity: 0.9 }}
+      >
+        <FlatList
+          data={data}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          onMoveEnd={setData}
+          style={styles.color}
+        />
+      </ImageBackground>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   textmovement: {
-    alignSelf: "flex-start",
-    fontSize: 20,
-    right: 10,
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderRadius: 10,
+    justifyContent: "center",
+    alignSelf: "center",
+    top: 10,
+    height: 200,
+    fontWeight: "900",
+    marginBottom: 5,
+    width: 260,
   },
   nutritionbreakdown: {
     textAlign: "auto",
     alignSelf: "flex-start",
     justifyContent: "center",
     alignItems: "center",
-    paddingLeft: "20%",
-    color: "#FDFFF7",
+    paddingHorizontal: "10%",
+    color: "black",
     fontSize: 15,
+    paddingVertical: 1,
   },
   mainTitle: {
     fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
@@ -691,11 +703,14 @@ const styles = StyleSheet.create({
     alignSelf: FORMAT_headings.F_heading_alignSelf,
   },
   Heading: {
-    color: "white",
+    color: "grey",
     fontSize: 20,
     textAlign: "center",
+    justifyContent: "center",
+    alignSelf: "center",
     marginVertical: 5,
     marginBottom: 5,
+    width: 260,
   },
   item: {
     justifyContent: "space-around",
@@ -713,18 +728,10 @@ const styles = StyleSheet.create({
     color: "#FDFFF7",
   },
   margin: {
-    marginTop: 20,
     backgroundColor: COLS.C_BG,
     borderBottomColor: "black",
   },
-  border: {
-    borderRightColor: "black",
-    borderColor: "black",
-    backgroundColor: "white",
-    bottom: 10,
-    height: 120,
-    width: 300,
-  },
+
   centeredView: {
     flex: 1,
     justifyContent: "center",
@@ -775,11 +782,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     fontWeight: "bold",
     color: "white",
+    width: 270,
   },
   methodIngredient: {
     marginVertical: "2%",
-    color: "#FDFFF7",
+    color: "black",
     fontSize: 15,
+    width: 260,
+    backgroundColor: "white",
+    width: 260,
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 5,
   },
 });
 

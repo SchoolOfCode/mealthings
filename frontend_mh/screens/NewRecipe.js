@@ -74,7 +74,7 @@ export default function NewRecipe() {
         </Text>
       </View>
       <View style={styles.swipeForMoreBar}>
-        <Text style={{ paddingTop: 5 }}>Swipe for more choices</Text>
+        <Text style={{ paddingTop: 5 }}>Scroll for more choices</Text>
         <AntDesign name="arrowdown" size={32} color="black" />
       </View>
       <ScrollView contentContainerStyle={styles.moreChoicesContainer}>
@@ -166,11 +166,14 @@ const styles = StyleSheet.create({
     width: "100%",
     marginTop: 5,
     padding: 5,
+    textAlign: "center",
   },
   recipeCardTitle: {
     fontSize: 12,
-    textAlign: "center",
-    alignSelf: "center",
+    marginLeft: 11,
+    textAlign: "auto",
+    paddingLeft: 5,
+    paddingRight: 5,
     fontWeight: "bold",
   },
   recipeCardCookingTime: {
