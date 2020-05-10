@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
   },
 
   inputField: {
+    padding: FORMAT_inputField.F_inputField_padding,
     marginVertical: FORMAT_inputField.F_inputField_marginVertical,
     backgroundColor: COLS.C_BG,
     width: FORMAT_inputField.F_inputField_width,

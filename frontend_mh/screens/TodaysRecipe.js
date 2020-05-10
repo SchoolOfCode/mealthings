@@ -151,6 +151,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   pageTitle: {
+    padding: 5,
+    textAlign: "center",
     fontSize: 20,
     borderRadius: 5,
     fontWeight: "bold",
@@ -190,14 +192,14 @@ const styles = StyleSheet.create({
     top: -10,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 1,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 2,
+    // elevation: 5,
   },
   buttonText: {
     alignSelf: "center",
@@ -232,7 +234,7 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.25,
     // shadowRadius: 2,
     // elevation: 5,
-    height: 30,
+    // height: 30,
   },
   ingredientsAndMethodContainer: {
     width: "100%",
