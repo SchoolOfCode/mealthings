@@ -81,30 +81,27 @@ export default function BackToTop(props) {
               className={css.anchorLinks}
               onClick={() => handleLink("download-id")}
             >
-              Download
+              Download ....|....
             </p>
-            |
             <p
               className={css.anchorLinks}
               onClick={() => handleLink("setup-id")}
             >
-              Set up
+              Set up ....|....
             </p>
-            |
             <p
               className={css.anchorLinks}
               onClick={() => handleLink("about-us-id")}
             >
-              About us
+              Impact ....|....
             </p>
-            |
             <p
               className={css.anchorLinks}
               onClick={() => handleLink("reviews-id")}
             >
-              Reviews
+              Reviews ....|....
             </p>
-            |
+
             <p
               className={css.anchorLinks}
               onClick={() => handleLink("contact-id")}
