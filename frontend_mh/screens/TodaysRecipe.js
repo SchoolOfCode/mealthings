@@ -7,14 +7,14 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-  FlatList,
+  FlatList
 } from "react-native";
 import { COLS } from "./COLS";
 import { FORMAT_background } from "./FORMAT_background";
 import {
   FORMAT_containers,
   FORMAT_welcomeContainer,
-  FORMAT_moreChoicesContainer,
+  FORMAT_moreChoicesContainer
 } from "./FORMAT_containers";
 import {
   FORMAT_switches,
@@ -24,7 +24,7 @@ import {
   FORMAT_swipeBar,
   FORMAT_arrow,
   FORMAT_icons,
-  FORMAT_mainRecipe,
+  FORMAT_mainRecipe
 } from "./FORMAT_extraComponents";
 import { FORMAT_headings, FORMAT_textBoxHeading } from "./FORMAT_headings";
 import { FORMAT_images } from "./FORMAT_images";
@@ -33,7 +33,7 @@ import { FORMAT_logo } from "./FORMAT_logo";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-  FORMAT_navButtonBackground,
+  FORMAT_navButtonBackground
 } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 
@@ -49,7 +49,7 @@ function Item({ ingredient, quantity, leadingChar = "\u2022" }) {
 }
 
 function cleanString(string) {
-  return string.split('","').map((x) => x.replace(/"|{|}|\\|\//g, ""));
+  return string.split('","').map(x => x.replace(/"|{|}|\\|\//g, ""));
 }
 
 export default function TodaysRecipe() {
@@ -150,10 +150,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    alignItems: "center",
+    alignItems: "center"
   },
   pageTitle: {
     position: "absolute",
+    zIndex: 2,
     padding: 5,
     textAlign: "center",
     fontSize: 24,
@@ -168,15 +169,15 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 1
     },
     shadowOpacity: 0.25,
     shadowRadius: 2,
-    elevation: 5,
+    elevation: 5
   },
   image: {
     width: "100%",
-    height: "45%",
+    height: "45%"
   },
   buttonView: {
     flexDirection: "row",
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
     borderBottomColor: COLS.C4_DARK_TEXT,
     borderTopColor: COLS.C4_DARK_TEXT,
     borderWidth: 2,
-    borderStyle: "solid",
+    borderStyle: "solid"
   },
   buttonText: {
     alignSelf: "center",
@@ -193,15 +194,15 @@ const styles = StyleSheet.create({
     padding: 12,
     fontWeight: "bold",
     color: COLS.C6_WHITE_TEXT,
-    borderRadius: 5,
+    borderRadius: 5
   },
   methodIngredientsButton: {
     backgroundColor: COLS.C_BG,
-    width: "50%",
+    width: "50%"
   },
   selectedMethodIngredientsButton: {
     backgroundColor: COLS.C_RED,
-    width: "50%",
+    width: "50%"
   },
   boxTitle: {
     textAlign: "center",
@@ -220,11 +221,11 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.25,
     // shadowRadius: 2,
     // elevation: 5,
-    height: 30,
+    height: 30
   },
   ingredientsAndMethodContainer: {
     width: "100%",
-    height: "100%",
+    height: "100%"
   },
   ingredientsAndMethodView: {
     height: "100%",
@@ -232,7 +233,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     backgroundColor: "white",
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 5
   },
   ingredientsAndMethod: {
     height: "100%",
@@ -248,6 +249,6 @@ const styles = StyleSheet.create({
     borderColor: COLS.C4_DARK_TEXT,
     borderStyle: "solid",
     backgroundColor: COLS.C6_WHITE_TEXT,
-    fontSize: 16,
-  },
+    fontSize: 16
+  }
 });
