@@ -12,29 +12,45 @@ const {
   patchUser,
 } = require("../models/users");
 
-// Small function that returns whether a string is JSON or not.
-function isJsonString(str) {
-  try {
-    JSON.parse(str);
-  } catch (e) {
-    console.log("Got an error!", e);
-    return false;
-  }
-  return true;
-}
+const { getRecipes } = require("../models/recipes");
 
-let allUsers, user2;
+let allUsers,
+  user2,
+  user1Index,
+  user2Index,
+  user3Index,
+  user1Email,
+  user2Email,
+  user3Email,
+  user99999,
+  userasdf,
+  usernull,
+  userundefined,
+  addRecipes;
 
 beforeAll(async () => {
   user2 = await getUserById(2);
   allUsers = await getUsers();
+  user99999 = await getUserById(99999);
+  userasdf = await getUserById("asdf");
+  usernull = await getUserById(null);
+  userundefined = await getUserById(undefined);
+  user1Index = allUsers.map((x) => x.user_id).indexOf(1);
+  user2Index = allUsers.map((x) => x.user_id).indexOf(2);
+  user3Index = allUsers.map((x) => x.user_id).indexOf(3);
+  user1Email =
+    allUsers[allUsers.map((x) => x.user_id).indexOf(1)].email_address;
+  user2Email =
+    allUsers[allUsers.map((x) => x.user_id).indexOf(2)].email_address;
+  user3Email =
+    allUsers[allUsers.map((x) => x.user_id).indexOf(3)].email_address;
+  allRecipes = await getRecipes();
 });
 
 describe("User models ", () => {
   test("query all, should have at least 3 items in database", async () => {
     expect(allUsers.length).toBeGreaterThanOrEqual(3);
   });
-  test("");
 });
 
 describe.each([
@@ -56,39 +72,106 @@ describe.each([
   });
 });
 
-test("User 2 password should be hashed, so should not be password", () => {
-  expect(user2[0].password).not.toEqual("password");
+describe("User 2", () => {
+  test("password should be hashed, so should not be password", () => {
+    expect(user2[0].password).not.toEqual("password");
+  });
 });
 
-/* 
-Query all users, somewhere within should be all 3 names in dummy 
-Query all users, somewhere within should be all 3 email address
+describe("Somewhere in users", () => {
+  test("there should be the first dummy name", () => {
+    expect(user1Index).toBeGreaterThanOrEqual(0);
+  });
+  test("there should be the second dummy name", () => {
+    expect(user2Index).toBeGreaterThanOrEqual(0);
+  });
+  test("there should be the third dummy name", () => {
+    expect(user3Index).toBeGreaterThanOrEqual(0);
+  });
+});
 
+describe("Email", () => {
+  test("1 should exist", () =>
+    expect(user1Email).toEqual("bobforward@gmail.com"));
+  test("2 should exist", () =>
+    expect(user2Email).toEqual("anyaforward@gmail.com"));
+  test("3 should exist", () =>
+    expect(user3Email).toEqual("aylaforward@gmail.com"));
+});
 
-Query user 999999, should return correct error message 
-Query user with string, should return correct error 
+describe("Should return sensible error messages when getUserID is called", () => {
+  test("with number 99999", () => expect(user99999).toEqual(false));
+  test("with string 'asdf'", () => expect(userasdf).toEqual(false));
+  test("with null", () => expect(usernull).toEqual(false));
+  test("with undefined", () => expect(userundefined).toEqual(false));
+});
 
+describe("Recipes", () => {
+  test("query all, should have at least 70 recipes in database", async () => {
+    expect(allRecipes.length).toBeGreaterThanOrEqual(70);
+  });
+});
 
+describe.each([
+  ["calories", 525],
+  ["carbohydrates", 60.5],
+  ["cooking_difficulty", 2],
+  ["cooking_time_mins", 12],
+  ["fat", 23],
+  ["fibre", 1.9],
+  ["protein", 23.4],
+  ["salt", 2],
+  ["saturates", 6.5],
+  ["sugars", 15.4],
+])("Recipes", (key, value) => {
+  test("first item should have correct calories value", async () => {
+    expect(Number(allRecipes[0][key])).toEqual(value);
+  });
+});
 
+describe("In all recipes", () => {
+  test("first item should have correct name value", async () => {
+    expect(allRecipes[0].name).toEqual("Egg & mango chutney flatbreads    ");
+  });
+  test("first item should have correct url value", async () => {
+    expect(allRecipes[0].url).toEqual(
+      "https://img1.jamieoliver.com/jamieoliver/recipe-database/xtra_med/55846381.jpg?tr=w-330"
+    );
+  });
+});
 
-Query all recipes, response should be JSON
-Query all recipes, first line should equal first line of dummy data  // But check this incase they come in a random order!
-Query all recipes, somewhere within should be several of the correct recipe names
-Query all recipes, somewhere within should be all 
+describe("In all recipes", () => {
+  test("contains the string Chicken noodle stir-fry", async () => {
+    const jsonAllRecipes = JSON.stringify(allRecipes);
+    expect(jsonAllRecipes.includes("Chicken noodle stir-fry")).toEqual(true);
+  });
+  test("contains the string Chianti crudo", async () => {
+    const jsonAllRecipes = JSON.stringify(allRecipes);
+    expect(jsonAllRecipes.includes("Chianti crudo")).toEqual(true);
+  });
+  test("contains the string Simple noodle soup", async () => {
+    const jsonAllRecipes = JSON.stringify(allRecipes);
+    expect(jsonAllRecipes.includes("Simple noodle soup")).toEqual(true);
+  });
+  test("contains the string Toasted popeye bread", async () => {
+    const jsonAllRecipes = JSON.stringify(allRecipes);
+    expect(jsonAllRecipes.includes("Toasted popeye bread")).toEqual(true);
+  });
+  test("contains the string Comforting sausage bake", async () => {
+    const jsonAllRecipes = JSON.stringify(allRecipes);
+    expect(jsonAllRecipes.includes("Comforting sausage bake")).toEqual(true);
+  });
+});
 
-Query recipe 2 specifically, should contain correct name
-Query recipe 2 specifically, should contain correct calories
-Query recipe 2 specifically, should contain correct protein
-Query recipe 2 specifically, should contain correct carbohydrates
-Query recipe 2 specifically, should contain correct fat
-Query recipe 2 specifically, should contain correct saturates
-Query recipe 2 specifically, should contain correct sugars
-Query recipe 2 specifically, should contain correct salt
-Query recipe 2 specifically, should contain correct fibre
-Query recipe 2 specifically, should contain correct cooking_difficulty
-Query recipe 2 specifically, should contain correct cooking_time_mins
+// Query recipe 999999, should return correct error message
+// Query recipe with string, should return correct error
 
-Query recipe 999999, should return correct error message 
-Query recipe with string, should return correct error 
-
-*/
+// Text checkEmail
+// Text saveNewUser
+// Text verifyJwt
+// Text addUser
+// Text getToken
+// Text getPassword
+// Text saveTempPassword
+// Text sendTempPasswordEmail
+// Text patchUser

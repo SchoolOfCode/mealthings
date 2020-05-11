@@ -17,7 +17,7 @@
     "db:reset": "npm run db:dropFoodIntake && npm run db:dropRecipes && npm run db:dropUsers && npm run db:createUsers && npm run db:createRecipes && npm run db:createFoodIntake && npm run db:populateUsers && npm run db:populateRecipes && npm run db:populateFoodIntake",
     "dev": "nodemon -r dotenv/config app.js",
     "test": "jest",
-    "text:watch": "jest --watch"
+    "test:watch": "jest --watch"
   },
   "author": "",
   "license": "ISC",

@@ -45,7 +45,7 @@ router.get("/:userId", async (req, res) => {
   console.log("Recieved GET request for userId: ", userId);
   try {
     const data = await getUserById(userId);
-    if (data.length) {
+    if (data && data.length) {
       return res.status(200).json({
         message: "Received User Using ID",
         success: true,

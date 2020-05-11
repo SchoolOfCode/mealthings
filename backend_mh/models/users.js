@@ -12,8 +12,17 @@ async function getUsers() {
 
 // Get one user by id
 async function getUserById(user_id) {
-  const res = await query(`SELECT * FROM users WHERE user_id = $1`, [user_id]);
-  return res.rows;
+  try {
+    const res = await query(`SELECT * FROM users WHERE user_id = $1`, [
+      user_id,
+    ]);
+    if (res.rows.length < 1) {
+      return false;
+    }
+    return res.rows;
+  } catch (err) {
+    return false;
+  }
 }
 
 // Add a function to check whether the user's email already exists in the database.
