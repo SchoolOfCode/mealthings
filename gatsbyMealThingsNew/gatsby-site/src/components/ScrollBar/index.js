@@ -74,7 +74,7 @@ ScrollTop.propTypes = {
 export default function BackToTop(props) {
   return (
     <React.Fragment>
-      <AppBar style={{ background: "#FB4B3D" }}>
+      <AppBar style={{ background: "#BCB5C3" }}>
         <Toolbar>
           <div className={css.scrollBarText}>
             <p

@@ -1,8 +1,8 @@
 import React from "react"
-import impact2 from "./impact2.png"
+import impact3 from "./impact3.png"
 
 const Impact = () => {
-  return <img src={impact2} />
+  return <img src={impact3} />
 }
 
 export default Impact
