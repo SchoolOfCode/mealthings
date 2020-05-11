@@ -716,7 +716,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: 300,
     height: 40,
-    padding: 10,
+    padding: 5,
     paddingLeft: 50,
     margin: 5,
     fontSize: 10,
