@@ -14,7 +14,11 @@ async function createUsers() {
         new_mum BOOLEAN,
         food_prefs_inc TEXT,
         food_prefs_exc TEXT,
-        goals TEXT
+        goals TEXT,
+        last_weeks_meals TEXT, 
+        this_weeks_meals TEXT, 
+        gender TEXT,
+        last_date_meals_requested DATE
             )`
   );
   console.log(res);

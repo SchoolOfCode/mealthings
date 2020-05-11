@@ -1,19 +1,27 @@
 import React, { useState } from "react";
 import {
   Image,
-  Platform,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
   TextInput,
-  Flatlist,
-  Button,
+  Dimensions,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { COLS } from "./COLS";
-import { MonoText } from "../components/StyledText";
 
+import { FORMAT_images } from "./FORMAT_images";
+import { FORMAT_inputField } from "./FORMAT_inputField";
+
+import { FORMAT_navButton, FORMAT_navButtonText } from "./FORMAT_navButton";
+
+const screenWidth = Dimensions.get("screen").width;
+const iconSize = screenWidth * (1 / 4);
+const iconColour = COLS.C4_DARK_TEXT;
 export default function Goals({ navigation }) {
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
@@ -22,24 +30,36 @@ export default function Goals({ navigation }) {
   const [diet, setDiet] = useState(false);
   const [time, setTime] = useState(false);
   const [cook, setCook] = useState(false);
-  const [display, setDisplay] = useState();
-
   function Track(enteredText) {
     setWeight(enteredText);
   }
   function Tracked(enteredText) {
     setHeight(enteredText);
   }
-
-  function HandleSubmit() {
-    setDisplay("success");
-    console.log({ weight, height, fatLoss, muscle, diet, time, cook });
-    navigation.navigate("SplashSuccess");
+  function handleSubmit() {
+    var goals = "";
+    if (fatLoss) {
+      goals += "Fat loss,";
+    }
+    if (muscle) {
+      goals += ",Muscle gain";
+    }
+    if (diet) {
+      goals += ",No diet";
+    }
+    if (time) {
+      goals += ",Save time";
+    }
+    if (cook) {
+      goals += ",Learn to cook";
+    }
+    const data = { height, weight, goals };
+    console.log("data in goals", data);
+    navigation.navigate("Allergies", { data });
   }
-
   function fatHandler() {
     if (diet === true) {
-      setTime(false);
+      setFatLoss(false);
     } else if (fatLoss === false) {
       setFatLoss(true);
     } else if (fatLoss === true) {
@@ -47,34 +67,30 @@ export default function Goals({ navigation }) {
     }
   }
   function muscleHandler() {
-    if (diet === true) {
-      setMuscle(false);
-    } else if (muscle === false) {
+    if (muscle === false) {
       setMuscle(true);
     } else if (muscle === true) {
       setMuscle(false);
     }
   }
   function dietHandler() {
-    if (diet === true) {
+    if (diet === false) {
       setDiet(true);
+      setFatLoss(false);
+      setMuscle(false);
     } else if (diet === true) {
       setDiet(false);
     }
   }
   function timeHandler() {
-    if (diet === true) {
-      setTime(false);
-    } else if (time === false) {
+    if (time === false) {
       setTime(true);
     } else if (time === true) {
       setTime(false);
     }
   }
   function cookHandler() {
-    if (diet === true) {
-      setCook(false);
-    } else if (cook === false) {
+    if (cook === false) {
       setCook(true);
     } else if (cook === true) {
       setCook(false);
@@ -82,141 +98,218 @@ export default function Goals({ navigation }) {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.header}>
-        <TouchableOpacity>
-          <Image
-            style={styles.arrow}
-            source={require("../assets/images/goback.png")}
-          ></Image>
-        </TouchableOpacity>
-        <Text style={styles.Goals}>Goals</Text>
-        <View style={styles.margin}>
-          <TextInput
-            type="number"
-            style={styles.inputField}
-            placeholder="Weight"
-            placeholderTextColor="white"
-            onChangeText={Track}
-          ></TextInput>
-          <TextInput
-            style={styles.inputField}
-            placeholder="Height"
-            placeholderTextColor="white"
-            type="number"
-            onChangeText={Tracked}
-          ></TextInput>
-        </View>
-        <View style={styles.flex}>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <ScrollView style={styles.container}>
+        <View>
+          <View style={styles.margin}>
+            <TextInput
+              keyboardType="number-pad"
+              style={styles.inputField}
+              placeholder="Weight (kg)"
+              placeholderTextColor="white"
+              onChangeText={Track}
+              maxLength={3}
+            ></TextInput>
+            <TextInput
+              keyboardType="number-pad"
+              style={styles.inputField}
+              placeholder="Height (cm)"
+              placeholderTextColor="white"
+              type="number"
+              onChangeText={Tracked}
+              maxLength={3}
+            ></TextInput>
+          </View>
           <View>
+            <Text style={styles.Goals}>Goals</Text>
+          </View>
+          <View style={styles.icons}>
+            <View style={styles.positioning}>
+              <TouchableOpacity onPress={fatHandler}>
+                <MaterialCommunityIcons
+                  name="fire"
+                  size={iconSize}
+                  color={fatLoss ? COLS.C_RED : COLS.C6_WHITE_TEXT}
+                />
+                <Text style={styles.text}>Fat Loss</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.positioning}>
+              <TouchableOpacity onPress={muscleHandler}>
+                <FontAwesome5
+                  name="weight-hanging"
+                  size={iconSize * 0.9}
+                  color={muscle ? COLS.C_RED : COLS.C6_WHITE_TEXT}
+                />
+                <Text style={styles.text}>Gaining Muscle</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.positioning}>
+              <TouchableOpacity onPress={dietHandler}>
+                <MaterialCommunityIcons
+                  name="food-croissant"
+                  size={iconSize}
+                  color={diet ? COLS.C_RED : COLS.C6_WHITE_TEXT}
+                />
+                <Text style={styles.text}>No Diet</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.flex2}>
+            <View style={styles.secondRow}>
+              <View style={styles.secondLastIcon}>
+                <View style={styles.positioning}>
+                  <TouchableOpacity onPress={timeHandler}>
+                    <MaterialCommunityIcons
+                      name="clock"
+                      size={iconSize}
+                      color={time ? COLS.C_RED : COLS.C6_WHITE_TEXT}
+                    />
+                    <Text style={styles.text}>Saving Time</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <View style={styles.lastIcon}>
+                <View style={styles.positioning}>
+                  <TouchableOpacity onPress={cookHandler}>
+                    <MaterialCommunityIcons
+                      name="chef-hat"
+                      size={iconSize}
+                      color={cook ? COLS.C_RED : COLS.C6_WHITE_TEXT}
+                    />
+                    <Text style={styles.text}>Learning to Cook</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </View>
+          <View style={styles.buttonPosition}>
             <TouchableOpacity
-              onPress={fatHandler}
-              onPress={() => {
-                backgroundColor: COLS.C_YELLOW;
-              }}
+              onPress={() => navigation.goBack()}
+              style={styles.button}
             >
-              <Image
-                style={styles.img}
-                source={require("../assets/images/calories.png")}
-              />
-
-              <Text style={styles.text}>Fatloss</Text>
+              <Text style={styles.buttonText}>Back</Text>
             </TouchableOpacity>
-          </View>
-
-          <View>
-            <TouchableOpacity onPress={muscleHandler}>
-              <Image
-                style={styles.img}
-                source={require("../assets/images/woman.png")}
-              />
-              <Text style={styles.text}>Gaining Muscle</Text>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <TouchableOpacity onPress={dietHandler}>
-              <Image
-                style={styles.img}
-                source={require("../assets/images/eat.png")}
-              />
-              <Text style={styles.text}>No Diet</Text>
+            <TouchableOpacity onPress={handleSubmit} style={styles.button}>
+              <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.flex2}>
-          <View>
-            <TouchableOpacity onPress={timeHandler}>
-              <Image
-                style={styles.img2}
-                source={require("../assets/images/time.png")}
-              />
-              <Text style={styles.text2}>Saving Time</Text>
-            </TouchableOpacity>
-          </View>
-          <View>
-            <TouchableOpacity onPress={cookHandler}>
-              <Image
-                style={styles.img2}
-                source={require("../assets/images/Cooking.png")}
-              />
-              <Text style={styles.text2}>Learning to Cook</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <TouchableOpacity style={styles.button} onPress={HandleSubmit}>
-          <Text style={{ color: "white" }}>Next</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </TouchableWithoutFeedback>
   );
 }
 const styles = StyleSheet.create({
-  Goals: {
-    alignSelf: "center",
+  container: {
+    flex: 1,
+    backgroundColor: COLS.C_BG,
+    padding: 20,
   },
-  arrow: {
-    height: 20,
-    width: 20,
-    left: 30,
-    top: 20,
+  positioning: {
+    padding: 15,
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 5,
   },
   margin: {
-    marginVertical: 50,
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
   },
   inputField: {
-    marginVertical: 5,
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    alignSelf: "center",
-    height: 50,
-    borderRadius: 5,
+    padding: FORMAT_inputField.F_inputField_padding,
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
+    backgroundColor: COLS.C_BG,
+    width: FORMAT_inputField.F_inputField_width,
+    alignSelf: FORMAT_inputField.F_inputField_alignSelf,
+    alignItems: FORMAT_inputField.F_inputField_alignItems,
+    height: FORMAT_inputField.F_inputField_height,
+    borderRadius: FORMAT_inputField.F_inputField_borderRadius,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    color: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+    fontSize: 16,
   },
-  flex: { flexDirection: "row", marginVertical: 20 },
-  flex2: { flexDirection: "row", right: 20 },
+  flex: {
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+    marginVertical: FORMAT_navButton.F_navButton_marginVertical,
+  },
+  flex2: { flexDirection: FORMAT_navButton.F_navButton_flexDirection },
   img: {
-    width: 100,
-    height: 100,
-    alignSelf: "center",
-    left: 50 / 2,
-    marginHorizontal: 10,
+    width: FORMAT_images.F_image_width,
+    height: FORMAT_images.F_image_height,
+    alignSelf: FORMAT_images.F_image_alignSelf,
+    left: FORMAT_images.F_image_left,
+    marginHorizontal: FORMAT_images.F_image_marginHorizontal,
   },
   img2: {
-    width: 100,
-    height: 100,
-    alignSelf: "center",
-    left: 190 / 2,
-    marginHorizontal: 10,
+    width: FORMAT_images.F_image_width,
+    height: FORMAT_images.F_image_height,
+    alignSelf: FORMAT_images.F_image_alignSelf,
+    marginHorizontal: FORMAT_images.F_image_marginHorizontal,
   },
-  text: { alignSelf: "center", left: 50 / 2, marginVertical: 10 },
-  text2: { alignSelf: "center", left: 190 / 2 },
-  button: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    color: COLS.C_BG,
+  text: {
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    fontSize: 13,
+    fontWeight: "bold",
+  },
+  buttonText: {
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
     textAlign: "center",
-    padding: 5,
-    width: 70,
-    alignSelf: "center",
+  },
+  button: {
+    backgroundColor: COLS.C_BG,
     borderRadius: 5,
-    marginVertical: 50,
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
+    padding: FORMAT_navButton.F_navButton_padding,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  buttonPosition: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  Goals: {
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    fontSize: 28,
+    fontWeight: "bold",
+    padding: 10,
+  },
+  icons: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  secondRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingBottom: 40,
+  },
+  lastIcon: {
+    paddingLeft: 30,
+  },
+  secondLastIcon: {
+    paddingLeft: 29,
   },
 });

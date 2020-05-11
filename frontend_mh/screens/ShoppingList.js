@@ -1,187 +1,93 @@
-import React, { useState } from "react";
-import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
+import React, { useContext } from "react";
+import {
+  View,
+  ScrollView,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Image,
+  ImageBackground,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+
+import IngredientItem from "../components/IngredientItem";
+import { AuthContext } from "../App";
 import { COLS } from "./COLS";
 
-const multipleRecipes = [
-  {
-    recipe_id: "1",
-    name: "Really Delicious Cabbage",
-    ingredients: ["Cabbage", "Butter", "Caraway seeds"],
-    ingredientsQuantities: ["1 head", "100 g", "1 tsp"],
-    calories: "286",
-    protein: "20",
-    carbohydrates: "160",
-    fat: "15",
-    cooking_difficulty: "1",
-    cooking_time_mins: "25",
-    method: [
-      "Roughly chop the cabbage",
-      "Add to steamer and add half a tsp of caraway seeds",
-      "Steam for approx. 5 min (depending on cabbage type) until cooked but still crunchy",
-      "Remove from heat and drain. ",
-      "Add the butter and gently stir cabbage until butter melts",
-      "Serve immediatly with remaining caraway seeds and several grinds of black pepper",
-    ],
-  },
-  {
-    recipe_id: "2",
-    name: "Really Delicious BLT",
-    ingredients: [
-      "Free range streaky bacon",
-      "Lettuce",
-      "Beef tomato",
-      "Wholemeal bread",
-      "Freshly churned butter",
-      "Mayonaise",
-    ],
-    ingredientsQuantities: [
-      "2 rashers",
-      "Several leaves",
-      "1",
-      "2 slices",
-      "",
-      "",
-    ],
-    calories: "286",
-    protein: "20",
-    carbohydrates: "160",
-    fat: "15",
-    cooking_difficulty: "1",
-    cooking_time_mins: "25",
-    method: [
-      "Slice the bread thickly",
-      "Spread the freshly churned butter on one slice of bread.",
-      "Spread mayonaise on the second slice of bread",
-      "Slice the tomato thinly",
-      "Fry the bacon until crispy",
-      "Tear the lettuce roughly by hand",
-      "layer the tomato slices, lettuce and bacon on the bread and serve as a sandwhich.",
-    ],
-  },
-  {
-    recipe_id: "3",
-    name: "Really Delicious Porrige",
-    ingredients: ["Porrige", "Blueberries", "Banana", "Oat milk"],
-    ingredientsQuantities: ["100 g", "1 handful", "1 sliced", "200 ml"],
-    calories: "286",
-    protein: "20",
-    carbohydrates: "160",
-    fat: "15",
-    cooking_difficulty: "1",
-    cooking_time_mins: "25",
-    method: [
-      "Mix ingredients in a saucepan",
-      "Heat ingredients over a low heat, stirring gently until milk is fully absorbed",
-      "Serve while hot",
-    ],
-  },
-];
+import { FORMAT_navButtonText } from "./FORMAT_navButton";
 
-function IngredientItem({ item }) {
-  const [bought, setBought] = useState(false);
-  return (
-    <TouchableOpacity onPress={() => setBought(!bought)} key={item}>
-      <View style={styles.ingredientItemContainer}>
-        <View style={bought ? styles.circleChecked : styles.circle}></View>
-        <Text style={bought ? styles.itemTextChecked : styles.itemText}>
-          {item}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  );
-}
-
-export default function ShoppingList({ navigation }) {
-  const listOfIngredients = [];
-  multipleRecipes.forEach((recipe) => {
-    recipe.ingredients.forEach((item) => {
-      listOfIngredients.push(item);
-    });
-  });
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.position}
-        onPress={() => {
-          navigation.navigate("LandingPage");
-        }}
-      >
-        <Image
-          style={styles.arrow}
-          source={require("../assets/images/goback.png")}
-        />
-      </TouchableOpacity>
-      <ScrollView>
-        {listOfIngredients.map((item) => (
-          <IngredientItem item={item} />
-        ))}
-      </ScrollView>
-
-      <View>
-        <TouchableOpacity
-          style={styles.formatting}
-          onPress={() => navigation.navigate("TodaysRecipe")}
-        >
-          <Text> Start Cooking </Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-}
+const screenWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLS.C_BG,
-    padding: 5,
   },
-
-  arrow: {
-    height: 30,
-    width: 30,
-    left: 10,
-    top: 20,
-    marginBottom: 40,
+  buttonText: {
+    textAlign: "center",
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+    fontSize: 18,
   },
   formatting: {
     backgroundColor: COLS.C5_LIGHT_TEXT,
     marginBottom: 20,
+    bottom: 70,
     padding: 20,
-    alignItems: "center",
-  },
-  ingredientItemContainer: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    padding: 10,
-  },
-  circle: {
-    marginRight: 10,
-    height: 25,
-    width: 25,
-    borderRadius: 25,
-    borderColor: COLS.C4_DARK_TEXT,
-    borderStyle: "solid",
-    borderWidth: 3,
-  },
-  circleChecked: {
-    marginRight: 10,
-    height: 25,
-    width: 25,
-    borderRadius: 25,
-    backgroundColor: COLS.C3_LIGHT_TEXT,
-    borderColor: COLS.C3_LIGHT_TEXT,
-    borderStyle: "solid",
-    borderWidth: 3,
-  },
-  itemTextChecked: {
-    fontSize: 18,
-    textDecorationLine: "line-through",
-    textDecorationStyle: "solid",
-    color: COLS.C5_LIGHT_TEXT,
-  },
-  itemText: {
-    fontSize: 18,
-    color: COLS.C4_DARK_TEXT,
+    alignSelf: "center",
+    backgroundColor: COLS.C_RED,
+    width: screenWidth * 0.95,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
   },
 });
+
+export default function ShoppingList({ navigation }) {
+  const { ingredientsList } = useContext(AuthContext);
+  console.log("ingredientsList", ingredientsList);
+  return (
+    <View style={styles.container}>
+      <ImageBackground
+        source={require("../assets/images/Trial.png")}
+        style={{ width: "100%", height: "100%", opacity: 0.5 }}
+      >
+        <ScrollView>
+          {ingredientsList &&
+            ingredientsList.sort().map((item, index) => (
+              <IngredientItem
+                style={{ position: "absolute" }}
+                item={item}
+                index={index}
+                key={
+                  "a" +
+                  item
+                    .split(" ")
+                    .join("")
+                    .replace(/,|-|\(|\)/g, "") +
+                  index
+                }
+              />
+            ))}
+        </ScrollView>
+      </ImageBackground>
+      <View>
+        <TouchableOpacity
+          style={styles.formatting}
+          onPress={() => navigation.navigate("TodaysRecipe")}
+        >
+          <Text style={styles.buttonText}> Start Cooking! </Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+}

@@ -1,121 +1,142 @@
-import * as WebBrowser from "expo-web-browser";
-import React, { useState } from "react";
-
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../App.js";
 import {
   StyleSheet,
   Text,
   View,
-  Button,
   TextInput,
-  ScrollView,
   Image,
+  Dimensions,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { COLS } from "./COLS";
 
-export default function App() {
-  const [name, setName] = useState();
-  const [password, setPassword] = useState();
+import { FORMAT_welcomeContainer } from "./FORMAT_containers";
+import { FORMAT_inputField } from "./FORMAT_inputField";
+import { FORMAT_logo } from "./FORMAT_logo";
+import { FORMAT_navButton, FORMAT_navButtonText } from "./FORMAT_navButton";
 
-  function tracked(enteredText) {
-    setName(enteredText);
+const screenWidth = Dimensions.get("window").width;
+
+export default function Loginpage() {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const { logIn } = useContext(AuthContext);
+
+  function handleEmailChange(enteredText) {
+    setEmail(enteredText);
   }
-  function tracker(enteredText) {
+  function handlePasswordChange(enteredText) {
     setPassword(enteredText);
   }
-  function handleSubmit() {
-    setPost(name, password);
-    // const data = { name,email };
-    // const options = {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Origin": "*",
-    //   },
-    //   body: JSON.stringify(data),
-    // };
-    // fetch("", options)
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("this is", data);
-    //   });
-  }
-  return (
-    <View style={styles.container}>
-      <View style={styles.border}>
-        <View style={styles.positioning}>
-          <View style={styles.logoCircle}>
-            <Image source={require("../assets/images/Mealthings.png")} />
-          </View>
-          <View>
-            <Text style={styles.tagLine}>Eat Well. Feel Amazing.</Text>
-          </View>
-        </View>
-        <TextInput
-          style={styles.inputField}
-          placeholder="enter username"
-          value={name}
-          onChangeText={tracked}
-          placeholderTextColor="white"
-        />
-        <TextInput
-          style={styles.inputField}
-          placeholder="enter password"
-          value={password}
-          onChangeText={tracker}
-          placeholderTextColor="white"
-        />
 
-        <TouchableOpacity style={styles.button} onPressText={handleSubmit}>
-          <Text>Login</Text>
-        </TouchableOpacity>
+  function handleSubmit() {
+    logIn(email, password);
+  }
+
+  return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        <View style={styles.welcomeContainer}>
+          <View>
+            <Image
+              style={styles.mealThingsLogo}
+              source={require("../assets/images/newLogo.png")}
+            />
+          </View>
+          <TextInput
+            style={styles.inputField}
+            placeholder=" enter email address"
+            value={email}
+            autoCompleteType={"email"}
+            keyboardType="email-address"
+            onChangeText={handleEmailChange}
+            placeholderTextColor="#FDFFF7"
+          />
+          <TextInput
+            style={styles.inputField}
+            placeholder=" enter password"
+            value={password}
+            autoCompleteType={"password"}
+            secureTextEntry={true}
+            onChangeText={handlePasswordChange}
+            placeholderTextColor="white"
+          />
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
 const styles = StyleSheet.create({
-  border: {
-    marginVertical: 50,
-  },
   container: {
+    flex: 1,
     backgroundColor: COLS.C_BG,
-    height: 1000,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  welcomeContainer: {
+    alignItems: FORMAT_welcomeContainer.F_welcomeContainer_alignItems,
+    marginTop: FORMAT_welcomeContainer.F_welcomeContainer_marginTop,
+    marginBottom: -40,
   },
   mealThingsLogo: {
-    alignItems: "center",
-    margin: "auto",
-    justifyContent: "center",
+    alignItems: FORMAT_logo.F_logo_alignItems,
+    margin: FORMAT_logo.F_logo_margin,
+    justifyContent: FORMAT_logo.F_logo_justifyContent,
+    width: screenWidth * 0.8,
+    height: screenWidth * 0.8,
+    marginBottom: 20,
   },
-  logoCircle: {
-    width: 200,
-    height: 200,
-    borderRadius: 200,
-    backgroundColor: COLS.C_LOGO_BG,
-  },
-  tagLine: {
-    color: COLS.C5_LIGHT_TEXT,
-    left: 20,
-    marginBottom: 60,
-  },
-  positioning: {
-    left: 100,
-  },
+
   inputField: {
-    marginVertical: 15,
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    width: 200,
-    alignSelf: "center",
-    alignItems: "center",
-    height: 50,
-    borderRadius: 5,
+    padding: FORMAT_inputField.F_inputField_padding,
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
+    backgroundColor: COLS.C_BG,
+    width: FORMAT_inputField.F_inputField_width,
+    alignSelf: FORMAT_inputField.F_inputField_alignSelf,
+    alignItems: FORMAT_inputField.F_inputField_alignItems,
+    height: FORMAT_inputField.F_inputField_height,
+    borderRadius: FORMAT_inputField.F_inputField_borderRadius,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    color: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+    fontSize: 16,
   },
   button: {
-    alignSelf: "center",
-    padding: 10,
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    borderRadius: 5,
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
+    padding: FORMAT_navButton.F_navButton_padding,
+    backgroundColor: COLS.C_BG,
+    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
     marginVertical: 20,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  buttonText: {
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    padding: FORMAT_navButtonText.F_navButtonText_padding,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
   },
 });

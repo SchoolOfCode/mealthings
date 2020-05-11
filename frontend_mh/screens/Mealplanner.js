@@ -1,32 +1,24 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-  Dimensions,
-  FlatList,
-} from "react-native";
-import { AntDesign, SimpleLineIcons } from "@expo/vector-icons";
+import React from "react";
+import { StyleSheet, View, ScrollView } from "react-native";
 import { COLS } from "./COLS";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <FlatList />
+import MealPlanner from "../components/MealPlanner";
+import Days from "../components/Days";
 
-      <Text>Hello</Text>
-    </View>
+export default function Mealplanner() {
+  return (
+    <ScrollView style={styles.color} horizontal={true}>
+      <View style={styles.rows}>
+        <Days />
+        <MealPlanner />
+      </View>
+    </ScrollView>
   );
 }
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLS.C_YELLOW,
-    alignItems: "center",
-    justifyContent: "center",
+  rows: {
+    flexDirection: "row",
+    backgroundColor: COLS.C_BG,
   },
+  color: { width: 500 },
 });

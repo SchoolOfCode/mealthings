@@ -1,293 +1,282 @@
-import React, { useState } from "react";
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Flatlist,
-  Switch,
-  Button,
-  TextInput,
-} from "react-native";
+import React, { useState, useContext } from "react";
+import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
+import { AuthContext } from "../App.js";
 import { ScrollView } from "react-native-gesture-handler";
 import { COLS } from "./COLS";
-import { MonoText } from "../components/StyledText";
 
-export default function HomeScreen({ navigation }) {
+import { FORMAT_containers } from "./FORMAT_containers";
+import { FORMAT_switches } from "./FORMAT_extraComponents";
+import { FORMAT_headings } from "./FORMAT_headings";
+import { FORMAT_navButton } from "./FORMAT_navButton";
+import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
+import { FORMAT_navButtonText } from "./FORMAT_navButton";
+
+export default function Preferences({ navigation, route }) {
+  const { userID } = useContext(AuthContext);
+  const { data } = route.params;
   const [noRequirement, setNoRequirement] = useState(false);
   const [vegetarian, setVegetarian] = useState(false);
   const [ovovegetarian, setOvovegetarian] = useState(false);
   const [lactoVegetarian, setlactoVegetarian] = useState(false);
   const [vegan, setVegan] = useState(false);
-  const [cheese, setCheese] = useState(false);
-  const [orange, setOrange] = useState(false);
-  const [chocolate, setChocolate] = useState(false);
-  const [beetroot, setBeetroot] = useState(false);
-  const [post, setPost] = useState();
 
   function noRequirementHandler() {
-    if (noRequirement === false) {
+    if (noRequirement === true) {
+      setNoRequirement(false);
+    } else {
       setNoRequirement(true);
       setVegetarian(false);
       setOvovegetarian(false);
       setlactoVegetarian(false);
       setVegan(false);
-      // setCheese(false);
-      // setOrange(false);
-      // setChocolate(false);
-      // setBeetroot(false);
-    } else if (noRequirement === true) {
-      setNoRequirement(false);
     }
   }
+
   function vegetarianHandler() {
-    if (noRequirement === true) {
+    if (vegetarian === true) {
       setVegetarian(false);
-    } else if (vegetarian === false) {
+    } else {
+      setNoRequirement(false);
       setVegetarian(true);
-    } else if (vegetarian === true) {
-      setVegetarian(false);
+      setOvovegetarian(false);
+      setlactoVegetarian(false);
+      setVegan(false);
     }
   }
+
   function ovovegetarianHandler() {
-    if (noRequirement === true) {
+    if (ovovegetarian === true) {
       setOvovegetarian(false);
-    } else if (ovovegetarian === false) {
+    } else {
+      setNoRequirement(false);
+      setVegetarian(false);
       setOvovegetarian(true);
-      console.log("hello");
-    } else if (ovovegetarian === true) {
-      setOvovegetarian(false);
-      console.log("Goodbye");
+      setlactoVegetarian(false);
+      setVegan(false);
     }
   }
+
   function lactoHander() {
-    if (noRequirement === true) {
+    if (lactoVegetarian === true) {
       setlactoVegetarian(false);
-    } else if (lactoVegetarian === false) {
+    } else {
+      setNoRequirement(false);
+      setVegetarian(false);
+      setOvovegetarian(false);
       setlactoVegetarian(true);
-    } else if (lactoVegetarian === true) {
-      setlactoVegetarian(false);
+      setVegan(false);
     }
   }
+
   function veganHandler() {
-    if (noRequirement === true) {
+    if (vegan === true) {
       setVegan(false);
-    } else if (vegan === false) {
+    } else {
+      setNoRequirement(false);
+      setVegetarian(false);
+      setOvovegetarian(false);
+      setlactoVegetarian(false);
       setVegan(true);
-    } else if (vegan === true) {
-      setVegan(false);
-    }
-  }
-  function cheeseHandler() {
-    if (cheese === false) {
-      setCheese(true);
-    } else if (cheese === true) {
-      setCheese(false);
-    }
-  }
-  function orangeHandler() {
-    if (orange === false) {
-      setOrange(true);
-    } else if (orange === true) {
-      setOrange(false);
-    }
-  }
-  function chocolateHandler() {
-    if (chocolate === false) {
-      setChocolate(true);
-    } else if (chocolate === true) {
-      setChocolate(false);
-    }
-  }
-  function beetrootHandler() {
-    if (beetroot === false) {
-      setBeetroot(true);
-      console.log("hello");
-    } else if (beetroot === true) {
-      setBeetroot(false);
-      console.log("Goodbye");
     }
   }
 
   function postHandler() {
-    setPost("submitted");
-
-    console.log({
-      noRequirement,
-      vegetarian,
-      ovovegetarian,
-      lactoVegetarian,
-      vegan,
-      cheese,
-      orange,
-      chocolate,
-      beetroot,
-    });
+    var food_prefs_inc = "";
+    if (vegetarian) {
+      food_prefs_inc = "vegetarian";
+    } else if (ovovegetarian) {
+      food_prefs_inc = "ovovegetarian";
+    } else if (lactoVegetarian) {
+      food_prefs_inc = "lactoVegetarian";
+    } else if (vegan) {
+      food_prefs_inc = "vegan";
+    } else {
+      food_prefs_inc = "noRequirement";
+    }
+    data["food_prefs_inc"] = food_prefs_inc;
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(data),
+    };
+    fetch(
+      `http://ec2-3-250-10-162.eu-west-1.compute.amazonaws.com:5000/users/${userID}`,
+      options
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Return from DietaryPreferences:", data);
+      })
+      .catch((err) => {
+        console.warn(err);
+      });
+    console.log("final data in dietary prefs", data);
     navigation.navigate("LandingPage");
   }
 
   return (
     <ScrollView style={styles.background}>
-      <Text style={styles.Font}> Diet Preferences</Text>
-
+      <Text style={styles.header}> Diet Preferences</Text>
       <View style={styles.container}>
         <Text style={styles.text}> No Requirement</Text>
-        <Text style={styles.subheading}> I have no dietary Requirements</Text>
+        <Text style={styles.subheading}> I have no dietary Requirements.</Text>
         <Switch
           style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={noRequirement ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
+          trackColor={{ false: COLS.C5_LIGHT_TEXT, true: COLS.C_RED }}
+          thumbColor={COLS.C6_WHITE_TEXT}
+          ios_backgroundColor={COLS.C4_DARK_TEXT}
           onValueChange={noRequirementHandler}
           value={noRequirement}
         />
         <Text style={styles.text}> Vegetarian</Text>
         <Text style={styles.subheading}>
-          I do not eat meat, fish nor poultry
+          I do not eat meat, fish nor poultry.
         </Text>
         <Switch
           style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={vegetarian ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
+          trackColor={{ false: COLS.C5_LIGHT_TEXT, true: COLS.C_RED }}
+          thumbColor={COLS.C6_WHITE_TEXT}
+          ios_backgroundColor={COLS.C4_DARK_TEXT}
           onValueChange={vegetarianHandler}
           value={vegetarian}
         />
         <Text style={styles.text}> Ovo-Vegetarian </Text>
-        <Text style={styles.subheading}>
-          I do not eat diary foods, meat, poultry or fish
-        </Text>
+        <Text style={styles.subheading}>I do not eat diary foods, meat,</Text>
+        <Text style={styles.subheading}> poultry nor fish.</Text>
         <Switch
           style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={ovovegetarian ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
+          trackColor={{ false: COLS.C5_LIGHT_TEXT, true: COLS.C_RED }}
+          thumbColor={COLS.C6_WHITE_TEXT}
+          ios_backgroundColor={COLS.C4_DARK_TEXT}
           onValueChange={ovovegetarianHandler}
           value={ovovegetarian}
         />
         <Text style={styles.text}> Lacto-vegetarian</Text>
-        <Text style={styles.subheading}>
-          I do not eat eggs, meat, poultry nor fish
-        </Text>
+        <Text style={styles.subheading}>I do not eat eggs, meat,</Text>
+        <Text style={styles.subheading}> poultry nor fish.</Text>
         <Switch
           style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={lactoVegetarian ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
+          trackColor={{ false: COLS.C5_LIGHT_TEXT, true: COLS.C_RED }}
+          thumbColor={COLS.C6_WHITE_TEXT}
+          ios_backgroundColor={COLS.C4_DARK_TEXT}
           onValueChange={lactoHander}
           value={lactoVegetarian}
         />
-
         <Text style={styles.text}> Vegan</Text>
         <Text style={styles.subheading}>I do not eat meats, poultry,</Text>
-        <Text style={styles.subheading}>fish nor animal products</Text>
-
+        <Text style={styles.subheading}>fish nor animal products.</Text>
         <Switch
           style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={vegan ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
+          trackColor={{ false: COLS.C5_LIGHT_TEXT, true: COLS.C_RED }}
+          thumbColor={COLS.C6_WHITE_TEXT}
+          ios_backgroundColor={COLS.C4_DARK_TEXT}
           onValueChange={veganHandler}
           value={vegan}
         />
-        <View style={styles.header}>
-          <Text>Preferences</Text>
-        </View>
-        <Text style={styles.text}> Cheese</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={cheese ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={cheeseHandler}
-          value={cheese}
-        />
-        <Text style={styles.text}> Orange</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={orange ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={orangeHandler}
-          value={orange}
-        />
-        <Text style={styles.text}> Chocolate</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={chocolate ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={chocolateHandler}
-          value={chocolate}
-        />
-        <Text style={styles.text}> Beetroot</Text>
-        <Switch
-          style={styles.switch}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
-          thumbColor={beetroot ? "#f5dd4b" : "#f4f3f4"}
-          ios_backgroundColor="#3e3e3e"
-          onValueChange={beetrootHandler}
-          value={beetroot}
-        />
-        <View style={styles.buttons}>
+        <View style={styles.button_Direction}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Allergies")}
-            style={styles.buttonstyle}
+            style={styles.buttons}
+            onPress={() => navigation.goBack()}
           >
-            <Text>Back</Text>
+            <Text style={styles.buttontext}>Back</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonstyle} onPress={postHandler}>
-            <Text>Finish</Text>
+          <TouchableOpacity style={styles.buttons} onPress={postHandler}>
+            <Text style={styles.buttontext}>Finish</Text>
           </TouchableOpacity>
         </View>
-        <Text> {post}</Text>
       </View>
     </ScrollView>
   );
 }
-
 const styles = StyleSheet.create({
-  background: { backgroundColor: COLS.C_BG },
-  container: {
-    margin: 10,
+  background: {
+    backgroundColor: COLS.C_BG,
+    flex: 1,
   },
-  Font: {
-    alignSelf: "center",
-    marginBottom: 10,
-    marginVertical: 20,
+  container: {
+    margin: FORMAT_containers.F_container_margin,
+    backgroundColor: COLS.C_BG,
+    marginVertical: 10,
+    padding: FORMAT_containers.F_container_padding,
+    alignItems: FORMAT_containers.F_container_alignItems,
+    justifyContent: FORMAT_containers.F_container_justifyContent,
+    flex: FORMAT_containers.F_container_flex,
+    backgroundColor: COLS.C_BG,
   },
   text: {
-    margin: 5,
-    left: 40,
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    marginBottom: FORMAT_text.F_text_marginBottom,
+    marginTop: FORMAT_text.F_text_marginTop,
+    margin: FORMAT_text.F_text_margin,
+    left: FORMAT_text.F_text_left,
+    fontWeight: FORMAT_fonts.F_font_fontWeight,
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
     fontWeight: "bold",
   },
   switch: {
-    right: 40,
-    bottom: 27,
+    right: FORMAT_switches.F_switch_right,
+    bottom: FORMAT_switches.F_switch_bottom,
+  },
+  button_Direction: {
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
   },
   buttons: {
-    flexDirection: "row",
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
+    padding: FORMAT_navButton.F_navButton_padding,
+    backgroundColor: COLS.C_BG,
+    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
+    margin: 20,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+      color: COLS.C6_WHITE_TEXT,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
   },
-  buttonstyle: {
-    margin: 10,
-    alignSelf: "center",
-    alignItems: "center",
-    padding: 15,
-    backgroundColor: COLS.C5_LIGHT_TEXT,
-    left: 120,
-    borderRadius: 5,
-    width: 80,
+  heading: {
+    alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
+    left: FORMAT_headings.F_headingMainTitle_left,
+    fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
+    fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
+    bottom: FORMAT_headings.F_headingMainTitle_bottom,
+    marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
+    marginTop: FORMAT_headings.F_headingMainTitle_marginTop,
+    color: COLS.C6_WHITE_TEXT,
   },
-
-  header: {
-    alignSelf: "center",
+  buttontext: {
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+    textAlign: "center",
   },
-
   subheading: {
-    fontSize: 10,
-    position: "relative",
-    left: 50,
+    fontSize: FORMAT_headings.F_subHeading_fontSize,
+    position: FORMAT_headings.F_subHeading_position,
+    left: FORMAT_headings.F_subHeading_left,
+    alignSelf: FORMAT_headings.F_subHeading_alignSelf,
+    alignItems: FORMAT_headings.F_subHeading_alignItems,
+    fontWeight: FORMAT_headings.F_subHeading_fontWeight,
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    fontSize: 11,
+    fontWeight: "bold",
+  },
+  header: {
+    marginTop: 20,
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    fontSize: 28,
+    fontWeight: "bold",
   },
 });
