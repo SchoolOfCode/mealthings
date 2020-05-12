@@ -421,7 +421,6 @@ Draggable list
 Tests
 Implement counter for today's recipe so a different set of recipes show
 Add button to stop hiding password in password fields
-burger menu spacing
 Loading splash screen
 Request recipes that dont fight preferances / allergies.
 Make a lower resolution image for logo
