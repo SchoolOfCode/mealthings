@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Muli");
+
+html {
+  font-family: "Muli", sans-serif;
+}
+
 .wrapper {
   background-color: #a6e6ab;
   display: grid;
@@ -6,7 +12,7 @@
   font-size: 3rem;
   font-weight: 50;
   text-align: center;
-  font-family: "Quicksand", serif;
+  font-family: "Muli", serif;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 10px;
   grid-auto-rows: 100px;
