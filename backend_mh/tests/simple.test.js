@@ -1,4 +1,5 @@
 /* global jest expect, describe, it */
+const { getUserSpecificRecipes } = require("../models/recipes");
 
 /* eslint-disable no-console */
 function sum(a, b) {
@@ -10,15 +11,53 @@ test("adds 1 + 2 to equal 3", () => {
   expect(sum(1, 2)).toBe(3);
 });
 
-// 2. Testing POST users route
-const { addUser } = require("../models/users");
-describe(`POST Endpoint for USERS`, () => {
-  it(`Creates a successful POST request for USERS`, async () => {
-    const res = await addUser({ name: "Bob" });
-    console.log("reply is: ", res);
-    expect(res.message).toEqual("Inserted new user");
+describe("The getUserSpecificRecipes function", () => {
+  test("fetches 1 recipe for user 1", async () => {
+    const oneRecipe = await getUserSpecificRecipes(1, 1);
+    expect(oneRecipe.length).toBe(1);
+  });
+
+  test("fetches 7 recipes for user 1", async () => {
+    const sevenRecipes = await getUserSpecificRecipes(1, 7);
+    expect(sevenRecipes.length).toBe(7);
+  });
+
+  test("fetches 1 recipe for user 2", async () => {
+    const oneRecipe = await getUserSpecificRecipes(2, 1);
+    expect(oneRecipe.length).toBe(1);
+  });
+
+  test("fetches 2 recipse for user 2", async () => {
+    const twoRecipes = await getUserSpecificRecipes(2, 2);
+    expect(twoRecipes.length).toBe(2);
+  });
+
+  test("fetches 14 recipse for user 2", async () => {
+    const fourteenRecipes = await getUserSpecificRecipes(2, 14);
+    expect(fourteenRecipes.length).toBe(14);
+  });
+
+  test("fetches 1 recipse for user 3", async () => {
+    const oneRecipe = await getUserSpecificRecipes(3, 1);
+    expect(oneRecipe.length).toBe(1);
+  });
+
+  test("fetches different recipes when called twice for user 3", async () => {
+    const oneRecipe = await getUserSpecificRecipes(3, 1);
+    const anotherRecipe = await getUserSpecificRecipes(3, 1);
+    expect(oneRecipe).not.toEqual(anotherRecipe);
   });
 });
+
+// // 2. Testing POST users route
+// const { addUser } = require("../models/users");
+// describe(`POST Endpoint for USERS`, () => {
+//   it(`Creates a successful POST request for USERS`, async () => {
+//     const res = await addUser({ name: "Bob" });
+//     console.log("reply is: ", res);
+//     expect(res.message).toEqual("Inserted new user");
+//   });
+// });
 
 // // 3. Testing GET users route
 // const { getUsers } = require("../models/users");

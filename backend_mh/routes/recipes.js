@@ -3,6 +3,7 @@ const {
   getRecipes,
   getRecipeById,
   getShoppingList,
+  getUserSpecificRecipes,
 } = require("../models/recipes");
 const { getRecipeCount } = require("../models/getNumerOfRecipes");
 const router = express.Router();
@@ -21,6 +22,26 @@ router.post("/shoppinglist", async (req, res) => {
     return res
       .status(400)
       .json({ success: false, message: "Failed to get shopping list." });
+  }
+});
+
+router.post("/userspecificrecipes", async (req, res) => {
+  console.log("Recieved POST request for userspecificrecipes");
+  const { body } = req;
+  const recipes = await getUserSpecificRecipes(body.userID, body.numRecipes);
+  if (recipes && recipes.length > 0) {
+    return res.status(200).json({
+      success: true,
+      payload: recipes,
+      message: "Specific user recipes enclosed.",
+    });
+  } else {
+    return res
+      .status(400)
+      .json({
+        success: false,
+        message: "Failed to get specific user recipes.",
+      });
   }
 });
 
