@@ -54,7 +54,7 @@ export default function SimplePopover() {
         }}
       >
         <Typography className={classes.typography}>
-          TestFlight / Apple Store / Play Store
+          Coming soon to Google Play -(sign up below for first preview)
           {/* Apple Store/ Play Store. */}
         </Typography>
       </Popover>

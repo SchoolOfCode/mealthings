@@ -1,8 +1,8 @@
 import React from "react"
-import vision2 from "./vision2.png"
+import vision3 from "./vision3.png"
 
 const Vision = () => {
-  return <img src={vision2} />
+  return <img src={vision3} />
 }
 
 export default Vision

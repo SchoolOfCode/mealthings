@@ -1,7 +1,7 @@
 :root {
-  --clr-accent: #fb4b3d;
+  --clr-accent: #bcb5c3;
   --clr-gray: hsl(98, 0%, 87%);
-  --clr-body: hsl(0, 0%, 0%);
+  --clr-body: #bcb5c3;
 }
 
 :root {
@@ -99,9 +99,8 @@ button {
   border-bottom: 1px solid rgba(black, 0.3);
   position: relative;
 }
-.card__input:hover,
-.card__input:focus {
-  outline: 2px solid rgba(255, 235, 75, 0.5);
+.card__input {
+  outline: 2px solid #a6e6ab;
 }
 
 .card__input::placeholder {
@@ -197,4 +196,4 @@ button {
   .card__btn {
     margin-top: 4em;
   }
-
+}

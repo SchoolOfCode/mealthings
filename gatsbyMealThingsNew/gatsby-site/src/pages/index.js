@@ -16,6 +16,8 @@ import Vision from "../components/Vision/index"
 import Impact from "../components/Impact/impact"
 import Download from "../components/Download"
 import Review from "../components/Review/index"
+import mealthings3 from "./mealthings3.png"
+import appstore from "./appstore.png"
 
 function IndexPage() {
   return (
@@ -26,21 +28,25 @@ function IndexPage() {
           <Circle />
           <div className="item1">
             <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+            <img src={mealthings3} />
 
             <div className={scss.sectionDownload} id="download-id">
               <br></br>
             </div>
-            <Popover />
+            {/* <Popover /> */}
             <br></br>
+            <img size="em" src={appstore} />
+            <br></br>
+            <br></br>
+
             <Download />
 
             <br></br>
+            <br></br>
             <div className={scss.sectionVision} id="vision-id">
+              <br></br>
+
+              <h3>Vision</h3>
               <Vision />
             </div>
           </div>
@@ -56,17 +62,22 @@ function IndexPage() {
             <br></br>
             <br></br>
             <br></br>
+            <h3>Impact</h3>
+            <br></br>
+            <br></br>
 
             <Impact />
           </div>
-
 
           <div className={scss.sectionReviews} id="reviews-id">
             <br></br>
             <br></br>
             <br></br>
-
+            <h3>Reviews</h3>
+            <br></br>
+            <br></br>
             <Review />
+
             {/* <SimpleRating /> */}
           </div>
           <br></br>
@@ -74,6 +85,8 @@ function IndexPage() {
           <div className={scss.sectionContact} id="contact-id">
             <br></br>
             <br></br>
+            <h3>Contact</h3>
+
             <NodeMailer />
           </div>
           <br></br>

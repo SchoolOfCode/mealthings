@@ -1,8 +1,8 @@
 import React from "react"
-import download from "./download.png"
+import download1 from "./download1.png"
 
 const Download = () => {
-  return <img src={download} />
+  return <img src={download1} />
 }
 
 export default Download
