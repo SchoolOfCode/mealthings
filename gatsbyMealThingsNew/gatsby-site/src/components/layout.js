@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <footer>© MealThings{new Date().getFullYear()}</footer>
+        <footer>© MealThings, {new Date().getFullYear()}</footer>
       </div>
     </>
   )

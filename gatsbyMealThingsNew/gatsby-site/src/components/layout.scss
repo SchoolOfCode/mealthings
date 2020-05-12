@@ -1,12 +1,12 @@
 .wrapper {
   background-color: #a6e6ab;
   display: grid;
-  text-transform: uppercase;
-  letter-spacing: 4rem;
-  font-size: 2.2rem;
-  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 1rem;
+  font-size: 3rem;
+  font-weight: 50;
   text-align: center;
-  font-family: "Playfair Display", serif;
+  font-family: "Quicksand", serif;
   grid-template-columns: repeat(1, 1fr);
   grid-gap: 10px;
   grid-auto-rows: 100px;
@@ -57,7 +57,8 @@
     "au "
     "av "
     "aw "
-    "ax ";
+    "ax "
+    "ay ";
   align-items: start;
 }
 .item1 {
