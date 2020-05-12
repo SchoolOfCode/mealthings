@@ -110,7 +110,7 @@
   {
     "recipe_id": 7,
     "name": "Boozy pears & chocolate",
-    "ingredients": "{\"blanched hazelnuts\",\"pear halves , in juice\",\"Armagnac\",\"dark chocolate\",\"scoops of vanilla ice cream\"}",
+    "ingredients": "{\"blanched hazelnuts\",\"pear halves, in juice\",\"Armagnac\",\"dark chocolate\",\"scoops of vanilla ice cream\"}",
     "calories": "275",
     "protein": "3.9",
     "carbohydrates": "28.3",
@@ -200,7 +200,7 @@
   {
     "recipe_id": 39,
     "name": "Crispy skin lemon sole                          ",
-    "ingredients": "{\"jar of artichoke hearts in oil\",\"mixed-colour courgettes\",\"fresh mint\",\"sides of flat white fish , such as lemon sole, skin on, scaled, from sustainable sources\",\"fresh mixed-colour chillies\"}",
+    "ingredients": "{\"jar of artichoke hearts in oil\",\"mixed-colour courgettes\",\"fresh mint\",\"sides of flat white fish, such as lemon sole, skin on, scaled, from sustainable sources\",\"fresh mixed-colour chillies\"}",
     "calories": "309",
     "protein": "38.8",
     "carbohydrates": "5.9",
@@ -254,7 +254,7 @@
   {
     "recipe_id": 10,
     "name": "Sweet & sour chicken noodles    ",
-    "ingredients": "{\"free-range chicken thighs , skin on, bone in\",\"fine rice noodles\",\"sugar snap peas\",\"Worcestershire sauce\",\"chilli jam\"}",
+    "ingredients": "{\"free-range chicken thighs, skin on, bone in\",\"fine rice noodles\",\"sugar snap peas\",\"Worcestershire sauce\",\"chilli jam\"}",
     "calories": "544",
     "protein": "26.2",
     "carbohydrates": "74.8",
@@ -272,7 +272,7 @@
   {
     "recipe_id": 21,
     "name": "Peachy pork chops    ",
-    "ingredients": "{\"higher-welfare pork chops , with rind\",\"garlic\",\"fresh rosemary\",\"peach halves in juice\",\"bourbon\"}",
+    "ingredients": "{\"higher-welfare pork chops, with rind\",\"garlic\",\"fresh rosemary\",\"peach halves in juice\",\"bourbon\"}",
     "calories": "545",
     "protein": "29.4",
     "carbohydrates": "21.7",
@@ -308,7 +308,7 @@
   {
     "recipe_id": 38,
     "name": "Creamy Cornish mussels                        ",
-    "ingredients": "{\"mussels , scrubbed, debearded, from sustainable sources\",\"garlic\",\"fresh chives\",\"cornish cider\",\"clotted cream\"}",
+    "ingredients": "{\"mussels, scrubbed, debearded, from sustainable sources\",\"garlic\",\"fresh chives\",\"cornish cider\",\"clotted cream\"}",
     "calories": "348",
     "protein": "15.2",
     "carbohydrates": "8.4",
@@ -488,7 +488,7 @@
   {
     "recipe_id": 30,
     "name": "Amazing dressed beets        ",
-    "ingredients": "{\"raw mixed-colour baby beets , ideally with leaves\",\"clementines\",\"extra virgin olive oil\",\"red wine vinegar          \",\"fresh tarragon\",\"crumbly goat’s cheese\",\"shelled unsalted walnut halves\"}",
+    "ingredients": "{\"raw mixed-colour baby beets, ideally with leaves\",\"clementines\",\"extra virgin olive oil\",\"red wine vinegar \",\"fresh tarragon\",\"crumbly goat’s cheese\",\"shelled unsalted walnut halves\"}",
     "calories": "263",
     "protein": "9.8",
     "carbohydrates": "16.1",
@@ -506,7 +506,7 @@
   {
     "recipe_id": 41,
     "name": "Smoky chorizo salmon                              ",
-    "ingredients": "{\"salmon fillets , skin on, scaled, pin-boned, from sustainable sources\",\"ripe mixed-colour cherry tomatoes\",\"fresh basil\",\"black olives , (stone in)\",\"higher-welfare chorizo\"}",
+    "ingredients": "{\"salmon fillets, skin on, scaled, pin-boned, from sustainable sources\",\"ripe mixed-colour cherry tomatoes\",\"fresh basil\",\"black olives, (stone in)\",\"higher-welfare chorizo\"}",
     "calories": "363",
     "protein": "34.3",
     "carbohydrates": "5.1",
@@ -596,7 +596,7 @@
   {
     "recipe_id": 34,
     "name": "Speedy spiced prawn soup                ",
-    "ingredients": "{\"small frozen cooked peeled prawns , from sustainable sources\",\"basmati rice\",\"spring onions\",\"heaped tablespoons korma curry paste\",\"tin of light coconut milk\"}",
+    "ingredients": "{\"small frozen cooked peeled prawns, from sustainable sources\",\"basmati rice\",\"spring onions\",\"heaped tablespoons korma curry paste\",\"tin of light coconut milk\"}",
     "calories": "321",
     "protein": "16.1",
     "carbohydrates": "36.2",
@@ -614,7 +614,7 @@
   {
     "recipe_id": 42,
     "name": "Sticky hoisin chicken                                ",
-    "ingredients": "{\"free-range chicken legs\",\"spring onions\",\"fresh mixed-colour chillies\",\"regular oranges , or blood oranges\",\"hoisin sauce\"}",
+    "ingredients": "{\"free-range chicken legs\",\"spring onions\",\"fresh mixed-colour chillies\",\"regular oranges, or blood oranges\",\"hoisin sauce\"}",
     "calories": "430",
     "protein": "29",
     "carbohydrates": "36.2",
@@ -632,7 +632,7 @@
   {
     "recipe_id": 43,
     "name": "Flaky pastry pesto chicken                                  ",
-    "ingredients": "{\"sheet of all-butter puff pastry , (cold)\",\"free-range skinless chicken breasts\",\"green pesto\",\"ripe cherry tomatoes , on the vine\",\"green beans                                    \"}",
+    "ingredients": "{\"sheet of all-butter puff pastry, (cold)\",\"free-range skinless chicken breasts\",\"green pesto\",\"ripe cherry tomatoes, on the vine\",\"green beans                                    \"}",
     "calories": "618",
     "protein": "36.3",
     "carbohydrates": "40.4",
@@ -686,7 +686,7 @@
   {
     "recipe_id": 35,
     "name": "Thai-style crispy sea bass                  ",
-    "ingredients": "{\"spring onions\",\"fresh coriander\",\"whole sea bass , scaled, gutted, trimmed, from sustainable sources\",\"thai red curry paste\",\"lime\"}",
+    "ingredients": "{\"spring onions\",\"fresh coriander\",\"whole sea bass, scaled, gutted, trimmed, from sustainable sources\",\"thai red curry paste\",\"lime\"}",
     "calories": "410",
     "protein": "37.4",
     "carbohydrates": "2.1",
@@ -851,7 +851,7 @@
   {
     "recipe_id": 24,
     "name": "Meltin' mustardy beef    ",
-    "ingredients": "{\"shin of beef , bone out (ask your butcher for the bone)\",\"carrots\",\"onions\",\"Worcestershire sauce\",\"teaspoons wholegrain mustard\"}",
+    "ingredients": "{\"shin of beef, bone out (ask your butcher for the bone)\",\"carrots\",\"onions\",\"Worcestershire sauce\",\"teaspoons wholegrain mustard\"}",
     "calories": "348",
     "protein": "34",
     "carbohydrates": "13.4",
@@ -905,7 +905,7 @@
   {
     "recipe_id": 37,
     "name": "Smoky pancetta cod                      ",
-    "ingredients": "{\"rashers of higher-welfare smoked pancetta\",\"white fish fillets , such as cod, skin off, pin-boned, from sustainable sources\",\"fresh rosemary\",\"cooked lentils\",\"spinach\"}",
+    "ingredients": "{\"rashers of higher-welfare smoked pancetta\",\"white fish fillets, such as cod, skin off, pin-boned, from sustainable sources\",\"fresh rosemary\",\"cooked lentils\",\"spinach\"}",
     "calories": "348",
     "protein": "44.1",
     "carbohydrates": "22.9",
@@ -1175,7 +1175,7 @@
   {
     "recipe_id": 36,
     "name": "Asian tuna steak salad                    ",
-    "ingredients": "{\"radishes , ideally with leaves\",\"teaspoons pickled ginger\",\"low-salt soy sauce\",\"frozen soya beans\",\"tuna steaks , (ideally 2 cm thick), from sustainable sources                      \"}",
+    "ingredients": "{\"radishes, ideally with leaves\",\"teaspoons pickled ginger\",\"low-salt soy sauce\",\"frozen soya beans\",\"tuna steaks, (ideally 2 cm thick), from sustainable sources                      \"}",
     "calories": "426",
     "protein": "54",
     "carbohydrates": "9.8",
@@ -1247,7 +1247,7 @@
   {
     "recipe_id": 71,
     "name": "Prawn and chorizo orzo",
-    "ingredients": "{\"garlic\",\"chorizo\",\"fresh basil\",\"olive oil\",\"sherry vinegar\",\"passata\",\"orzo\",\"ripe cherry tomatoes , on the vine\",\"large cooked peeled king prawns\"}",
+    "ingredients": "{\"garlic\",\"chorizo\",\"fresh basil\",\"olive oil\",\"sherry vinegar\",\"passata\",\"orzo\",\"ripe cherry tomatoes, on the vine\",\"large cooked peeled king prawns\"}",
     "calories": "513",
     "protein": "28.8",
     "carbohydrates": "60.3",
@@ -1301,7 +1301,7 @@
   {
     "recipe_id": 29,
     "name": "Pappa al pomodoro soup      ",
-    "ingredients": "{\"garlic\",\"olive oil        \",\"bunch of fresh basil\",\"tins of plum tomatoes\",\"stale ciabatta\",\"Parmesan cheese\",\"virgin olive oil\"}",
+    "ingredients": "{\"garlic\",\"olive oil \",\"bunch of fresh basil\",\"tins of plum tomatoes\",\"stale ciabatta\",\"Parmesan cheese\",\"virgin olive oil\"}",
     "calories": "464",
     "protein": "13.3",
     "carbohydrates": "44",
@@ -1319,7 +1319,7 @@
   {
     "recipe_id": 40,
     "name": "Crazy simple fish pie                            ",
-    "ingredients": "{\"undyed smoked haddock , skin off, from sustainable sources\",\"spring onions\",\"baby spinach\",\"cheddar cheese\",\"sheets of filo pastry\"}",
+    "ingredients": "{\"undyed smoked haddock, skin off, from sustainable sources\",\"spring onions\",\"baby spinach\",\"cheddar cheese\",\"sheets of filo pastry\"}",
     "calories": "431",
     "protein": "34.5",
     "carbohydrates": "27.9",
