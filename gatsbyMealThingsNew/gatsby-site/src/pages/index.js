@@ -34,7 +34,6 @@ function IndexPage() {
               <br></br>
             </div>
             {/* <Popover /> */}
-            <br></br>
             <img size="em" src={appstore} />
             <br></br>
             <br></br>
@@ -44,24 +43,18 @@ function IndexPage() {
             <br></br>
             <br></br>
             <div className={scss.sectionVision} id="vision-id">
-              <br></br>
-
               <h3>Vision</h3>
               <Vision />
             </div>
           </div>
-          <br></br>
 
-          <div className={scss.sectionSetup} id="setup-id">
-            <br></br>
-          </div>
-          <CustomizedSteppers />
+          <div className={scss.sectionSetup} id="setup-id"></div>
+          {/* <CustomizedSteppers /> */}
 
           <div className={scss.sectionAboutUs} id="about-us-id">
             <br></br>
             <br></br>
-            <br></br>
-            <br></br>
+
             <h3>Impact</h3>
             <br></br>
             <br></br>
@@ -70,7 +63,6 @@ function IndexPage() {
           </div>
 
           <div className={scss.sectionReviews} id="reviews-id">
-            <br></br>
             <br></br>
             <br></br>
             <h3>Reviews</h3>
@@ -84,8 +76,8 @@ function IndexPage() {
 
           <div className={scss.sectionContact} id="contact-id">
             <br></br>
-            <br></br>
             <h3>Contact</h3>
+            <br></br>
 
             <NodeMailer />
           </div>

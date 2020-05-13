@@ -75,41 +75,38 @@ export default function BackToTop(props) {
   return (
     <React.Fragment>
       <AppBar style={{ background: "#BCB5C3" }}>
-        <Toolbar>
-          <div className={css.scrollBarText}>
-            <p
-              className={css.anchorLinks}
-              onClick={() => handleLink("download-id")}
-            >
-              Download ....|....
-            </p>
-            <p
-              className={css.anchorLinks}
-              onClick={() => handleLink("setup-id")}
-            >
-              Set up ....|....
-            </p>
-            <p
-              className={css.anchorLinks}
-              onClick={() => handleLink("about-us-id")}
-            >
-              Impact ....|....
-            </p>
-            <p
-              className={css.anchorLinks}
-              onClick={() => handleLink("reviews-id")}
-            >
-              Reviews ....|....
-            </p>
+        {/* <Toolbar classes={{ root: css.scrollBarText }}> */}
+        <div classname={css.scrollBarText}>
+          <p
+            className={css.anchorLinks}
+            onClick={() => handleLink("download-id")}
+          >
+            Download |
+          </p>
+          <p className={css.anchorLinks} onClick={() => handleLink("setup-id")}>
+            Set up |
+          </p>
+          <p
+            className={css.anchorLinks}
+            onClick={() => handleLink("about-us-id")}
+          >
+            Impact |
+          </p>
+          <p
+            className={css.anchorLinks}
+            onClick={() => handleLink("reviews-id")}
+          >
+            Reviews |
+          </p>
 
-            <p
-              className={css.anchorLinks}
-              onClick={() => handleLink("contact-id")}
-            >
-              Register interest
-            </p>
-          </div>
-        </Toolbar>
+          <p
+            className={css.anchorLinks}
+            onClick={() => handleLink("contact-id")}
+          >
+            Register interest
+          </p>
+        </div>
+        {/* </Toolbar> */}
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
 

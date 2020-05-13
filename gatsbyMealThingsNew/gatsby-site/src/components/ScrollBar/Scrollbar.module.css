@@ -1,23 +1,25 @@
+@import url("https://fonts.googleapis.com/css?family=Muli");
+
 .scrollBarText {
-  width: 100%;
-  display: "flex";
-  justify-content: "space-around";
-  text-transform: uppercase;
-  font-size: 1.5rem;
-  font-weight: 400;
-  font-family: "Playfair Display", serif;
-  letter-spacing: 0.5rem;
-  color: "green";
+  /* width: 100%; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: space-between;
+  /* font-size: 1.8rem; */
+  font-weight: 100;
+  font-family: Muli, sans-serif;
+  letter-spacing: 0.4rem;
 }
 
 .anchorLinks {
   display: inline;
-  color: "green" !important;
-  padding-left: "20px" !important;
-  padding-right: "20px" !important;
+  color: white !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 .anchorLinks:hover {
   display: inline;
-  color: "purple";
+  color: purple;
 }
