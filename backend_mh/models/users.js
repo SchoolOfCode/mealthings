@@ -39,7 +39,7 @@ async function verifyJwt(token) {
     decoded = jwt.verify(token, JWT_SECRET);
     console.log("Decoded:", decoded);
     const resp = await query(
-      "SELECT user_id, email_address FROM users WHERE email_address = $1",
+      "SELECT user_id, email_address, height, weight, goals, food_prefs_exc FROM users WHERE email_address = $1",
       [decoded.email_address || decoded.email]
     );
     return resp.rows;
@@ -80,7 +80,6 @@ async function addUser(body) {
     goals,
     gender
   );
-  console.log("hi");
   const res = await query(
     `INSERT INTO users(
         name,

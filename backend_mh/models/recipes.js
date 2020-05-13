@@ -70,10 +70,11 @@ async function getUserSpecificRecipes(id, numOfRecipes) {
   // Get the user's diet and allergies
   const res = await query(`SELECT * FROM users where user_id = $1`, [id]);
   // Split allergies into an array
-  const allergies = res.rows[0].food_prefs_exc
+  let allergies = res.rows[0].food_prefs_exc
     .replace('"', "")
     .toLowerCase()
     .split(",");
+  allergies = [...allergies, res.rows[0].food_prefs_inc];
   // Get relevant array of ingredients to exclude for diet
   let ingredientsToExclude = [];
   for (allergen of allergies) {

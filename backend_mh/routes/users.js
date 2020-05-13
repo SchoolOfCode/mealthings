@@ -131,6 +131,10 @@ router.post("/login", async (req, res) => {
         message: "Welcome back!",
         email_address: verifyResponse[0].email_address,
         userID: verifyResponse[0].user_id,
+        food_prefs_exc: verifyResponse[0].food_prefs_exc,
+        height: verifyResponse[0].height,
+        weight: verifyResponse[0].weight,
+        goals: verifyResponse[0].goals,
       });
     } else {
       return res
