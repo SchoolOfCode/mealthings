@@ -31,24 +31,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   formatting: {
-    backgroundColor: COLS.C5_LIGHT_TEXT,
     marginBottom: 20,
-    bottom: 70,
+    top: "2%",
     padding: 20,
     alignSelf: "center",
-    backgroundColor: COLS.C_RED,
+    backgroundColor: "#BCB5C3",
     width: screenWidth * 0.95,
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
-    borderRadius: 5,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
+    opacity: 2,
   },
 });
 
@@ -140,8 +129,8 @@ export default function ShoppingList({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require("../assets/images/Trial.png")}
-        style={{ width: "100%", height: "100%", opacity: 0.5 }}
+        source={require("../assets/images/lemon.jpg")}
+        style={{ width: "100%", height: "100%", opacity: 0.6 }}
       >
         <ScrollView>
           {ingredientsList &&
@@ -161,15 +150,14 @@ export default function ShoppingList({ navigation }) {
               />
             ))}
         </ScrollView>
-      </ImageBackground>
-      <View>
         <TouchableOpacity
           style={styles.formatting}
           onPress={() => navigation.navigate("TodaysRecipe")}
         >
           <Text style={styles.buttonText}> Start Cooking! </Text>
         </TouchableOpacity>
-      </View>
+      </ImageBackground>
+      <View></View>
     </View>
   );
 }

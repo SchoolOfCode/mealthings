@@ -19,6 +19,6 @@ const styles = StyleSheet.create({
   rows: {
     flexDirection: "row",
     backgroundColor: COLS.C_BG,
+    margin: 0,
   },
-  color: { width: 500 },
 });
