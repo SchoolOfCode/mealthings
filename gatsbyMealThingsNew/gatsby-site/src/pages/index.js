@@ -47,12 +47,9 @@ function IndexPage() {
               <Vision />
             </div>
           </div>
-          <br></br>
 
-          <div className={scss.sectionSetup} id="setup-id">
-            <br></br>
-          </div>
-          <CustomizedSteppers />
+          <div className={scss.sectionSetup} id="setup-id"></div>
+          {/* <CustomizedSteppers /> */}
 
           <div className={scss.sectionAboutUs} id="about-us-id">
             <br></br>

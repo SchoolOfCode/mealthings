@@ -177,6 +177,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
   },
+  "& .MuiPaper-root": {
+    backgroundColor: "rgba(0,0,0,0)",
+  },
   button: {
     marginRight: theme.spacing(1),
   },
