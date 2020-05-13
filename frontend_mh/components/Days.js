@@ -19,8 +19,8 @@ export default function Days() {
 const styles = StyleSheet.create({
   row: {
     flexDirection: "column",
-    backgroundColor: "#5B625A",
-    borderBottomColor: COLS.C_BG,
+    backgroundColor: "#BCB5C3",
+    borderBottomColor: "#BCB5C3",
     borderBottomWidth: 4,
   },
   spacing: {
@@ -29,5 +29,6 @@ const styles = StyleSheet.create({
     borderTopColor: "white",
     color: "white",
     borderTopWidth: 2,
+    bottom: 40,
   },
 });

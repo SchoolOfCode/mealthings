@@ -5,6 +5,8 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
+  Image,
+  ImageBackground,
 } from "react-native";
 
 import { AuthContext } from "../App.js";
@@ -288,13 +290,44 @@ export default function LandingPage({ navigation }) {
             style={styles.note2}
             onPress={() => navigation.navigate("ShoppingList")}
           >
-            <Text style={styles.buttonText}>Shopping List</Text>
+            <Image
+              style={styles.images}
+              source={require("../assets/images/tapas.jpg")}
+            ></Image>
+            <Text
+              style={{
+                bottom: "25.8%",
+
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 18,
+                alignSelf: "flex-start",
+              }}
+            >
+              {" "}
+              Shopping List
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.note}
             onPress={() => navigation.navigate("TodaysRecipe")}
           >
-            <Text style={styles.buttonText}>Today's Recipe</Text>
+            <Image
+              style={styles.images}
+              source={require("../assets/images/Chilli.jpg")}
+            ></Image>
+            <Text
+              style={{
+                bottom: "30%",
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 18,
+                alignSelf: "flex-start",
+                bottom: "25%",
+              }}
+            >
+              Today's Recipe
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.flex}>
@@ -302,13 +335,56 @@ export default function LandingPage({ navigation }) {
             style={styles.note}
             onPress={() => navigation.navigate("NewRecipe")}
           >
-            <Text style={styles.buttonText}>Random Recipe</Text>
+            <Image
+              style={styles.images}
+              source={require("../assets/images/Brocoli.jpg")}
+            ></Image>
+            <Text
+              style={{
+                bottom: "30%",
+
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 18,
+                alignSelf: "flex-start",
+              }}
+            >
+              {" "}
+              Random Recipe
+            </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.note2}
             onPress={() => navigation.navigate("Mealplanner")}
           >
-            <Text style={styles.buttonText}>Weekly Meal Plan</Text>
+            <Image
+              style={styles.images}
+              source={require("../assets/images/Vegplate.jpg")}
+            ></Image>
+            <Text
+              style={{
+                bottom: "30%",
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 18,
+                alignSelf: "flex-start",
+              }}
+            >
+              {" "}
+              Weekly Meal
+            </Text>
+            <Text
+              style={{
+                bottom: "32%",
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 14,
+                alignSelf: "flex-start",
+              }}
+            >
+              {" "}
+              Planner
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.flex}>
@@ -316,15 +392,47 @@ export default function LandingPage({ navigation }) {
             onPress={() => navigation.navigate("Goals")}
             style={styles.note2}
           >
-            <Text style={styles.buttonText}>Diet and Goals</Text>
+            <Image
+              style={styles.images}
+              source={require("../assets/images/Orange.jpg")}
+            ></Image>
+            <Text> </Text>
+            <Text
+              style={{
+                bottom: "40%",
+                fontWeight: "bold",
+                color: "white",
+                fontSize: 18,
+                alignSelf: "flex-start",
+              }}
+            >
+              Goals & Diet
+            </Text>
           </TouchableOpacity>
+
           <TouchableOpacity
             style={styles.note}
             onPress={() => {
               logOut();
             }}
           >
-            <Text style={styles.buttonText}>Logout</Text>
+            <Image
+              style={styles.images}
+              source={require("../assets/images/Pancakes.jpg")}
+            ></Image>
+            <Text
+              style={{
+                bottom: "25%",
+
+                color: "white",
+                fontWeight: "bold",
+                fontSize: 18,
+                alignSelf: "flex-start",
+              }}
+            >
+              {" "}
+              Logout
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -342,6 +450,13 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C_BG,
     height: 1000,
   },
+  headingText: {
+    bottom: "30%",
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 18,
+    alignSelf: "flex-start",
+  },
   justify: {
     alignItems: "center",
     padding: 10,
@@ -357,53 +472,35 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     backgroundColor: COLS.C_BG,
-    margin: 10,
+    margin: 15,
     alignSelf: "center",
     alignItems: "center",
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
+
+    shadowColor: "#9000",
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 2,
     },
     shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
-    padding: 10,
-    paddingVertical: 50,
-    fontSize: 20,
+    shadowRadius: 5,
+    elevation: 20,
   },
   note2: {
     width: 150,
     height: 150,
     backgroundColor: COLS.C_BG,
-    margin: 10,
+    margin: 15,
     alignSelf: "center",
     alignItems: "center",
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
-    paddingVertical: 50,
-    padding: 10,
-    fontSize: 20,
   },
   todaysMeal: {
-    width: 200,
+    top: "2%",
+    width: "85%",
     padding: 7,
-    backgroundColor: COLS.C_RED,
+    backgroundColor: "#BCB5C3",
     justifyContent: "flex-end",
     alignSelf: "center",
     alignItems: "center",
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -412,6 +509,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 2,
     elevation: 5,
+    borderRadius: 5,
+  },
+  images: {
+    width: "110%",
+    height: "110%",
+    borderRadius: 10,
+    opacity: 0.7,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
+    shadowOpacity: 1.25,
+    shadowRadius: 3,
   },
   buttonText: {
     color: COLS.C6_WHITE_TEXT,

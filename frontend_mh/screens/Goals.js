@@ -20,7 +20,7 @@ import { FORMAT_inputField } from "./FORMAT_inputField";
 import { FORMAT_navButton, FORMAT_navButtonText } from "./FORMAT_navButton";
 
 const screenWidth = Dimensions.get("screen").width;
-const iconSize = screenWidth * (1 / 4);
+const iconSize = screenWidth * (1 / 5);
 const iconColour = COLS.C4_DARK_TEXT;
 export default function Goals({ navigation }) {
   const [weight, setWeight] = useState();
@@ -102,6 +102,16 @@ export default function Goals({ navigation }) {
       <ScrollView style={styles.container}>
         <View>
           <View style={styles.margin}>
+            <Text
+              style={{
+                color: COLS.C4_DARK_TEXT,
+                fontSize: 16,
+                fontWeight: "900",
+                marginBottom: 10,
+              }}
+            >
+              Tell us about yourself...
+            </Text>
             <TextInput
               keyboardType="number-pad"
               style={styles.inputField}
@@ -121,7 +131,7 @@ export default function Goals({ navigation }) {
             ></TextInput>
           </View>
           <View>
-            <Text style={styles.Goals}>Goals</Text>
+            <Text style={styles.Goals}>...and what are your Goals?</Text>
           </View>
           <View style={styles.icons}>
             <View style={styles.positioning}>
@@ -140,6 +150,7 @@ export default function Goals({ navigation }) {
                   name="weight-hanging"
                   size={iconSize * 0.9}
                   color={muscle ? COLS.C_RED : COLS.C6_WHITE_TEXT}
+                  style={{ left: "10%", marginBottom: "10%" }}
                 />
                 <Text style={styles.text}>Gaining Muscle</Text>
               </TouchableOpacity>
@@ -175,6 +186,7 @@ export default function Goals({ navigation }) {
                     <MaterialCommunityIcons
                       name="chef-hat"
                       size={iconSize}
+                      style={{ right: "18%" }}
                       color={cook ? COLS.C_RED : COLS.C6_WHITE_TEXT}
                     />
                     <Text style={styles.text}>Learning to Cook</Text>
@@ -206,7 +218,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   positioning: {
-    padding: 15,
+    padding: 10,
     justifyContent: "center",
     flexDirection: "row",
     alignItems: "center",
@@ -289,27 +301,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   Goals: {
-    color: COLS.C6_WHITE_TEXT,
-    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
-    fontSize: 28,
-    fontWeight: "bold",
-    padding: 10,
+    marginTop: "8%",
+    marginBottom: "5%",
+    color: COLS.C4_DARK_TEXT,
+    fontSize: 16,
+    fontWeight: "900",
   },
   icons: {
     flexDirection: "row",
-    justifyContent: "space-around",
     alignItems: "center",
+    left: "3%",
   },
   secondRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
-    paddingBottom: 40,
+    paddingBottom: 30,
   },
   lastIcon: {
-    paddingLeft: 30,
+    paddingLeft: 20,
   },
   secondLastIcon: {
-    paddingLeft: 29,
+    paddingLeft: 50,
   },
 });
