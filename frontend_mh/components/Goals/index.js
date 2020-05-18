@@ -39,7 +39,7 @@ export default function Goals({ navigation }) {
   function Tracked(enteredText) {
     setHeight(enteredText);
   }
-  function handleSubmit({ navigation }) {
+  function handleSubmit() {
     var goals = "";
     if (fatLoss) {
       goals += "Fat loss,";
