@@ -7,6 +7,7 @@ import {
   AsyncStorage,
   Alert,
 } from "react-native";
+import * as Font from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginPage from "./screens/Loginpage";
@@ -119,6 +120,16 @@ async function storeItem(key, item) {
   }
 }
 
+async function getFonts() {
+  await Font.loadAsync({
+    "Muli-Medium": {
+      uri: require("./assets/fonts/Muli-VariableFont_wght.ttf"),
+    },
+    "Muli-Bold": {
+      uri: require("./assets/fonts/Muli-Bold.ttf"),
+    },
+  });
+}
 export default function App() {
   const [state, dispatch] = useReducer(
     (prevState, action) => {
@@ -294,7 +305,7 @@ export default function App() {
         postResponseJson
       );
       Alert.alert(
-        `Error! Status code ${postResponse.status}`,
+        `Error! Status code ${postResponse.status}, that email is already in use!`,
         postResponse.message,
         [{ text: "Dismiss", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }
@@ -312,6 +323,7 @@ export default function App() {
     // Fetch the token from storage then navigate to our appropriate place
     const onLoad = async () => {
       console.log("Inside useEffect!");
+      await getFonts();
       let token;
       try {
         console.log("About to look for JWT");

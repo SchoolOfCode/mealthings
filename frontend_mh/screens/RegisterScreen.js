@@ -303,6 +303,7 @@ const styles = StyleSheet.create({
     width: 200,
     alignSelf: "center",
     height: 50,
+    fontFamily: "Muli-Medium",
     borderRadius: 5,
     borderWidth: 2,
     borderColor: COLS.C6_WHITE_TEXT,
@@ -369,12 +370,12 @@ const styles = StyleSheet.create({
   },
   optionText: {
     color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold",
+    fontFamily: "Muli-Bold",
     alignSelf: "center",
     fontSize: 16,
   },
   title: {
-    fontWeight: "bold",
+    fontFamily: "Muli-Bold",
     color: COLS.C6_WHITE_TEXT,
     fontSize: 24,
     alignSelf: "center",
@@ -382,7 +383,7 @@ const styles = StyleSheet.create({
   },
   option: {
     color: COLS.C6_WHITE_TEXT,
-    fontWeight: "bold",
+    fontFamily: "Muli-Bold",
     marginTop: 10,
     marginLeft: 10,
     fontSize: 16,
@@ -390,6 +391,14 @@ const styles = StyleSheet.create({
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold",
+    fontFamily: "Muli-Bold",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
   },
 });

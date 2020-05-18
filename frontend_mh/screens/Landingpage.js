@@ -297,9 +297,8 @@ export default function LandingPage({ navigation }) {
             <Text
               style={{
                 bottom: "25.8%",
-
                 color: "white",
-                fontWeight: "bold",
+                fontFamily: "Muli-Bold",
                 fontSize: 18,
                 alignSelf: "flex-start",
               }}
@@ -320,10 +319,10 @@ export default function LandingPage({ navigation }) {
               style={{
                 bottom: "30%",
                 color: "white",
-                fontWeight: "bold",
                 fontSize: 18,
                 alignSelf: "flex-start",
                 bottom: "25%",
+                fontFamily: "Muli-Bold",
               }}
             >
               Today's Recipe
@@ -342,10 +341,9 @@ export default function LandingPage({ navigation }) {
             <Text
               style={{
                 bottom: "30%",
-
+                fontFamily: "Muli-Bold",
                 color: "white",
-                fontWeight: "bold",
-                fontSize: 18,
+                fontSize: 17,
                 alignSelf: "flex-start",
               }}
             >
@@ -365,7 +363,7 @@ export default function LandingPage({ navigation }) {
               style={{
                 bottom: "30%",
                 color: "white",
-                fontWeight: "bold",
+                fontFamily: "Muli-Bold",
                 fontSize: 18,
                 alignSelf: "flex-start",
               }}
@@ -377,7 +375,7 @@ export default function LandingPage({ navigation }) {
               style={{
                 bottom: "32%",
                 color: "white",
-                fontWeight: "bold",
+                fontFamily: "Muli-Bold",
                 fontSize: 14,
                 alignSelf: "flex-start",
               }}
@@ -400,7 +398,7 @@ export default function LandingPage({ navigation }) {
             <Text
               style={{
                 bottom: "40%",
-                fontWeight: "bold",
+                fontFamily: "Muli-Bold",
                 color: "white",
                 fontSize: 18,
                 alignSelf: "flex-start",
@@ -423,9 +421,9 @@ export default function LandingPage({ navigation }) {
             <Text
               style={{
                 bottom: "25%",
-
+                fontFamily: "Muli-Bold",
                 color: "white",
-                fontWeight: "bold",
+
                 fontSize: 18,
                 alignSelf: "flex-start",
               }}
@@ -453,7 +451,7 @@ const styles = StyleSheet.create({
   headingText: {
     bottom: "30%",
     color: "white",
-    fontWeight: "bold",
+    fontFamily: "Muli-Bold",
     fontSize: 18,
     alignSelf: "flex-start",
   },
@@ -475,7 +473,7 @@ const styles = StyleSheet.create({
     margin: 15,
     alignSelf: "center",
     alignItems: "center",
-
+    fontFamily: "Muli-Bold",
     shadowColor: "#9000",
     shadowOffset: {
       width: 0,
@@ -527,8 +525,8 @@ const styles = StyleSheet.create({
   buttonText: {
     color: COLS.C6_WHITE_TEXT,
     textAlign: "center",
-    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold",
+
     fontSize: 18,
+    fontFamily: "Muli-Bold",
   },
 });

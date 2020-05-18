@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
 import React from "react";
-import { COLS } from "../screens/COLS";
 
 export default function Days() {
   return (
@@ -30,5 +29,6 @@ const styles = StyleSheet.create({
     color: "white",
     borderTopWidth: 2,
     bottom: 40,
+    fontFamily: "Muli-Medium",
   },
 });

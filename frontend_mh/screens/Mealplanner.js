@@ -2,8 +2,8 @@ import React from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 import { COLS } from "./COLS";
 
-import MealPlanner from "../components/MealPlanner";
-import Days from "../components/Days";
+import MealPlanner from "../components/Mealplanner/index";
+import Days from "../components/Days/index";
 
 export default function Mealplanner() {
   return (

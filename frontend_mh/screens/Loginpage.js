@@ -43,7 +43,7 @@ export default function Loginpage() {
           <View>
             <Image
               style={styles.mealThingsLogo}
-              source={require("../assets/images/newLogo.png")}
+              source={require("../assets/images/logo_transparent_background.png")}
             />
           </View>
           <TextInput

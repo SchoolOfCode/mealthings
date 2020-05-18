@@ -30,71 +30,6 @@ const initialState = [
   { id: "dioxide", name: "Dioxide", allergic: false },
 ];
 
-const styles = StyleSheet.create({
-  background: {
-    backgroundColor: COLS.C_BG,
-    flex: 1,
-  },
-  container: {
-    backgroundColor: COLS.C_BG,
-    padding: 20,
-    alignItems: FORMAT_containers.F_container_alignItems,
-    justifyContent: FORMAT_containers.F_container_justifyContent,
-    backgroundColor: COLS.C_BG,
-  },
-  position: {
-    justifyContent: "center",
-  },
-  text: {
-    alignSelf: FORMAT_text.F_text_alignSelf,
-    marginBottom: FORMAT_text.F_text_marginBottom,
-    fontWeight: FORMAT_fonts.F_font_fontWeight,
-    color: COLS.C6_WHITE_TEXT,
-    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold",
-  },
-  heading: {
-    color: COLS.C6_WHITE_TEXT,
-    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
-    fontSize: 28,
-    fontWeight: "bold",
-    marginTop: 20,
-    marginBottom: 60,
-  },
-  switch: {
-    flexDirection: "column",
-    marginLeft: "70%",
-    bottom: "3.7%",
-  },
-  buttonText: {
-    color: COLS.C6_WHITE_TEXT,
-    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  buttons: {
-    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
-    padding: FORMAT_navButton.F_navButton_padding,
-    backgroundColor: COLS.C_BG,
-    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
-    margin: 20,
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-      color: COLS.C6_WHITE_TEXT,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
-  },
-  buttonPosition: {
-    flexDirection: "row",
-  },
-});
-
 export default function Allergies({ onBackClick, onSubmit }) {
   const [allergens, setAllergens] = useState(initialState);
 
@@ -125,9 +60,9 @@ export default function Allergies({ onBackClick, onSubmit }) {
               <Text style={styles.text}> {item.name}</Text>
               <Switch
                 style={styles.switch}
-                trackColor={{ false: "#767577", true: "#FB4B3D" }}
+                trackColor={{ false: "#BCB5C3", true: "orange" }}
                 thumbColor="#F4F3F4"
-                ios_backgroundColor="#3E3E3E"
+                ios_backgroundColor="#767577"
                 onValueChange={() => toggleAllergen(index)}
                 value={item.allergic}
               />
@@ -146,3 +81,68 @@ export default function Allergies({ onBackClick, onSubmit }) {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  background: {
+    backgroundColor: COLS.C_BG,
+    flex: 1,
+  },
+  container: {
+    backgroundColor: COLS.C_BG,
+    padding: 20,
+    alignItems: FORMAT_containers.F_container_alignItems,
+    justifyContent: FORMAT_containers.F_container_justifyContent,
+    backgroundColor: COLS.C_BG,
+  },
+  position: {
+    justifyContent: "center",
+  },
+  text: {
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    marginBottom: FORMAT_text.F_text_marginBottom,
+
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontFamily: "Muli-Bold",
+  },
+  heading: {
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    fontSize: 28,
+    fontFamily: "Muli-Bold",
+    marginTop: 20,
+    marginBottom: 60,
+  },
+  switch: {
+    flexDirection: "column",
+    marginLeft: "70%",
+    bottom: "3.7%",
+  },
+  buttonText: {
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontFamily: "Muli-Bold",
+    textAlign: "center",
+  },
+  buttons: {
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
+    padding: FORMAT_navButton.F_navButton_padding,
+    backgroundColor: COLS.C_BG,
+    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
+    margin: 20,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+      color: COLS.C6_WHITE_TEXT,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  buttonPosition: {
+    flexDirection: "row",
+  },
+});
