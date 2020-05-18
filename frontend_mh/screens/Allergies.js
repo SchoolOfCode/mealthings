@@ -9,7 +9,6 @@ export default function AllergiesScreen({ navigation, route }) {
     data["food_prefs_exc"] = preferences;
     console.log("data in allergies", data);
     navigation.navigate("Preferences", { data });
-    // fetch PATCH to the database
   }
 
   return (

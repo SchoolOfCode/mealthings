@@ -2,16 +2,13 @@ import React, { useState, Fragment } from "react";
 import { StyleSheet, Text, TouchableOpacity, View, Switch } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 
-import { COLS } from "../../screens/COLS";
-import { FORMAT_background } from "../../screens/FORMAT_background";
-import { FORMAT_containers } from "../../screens/FORMAT_containers";
-import { FORMAT_switches } from "../../screens/FORMAT_extraComponents";
+import { COLS } from "../../styles/COLS";
+import { FORMAT_containers } from "../../styles/FORMAT_containers";
 import {
   FORMAT_navButton,
   FORMAT_navButtonText,
-} from "../../screens/FORMAT_navButton";
-import { FORMAT_text, FORMAT_fonts } from "../../screens/FORMAT_text";
-import { FORMAT_headings } from "../../screens/FORMAT_headings";
+} from "../../styles/FORMAT_navButton";
+import { FORMAT_text, FORMAT_fonts } from "../../styles/FORMAT_text";
 
 const initialState = [
   { id: "celery", name: "Celery", allergic: false },

@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-import { AuthContext } from "../App.js";
 import {
   View,
   Text,
@@ -9,9 +8,119 @@ import {
   StyleSheet,
   Dimensions,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+
+import { AuthContext } from "../App.js";
 import { COLS } from "./COLS";
-import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
+const screenWidth = Dimensions.get("window").width;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLS.C_BG,
+    alignItems: "center",
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  title: {
+    fontWeight: "bold",
+    fontSize: 22,
+  },
+  mainTitle: {
+    position: "absolute",
+    paddingTop: 5,
+    paddingBottom: 5,
+    width: "80%",
+    textAlign: "center",
+    backgroundColor: COLS.C_RED,
+    borderRadius: 5,
+    fontSize: 24,
+    fontWeight: "bold",
+    color: COLS.C6_WHITE_TEXT,
+    zIndex: 2,
+    justifyContent: "space-around",
+  },
+  mainImage: {
+    width: screenWidth,
+    height: screenWidth * 0.7,
+  },
+  mainRecipeInfo: {
+    width: "90%",
+    alignItems: "flex-start",
+    backgroundColor: "white",
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+    paddingLeft: screenWidth * 0.1,
+    paddingRight: screenWidth * 0.1,
+    paddingBottom: 10,
+    paddingTop: 10,
+    bottom: 40,
+  },
+  swipeForMoreBar: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    backgroundColor: "white",
+    width: "90%",
+    paddingLeft: screenWidth * 0.1,
+    paddingRight: screenWidth * 0.1,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    bottom: "10%",
+    backgroundColor: "#BCB5C3",
+  },
+  moreChoicesContainer: {
+    flexWrap: "wrap",
+    width: screenWidth * 0.95,
+    backgroundColor: COLS.C_BG,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingBottom: 70,
+  },
+  recipeCardContainer: {
+    width: "40%",
+    height: "13%",
+    backgroundColor: COLS.C6_WHITE_TEXT,
+    marginBottom: 25,
+    borderRadius: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+    overflow: "hidden",
+  },
+  recipeCardImage: {
+    width: "100%",
+    height: 100,
+  },
+  recipeCardTextContainer: {
+    width: "100%",
+    marginTop: 5,
+    padding: 5,
+    textAlign: "center",
+  },
+  recipeCardTitle: {
+    fontSize: 12,
+    textAlign: "center",
+    paddingLeft: 5,
+    paddingRight: 5,
+    fontWeight: "bold",
+  },
+  recipeCardCookingTime: {
+    fontSize: 12,
+    alignSelf: "center",
+  },
+  recipeCardDifficulty: {
+    fontSize: 12,
+    marginTop: 5,
+    alignSelf: "center",
+  },
+});
 
 function recipeCard(recipeObject, index, setTodaysRecipeIndex) {
   return (
@@ -36,13 +145,10 @@ function recipeCard(recipeObject, index, setTodaysRecipeIndex) {
               : "Hard"}
           </Text>
         </View>
-        {/* <SimpleLineIcons style={styles.icons} name="magnifier-add" size={20} /> */}
       </TouchableOpacity>
     </View>
   );
 }
-
-const screenWidth = Dimensions.get("window").width;
 
 export default function NewRecipe() {
   const { recipeList } = useContext(AuthContext); // Needs a todaysRecipeIndex to get at the correct recipe for the main image
@@ -87,7 +193,7 @@ export default function NewRecipe() {
         </View>
       </View>
       <View style={styles.swipeForMoreBar}>
-        <Text style={{ paddingTop: 5 }}>Scroll for more choices</Text>
+        <Text style={{ alignSelf: "center" }}>Scroll for more choices</Text>
         <AntDesign name="arrowdown" size={32} color="black" />
       </View>
       <ScrollView contentContainerStyle={styles.moreChoicesContainer}>
@@ -98,130 +204,3 @@ export default function NewRecipe() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLS.C_BG,
-    alignItems: "center",
-  },
-  positioning: {
-    right: "10%",
-    top: "2%",
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 22,
-  },
-  mainTitle: {
-    position: "absolute",
-    paddingTop: 5,
-    paddingBottom: 5,
-    width: "80%",
-    textAlign: "center",
-    backgroundColor: COLS.C_RED,
-    borderRadius: 5,
-    top: "3%",
-    marginTop: 10,
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: "3%",
-    color: COLS.C6_WHITE_TEXT,
-    zIndex: 2,
-    justifyContent: "space-around",
-  },
-  mainImage: {
-    width: screenWidth,
-    height: screenWidth * 0.7,
-  },
-  mainRecipeInfo: {
-    width: "90%",
-    alignItems: "flex-start",
-    backgroundColor: "white",
-
-    borderTopRightRadius: 10,
-    borderTopLeftRadius: 10,
-    paddingLeft: screenWidth * 0.1,
-    paddingRight: screenWidth * 0.1,
-    paddingBottom: 10,
-    paddingTop: 10,
-    bottom: 40,
-  },
-
-  infoTextLine: {
-    marginTop: 5,
-  },
-  swipeForMoreBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    backgroundColor: "white",
-    width: "90%",
-    paddingLeft: screenWidth * 0.1,
-    paddingRight: screenWidth * 0.1,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5,
-    bottom: "10%",
-    backgroundColor: "#BCB5C3",
-  },
-  moreChoicesContainer: {
-    flexWrap: "wrap",
-    width: screenWidth * 0.9,
-    backgroundColor: COLS.C_BG,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    bottom: 70,
-  },
-  recipeCardContainer: {
-    width: "35%",
-    height: "13%",
-    backgroundColor: COLS.C6_WHITE_TEXT,
-    marginTop: 20,
-    marginBottom: 5,
-    borderRadius: 3,
-
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
-  },
-  recipeCardImage: {
-    width: "100%",
-    height: 100,
-  },
-  recipeCardTextContainer: {
-    width: "100%",
-    marginTop: 5,
-    padding: 5,
-    textAlign: "center",
-  },
-  recipeCardTitle: {
-    fontSize: 12,
-    marginLeft: 11,
-    textAlign: "auto",
-    paddingLeft: 5,
-    paddingRight: 5,
-    fontWeight: "bold",
-  },
-  recipeCardCookingTime: {
-    fontSize: 12,
-    alignItems: "center",
-    alignSelf: "center",
-  },
-  recipeCardDifficulty: {
-    fontSize: 12,
-    alignItems: "center",
-    marginTop: 5,
-    alignSelf: "center",
-  },
-  icons: {
-    alignSelf: "flex-end",
-  },
-});

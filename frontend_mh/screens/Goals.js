@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Image,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -12,16 +11,101 @@ import {
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
-import { COLS } from "./COLS";
 
+import { COLS } from "./COLS";
 import { FORMAT_images } from "./FORMAT_images";
 import { FORMAT_inputField } from "./FORMAT_inputField";
-
 import { FORMAT_navButton, FORMAT_navButtonText } from "./FORMAT_navButton";
-
 const screenWidth = Dimensions.get("screen").width;
 const iconSize = screenWidth * (1 / 5);
-const iconColour = COLS.C4_DARK_TEXT;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLS.C_BG,
+    padding: 20,
+  },
+  positioning: {
+    padding: 10,
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 5,
+  },
+  inputField: {
+    padding: FORMAT_inputField.F_inputField_padding,
+    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
+    backgroundColor: COLS.C_BG,
+    width: FORMAT_inputField.F_inputField_width,
+    alignSelf: FORMAT_inputField.F_inputField_alignSelf,
+    alignItems: FORMAT_inputField.F_inputField_alignItems,
+    height: FORMAT_inputField.F_inputField_height,
+    borderRadius: FORMAT_inputField.F_inputField_borderRadius,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    color: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+    fontSize: 16,
+  },
+  text: {
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    fontSize: 13,
+    fontWeight: "bold",
+  },
+  buttonText: {
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: COLS.C_BG,
+    borderRadius: 5,
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
+    padding: FORMAT_navButton.F_navButton_padding,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  buttonPosition: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+  goals: {
+    marginTop: "8%",
+    marginBottom: "5%",
+    color: COLS.C4_DARK_TEXT,
+    fontSize: 16,
+    fontWeight: "900",
+  },
+  firstRowIcons: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  secondRowIcons: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    paddingBottom: 30,
+  },
+});
+
 export default function Goals({ navigation }) {
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
@@ -101,39 +185,37 @@ export default function Goals({ navigation }) {
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <ScrollView style={styles.container}>
         <View>
-          <View style={styles.margin}>
-            <Text
-              style={{
-                color: COLS.C4_DARK_TEXT,
-                fontSize: 16,
-                fontWeight: "900",
-                marginBottom: 10,
-              }}
-            >
-              Tell us about yourself...
-            </Text>
-            <TextInput
-              keyboardType="number-pad"
-              style={styles.inputField}
-              placeholder="Weight (kg)"
-              placeholderTextColor="white"
-              onChangeText={Track}
-              maxLength={3}
-            ></TextInput>
-            <TextInput
-              keyboardType="number-pad"
-              style={styles.inputField}
-              placeholder="Height (cm)"
-              placeholderTextColor="white"
-              type="number"
-              onChangeText={Tracked}
-              maxLength={3}
-            ></TextInput>
-          </View>
+          <Text
+            style={{
+              color: COLS.C4_DARK_TEXT,
+              fontSize: 16,
+              fontWeight: "900",
+              marginBottom: 10,
+            }}
+          >
+            Tell us about yourself...
+          </Text>
+          <TextInput
+            keyboardType="number-pad"
+            style={styles.inputField}
+            placeholder="Weight (kg)"
+            placeholderTextColor="white"
+            onChangeText={Track}
+            maxLength={3}
+          ></TextInput>
+          <TextInput
+            keyboardType="number-pad"
+            style={styles.inputField}
+            placeholder="Height (cm)"
+            placeholderTextColor="white"
+            type="number"
+            onChangeText={Tracked}
+            maxLength={3}
+          ></TextInput>
           <View>
-            <Text style={styles.Goals}>...and what are your Goals?</Text>
+            <Text style={styles.goals}>...and what are your Goals?</Text>
           </View>
-          <View style={styles.icons}>
+          <View style={styles.firstRowIcons}>
             <View style={styles.positioning}>
               <TouchableOpacity onPress={fatHandler}>
                 <MaterialCommunityIcons
@@ -166,32 +248,30 @@ export default function Goals({ navigation }) {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.flex2}>
-            <View style={styles.secondRow}>
-              <View style={styles.secondLastIcon}>
-                <View style={styles.positioning}>
-                  <TouchableOpacity onPress={timeHandler}>
-                    <MaterialCommunityIcons
-                      name="clock"
-                      size={iconSize}
-                      color={time ? COLS.C_RED : COLS.C6_WHITE_TEXT}
-                    />
-                    <Text style={styles.text}>Saving Time</Text>
-                  </TouchableOpacity>
-                </View>
+          <View style={styles.secondRowIcons}>
+            <View style={styles.secondLastIcon}>
+              <View style={styles.positioning}>
+                <TouchableOpacity onPress={timeHandler}>
+                  <MaterialCommunityIcons
+                    name="clock"
+                    size={iconSize}
+                    color={time ? COLS.C_RED : COLS.C6_WHITE_TEXT}
+                  />
+                  <Text style={styles.text}>Saving Time</Text>
+                </TouchableOpacity>
               </View>
-              <View style={styles.lastIcon}>
-                <View style={styles.positioning}>
-                  <TouchableOpacity onPress={cookHandler}>
-                    <MaterialCommunityIcons
-                      name="chef-hat"
-                      size={iconSize}
-                      style={{ right: "18%" }}
-                      color={cook ? COLS.C_RED : COLS.C6_WHITE_TEXT}
-                    />
-                    <Text style={styles.text}>Learning to Cook</Text>
-                  </TouchableOpacity>
-                </View>
+            </View>
+            <View style={styles.lastIcon}>
+              <View style={styles.positioning}>
+                <TouchableOpacity onPress={cookHandler}>
+                  <MaterialCommunityIcons
+                    name="chef-hat"
+                    size={iconSize}
+                    style={{ right: "18%" }}
+                    color={cook ? COLS.C_RED : COLS.C6_WHITE_TEXT}
+                  />
+                  <Text style={styles.text}>Learning to Cook</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
@@ -211,116 +291,3 @@ export default function Goals({ navigation }) {
     </TouchableWithoutFeedback>
   );
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: COLS.C_BG,
-    padding: 20,
-  },
-  positioning: {
-    padding: 10,
-    justifyContent: "center",
-    flexDirection: "row",
-    alignItems: "center",
-    borderRadius: 5,
-  },
-  margin: {
-    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
-  },
-  inputField: {
-    padding: FORMAT_inputField.F_inputField_padding,
-    marginVertical: FORMAT_inputField.F_inputField_marginVertical,
-    backgroundColor: COLS.C_BG,
-    width: FORMAT_inputField.F_inputField_width,
-    alignSelf: FORMAT_inputField.F_inputField_alignSelf,
-    alignItems: FORMAT_inputField.F_inputField_alignItems,
-    height: FORMAT_inputField.F_inputField_height,
-    borderRadius: FORMAT_inputField.F_inputField_borderRadius,
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
-    color: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
-    fontSize: 16,
-  },
-  flex: {
-    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
-    marginVertical: FORMAT_navButton.F_navButton_marginVertical,
-  },
-  flex2: { flexDirection: FORMAT_navButton.F_navButton_flexDirection },
-  img: {
-    width: FORMAT_images.F_image_width,
-    height: FORMAT_images.F_image_height,
-    alignSelf: FORMAT_images.F_image_alignSelf,
-    left: FORMAT_images.F_image_left,
-    marginHorizontal: FORMAT_images.F_image_marginHorizontal,
-  },
-  img2: {
-    width: FORMAT_images.F_image_width,
-    height: FORMAT_images.F_image_height,
-    alignSelf: FORMAT_images.F_image_alignSelf,
-    marginHorizontal: FORMAT_images.F_image_marginHorizontal,
-  },
-  text: {
-    color: COLS.C6_WHITE_TEXT,
-    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
-    fontSize: 13,
-    fontWeight: "bold",
-  },
-  buttonText: {
-    color: COLS.C6_WHITE_TEXT,
-    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  button: {
-    backgroundColor: COLS.C_BG,
-    borderRadius: 5,
-    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
-    padding: FORMAT_navButton.F_navButton_padding,
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
-  },
-  buttonPosition: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  Goals: {
-    marginTop: "8%",
-    marginBottom: "5%",
-    color: COLS.C4_DARK_TEXT,
-    fontSize: 16,
-    fontWeight: "900",
-  },
-  icons: {
-    flexDirection: "row",
-    alignItems: "center",
-    left: "3%",
-  },
-  secondRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingBottom: 30,
-  },
-  lastIcon: {
-    paddingLeft: 20,
-  },
-  secondLastIcon: {
-    paddingLeft: 50,
-  },
-});

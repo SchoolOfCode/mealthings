@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { COLS } from "../../screens/COLS";
+import { COLS } from "../../styles/COLS";
 
 const styles = StyleSheet.create({
   ingredientItemContainer: {
     flexDirection: "row",
     justifyContent: "flex-start",
-    padding: 10
+    padding: 10,
   },
   position: {
-    width: 100
+    width: 100,
   },
   circle: {
     marginRight: 10,
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: "black",
     borderStyle: "solid",
-    borderWidth: 3
+    borderWidth: 3,
   },
   circleChecked: {
     marginRight: 10,
@@ -30,19 +30,19 @@ const styles = StyleSheet.create({
     backgroundColor: COLS.C4_DARK_TEXT,
     borderColor: "#65676F",
     borderStyle: "solid",
-    borderWidth: 3
+    borderWidth: 3,
   },
   itemTextChecked: {
     fontSize: 18,
     textDecorationLine: "line-through",
     textDecorationStyle: "solid",
-    color: "#65676F"
+    color: "#65676F",
   },
   itemText: {
     fontSize: 18,
     fontWeight: "900",
-    color: "black"
-  }
+    color: "black",
+  },
 });
 
 export default function IngredientItem({ item }) {
