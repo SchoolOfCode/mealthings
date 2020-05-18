@@ -11,6 +11,80 @@ import { FORMAT_navButton } from "./FORMAT_navButton";
 import { FORMAT_text, FORMAT_fonts } from "./FORMAT_text";
 import { FORMAT_navButtonText } from "./FORMAT_navButton";
 
+const styles = StyleSheet.create({
+  background: {
+    backgroundColor: COLS.C_BG,
+    flex: 1,
+  },
+  container: {
+    padding: FORMAT_containers.F_container_padding,
+    alignItems: FORMAT_containers.F_container_alignItems,
+    justifyContent: FORMAT_containers.F_container_justifyContent,
+    flex: FORMAT_containers.F_container_flex,
+  },
+  text: {
+    alignSelf: FORMAT_text.F_text_alignSelf,
+    marginBottom: FORMAT_text.F_text_marginBottom,
+    marginTop: FORMAT_text.F_text_marginTop,
+    margin: FORMAT_text.F_text_margin,
+    fontWeight: FORMAT_fonts.F_font_fontWeight,
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+  },
+  switch: {
+    right: FORMAT_switches.F_switch_right,
+    bottom: FORMAT_switches.F_switch_bottom,
+  },
+  button_Direction: {
+    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
+  },
+  buttons: {
+    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
+    padding: FORMAT_navButton.F_navButton_padding,
+    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
+    margin: 20,
+    borderWidth: 2,
+    borderColor: COLS.C6_WHITE_TEXT,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+      color: COLS.C6_WHITE_TEXT,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 2,
+    elevation: 5,
+  },
+  heading: {
+    alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
+    left: FORMAT_headings.F_headingMainTitle_left,
+    fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
+    fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
+    bottom: FORMAT_headings.F_headingMainTitle_bottom,
+    marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
+    marginTop: FORMAT_headings.F_headingMainTitle_marginTop,
+    color: COLS.C6_WHITE_TEXT,
+  },
+  buttontext: {
+    color: COLS.C6_WHITE_TEXT,
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  subheading: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  header: {
+    marginTop: 20,
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
+    fontSize: 28,
+    fontWeight: "bold",
+  },
+});
+
 export default function Preferences({ navigation, route }) {
   const { userID } = useContext(AuthContext);
   const { data } = route.params;
@@ -193,90 +267,3 @@ export default function Preferences({ navigation, route }) {
     </ScrollView>
   );
 }
-const styles = StyleSheet.create({
-  background: {
-    backgroundColor: COLS.C_BG,
-    flex: 1,
-  },
-  container: {
-    margin: FORMAT_containers.F_container_margin,
-    backgroundColor: COLS.C_BG,
-    marginVertical: 10,
-    padding: FORMAT_containers.F_container_padding,
-    alignItems: FORMAT_containers.F_container_alignItems,
-    justifyContent: FORMAT_containers.F_container_justifyContent,
-    flex: FORMAT_containers.F_container_flex,
-    backgroundColor: COLS.C_BG,
-  },
-  text: {
-    alignSelf: FORMAT_text.F_text_alignSelf,
-    marginBottom: FORMAT_text.F_text_marginBottom,
-    marginTop: FORMAT_text.F_text_marginTop,
-    margin: FORMAT_text.F_text_margin,
-    left: FORMAT_text.F_text_left,
-    fontWeight: FORMAT_fonts.F_font_fontWeight,
-    color: COLS.C6_WHITE_TEXT,
-    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold",
-  },
-  switch: {
-    right: FORMAT_switches.F_switch_right,
-    bottom: FORMAT_switches.F_switch_bottom,
-  },
-  button_Direction: {
-    flexDirection: FORMAT_navButton.F_navButton_flexDirection,
-  },
-  buttons: {
-    alignSelf: FORMAT_navButton.F_navButton_alignSelf,
-    padding: FORMAT_navButton.F_navButton_padding,
-    backgroundColor: COLS.C_BG,
-    borderRadius: FORMAT_navButton.F_navButton_borderRadius,
-    margin: 20,
-    borderWidth: 2,
-    borderColor: COLS.C6_WHITE_TEXT,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-      color: COLS.C6_WHITE_TEXT,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
-  },
-  heading: {
-    alignSelf: FORMAT_headings.F_heading_alignSelfF_heading_alignSelf,
-    left: FORMAT_headings.F_headingMainTitle_left,
-    fontSize: FORMAT_headings.F_headingMainTitle_fontSize,
-    fontWeight: FORMAT_headings.F_headingMainTitle_fontWeight,
-    bottom: FORMAT_headings.F_headingMainTitle_bottom,
-    marginBottom: FORMAT_headings.F_headingMainTitle_marginBottom,
-    marginTop: FORMAT_headings.F_headingMainTitle_marginTop,
-    color: COLS.C6_WHITE_TEXT,
-  },
-  buttontext: {
-    color: COLS.C6_WHITE_TEXT,
-    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  subheading: {
-    fontSize: FORMAT_headings.F_subHeading_fontSize,
-    position: FORMAT_headings.F_subHeading_position,
-    left: FORMAT_headings.F_subHeading_left,
-    alignSelf: FORMAT_headings.F_subHeading_alignSelf,
-    alignItems: FORMAT_headings.F_subHeading_alignItems,
-    fontWeight: FORMAT_headings.F_subHeading_fontWeight,
-    color: COLS.C6_WHITE_TEXT,
-    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
-    fontSize: 11,
-    fontWeight: "bold",
-  },
-  header: {
-    marginTop: 20,
-    color: COLS.C6_WHITE_TEXT,
-    textAlign: FORMAT_navButtonText.F_navButtonText_textAlign,
-    fontSize: 28,
-    fontWeight: "bold",
-  },
-});

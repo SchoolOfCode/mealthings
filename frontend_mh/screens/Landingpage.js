@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   AsyncStorage,
   Image,
-  ImageBackground,
 } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 import { AuthContext } from "../App.js";
 import { AWS_PATH } from "../config";
@@ -16,6 +16,61 @@ import { FORMAT_navButtonText } from "./FORMAT_navButton";
 import { COLS } from "./COLS";
 
 const MIN_NUM_RECIPIES = 6;
+
+const styles = StyleSheet.create({
+  background: {
+    backgroundColor: COLS.C_BG,
+    flex: 1,
+    padding: 10,
+  },
+  headingText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 18,
+    alignSelf: "flex-start",
+  },
+  flex: {
+    flexDirection: "row",
+  },
+  imageButton: {
+    width: 150,
+    height: 150,
+    backgroundColor: COLS.C_BG,
+    margin: 15,
+    alignSelf: "center",
+    alignItems: "center",
+  },
+  todaysMeal: {
+    width: "100%",
+    padding: 7,
+    backgroundColor: "#BCB5C3",
+    justifyContent: "flex-end",
+    alignSelf: "center",
+    alignItems: "center",
+    marginTop: 15,
+    borderRadius: 5,
+  },
+  images: {
+    width: "110%",
+    height: "110%",
+    borderRadius: 10,
+    opacity: 0.7,
+  },
+  buttonText: {
+    color: COLS.C6_WHITE_TEXT,
+    textAlign: "center",
+    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
+    fontWeight: "bold",
+    fontSize: 18,
+  },
+  pictureButtonText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 18,
+    alignSelf: "flex-start",
+    bottom: "20%",
+  },
+});
 
 const storeRecipes = async (recipeArray) => {
   try {
@@ -283,158 +338,77 @@ export default function LandingPage({ navigation }) {
   }
 
   return (
-    <View style={styles.background}>
-      <View style={styles.justify}>
-        <View style={styles.flex}>
-          <TouchableOpacity
-            style={styles.note2}
-            onPress={() => navigation.navigate("ShoppingList")}
-          >
-            <Image
-              style={styles.images}
-              source={require("../assets/images/tapas.jpg")}
-            ></Image>
-            <Text
-              style={{
-                bottom: "25.8%",
-
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 18,
-                alignSelf: "flex-start",
-              }}
-            >
-              {" "}
-              Shopping List
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.note}
-            onPress={() => navigation.navigate("TodaysRecipe")}
-          >
-            <Image
-              style={styles.images}
-              source={require("../assets/images/Chilli.jpg")}
-            ></Image>
-            <Text
-              style={{
-                bottom: "30%",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 18,
-                alignSelf: "flex-start",
-                bottom: "25%",
-              }}
-            >
-              Today's Recipe
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.flex}>
-          <TouchableOpacity
-            style={styles.note}
-            onPress={() => navigation.navigate("NewRecipe")}
-          >
-            <Image
-              style={styles.images}
-              source={require("../assets/images/Brocoli.jpg")}
-            ></Image>
-            <Text
-              style={{
-                bottom: "30%",
-
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 18,
-                alignSelf: "flex-start",
-              }}
-            >
-              {" "}
-              Random Recipe
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.note2}
-            onPress={() => navigation.navigate("Mealplanner")}
-          >
-            <Image
-              style={styles.images}
-              source={require("../assets/images/Vegplate.jpg")}
-            ></Image>
-            <Text
-              style={{
-                bottom: "30%",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 18,
-                alignSelf: "flex-start",
-              }}
-            >
-              {" "}
-              Weekly Meal
-            </Text>
-            <Text
-              style={{
-                bottom: "32%",
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 14,
-                alignSelf: "flex-start",
-              }}
-            >
-              {" "}
-              Planner
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.flex}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Goals")}
-            style={styles.note2}
-          >
-            <Image
-              style={styles.images}
-              source={require("../assets/images/Orange.jpg")}
-            ></Image>
-            <Text> </Text>
-            <Text
-              style={{
-                bottom: "40%",
-                fontWeight: "bold",
-                color: "white",
-                fontSize: 18,
-                alignSelf: "flex-start",
-              }}
-            >
-              Goals & Diet
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.note}
-            onPress={() => {
-              logOut();
-            }}
-          >
-            <Image
-              style={styles.images}
-              source={require("../assets/images/Pancakes.jpg")}
-            ></Image>
-            <Text
-              style={{
-                bottom: "25%",
-
-                color: "white",
-                fontWeight: "bold",
-                fontSize: 18,
-                alignSelf: "flex-start",
-              }}
-            >
-              {" "}
-              Logout
-            </Text>
-          </TouchableOpacity>
-        </View>
+    <ScrollView
+      style={styles.background}
+      contentContainerStyle={{ alignItems: "center" }}
+    >
+      <View style={styles.flex}>
+        <TouchableOpacity
+          style={styles.imageButton}
+          onPress={() => navigation.navigate("ShoppingList")}
+        >
+          <Image
+            style={styles.images}
+            source={require("../assets/images/tapas.jpg")}
+          ></Image>
+          <Text style={styles.pictureButtonText}>Shopping List</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.imageButton}
+          onPress={() => navigation.navigate("TodaysRecipe")}
+        >
+          <Image
+            style={styles.images}
+            source={require("../assets/images/Chilli.jpg")}
+          ></Image>
+          <Text style={styles.pictureButtonText}>Today's Recipe</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.flex}>
+        <TouchableOpacity
+          style={styles.imageButton}
+          onPress={() => navigation.navigate("NewRecipe")}
+        >
+          <Image
+            style={styles.images}
+            source={require("../assets/images/Brocoli.jpg")}
+          ></Image>
+          <Text style={styles.pictureButtonText}>Random Recipe</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.imageButton}
+          onPress={() => navigation.navigate("Mealplanner")}
+        >
+          <Image
+            style={styles.images}
+            source={require("../assets/images/Vegplate.jpg")}
+          ></Image>
+          <Text style={styles.pictureButtonText}>Weekly Meal plan</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.flex}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Goals")}
+          style={styles.imageButton}
+        >
+          <Image
+            style={styles.images}
+            source={require("../assets/images/Orange.jpg")}
+          ></Image>
+          <Text style={styles.pictureButtonText}>Goals & Diet</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.imageButton}
+          onPress={() => {
+            logOut();
+          }}
+        >
+          <Image
+            style={styles.images}
+            source={require("../assets/images/Pancakes.jpg")}
+          ></Image>
+          <Text style={styles.pictureButtonText}>Logout</Text>
+        </TouchableOpacity>
       </View>
       <TouchableOpacity
         style={styles.todaysMeal}
@@ -442,93 +416,6 @@ export default function LandingPage({ navigation }) {
       >
         <Text style={styles.buttonText}>Today's Meal</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
-const styles = StyleSheet.create({
-  background: {
-    backgroundColor: COLS.C_BG,
-    height: 1000,
-  },
-  headingText: {
-    bottom: "30%",
-    color: "white",
-    fontWeight: "bold",
-    fontSize: 18,
-    alignSelf: "flex-start",
-  },
-  justify: {
-    alignItems: "center",
-    padding: 10,
-    marginTop: "7%",
-  },
-  margin: {
-    backgroundColor: COLS.C_BG,
-  },
-  flex: {
-    flexDirection: "row",
-  },
-  note: {
-    width: 150,
-    height: 150,
-    backgroundColor: COLS.C_BG,
-    margin: 15,
-    alignSelf: "center",
-    alignItems: "center",
-
-    shadowColor: "#9000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 5,
-    elevation: 20,
-  },
-  note2: {
-    width: 150,
-    height: 150,
-    backgroundColor: COLS.C_BG,
-    margin: 15,
-    alignSelf: "center",
-    alignItems: "center",
-  },
-  todaysMeal: {
-    top: "2%",
-    width: "85%",
-    padding: 7,
-    backgroundColor: "#BCB5C3",
-    justifyContent: "flex-end",
-    alignSelf: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2,
-    elevation: 5,
-    borderRadius: 5,
-  },
-  images: {
-    width: "110%",
-    height: "110%",
-    borderRadius: 10,
-    opacity: 0.7,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 4,
-      height: 4,
-    },
-    shadowOpacity: 1.25,
-    shadowRadius: 3,
-  },
-  buttonText: {
-    color: COLS.C6_WHITE_TEXT,
-    textAlign: "center",
-    fontSize: FORMAT_navButtonText.F_navButtonText_fontSize,
-    fontWeight: "bold",
-    fontSize: 18,
-  },
-});
