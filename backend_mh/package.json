@@ -1,0 +1,40 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r dotenv/config app.js",
+    "db:dropFoodIntake": "node -r dotenv/config ./db/scripts/dropFoodIntake.js",
+    "db:dropUsers": "node -r dotenv/config ./db/scripts/dropUsers.js",
+    "db:dropRecipes": "node -r dotenv/config ./db/scripts/dropRecipes.js",
+    "db:createFoodIntake": "node -r dotenv/config ./db/scripts/createFoodIntake.js",
+    "db:createRecipes": "node -r dotenv/config ./db/scripts/createRecipes.js",
+    "db:createUsers": "node -r dotenv/config ./db/scripts/createUsers.js",
+    "db:populateUsers": "node -r dotenv/config ./db/scripts/populateUsers.js",
+    "db:populateRecipes": "node -r dotenv/config ./db/scripts/populateRecipes.js",
+    "db:populateFoodIntake": "node -r dotenv/config ./db/scripts/populateFoodIntake.js",
+    "db:reset": "npm run db:dropFoodIntake && npm run db:dropRecipes && npm run db:dropUsers && npm run db:createUsers && npm run db:createRecipes && npm run db:createFoodIntake && npm run db:populateUsers && npm run db:populateRecipes && npm run db:populateFoodIntake",
+    "dev": "nodemon -r dotenv/config app.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "generate-password": "^1.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "node": "^13.13.0",
+    "nodemailer": "^6.4.6",
+    "nodemon": "^2.0.3",
+    "pg": "^8.0.2",
+    "postgresql": "0.0.1",
+    "psql": "0.0.1"
+  },
+  "devDependencies": {
+    "jest": "^25.4.0"
+  }
+}

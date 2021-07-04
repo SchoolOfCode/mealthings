@@ -1,0 +1,53 @@
+[
+  {
+    "name": "bob",
+    "birthday": "1990-04-12",
+    "height": "189",
+    "email_address": "bobforward@gmail.com",
+    "username": "bobforward",
+    "weight": "82",
+    "password": "password2",
+    "new_mum": "no",
+    "food_prefs_inc": "cheese",
+    "food_prefs_exc": "vegan",
+    "goals": "gaining muscle",
+    "gender": "Male",
+    "last_weeks_meals": [1, 4, 7, 5, 8, 9, 34],
+    "this_weeks_meals": [1, 2, 3, 4, 5],
+    "last_date_meals_requested": "2019-04-12"
+  },
+  {
+    "name": "ayla",
+    "birthday": "1995-03-15",
+    "height": "172",
+    "email_address": "aylaforward@gmail.com",
+    "username": "aylaforward",
+    "weight": "57",
+    "password": "password",
+    "new_mum": "yes",
+    "food_prefs_inc": "fish",
+    "food_prefs_exc": "vegetarian",
+    "goals": "saving time",
+    "gender": "Female",
+    "last_weeks_meals": [1, 4, 7, 5, 8, 9, 34],
+    "this_weeks_meals": [1, 2, 3, 4, 5],
+    "last_date_meals_requested": "2019-05-12"
+  },
+  {
+    "name": "anya",
+    "birthday": "1988-02-14",
+    "height": "182",
+    "email_address": "anyaforward@gmail.com",
+    "username": "anyaforward",
+    "weight": "55",
+    "password": "password",
+    "new_mum": "no",
+    "food_prefs_inc": "beer",
+    "food_prefs_exc": "celiac",
+    "goals": "lose weight",
+    "gender": "Female",
+    "last_weeks_meals": [1, 4, 7, 5, 8, 9, 34],
+    "this_weeks_meals": [1, 2, 3, 4, 5],
+    "last_date_meals_requested": "2019-06-12"
+  }
+]

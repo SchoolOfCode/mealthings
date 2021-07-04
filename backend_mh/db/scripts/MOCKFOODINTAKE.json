@@ -1,0 +1,23 @@
+[
+  {
+    "user_id": "2",
+    "recipe_id": "5",
+    "meal_date_time": "2019-01-19 09:14:07",
+    "confirmed_eaten": "true",
+    "additional_preferences": "vegan"
+  },
+  {
+    "user_id": "1",
+    "recipe_id": "19",
+    "meal_date_time": "2020-01-19 03:14:07",
+    "confirmed_eaten": "true",
+    "additional_preferences": "saving time"
+  },
+  {
+    "user_id": "3",
+    "recipe_id": "7",
+    "meal_date_time": "2016-01-19 03:14:07",
+    "confirmed_eaten": "false",
+    "additional_preferences": "lose weight"
+  }
+]
